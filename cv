@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kimberly Wright Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0 20px;
+            color: #333;
+        }
+        h1, h2 {
+            color: #444;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kimberly Wright</h1>
+    <p>P: (972) 814-6585 | E: <a href="mailto:kesmit3@gmail.com">kesmit3@gmail.com</a> | LI: <a href="https://linkedin.com/in/kesmit" target="_blank">linkedin.com/in/kesmit</a></p>
+
+    <div class="section">
+        <h2>Summary</h2>
+        <p>Experienced technology and business leader with over 20 years of expertise in leveraging emerging technologies, IT, and education to drive innovation and solve complex challenges. Known for identifying critical systemic issues and implementing strategic solutions that deliver lasting impact. A catalyst for change, fostering progress and growth even in the face of difficult or uncomfortable transitions. Passionate about creating pathways for sustainable success by aligning technology, people, and processes with organizational goals.</p>
+    </div>
+
+    <div class="section">
+        <h2>Skills & Expertise</h2>
+        <ul>
+            <li>AI Integration & Emerging Technologies</li>
+            <li>Agile Project Management</li>
+            <li>IT Project Management</li>
+            <li>Digital Transformation</li>
+            <li>Strategic Business Consulting</li>
+            <li>Low-Code Development</li>
+            <li>Change Management & Process Improvement</li>
+            <li>Education Technology Leadership</li>
+            <li>Digital Storytelling & Branding</li>
+            <li>Public Speaking & Thought Leadership</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Experience</h2>
+        <h3>Wright Consulting</h3>
+        <p><em>Founder & Principal Consultant</em> | 2001 - Present</p>
+        <ul>
+            <li>Provide ongoing strategic consulting services in technology integration, business innovation, and application development.</li>
+            <li>Offer expert guidance on leveraging AI and emerging technologies to drive business efficiency and growth.</li>
+            <li>Develop and deliver educational frameworks, workshops, and consulting projects that bridge technology and human development.</li>
+            <li>Partner with businesses, educational institutions, and organizations to implement solutions that empower individuals and improve operational outcomes.</li>
+            <li>Deliver expertise in digital storytelling, branding, and marketing strategies to enhance organizational and personal narratives.</li>
+        </ul>
+
+        <h3>Uplift Education | Dallas, TX</h3>
+        <p><em>Director, Tech Career Development</em> | 2024 - Present</p>
+        <ul>
+            <li>Strategically advise leadership on trends and opportunities in IT, cybersecurity, and software development.</li>
+            <li>Established the Alumni Tech Network to foster advisory and mentorship dynamics.</li>
+            <li>Launched the inaugural alumni tech and business hackathon.</li>
+        </ul>
+
+        <!-- Additional roles omitted for brevity -->
+    </div>
+
+    <div class="section">
+        <h2>Education</h2>
+        <ul>
+            <li>The University of Texas at Dallas – School of Management | Graduate Certificate in Project Management | 2015</li>
+            <li>The University of Texas at Dallas – School of Arts and Technology | MA, Digital Media and Communications | 2011</li>
+            <li>The University of Texas at Dallas – School of Arts and Humanities | BA, General Studies | 2009</li>
+        </ul>
+    </div>
+</body>
+</html>
