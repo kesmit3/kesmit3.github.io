@@ -32,6 +32,44 @@ TODO:
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academic Year Timeline</title>
     <style>
+        /* Submit event button styles */
+        .selector-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .add-event-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-event-button span {
+            font-size: 1.2rem;
+            margin-right: 5px;
+        }
+
+        .add-event-button:hover {
+            background-color: #45a049;
+        }
+
+        .submit-event-btn {
+            background-color: #4CAF50 !important;
+            color: white !important;
+            border-radius: 4px;
+        }
+
         .campus-selector {
             max-width: 1200px;
             margin: 20px auto;
@@ -281,29 +319,16 @@ TODO:
             </select>
         </div>
         
-        <div class="dept-container">
-            <div class="dept-tabs">
-                <button class="dept-tab active" onclick="showDept('rtcc')">RTCC</button>
-                <button class="dept-tab" onclick="showDept('fase')">FASE</button>
-                <button class="dept-tab" onclick="showDept('cis')">CIS</button>
-            </div>
-            
-            <div id="rtcc" class="dept-content active">
-                <span class="service-tag">Tech Career Services</span>
-                <span class="service-tag">Healthcare Services</span>
-                <span class="service-tag">Alumni Services</span>
-                <span class="service-tag">CTE</span>
-            </div>
-            
-            <div id="fase" class="dept-content">
-                <span class="service-tag">Special Events</span>
-                <span class="service-tag">Scholar Experience</span>
-                <span class="service-tag">Family Experience</span>
-            </div>
-            
-            <div id="cis" class="dept-content">
-                <span class="service-tag">CTE</span>
-            </div>
+        <div class="category-filters">
+            <button class="filter-btn active-rtcc" onclick="filterEvents('rtcc')">
+                <span class="category-indicator rtcc-indicator"></span>RTCC Events
+            </button>
+            <button class="filter-btn active-signature" onclick="filterEvents('signature')">
+                <span class="category-indicator signature-indicator"></span>Signature Events
+            </button>
+            <button class="filter-btn active-testing" onclick="filterEvents('testing')">
+                <span class="category-indicator testing-indicator"></span>Testing Period
+            </button>
         </div>
 
         <div class="legend">
@@ -486,14 +511,17 @@ TODO:
             });
         }
 
-        function showDept(deptId) {
-            // Remove active class from all tabs and contents
-            document.querySelectorAll('.dept-tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.dept-content').forEach(content => content.classList.remove('active'));
+        function filterEvents(category) {
+            const button = document.querySelector(`.filter-btn[onclick="filterEvents('${category}')"]`);
+            button.classList.toggle(`active-${category}`);
             
-            // Add active class to selected tab and content
-            document.querySelector(`.dept-tab[onclick="showDept('${deptId}')"]`).classList.add('active');
-            document.getElementById(deptId).classList.add('active');
+            // Update visibility of events based on active filters
+            const events = document.querySelectorAll('.event');
+            events.forEach(event => {
+                const shouldShow = Array.from(document.querySelectorAll('.filter-btn'))
+                    .some(btn => btn.classList.contains(`active-${event.dataset.category}`));
+                event.style.display = shouldShow ? 'block' : 'none';
+            });
         }
     </script>
 </body>
