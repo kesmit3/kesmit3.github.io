@@ -255,30 +255,27 @@
         </div>
         
         <div class="departments">
-            <div class="department">
-                <h2>Road to College and Career (RTCC)</h2>
-                <div class="department-services">
-                    <p>Tech Career Services</p>
-                    <p>Healthcare Services</p>
-                    <p>Alumni Services</p>
-                    <p>CTE</p>
-                </div>
+            <div class="dept-tabs">
+                <button class="dept-tab active" onclick="showDept('rtcc')">RTCC</button>
+                <button class="dept-tab" onclick="showDept('fase')">FASE</button>
+                <button class="dept-tab" onclick="showDept('cis')">CIS</button>
             </div>
-
-            <div class="department">
-                <h2>Family and Scholar Experience (FASE)</h2>
-                <div class="department-services">
-                    <p>Special Events</p>
-                    <p>Scholar Experience</p>
-                    <p>Family Experience</p>
-                </div>
+            
+            <div id="rtcc" class="dept-content active">
+                <span class="service-tag">Tech Career Services</span>
+                <span class="service-tag">Healthcare Services</span>
+                <span class="service-tag">Alumni Services</span>
+                <span class="service-tag">CTE</span>
             </div>
-
-            <div class="department">
-                <h2>Curriculum and Instruction (CIS)</h2>
-                <div class="department-services">
-                    <p>CTE</p>
-                </div>
+            
+            <div id="fase" class="dept-content">
+                <span class="service-tag">Special Events</span>
+                <span class="service-tag">Scholar Experience</span>
+                <span class="service-tag">Family Experience</span>
+            </div>
+            
+            <div id="cis" class="dept-content">
+                <span class="service-tag">CTE</span>
             </div>
         </div>
 
@@ -460,6 +457,16 @@
                     event.classList.add('hidden-campus');
                 }
             });
+        }
+
+        function showDept(deptId) {
+            // Remove active class from all tabs and contents
+            document.querySelectorAll('.dept-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.dept-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to selected tab and content
+            document.querySelector(`.dept-tab[onclick="showDept('${deptId}')"]`).classList.add('active');
+            document.getElementById(deptId).classList.add('active');
         }
     </script>
 </body>
