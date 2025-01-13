@@ -1,10 +1,72 @@
 <!DOCTYPE html>
+<!-- 
+==============================================
+TIMELINE VERSION NOTES
+==============================================
+Version: 1.0
+Last Updated: January 13, 2025
+Created By: Kimberly Wright
+
+CHANGE LOG:
+- Initial creation of timeline
+- Added campus filtering
+- Added department tabs
+- Added testing periods
+
+FEATURES:
+- Campus-specific filtering
+- Department organization tabs
+- Event categories: RTCC, Signature Events, Testing Period
+- Mobile responsive design
+
+TODO:
+- Add more campus-specific events
+- Update styling as needed
+- Add additional features as requested
+==============================================
+-->
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academic Year Timeline</title>
     <style>
+        .campus-selector {
+            max-width: 1200px;
+            margin: 20px auto;
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .campus-selector select {
+            padding: 8px 16px;
+            font-size: 1rem;
+            border: 2px solid #2196f3;
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .campus-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 8px;
+            background-color: #e3f2fd;
+            color: #2196f3;
+        }
+
+        .hidden-campus {
+            display: none;
+        }
+
         .departments {
             max-width: 1200px;
             margin: 20px auto;
@@ -200,32 +262,35 @@
     <header>
         <h1>Academic Year Timeline</h1>
         
-        <div class="departments">
-            <div class="department">
-                <h2>Road to College and Career (RTCC)</h2>
-                <div class="department-services">
-                    <p>Tech Career Services</p>
-                    <p>Healthcare Services</p>
-                    <p>Alumni Services</p>
-                    <p>CTE</p>
-                </div>
-            </div>
-
-            <div class="department">
-                <h2>Family and Scholar Experience (FASE)</h2>
-                <div class="department-services">
-                    <p>Special Events</p>
-                    <p>Scholar Experience</p>
-                    <p>Family Experience</p>
-                </div>
-            </div>
-
-            <div class="department">
-                <h2>Curriculum and Instruction (CIS)</h2>
-                <div class="department-services">
-                    <p>CTE</p>
-                </div>
-            </div>
+        <!-- Campus Selector -->
+        <div class="campus-selector">
+            <select id="campusFilter" onchange="filterCampus()">
+                <option value="all">All Campuses</option>
+                <option value="wisdom">Uplift Wisdom Preparatory</option>
+                <option value="northhills">Uplift North Hills Preparatory</option>
+                <option value="summit">Uplift Summit International Preparatory</option>
+                <option value="infinity">Uplift Infinity Preparatory</option>
+                <option value="hampton">Uplift Hampton Preparatory</option>
+                <option value="luna">Uplift Luna Preparatory</option>
+                <option value="grand">Uplift Grand Preparatory</option>
+                <option value="atlas">Uplift Atlas Preparatory</option>
+                <option value="elevate">Uplift Elevate Preparatory</option>
+                <option value="heights">Uplift Heights Preparatory - Healthcare</option>
+                <option value="williams">Uplift Williams Preparatory</option>
+                <option value="mighty">Uplift Mighty Preparatory</option>
+            </select>
+        </div>
+        
+        <div class="category-filters">
+            <button class="filter-btn active-rtcc" onclick="filterEvents('rtcc')">
+                <span class="category-indicator rtcc-indicator"></span>RTCC Events
+            </button>
+            <button class="filter-btn active-signature" onclick="filterEvents('signature')">
+                <span class="category-indicator signature-indicator"></span>Signature Events
+            </button>
+            <button class="filter-btn active-testing" onclick="filterEvents('testing')">
+                <span class="category-indicator testing-indicator"></span>Testing Period
+            </button>
         </div>
 
         <div class="legend">
@@ -390,5 +455,36 @@
             </div>
         </div>
     </div>
+    <script>
+        function filterCampus() {
+            const selectedCampus = document.getElementById('campusFilter').value;
+            const events = document.querySelectorAll('.event');
+            
+            events.forEach(event => {
+                const campusAttribute = event.getAttribute('data-campus');
+                if (selectedCampus === 'all' || 
+                    campusAttribute === selectedCampus || 
+                    campusAttribute === 'all' ||
+                    (campusAttribute && campusAttribute.split(' ').includes(selectedCampus))) {
+                    event.classList.remove('hidden-campus');
+                } else {
+                    event.classList.add('hidden-campus');
+                }
+            });
+        }
+
+        function filterEvents(category) {
+            const button = document.querySelector(`.filter-btn[onclick="filterEvents('${category}')"]`);
+            button.classList.toggle(`active-${category}`);
+            
+            // Update visibility of events based on active filters
+            const events = document.querySelectorAll('.event');
+            events.forEach(event => {
+                const shouldShow = Array.from(document.querySelectorAll('.filter-btn'))
+                    .some(btn => btn.classList.contains(`active-${event.dataset.category}`));
+                event.style.display = shouldShow ? 'block' : 'none';
+            });
+        }
+    </script>
 </body>
 </html>
