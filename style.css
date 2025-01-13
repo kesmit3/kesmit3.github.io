@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #1d7a85;
+    background-color: #f4f4f9;
     color: #333;
     line-height: 1.6;
 }
@@ -12,7 +12,7 @@ body {
 header {
     text-align: center;
     padding: 50px 20px;
-    background: #1d7a85;
+    background: #007acc;
     color: white;
 }
 
@@ -53,7 +53,7 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #id7a85;
+    color: #007acc;
     font-size: 1.1rem;
     transition: color 0.3s;
 }
