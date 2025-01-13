@@ -5,6 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academic Year Timeline</title>
     <style>
+        .departments {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .department {
+            margin-bottom: 30px;
+            padding: 15px;
+            border-left: 4px solid #2196f3;
+            background-color: #f8f9fa;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .department h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .department-services {
+            margin-left: 20px;
+        }
+
+        .department-services p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 1em;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -103,7 +136,7 @@
             border-left: 4px solid #2196f3;
         }
 
-        .special-events {
+        .signature-events {
             background-color: #f3e5f5;
             border-left: 4px solid #9c27b0;
         }
@@ -166,6 +199,35 @@
 <body>
     <header>
         <h1>Academic Year Timeline</h1>
+        
+        <div class="departments">
+            <div class="department">
+                <h2>Road to College and Career (RTCC)</h2>
+                <div class="department-services">
+                    <p>Tech Career Services</p>
+                    <p>Healthcare Services</p>
+                    <p>Alumni Services</p>
+                    <p>CTE</p>
+                </div>
+            </div>
+
+            <div class="department">
+                <h2>Family and Scholar Experience (FASE)</h2>
+                <div class="department-services">
+                    <p>Special Events</p>
+                    <p>Scholar Experience</p>
+                    <p>Family Experience</p>
+                </div>
+            </div>
+
+            <div class="department">
+                <h2>Curriculum and Instruction (CIS)</h2>
+                <div class="department-services">
+                    <p>CTE</p>
+                </div>
+            </div>
+        </div>
+
         <div class="legend">
             <div class="legend-item">
                 <span class="legend-color" style="background-color: #e3f2fd; border-left: 4px solid #2196f3;"></span>
@@ -173,7 +235,7 @@
             </div>
             <div class="legend-item">
                 <span class="legend-color" style="background-color: #f3e5f5; border-left: 4px solid #9c27b0;"></span>
-                <span>Special Events</span>
+                <span>Signature Events</span>
             </div>
             <div class="legend-item">
                 <span class="legend-color" style="background-color: #ffebee; border-left: 4px solid #f44336;"></span>
@@ -211,7 +273,7 @@
         <div class="month right">
             <div class="content">
                 <h2>August</h2>
-                <div class="event special-events">
+                <div class="event signature-events">
                     <p>Convocation</p>
                     <p class="team">For: Staff</p>
                 </div>
