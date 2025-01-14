@@ -3,6 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select } from '@/components/ui/select';
+import { fetchTimelineFile, updateTimelineFile, insertEventIntoTimeline } from './github-api';
 
 const TimelineAdmin = () => {
   const [eventData, setEventData] = useState({
@@ -13,7 +14,7 @@ const TimelineAdmin = () => {
     host: '',
     position: 'left'
   });
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const months = [
     'June', 'July', 'August', 'September', 'October',
     'November', 'December', 'January', 'February',
@@ -30,19 +31,43 @@ const TimelineAdmin = () => {
   ];
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    // Generate HTML for the new event
-    const eventHtml = `
-    <div class="event ${eventData.eventType}">
-        <p>${eventData.eventName}</p>
-        <p class="team">For: ${eventData.audience}</p>
-        <p class="team">Organized by: ${eventData.host}</p>
-    </div>`;
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    // TODO: Add GitHub API integration here
-    console.log('Generated HTML:', eventHtml);
-  };
+  try {
+    // Fetch current timeline content
+    const { content, sha } = await fetchTimelineFile();
+
+    // Insert new event
+    const updatedContent = insertEventIntoTimeline(content, eventData);
+
+    // Commit changes to GitHub
+    await updateTimelineFile(
+      updatedContent, 
+      sha,
+      `Add ${eventData.eventName} to ${eventData.month}`
+    );
+
+    // Show success message
+    alert("Event added successfully!");
+
+    // Reset form
+    setEventData({
+      month: '',
+      eventName: '',
+      eventType: 'rtcc',
+      audience: '',
+      host: '',
+      position: 'left'
+    });
+
+  } catch (error) {
+    console.error('Error adding event:', error);
+    alert("Error adding event: " + error.message);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <Card className="w-full max-w-2xl mx-auto">
