@@ -62,7 +62,11 @@ nav ul li a {
 nav ul li a:hover {
     color: #005f99;
 }
-
+/* Video Container
+.video-container {
+    text-align: center;
+    margin: 20px 0;
+}
 /* Footer Section */
 footer {
     text-align: center;
