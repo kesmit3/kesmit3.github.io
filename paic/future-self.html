@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Future Self | Purpose Engine</title>
+  
+  <link rel="icon" type="image/png" href="uplift-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="variables.css">
+  
+  <style>
+    body {
+      background: linear-gradient(180deg, var(--navy) 0%, #0f0f1a 100%);
+      color: white;
+      min-height: 100vh;
+    }
+
+    .future-page {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: calc(var(--nav-height) + 20px) 20px 40px;
+    }
+
+    .chat-container {
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .chat-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .avatar-ring {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      box-shadow: 0 0 40px rgba(0, 103, 177, 0.4);
+    }
+
+    .chat-header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .chat-header p {
+      color: var(--gray-400);
+      font-size: 14px;
+    }
+
+    /* Chat Box */
+    .chat-box {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 24px;
+      max-height: 50vh;
+      overflow-y: auto;
+    }
+
+    /* Messages */
+    .message {
+      display: flex;
+    }
+
+    .message.user {
+      justify-content: flex-end;
+    }
+
+    .message.system {
+      justify-content: center;
+    }
+
+    .message-bubble {
+      max-width: 85%;
+      padding: 16px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .message.user .message-bubble {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      border-bottom-right-radius: 6px;
+    }
+
+    .message.assistant .message-bubble {
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+      border-bottom-left-radius: 6px;
+    }
+
+    .message.system .message-bubble {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--gray-400);
+      font-size: 12px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 100%;
+    }
+
+    /* Suggested Questions */
+    .suggestions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .suggestion-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 10px 16px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .suggestion-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .suggestion-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Input Area */
+    .input-area {
+      display: flex;
+      gap: 12px;
+    }
+
+    .chat-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 16px 20px;
+      color: white;
+      font-size: 14px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .chat-input::placeholder {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .chat-input:focus {
+      border-color: var(--primary);
+    }
+
+    .send-btn {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border: none;
+      border-radius: 16px;
+      padding: 0 24px;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .send-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 103, 177, 0.4);
+    }
+
+    /* Info Card */
+    .info-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 24px;
+    }
+
+    .info-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-card p {
+      color: var(--gray-400);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* Typing indicator */
+    .typing-indicator {
+      display: none;
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      border-bottom-left-radius: 6px;
+      max-width: 80px;
+    }
+
+    .typing-indicator.visible {
+      display: flex;
+      gap: 4px;
+    }
+
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--gray-400);
+      border-radius: 50%;
+      animation: typingBounce 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-4px); }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .future-page {
+        padding: calc(var(--nav-height) + 16px) 16px 32px;
+      }
+
+      .avatar-ring {
+        width: 64px;
+        height: 64px;
+        font-size: 28px;
+      }
+
+      .chat-header h1 {
+        font-size: 24px;
+      }
+
+      .chat-box {
+        padding: 16px;
+        max-height: 45vh;
+      }
+
+      .message-bubble {
+        padding: 12px 16px;
+        font-size: 13px;
+      }
+
+      .suggestions {
+        flex-direction: column;
+      }
+
+      .suggestion-btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .input-area {
+        flex-direction: column;
+      }
+
+      .send-btn {
+        padding: 14px 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .chat-header h1 {
+        font-size: 22px;
+      }
+
+      .chat-header p {
+        font-size: 12px;
+      }
+
+      .chat-box {
+        padding: 12px;
+        border-radius: 16px;
+      }
+
+      .message-bubble {
+        max-width: 90%;
+        padding: 10px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav nav--dark">
+    <a href="index.html" class="nav__logo">
+      <img src="uplift-logo.png" alt="Uplift Education" class="nav__logo-img">
+      <div class="nav__divider"></div>
+      <span class="nav__product">Purpose Engine</span>
+    </a>
+    <button class="nav__toggle" onclick="toggleNav()">☰</button>
+    <div class="nav__links" id="navLinks">
+      <a href="index.html" class="nav__link">
+        <span class="nav__link-icon">🏠</span>
+        <span class="nav__link-text">Home</span>
+      </a>
+      <a href="student-dashboard.html" class="nav__link">
+        <span class="nav__link-icon">📊</span>
+        <span class="nav__link-text">Student</span>
+      </a>
+      <a href="career-bridge.html" class="nav__link">
+        <span class="nav__link-icon">🎯</span>
+        <span class="nav__link-text">Career Bridge</span>
+      </a>
+      <a href="future-self.html" class="nav__link nav__link--active">
+        <span class="nav__link-icon">🔮</span>
+        <span class="nav__link-text">Future Self</span>
+      </a>
+      <a href="educator-dashboard.html" class="nav__link">
+        <span class="nav__link-icon">👩‍🏫</span>
+        <span class="nav__link-text">Educator</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="future-page">
+    <div class="chat-container">
+      <!-- Header -->
+      <div class="chat-header">
+        <div class="avatar-ring">🔮</div>
+        <h1>Your Future Self</h1>
+        <p>Maya Chen, 10 years from now • Sustainable Design Director</p>
+      </div>
+
+      <!-- Chat Box -->
+      <div class="chat-box" id="chatBox">
+        <div class="message system">
+          <div class="message-bubble">
+            Connected to Maya Chen's Future Self — Sustainable Design Director at an award-winning eco-architecture firm, 10 years from now.
+          </div>
+        </div>
+        <div class="message assistant">
+          <div class="message-bubble">
+            Hey Maya! It's so good to hear from you. I remember being exactly where you are—11th grade, wondering if any of this chemistry stuff actually matters. Trust me, it does. What's on your mind?
+          </div>
+        </div>
+        <div class="message assistant typing-indicator" id="typingIndicator">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      </div>
+
+      <!-- Suggested Questions -->
+      <div class="suggestions" id="suggestions">
+        <button class="suggestion-btn" onclick="askQuestion('stoich')">Why do I need stoichiometry?</button>
+        <button class="suggestion-btn" onclick="askQuestion('giveup')">Did you ever feel like giving up?</button>
+        <button class="suggestion-btn" onclick="askQuestion('focus')">What should I focus on this year?</button>
+      </div>
+
+      <!-- Input Area -->
+      <div class="input-area">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Ask your Future Self anything..." onkeypress="handleKeyPress(event)">
+        <button class="send-btn" onclick="sendCustomMessage()">Send</button>
+      </div>
+
+      <!-- Info Card -->
+      <div class="info-card">
+        <h3>💡 About Future Self AI</h3>
+        <p>
+          This AI persona is built from Maya's Purpose Card—her career interests, aptitudes, and goals. 
+          It provides mentorship from the perspective of her successful future self, helping connect 
+          today's work to tomorrow's dreams.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const responses = {
+      stoich: "I use it almost weekly! When specifying sustainable materials—bio-based insulation, low-VOC paints, carbon-sequestering concrete—I need to understand the chemistry. Last month, a supplier tried to pass off a formulation that would have failed fire codes. I caught it because I understood the ratios. That chemistry class? It's not about the grade. It's about protecting the integrity of your future work.",
+      giveup: "More times than I can count. Junior year was brutal—I remember feeling like none of it mattered. But here's what I wish someone had told me: the struggle IS the preparation. Every time you push through something hard, you're building resilience you'll need when a client rejects your design. And that happens. But you get back up because you've practiced.",
+      focus: "Three things: First, don't just complete assignments—find the connection to real problems. Second, start documenting your projects. That Science Fair solar catcher? That's portfolio material. Finally, find one adult in sustainability and ask them questions. LinkedIn exists—use it. That's how I got my first internship.",
+      default: "That's a great question. From where I'm standing now, I can tell you that everything you're going through is building toward something bigger than you can see right now. Keep pushing, keep questioning, and most importantly—keep connecting what you're learning to what you want to build. You've got this."
+    };
+
+    const usedQuestions = new Set();
+
+    function askQuestion(questionId) {
+      if (usedQuestions.has(questionId)) return;
+      usedQuestions.add(questionId);
+      
+      const questionTexts = {
+        stoich: "Why do I need stoichiometry?",
+        giveup: "Did you ever feel like giving up?",
+        focus: "What should I focus on this year?"
+      };
+      
+      const questionText = questionTexts[questionId];
+      const response = responses[questionId];
+      
+      // Disable the button
+      event.target.disabled = true;
+      
+      // Add user message
+      addMessage('user', questionText);
+      
+      // Show typing indicator
+      showTyping();
+      
+      // Add response after delay
+      setTimeout(() => {
+        hideTyping();
+        addMessage('assistant', response);
+      }, 1500);
+    }
+
+    function sendCustomMessage() {
+      const input = document.getElementById('chatInput');
+      const message = input.value.trim();
+      
+      if (!message) return;
+      
+      input.value = '';
+      addMessage('user', message);
+      showTyping();
+      
+      setTimeout(() => {
+        hideTyping();
+        addMessage('assistant', responses.default);
+      }, 1500);
+    }
+
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        sendCustomMessage();
+      }
+    }
+
+    function addMessage(type, text) {
+      const chatBox = document.getElementById('chatBox');
+      const indicator = document.getElementById('typingIndicator');
+      
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${type}`;
+      messageDiv.innerHTML = `<div class="message-bubble">${text}</div>`;
+      
+      chatBox.insertBefore(messageDiv, indicator);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function showTyping() {
+      const indicator = document.getElementById('typingIndicator');
+      indicator.classList.add('visible');
+      const chatBox = document.getElementById('chatBox');
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function hideTyping() {
+      const indicator = document.getElementById('typingIndicator');
+      indicator.classList.remove('visible');
+    }
+
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    
+    document.addEventListener('click', function(e) {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.querySelector('.nav__toggle');
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Bridge | Purpose Engine</title>
+  
+  <link rel="icon" type="image/png" href="uplift-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="variables.css">
+  
+  <style>
+    body {
+      background: var(--navy);
+      color: white;
+    }
+
+    .bridge-page {
+      min-height: 100vh;
+      padding: calc(var(--nav-height) + 40px) 40px 60px;
+    }
+
+    .bridge-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .bridge-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(0, 103, 177, 0.2);
+      color: var(--primary-light);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .bridge-header h1 {
+      font-size: 40px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .bridge-header p {
+      color: var(--gray-400);
+      font-size: 18px;
+    }
+
+    /* Student Context Card */
+    .student-context {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .student-avatar {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .student-info {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .student-name {
+      color: white;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .student-interests {
+      color: var(--gray-400);
+      font-size: 13px;
+    }
+
+    .theme-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .theme-badge {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* Transformation Grid */
+    .transform-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    /* Assignment Cards */
+    .assignment-card {
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.5s ease;
+    }
+
+    .assignment-card.before {
+      background: rgba(239, 68, 68, 0.08);
+      border: 2px solid rgba(239, 68, 68, 0.25);
+    }
+
+    .assignment-card.before.faded {
+      opacity: 0.5;
+    }
+
+    .assignment-card.after {
+      background: rgba(0, 103, 177, 0.05);
+      border: 2px solid rgba(0, 103, 177, 0.2);
+    }
+
+    .assignment-card.after.active {
+      background: rgba(0, 103, 177, 0.12);
+      border-color: var(--primary);
+      transform: scale(1.02);
+    }
+
+    .assignment-tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .assignment-card.before .assignment-tag {
+      background: var(--danger);
+      color: white;
+    }
+
+    .assignment-card.after .assignment-tag {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+    }
+
+    .assignment-title {
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .assignment-desc {
+      color: var(--gray-400);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .assignment-card.after .assignment-desc strong {
+      color: var(--primary-light);
+    }
+
+    .mindset-box {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .assignment-card.after .mindset-box {
+      background: rgba(0, 103, 177, 0.2);
+    }
+
+    .mindset-label {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .assignment-card.before .mindset-label {
+      color: var(--danger);
+    }
+
+    .assignment-card.after .mindset-label {
+      color: var(--primary-light);
+    }
+
+    .mindset-text {
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    .assignment-card.before .mindset-text {
+      color: var(--gray-400);
+    }
+
+    .assignment-card.after .mindset-text {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Transform Button */
+    .transform-control {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .transform-btn {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 103, 177, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .transform-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .transform-btn.active {
+      background: linear-gradient(135deg, var(--success) 0%, #8BC34A 100%);
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+    }
+
+    .transform-label {
+      color: var(--gray-400);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Learning Objectives */
+    .objectives-bar {
+      margin-top: 40px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .objective-item {
+      text-align: center;
+    }
+
+    .objective-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .objective-text {
+      color: var(--gray-400);
+      font-size: 13px;
+    }
+
+    .objective-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* How It Works Section */
+    .how-section {
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .how-section h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .how-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: left;
+    }
+
+    .how-number {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+
+    .how-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .how-card p {
+      color: var(--gray-400);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 1024px) {
+      .bridge-page {
+        padding: calc(var(--nav-height) + 32px) 32px 48px;
+      }
+
+      .how-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .bridge-page {
+        padding: calc(var(--nav-height) + 24px) 20px 40px;
+      }
+
+      .bridge-header h1 {
+        font-size: 28px;
+      }
+
+      .bridge-header p {
+        font-size: 15px;
+      }
+
+      .student-context {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .theme-badges {
+        width: 100%;
+      }
+
+      .transform-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .transform-control {
+        flex-direction: row;
+        padding: 16px 0;
+      }
+
+      .transform-btn {
+        width: 56px;
+        height: 56px;
+        font-size: 20px;
+      }
+
+      .assignment-card {
+        padding: 24px;
+      }
+
+      .assignment-title {
+        font-size: 18px;
+      }
+
+      .objectives-bar {
+        flex-direction: column;
+        gap: 24px;
+        padding: 20px;
+      }
+
+      .objective-divider {
+        width: 40px;
+        height: 1px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .bridge-page {
+        padding: calc(var(--nav-height) + 16px) 16px 32px;
+      }
+
+      .bridge-header h1 {
+        font-size: 24px;
+      }
+
+      .assignment-card {
+        padding: 20px;
+      }
+
+      .assignment-title {
+        font-size: 16px;
+      }
+
+      .assignment-desc {
+        font-size: 13px;
+      }
+
+      .how-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav nav--dark">
+    <a href="index.html" class="nav__logo">
+      <img src="uplift-logo.png" alt="Uplift Education" class="nav__logo-img">
+      <div class="nav__divider"></div>
+      <span class="nav__product">Purpose Engine</span>
+    </a>
+    <button class="nav__toggle" onclick="toggleNav()">☰</button>
+    <div class="nav__links" id="navLinks">
+      <a href="index.html" class="nav__link">
+        <span class="nav__link-icon">🏠</span>
+        <span class="nav__link-text">Home</span>
+      </a>
+      <a href="student-dashboard.html" class="nav__link">
+        <span class="nav__link-icon">📊</span>
+        <span class="nav__link-text">Student</span>
+      </a>
+      <a href="career-bridge.html" class="nav__link nav__link--active">
+        <span class="nav__link-icon">🎯</span>
+        <span class="nav__link-text">Career Bridge</span>
+      </a>
+      <a href="future-self.html" class="nav__link">
+        <span class="nav__link-icon">🔮</span>
+        <span class="nav__link-text">Future Self</span>
+      </a>
+      <a href="educator-dashboard.html" class="nav__link">
+        <span class="nav__link-icon">👩‍🏫</span>
+        <span class="nav__link-text">Educator</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="bridge-page">
+    <div class="bridge-container">
+      <!-- Header -->
+      <div class="bridge-header">
+        <span class="badge">Personalized Purpose Engine</span>
+        <h1>The Career-Bridge Challenge</h1>
+        <p>Same learning objectives. Completely different motivation.</p>
+      </div>
+
+      <!-- Student Context -->
+      <div class="student-context">
+        <div class="student-avatar">👤</div>
+        <div class="student-info">
+          <div class="student-name">Maya Chen</div>
+          <div class="student-interests">Interests from Schoolinks: Sustainable Architecture, Environmental Engineering, Urban Planning</div>
+        </div>
+        <div class="theme-badges">
+          <span class="theme-badge" style="background: rgba(232, 107, 107, 0.2); color: #E86B6B;">🎨 85%</span>
+          <span class="theme-badge" style="background: rgba(76, 175, 80, 0.2); color: #4CAF50;">🌱 72%</span>
+          <span class="theme-badge" style="background: rgba(255, 183, 77, 0.2); color: #FFB74D;">💡 64%</span>
+        </div>
+      </div>
+
+      <!-- Transformation Grid -->
+      <div class="transform-grid">
+        <!-- Before Card -->
+        <div class="assignment-card before" id="beforeCard">
+          <span class="assignment-tag">TRADITIONAL</span>
+          <h3 class="assignment-title">Stoichiometry Lab #7</h3>
+          <p class="assignment-desc">
+            Calculate the molar ratios needed to balance the following chemical equations. 
+            Complete problems 1-15. Due tomorrow.
+          </p>
+          <div class="mindset-box">
+            <div class="mindset-label">STUDENT MINDSET</div>
+            <p class="mindset-text">
+              "I want to work in sustainable design, not be a chemist. This is busywork."
+            </p>
+          </div>
+        </div>
+
+        <!-- Transform Button -->
+        <div class="transform-control">
+          <button class="transform-btn" id="transformBtn" onclick="toggleTransform()">⚡</button>
+          <span class="transform-label" id="transformLabel">Transform</span>
+        </div>
+
+        <!-- After Card -->
+        <div class="assignment-card after" id="afterCard">
+          <span class="assignment-tag">PURPOSE ENGINE</span>
+          <h3 class="assignment-title">🌱 Eco-Material Design Challenge</h3>
+          <p class="assignment-desc">
+            <strong>As an aspiring sustainable designer,</strong> calculate 
+            the exact chemical ratios for plant-based building insulation. A local green construction 
+            startup needs your help—if your ratios are off, the material won't meet fire safety standards.
+          </p>
+          <div class="mindset-box">
+            <div class="mindset-label">STUDENT MINDSET</div>
+            <p class="mindset-text">
+              "This is actually relevant to what I want to do. I need to understand this."
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Learning Objectives Bar -->
+      <div class="objectives-bar">
+        <div class="objective-item">
+          <div class="objective-icon" style="color: var(--success);">✓</div>
+          <div class="objective-text">Same TEKS Standards</div>
+        </div>
+        <div class="objective-divider"></div>
+        <div class="objective-item">
+          <div class="objective-icon" style="color: var(--success);">✓</div>
+          <div class="objective-text">Same Learning Objectives</div>
+        </div>
+        <div class="objective-divider"></div>
+        <div class="objective-item">
+          <div class="objective-icon" style="color: var(--primary);">⬆</div>
+          <div class="objective-text">2.3x More Engagement</div>
+        </div>
+      </div>
+
+      <!-- How It Works Section -->
+      <div class="how-section">
+        <h2>How Career-Bridge Works</h2>
+        <div class="how-grid">
+          <div class="how-card">
+            <div class="how-number">1</div>
+            <h3>Read the Scorecard</h3>
+            <p>AI pulls student's career interests, aptitudes, and purpose themes from integrated systems like Schoolinks and YouScience.</p>
+          </div>
+          <div class="how-card">
+            <div class="how-number">2</div>
+            <h3>Match to Context</h3>
+            <p>Learning objectives stay the same, but the framing is personalized to connect with each student's goals and interests.</p>
+          </div>
+          <div class="how-card">
+            <div class="how-number">3</div>
+            <h3>Deliver Relevance</h3>
+            <p>Students see why the assignment matters to THEIR future, increasing intrinsic motivation and engagement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let isTransformed = false;
+
+    function toggleTransform() {
+      isTransformed = !isTransformed;
+      
+      const btn = document.getElementById('transformBtn');
+      const label = document.getElementById('transformLabel');
+      const beforeCard = document.getElementById('beforeCard');
+      const afterCard = document.getElementById('afterCard');
+      
+      if (isTransformed) {
+        btn.textContent = '✓';
+        btn.classList.add('active');
+        label.textContent = 'Transformed!';
+        beforeCard.classList.add('faded');
+        afterCard.classList.add('active');
+      } else {
+        btn.textContent = '⚡';
+        btn.classList.remove('active');
+        label.textContent = 'Transform';
+        beforeCard.classList.remove('faded');
+        afterCard.classList.remove('active');
+      }
+    }
+
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    
+    document.addEventListener('click', function(e) {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.querySelector('.nav__toggle');
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>
