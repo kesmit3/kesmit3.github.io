@@ -1,0 +1,59 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#00838F', 'primaryTextColor': '#fff', 'primaryBorderColor': '#006064', 'lineColor': '#64748B', 'secondaryColor': '#F1F5F9', 'tertiaryColor': '#FFB74D'}}}%%
+
+flowchart TB
+    subgraph ENTRY["🚪 Entry Points"]
+        LOGIN["login.html<br/>━━━━━━━━━━━<br/>Role Selection:<br/>• Student<br/>• Teacher<br/>• Counselor<br/>• Admin"]
+        INDEX["index.html<br/>━━━━━━━━━━━<br/>Marketing Landing<br/>Hero + Value Prop"]
+    end
+
+    subgraph INFO["📚 Informational Pages"]
+        ARCH["architecture.html<br/>━━━━━━━━━━━<br/>System Integration<br/>Data Flow Diagram"]
+        PROBLEM["problem.html<br/>━━━━━━━━━━━<br/>The Problem<br/>Before/After"]
+    end
+
+    subgraph STUDENT["🎓 Student Experience"]
+        SDASH["student-dashboard.html<br/>━━━━━━━━━━━<br/>• Purpose Points<br/>• Purpose Card<br/>• Recent Wins<br/>• Quick Actions<br/>• Journey Chart"]
+        BRIDGE["purpose-bridge.html<br/>━━━━━━━━━━━<br/>Assignment Transform<br/>Interactive Demo"]
+        FUTURE["future-self.html<br/>━━━━━━━━━━━<br/>AI Chat Interface<br/>Mentorship Sim"]
+    end
+
+    subgraph EDUCATOR["👩‍🏫 Educator Experience"]
+        EDASH["educator-dashboard.html<br/>━━━━━━━━━━━<br/>⭐ PRIMARY PAGE<br/>• Class Roster<br/>• Student Detail<br/>• Celebrations<br/>• Support/Inquiry<br/>• Events/Feedback"]
+    end
+
+    subgraph ADMIN["🏛️ Administration"]
+        ADASH["admin-dashboard.html<br/>━━━━━━━━━━━<br/>Campus/District<br/>Aggregate Analytics"]
+    end
+
+    %% Navigation flows
+    INDEX --> LOGIN
+    INDEX --> ARCH
+    INDEX --> PROBLEM
+    
+    LOGIN -->|Student| SDASH
+    LOGIN -->|Teacher| EDASH
+    LOGIN -->|Counselor| EDASH
+    LOGIN -->|Admin| ADASH
+    
+    SDASH -->|"Why does this matter?"| BRIDGE
+    SDASH -->|"Talk to Future Self"| FUTURE
+    SDASH <-->|Return| BRIDGE
+    SDASH <-->|Return| FUTURE
+    
+    EDASH -->|"Transform Assignment"| BRIDGE
+    EDASH -->|"View Student Detail"| EDASH
+    
+    ARCH --> INDEX
+    PROBLEM --> INDEX
+
+    %% Styling
+    classDef primary fill:#00838F,stroke:#006064,color:#fff
+    classDef secondary fill:#F1F5F9,stroke:#E2E8F0,color:#1E293B
+    classDef accent fill:#FF6F00,stroke:#E65100,color:#fff
+    classDef student fill:#8B5CF6,stroke:#7C3AED,color:#fff
+    
+    class EDASH primary
+    class SDASH,BRIDGE,FUTURE student
+    class INDEX,LOGIN secondary
+    class ARCH,PROBLEM secondary
+    class ADASH accent
