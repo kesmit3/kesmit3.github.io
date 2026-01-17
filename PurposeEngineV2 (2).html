@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purpose Engine - Uplift Education</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { overflow-x: hidden; font-family: 'Outfit', sans-serif; }
+    button:hover { opacity: 0.92; }
+    input::placeholder { color: rgba(255,255,255,0.3); }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // Uplift Education Brand Colors - from actual logo
+    const brand = {
+      primary: '#0A3D62',      // Darker Uplift blue for backgrounds
+      primaryDark: '#062840',
+      primaryLight: '#1B5A90',
+      gold: '#F7B618',         // Uplift gold (sun/rays)
+      goldDark: '#D99E0D',
+      goldLight: '#FBC84A',
+      navy: '#0A3D62',
+      success: '#43A047',
+      warning: '#FB8C00',
+      danger: '#E53935',
+      gray100: '#F5F7FA',
+      gray200: '#E4E7EB',
+      gray500: '#6B7280',
+      gray800: '#1F2937'
+    };
+
+    const integrationSources = {
+      powerschool: { name: 'PowerSchool', icon: '📊', color: '#1976D2', status: 'live' },
+      lms: { name: 'Schoology LMS', icon: '📚', color: '#7B1FA2', status: 'live' },
+      schoolinks: { name: 'Schoolinks', icon: '🎯', color: '#388E3C', status: 'live' },
+      youscience: { name: 'YouScience', icon: '🧠', color: '#F57C00', status: 'synced' }
+    };
+
+    const studentData = {
+      name: "Xander Wright",
+      campus: "Uplift Hampton Preparatory",
+      grade: "11th Grade",
+      totalPoints: 67,
+      attendance: { present: 87, absent: 4, tardy: 3 },
+      assignments: { completed: 23, missing: 2 },
+      careerInterests: ["Sustainable Architecture", "Environmental Engineering", "Urban Planning"],
+      purposeThemes: [
+        { name: "Creative Technology", icon: "🎨", color: "#E86B6B", strength: 85 },
+        { name: "Environmental Science", icon: "🌱", color: "#4CAF50", strength: 72 },
+        { name: "Entrepreneurship", icon: "💡", color: "#FFB74D", strength: 64 }
+      ],
+      recentWins: [
+        { text: "Connected chemistry concepts to sustainable design", date: "Jan 15", points: 3, source: "Teacher Validated" },
+        { text: "Led team discussion on renewable materials", date: "Jan 12", points: 2, source: "AI Observed" },
+        { text: "Completed Digital Communications CTE module", date: "Jan 8", points: 5, source: "Schoolinks" }
+      ],
+      activityHistory: [
+        { grade: "6th", points: 7.7 }, { grade: "7th", points: 7.4 }, { grade: "8th", points: 9.2 },
+        { grade: "9th", points: 11 }, { grade: "10th", points: 14 }, { grade: "11th", points: 18 }
+      ]
+    };
+
+    // Logo using actual image
+    const UpliftLogo = () => (
+      <img src="uplift_logo.png" alt="Uplift Education" style={{ height: '40px', width: 'auto' }} 
+        onError={(e) => { e.target.outerHTML = '<span style="font-weight:700;font-size:18px"><span style="color:#F7B618">uplift</span><span style="color:#1B5A90">education</span></span>'; }} />
+    );
+
+    // Navigation
+    const Navigation = ({ currentView, setCurrentView }) => {
+      const navItems = [
+        { id: 'architecture', label: 'System Architecture', icon: '⬡' },
+        { id: 'concept', label: 'The Problem', icon: '◉' },
+        { id: 'dashboard', label: 'Student Dashboard', icon: '◈' },
+        { id: 'bridge', label: 'Purpose Engine', icon: '◇' },
+        { id: 'futureself', label: 'Future Self', icon: '◆' },
+        { id: 'teacher', label: 'Educator View', icon: '▣' }
+      ];
+
+      return (
+        <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '64px', background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 32px', zIndex: 1000, borderBottom: `1px solid ${brand.gray200}`, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <UpliftLogo />
+            <div style={{ height: '24px', width: '1px', background: brand.gray200 }} />
+            <div style={{ fontSize: '15px', fontWeight: '600', color: brand.primary }}>Purpose Engine</div>
+          </div>
+          <div style={{ display: 'flex', gap: '4px' }}>
+            {navItems.map(item => (
+              <button key={item.id} onClick={() => setCurrentView(item.id)} style={{ background: currentView === item.id ? brand.primary : 'transparent', border: 'none', borderRadius: '8px', padding: '8px 14px', color: currentView === item.id ? '#fff' : brand.gray500, fontSize: '13px', fontWeight: currentView === item.id ? '600' : '500', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ opacity: 0.8, fontSize: '12px' }}>{item.icon}</span>{item.label}
+              </button>
+            ))}
+          </div>
+        </nav>
+      );
+    };
+
+    // Architecture View
+    const ArchitectureView = () => {
+      const [step, setStep] = useState(0);
+      useEffect(() => { const t = setInterval(() => setStep(p => p < 5 ? p + 1 : p), 600); return () => clearInterval(t); }, []);
+
+      return (
+        <div style={{ minHeight: '100vh', background: `linear-gradient(180deg, ${brand.gray100} 0%, #fff 100%)`, paddingTop: '64px' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '60px 40px' }}>
+            <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: `${brand.gold}20`, padding: '8px 16px', borderRadius: '20px', marginBottom: '20px' }}>
+                <span style={{ color: brand.gold }}>🏫</span>
+                <span style={{ color: brand.goldDark, fontSize: '13px', fontWeight: '600' }}>Runs Locally at Your School</span>
+              </div>
+              <h1 style={{ fontSize: '44px', fontWeight: '800', color: brand.navy, marginBottom: '16px', lineHeight: 1.2 }}>
+                AI as the <span style={{ color: brand.primary }}>Connective Tissue</span><br />Between Systems You Already Use
+              </h1>
+              <p style={{ fontSize: '18px', color: brand.gray500, maxWidth: '700px', margin: '0 auto', lineHeight: 1.6 }}>
+                The Purpose Engine doesn't replace your existing tools—it synthesizes data from PowerSchool, your LMS, and Schoolinks to surface insights no single system can see.
+              </p>
+            </div>
+
+            <div style={{ background: '#fff', borderRadius: '24px', padding: '48px', boxShadow: '0 4px 24px rgba(0,0,0,0.06)', marginBottom: '48px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr auto 1fr', gap: '24px', alignItems: 'center' }}>
+                {/* Sources */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <h3 style={{ color: brand.gray500, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>Data Sources</h3>
+                  {Object.entries(integrationSources).map(([key, src], i) => (
+                    <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '16px', background: `${src.color}08`, border: `2px solid ${step >= 1 ? src.color : brand.gray200}`, borderRadius: '12px', opacity: step >= 1 ? 1 : 0.4, transform: step >= 1 ? 'translateX(0)' : 'translateX(-20px)', transition: `all 0.4s ease ${i * 0.1}s` }}>
+                      <span style={{ fontSize: '24px' }}>{src.icon}</span>
+                      <div><div style={{ fontWeight: '600', color: brand.gray800, fontSize: '14px' }}>{src.name}</div><div style={{ fontSize: '11px', color: src.color, fontWeight: '500' }}>● {src.status}</div></div>
+                    </div>
+                  ))}
+                </div>
+                {/* Arrows In */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', opacity: step >= 2 ? 1 : 0.2, transition: 'opacity 0.5s' }}>
+                  {[1,2,3,4].map(i => <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><div style={{ width: '40px', height: '2px', background: `linear-gradient(90deg, ${brand.gray200}, ${brand.primary})` }} /><div style={{ color: brand.primary, fontSize: '12px' }}>→</div></div>)}
+                </div>
+                {/* AI Engine */}
+                <div style={{ background: `linear-gradient(135deg, ${brand.primary} 0%, ${brand.primaryDark} 100%)`, borderRadius: '20px', padding: '32px', textAlign: 'center', color: '#fff', boxShadow: step >= 3 ? `0 0 40px ${brand.primary}40` : 'none', transform: step >= 3 ? 'scale(1.02)' : 'scale(1)', transition: 'all 0.5s', border: `3px solid ${brand.gold}` }}>
+                  <div style={{ width: '64px', height: '64px', background: brand.gold, borderRadius: '16px', margin: '0 auto 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '32px' }}>🧠</div>
+                  <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '8px' }}>Local AI Engine</h3>
+                  <p style={{ fontSize: '13px', opacity: 0.8, marginBottom: '16px' }}>Runs on-premise at your school.<br />Student data never leaves campus.</p>
+                  <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                    <span style={{ background: 'rgba(255,255,255,0.2)', padding: '4px 10px', borderRadius: '12px', fontSize: '11px' }}>Pattern Recognition</span>
+                    <span style={{ background: 'rgba(255,255,255,0.2)', padding: '4px 10px', borderRadius: '12px', fontSize: '11px' }}>Insight Synthesis</span>
+                  </div>
+                </div>
+                {/* Arrows Out */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', opacity: step >= 4 ? 1 : 0.2, transition: 'opacity 0.5s' }}>
+                  {[1,2,3].map(i => <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><div style={{ color: brand.primary, fontSize: '12px' }}>→</div><div style={{ width: '40px', height: '2px', background: `linear-gradient(90deg, ${brand.primary}, ${brand.gold})` }} /></div>)}
+                </div>
+                {/* Features */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <h3 style={{ color: brand.gray500, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>Purpose Engine Features</h3>
+                  {[{ icon: '🎯', name: 'Career-Bridge Challenges', desc: 'Personalized assignment framing' }, { icon: '🔮', name: 'Future Self AI', desc: 'Mentorship simulations' }, { icon: '⚠️', name: 'Early Warning Signals', desc: 'Attendance + assignment patterns' }].map((f, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '16px', background: `${brand.gold}10`, border: `2px solid ${step >= 5 ? brand.gold : brand.gray200}`, borderRadius: '12px', opacity: step >= 5 ? 1 : 0.4, transform: step >= 5 ? 'translateX(0)' : 'translateX(20px)', transition: `all 0.4s ease ${i * 0.1}s` }}>
+                      <span style={{ fontSize: '24px' }}>{f.icon}</span>
+                      <div><div style={{ fontWeight: '600', color: brand.gray800, fontSize: '14px' }}>{f.name}</div><div style={{ fontSize: '11px', color: brand.gray500 }}>{f.desc}</div></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* AI Synthesis Example */}
+            <div style={{ background: brand.primary, borderRadius: '24px', padding: '40px', color: '#fff' }}>
+              <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '24px', textAlign: 'center' }}>What the AI Synthesizes (Example: Xander Wright)</h3>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
+                {[
+                  { source: 'PowerSchool', icon: '📊', title: 'Attendance Pattern', value: '2 absences this week', detail: 'Unusual - typically 98% attendance', color: '#1976D2' },
+                  { source: 'Schoology', icon: '📚', title: 'Missing Work', value: '2 assignments overdue', detail: 'Chemistry + English', color: '#7B1FA2' },
+                  { source: 'Schoolinks', icon: '🎯', title: 'Career Interest', value: 'Sustainable Design', detail: 'Top match: Environmental Engineering', color: '#388E3C' },
+                  { source: 'AI Insight', icon: '🧠', title: 'Pattern Detected', value: 'Potential struggle', detail: 'Absences + missing work = check in needed', color: brand.gold, highlight: true }
+                ].map((c, i) => (
+                  <div key={i} style={{ background: c.highlight ? `${c.color}20` : 'rgba(255,255,255,0.05)', border: `1px solid ${c.highlight ? c.color : 'rgba(255,255,255,0.1)'}`, borderRadius: '16px', padding: '20px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}><span style={{ fontSize: '16px' }}>{c.icon}</span><span style={{ fontSize: '11px', color: c.color, fontWeight: '600' }}>{c.source}</span></div>
+                    <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', marginBottom: '4px' }}>{c.title}</div>
+                    <div style={{ fontSize: '18px', fontWeight: '700', marginBottom: '4px' }}>{c.value}</div>
+                    <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.6)' }}>{c.detail}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // Concept View
+    const ConceptView = () => (
+      <div style={{ minHeight: '100vh', background: brand.primary, paddingTop: '64px' }}>
+        <section style={{ padding: '80px 60px', textAlign: 'center', position: 'relative' }}>
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundImage: `linear-gradient(${brand.gold}10 1px, transparent 1px), linear-gradient(90deg, ${brand.gold}10 1px, transparent 1px)`, backgroundSize: '60px 60px' }} />
+          <h1 style={{ fontSize: '52px', fontWeight: '800', color: '#fff', marginBottom: '24px', lineHeight: 1.1, position: 'relative' }}>
+            <span style={{ color: brand.gold }}>Motivation Collapses</span><br />When Work Feels Disconnected
+          </h1>
+          <p style={{ fontSize: '20px', color: 'rgba(255,255,255,0.7)', maxWidth: '700px', margin: '0 auto 60px', lineHeight: 1.6 }}>
+            73% of high school students say their coursework feels disconnected from their future. AI can bridge this gap—not by doing work for them, but by <em style={{ color: brand.goldLight }}>contextualizing work for them specifically</em>.
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '40px', marginBottom: '80px', flexWrap: 'wrap' }}>
+            {[
+              { type: 'before', emoji: '😐', title: 'Traditional Approach', text: 'Complete this stoichiometry worksheet for tomorrow. It\'s on the test.', thought: 'Why does this matter to me?' },
+              { type: 'after', emoji: '🚀', title: 'Purpose Engine', text: 'As an aspiring sustainable designer, calculate the chemical ratios for eco-friendly building insulation.', thought: 'This is relevant to MY future.' }
+            ].map((c, i) => (
+              <React.Fragment key={i}>
+                {i === 1 && <div style={{ fontSize: '32px', color: brand.gold }}>→</div>}
+                <div style={{ background: c.type === 'before' ? 'rgba(229,57,53,0.1)' : `${brand.primary}15`, border: `2px solid ${c.type === 'before' ? 'rgba(229,57,53,0.3)' : brand.primaryLight}40`, borderRadius: '16px', padding: '32px', width: '300px', textAlign: 'left' }}>
+                  <div style={{ fontSize: '32px', marginBottom: '12px' }}>{c.emoji}</div>
+                  <h3 style={{ color: c.type === 'before' ? brand.danger : brand.goldLight, fontSize: '18px', marginBottom: '12px' }}>{c.title}</h3>
+                  <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '14px', lineHeight: 1.6, marginBottom: '16px' }}>"{c.text}"</p>
+                  <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '8px', padding: '12px', fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>Student thought: "{c.thought}"</div>
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', maxWidth: '1000px', margin: '0 auto' }}>
+            {[
+              { icon: '🎯', title: 'Personalized Purpose Engine', desc: 'AI re-skins assignments based on each student\'s career interests and aptitudes from their scorecard.', color: brand.gold },
+              { icon: '🔮', title: 'Future Self Simulations', desc: 'Students consult an AI persona of their successful future self for mentorship and motivation.', color: '#fff' },
+              { icon: '🚀', title: 'AI Co-Founder Capstone', desc: 'Semester-long venture where classwork becomes R&D for a real micro-business or nonprofit.', color: brand.success }
+            ].map((p, i) => (
+              <div key={i} style={{ background: `${p.color}10`, border: `1px solid ${p.color}30`, borderRadius: '16px', padding: '28px', textAlign: 'left' }}>
+                <div style={{ width: '48px', height: '48px', background: `${p.color}20`, borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', marginBottom: '16px' }}>{p.icon}</div>
+                <h3 style={{ color: '#fff', fontSize: '18px', fontWeight: '600', marginBottom: '8px' }}>{p.title}</h3>
+                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '14px', lineHeight: 1.6 }}>{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    );
+
+    // Dashboard View
+    const DashboardView = () => (
+      <div style={{ minHeight: '100vh', background: brand.gray100, paddingTop: '64px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px' }}>
+          {/* Header */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '32px' }}>
+            <div>
+              <p style={{ color: brand.gold, fontSize: '14px', fontWeight: '600', marginBottom: '4px' }}>Good morning 👋</p>
+              <h1 style={{ fontSize: '32px', fontWeight: '700', color: brand.primary, margin: 0 }}>{studentData.name}</h1>
+              <p style={{ color: brand.gray500, fontSize: '14px', marginTop: '4px' }}>{studentData.grade} • {studentData.campus}</p>
+            </div>
+            <div style={{ background: `linear-gradient(135deg, ${brand.primary} 0%, ${brand.primaryDark} 100%)`, borderRadius: '16px', padding: '20px 28px', color: '#fff', textAlign: 'center', border: `3px solid ${brand.gold}` }}>
+              <div style={{ fontSize: '36px', fontWeight: '800' }}>{studentData.totalPoints}</div>
+              <div style={{ fontSize: '12px', opacity: 0.8, textTransform: 'uppercase', letterSpacing: '1px' }}>Purpose Points</div>
+            </div>
+          </div>
+
+          {/* Alert */}
+          <div style={{ background: `linear-gradient(90deg, ${brand.warning}15 0%, ${brand.warning}05 100%)`, border: `1px solid ${brand.warning}40`, borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <div style={{ width: '40px', height: '40px', background: brand.warning, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '18px' }}>⚠️</div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontWeight: '600', color: brand.gray800, fontSize: '14px' }}>Heads up: You have 2 missing assignments</div>
+              <div style={{ fontSize: '13px', color: brand.gray500 }}>Chemistry Lab Report #6 and Reading Response Ch. 8 are overdue</div>
+            </div>
+            <button style={{ background: brand.warning, border: 'none', borderRadius: '8px', padding: '10px 16px', color: '#fff', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>View Details</button>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+            {/* Left */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+              {/* Purpose Card */}
+              <div style={{ background: '#fff', borderRadius: '20px', padding: '28px', boxShadow: '0 4px 24px rgba(0,0,0,0.04)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                  <h2 style={{ fontSize: '18px', fontWeight: '700', color: brand.primary, margin: 0 }}>Your Purpose Card</h2>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: `${brand.success}15`, padding: '4px 10px', borderRadius: '20px' }}><span style={{ fontSize: '10px' }}>🎯</span><span style={{ color: brand.success, fontSize: '11px', fontWeight: '600' }}>from Schoolinks</span></div>
+                </div>
+                {studentData.purposeThemes.map((t, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '16px', background: `${t.color}08`, borderRadius: '12px', marginBottom: i < 2 ? '12px' : 0, border: `1px solid ${t.color}20` }}>
+                    <div style={{ width: '48px', height: '48px', background: `${t.color}15`, borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>{t.icon}</div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontWeight: '600', color: brand.primary, fontSize: '15px', marginBottom: '6px' }}>{t.name}</div>
+                      <div style={{ height: '6px', background: brand.gray200, borderRadius: '3px', overflow: 'hidden' }}><div style={{ height: '100%', width: `${t.strength}%`, background: t.color, borderRadius: '3px' }} /></div>
+                    </div>
+                    <div style={{ color: t.color, fontWeight: '700', fontSize: '14px' }}>{t.strength}%</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Stats */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
+                {[
+                  { icon: '📊', source: 'PowerSchool', label: 'Attendance', value: '93%', detail: '4 absences', color: '#1976D2' },
+                  { icon: '📚', source: 'Schoology', label: 'Assignments', value: '23/25', detail: '2 missing', color: '#7B1FA2', alert: true }
+                ].map((s, i) => (
+                  <div key={i} style={{ background: '#fff', borderRadius: '16px', padding: '20px', boxShadow: '0 4px 24px rgba(0,0,0,0.04)', border: s.alert ? `2px solid ${brand.warning}` : 'none' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}><span style={{ fontSize: '14px' }}>{s.icon}</span><span style={{ fontSize: '10px', color: s.color, fontWeight: '600' }}>{s.source}</span></div>
+                    <div style={{ fontSize: '11px', color: brand.gray500, marginBottom: '4px' }}>{s.label}</div>
+                    <div style={{ fontSize: '24px', fontWeight: '700', color: s.alert ? brand.warning : brand.primary }}>{s.value}</div>
+                    <div style={{ fontSize: '11px', color: s.alert ? brand.warning : brand.gray500 }}>{s.detail}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Wins */}
+              <div style={{ background: '#fff', borderRadius: '20px', padding: '28px', boxShadow: '0 4px 24px rgba(0,0,0,0.04)' }}>
+                <h2 style={{ fontSize: '18px', fontWeight: '700', color: brand.primary, marginBottom: '20px' }}>Recent Wins 🎉</h2>
+                {studentData.recentWins.map((w, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 0', borderBottom: i < 2 ? `1px solid ${brand.gray200}` : 'none' }}>
+                    <div style={{ width: '32px', height: '32px', background: `linear-gradient(135deg, ${brand.gold} 0%, ${brand.goldDark} 100%)`, borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '12px', fontWeight: '700' }}>+{w.points}</div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontSize: '14px', color: brand.primary }}>{w.text}</div>
+                      <div style={{ fontSize: '11px', color: brand.gray500, marginTop: '2px' }}>{w.date} • <span style={{ color: brand.gold }}>{w.source}</span></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+              {/* Future Self CTA */}
+              <div style={{ background: `linear-gradient(135deg, ${brand.primary} 0%, ${brand.primaryDark} 100%)`, borderRadius: '20px', padding: '28px', color: '#fff', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '120px', height: '120px', background: `radial-gradient(circle, ${brand.gold}50 0%, transparent 70%)`, borderRadius: '50%' }} />
+                <h2 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '12px' }}>Talk to Your Future Self</h2>
+                <p style={{ fontSize: '14px', opacity: 0.8, marginBottom: '20px', lineHeight: 1.6 }}>Get advice from the successful version of you, 10 years from now—a Sustainable Design Director.</p>
+                <button style={{ background: brand.gold, border: 'none', borderRadius: '12px', padding: '14px 24px', color: '#fff', fontSize: '14px', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}><span>Start Conversation</span><span>→</span></button>
+              </div>
+
+              {/* Journey */}
+              <div style={{ background: '#fff', borderRadius: '20px', padding: '28px', boxShadow: '0 4px 24px rgba(0,0,0,0.04)' }}>
+                <h2 style={{ fontSize: '18px', fontWeight: '700', color: brand.primary, marginBottom: '20px' }}>Your Journey</h2>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', height: '140px' }}>
+                  {studentData.activityHistory.map((y, i) => (
+                    <div key={i} style={{ textAlign: 'center', flex: 1 }}>
+                      <div style={{ height: `${(y.points / 20) * 100}px`, background: i === studentData.activityHistory.length - 1 ? `linear-gradient(180deg, ${brand.gold} 0%, ${brand.goldDark} 100%)` : `linear-gradient(180deg, ${brand.primary}40 0%, ${brand.primary}20 100%)`, borderRadius: '6px 6px 0 0', margin: '0 4px', position: 'relative' }}>
+                        <span style={{ position: 'absolute', top: '-24px', left: '50%', transform: 'translateX(-50%)', fontSize: '12px', fontWeight: '600', color: i === studentData.activityHistory.length - 1 ? brand.gold : brand.gray500 }}>{y.points}</span>
+                      </div>
+                      <div style={{ fontSize: '11px', color: brand.gray500, marginTop: '8px' }}>{y.grade}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Quick Actions */}
+              <div style={{ background: `${brand.gold}15`, border: `1px solid ${brand.gold}30`, borderRadius: '20px', padding: '28px' }}>
+                <h2 style={{ fontSize: '18px', fontWeight: '700', color: brand.primary, marginBottom: '16px' }}>Quick Actions</h2>
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                  {[{ icon: '📝', label: 'Why does this matter?', primary: true }, { icon: '🎯', label: 'Log Experience' }, { icon: '🔍', label: 'Explore Careers' }].map((a, i) => (
+                    <button key={i} style={{ background: a.primary ? `linear-gradient(135deg, ${brand.gold} 0%, ${brand.goldDark} 100%)` : '#fff', border: a.primary ? 'none' : `1px solid ${brand.gray200}`, borderRadius: '10px', padding: '12px 16px', color: a.primary ? '#fff' : brand.primary, fontSize: '13px', fontWeight: '500', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}><span>{a.icon}</span>{a.label}</button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
+    // Bridge View
+    const BridgeView = () => {
+      const [transformed, setTransformed] = useState(false);
+      return (
+        <div style={{ minHeight: '100vh', background: brand.primary, paddingTop: '64px' }}>
+          <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '60px 40px' }}>
+            <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+              <span style={{ background: `${brand.gold}40`, color: '#fff', padding: '6px 14px', borderRadius: '20px', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>Personalized Purpose Engine</span>
+              <h1 style={{ fontSize: '40px', fontWeight: '800', color: '#fff', marginTop: '20px', marginBottom: '12px' }}>The Career-Bridge Challenge</h1>
+              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '18px' }}>Same learning objectives. Completely different motivation.</p>
+            </div>
+
+            <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '16px', padding: '20px 24px', marginBottom: '32px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <div style={{ width: '48px', height: '48px', background: brand.gold, borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>👤</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ color: '#fff', fontWeight: '600' }}>{studentData.name}</div>
+                <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '13px' }}>Interests: {studentData.careerInterests.join(', ')}</div>
+              </div>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                {studentData.purposeThemes.map((t, i) => <span key={i} style={{ background: `${t.color}30`, color: t.color, padding: '4px 10px', borderRadius: '6px', fontSize: '11px', fontWeight: '600' }}>{t.icon} {t.strength}%</span>)}
+              </div>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '24px', alignItems: 'stretch' }}>
+              <div style={{ background: `${brand.danger}15`, border: `2px solid ${brand.danger}40`, borderRadius: '20px', padding: '32px', opacity: transformed ? 0.5 : 1, transition: 'opacity 0.5s' }}>
+                <span style={{ background: brand.danger, color: '#fff', padding: '4px 10px', borderRadius: '6px', fontSize: '11px', fontWeight: '700' }}>TRADITIONAL</span>
+                <h3 style={{ color: '#fff', fontSize: '20px', fontWeight: '600', margin: '20px 0 16px' }}>Stoichiometry Lab #7</h3>
+                <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '14px', lineHeight: 1.7, marginBottom: '24px' }}>Calculate the molar ratios needed to balance the following chemical equations. Complete problems 1-15. Due tomorrow.</p>
+                <div style={{ background: 'rgba(0,0,0,0.2)', borderRadius: '12px', padding: '16px' }}>
+                  <div style={{ color: brand.danger, fontSize: '12px', fontWeight: '600', marginBottom: '8px' }}>STUDENT MINDSET</div>
+                  <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '13px', fontStyle: 'italic' }}>"I want to work in sustainable design, not be a chemist. This is busywork."</p>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
+                <button onClick={() => setTransformed(!transformed)} style={{ width: '64px', height: '64px', borderRadius: '50%', border: 'none', background: transformed ? `linear-gradient(135deg, ${brand.success} 0%, #8BC34A 100%)` : `linear-gradient(135deg, ${brand.gold} 0%, ${brand.goldDark} 100%)`, color: '#fff', fontSize: '24px', cursor: 'pointer', boxShadow: `0 4px 20px ${brand.gold}60` }}>{transformed ? '✓' : '⚡'}</button>
+                <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px' }}>{transformed ? 'Transformed!' : 'Transform'}</span>
+              </div>
+
+              <div style={{ background: transformed ? `${brand.gold}25` : `${brand.gold}10`, border: `2px solid ${transformed ? brand.gold : `${brand.gold}40`}`, borderRadius: '20px', padding: '32px', transition: 'all 0.5s', transform: transformed ? 'scale(1.02)' : 'scale(1)' }}>
+                <span style={{ background: brand.gold, color: '#fff', padding: '4px 10px', borderRadius: '6px', fontSize: '11px', fontWeight: '700' }}>PURPOSE ENGINE</span>
+                <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '13px', marginLeft: '8px' }}>Personalized for Xander</span>
+                <h3 style={{ color: '#fff', fontSize: '20px', fontWeight: '600', margin: '20px 0 16px' }}>🌱 Eco-Material Design Challenge</h3>
+                <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '14px', lineHeight: 1.7, marginBottom: '24px' }}><strong style={{ color: brand.goldLight }}>As an aspiring sustainable designer,</strong> calculate the exact chemical ratios for plant-based building insulation. A local green construction startup needs your help—if your ratios are off, the material won't meet fire safety standards.</p>
+                <div style={{ background: `${brand.gold}30`, borderRadius: '12px', padding: '16px' }}>
+                  <div style={{ color: brand.goldLight, fontSize: '12px', fontWeight: '600', marginBottom: '8px' }}>STUDENT MINDSET</div>
+                  <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '13px', fontStyle: 'italic' }}>"This is actually relevant to what I want to do. I need to understand this."</p>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '40px', background: 'rgba(255,255,255,0.05)', borderRadius: '16px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '40px' }}>
+              <div style={{ textAlign: 'center' }}><div style={{ color: brand.success, fontSize: '24px', marginBottom: '8px' }}>✓</div><div style={{ color: 'rgba(255,255,255,0.8)', fontSize: '13px' }}>Same TEKS Standards</div></div>
+              <div style={{ width: '1px', height: '40px', background: 'rgba(255,255,255,0.15)' }} />
+              <div style={{ textAlign: 'center' }}><div style={{ color: brand.success, fontSize: '24px', marginBottom: '8px' }}>✓</div><div style={{ color: 'rgba(255,255,255,0.8)', fontSize: '13px' }}>Same Learning Objectives</div></div>
+              <div style={{ width: '1px', height: '40px', background: 'rgba(255,255,255,0.15)' }} />
+              <div style={{ textAlign: 'center' }}><div style={{ color: brand.gold, fontSize: '24px', marginBottom: '8px' }}>⬆</div><div style={{ color: 'rgba(255,255,255,0.8)', fontSize: '13px' }}>2.3x More Engagement</div></div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // Future Self View
+    const FutureSelfView = () => {
+      const [messages, setMessages] = useState([
+        { role: 'system', content: "Connected to Xander Wright's Future Self — Sustainable Design Director, 10 years from now." },
+        { role: 'assistant', content: "Hey Xander! It's so good to hear from you. I remember being exactly where you are—11th grade, wondering if any of this chemistry stuff actually matters. Trust me, it does. What's on your mind?" }
+      ]);
+      const questions = ["Why do I need stoichiometry?", "Did you ever feel like giving up?", "What should I focus on this year?"];
+      const responses = {
+        "Why do I need stoichiometry?": "I use it almost weekly! When specifying sustainable materials—bio-based insulation, low-VOC paints, carbon-sequestering concrete—I need to understand the chemistry. Last month, a supplier tried to pass off a formulation that would have failed fire codes. I caught it because I understood the ratios.",
+        "Did you ever feel like giving up?": "More times than I can count. Junior year was brutal—I remember feeling like none of it mattered. But here's what I wish someone had told me: the struggle IS the preparation. Every time you push through something hard, you're building resilience.",
+        "What should I focus on this year?": "Three things: First, don't just complete assignments—find the connection to real problems. Second, start documenting your projects. That Science Fair solar catcher? That's portfolio material. Finally, find one adult in sustainability and ask them questions."
+      };
+      const addMessage = (q) => setMessages(p => [...p, { role: 'user', content: q }, { role: 'assistant', content: responses[q] }]);
+
+      return (
+        <div style={{ minHeight: '100vh', background: `linear-gradient(180deg, ${brand.primary} 0%, ${brand.primaryDark} 100%)`, paddingTop: '64px', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ width: '100%', maxWidth: '700px', padding: '40px 20px', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+              <div style={{ width: '80px', height: '80px', margin: '0 auto 16px', background: brand.gold, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '36px', boxShadow: `0 0 40px ${brand.gold}60` }}>🔮</div>
+              <h1 style={{ color: '#fff', fontSize: '28px', fontWeight: '700', marginBottom: '8px' }}>Your Future Self</h1>
+              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>Xander Wright, 10 years from now • Sustainable Design Director</p>
+            </div>
+
+            <div style={{ flex: 1, background: 'rgba(255,255,255,0.05)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
+              {messages.map((m, i) => (
+                <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
+                  <div style={{ maxWidth: m.role === 'system' ? '100%' : '85%', padding: m.role === 'system' ? '12px 16px' : '16px 20px', borderRadius: m.role === 'system' ? '12px' : '20px', background: m.role === 'user' ? brand.gold : m.role === 'system' ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.1)', color: m.role === 'system' ? 'rgba(255,255,255,0.5)' : '#fff', fontSize: m.role === 'system' ? '12px' : '14px', lineHeight: 1.6, textAlign: m.role === 'system' ? 'center' : 'left' }}>{m.content}</div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '16px' }}>
+              {questions.map((q, i) => <button key={i} onClick={() => addMessage(q)} style={{ background: 'rgba(255,255,255,0.08)', border: `1px solid ${brand.gold}50`, borderRadius: '20px', padding: '10px 16px', color: 'rgba(255,255,255,0.8)', fontSize: '13px', cursor: 'pointer' }}>{q}</button>)}
+            </div>
+
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <input type="text" placeholder="Ask your Future Self anything..." style={{ flex: 1, background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '16px', padding: '16px 20px', color: '#fff', fontSize: '14px', outline: 'none' }} />
+              <button style={{ background: brand.gold, border: 'none', borderRadius: '16px', padding: '0 24px', color: '#fff', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>Send</button>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // Teacher View
+    const TeacherView = () => {
+      const students = [
+        { name: "Xander Wright", points: 67, flag: { type: 'warning', text: '2 missing assignments + 2 recent absences' }, theme: "Creative Technology", attendance: "93%", assignments: "92%" },
+        { name: "Jordan Williams", points: 52, flag: { type: 'insight', text: 'Shows strong leadership in group activities' }, theme: "Business & Leadership", attendance: "98%", assignments: "100%" },
+        { name: "Alex Rivera", points: 71, flag: null, theme: "Healthcare Innovation", attendance: "96%", assignments: "96%" },
+        { name: "Sam Thompson", points: 34, flag: { type: 'insight', text: 'Engages more with hands-on building tasks' }, theme: "Engineering", attendance: "89%", assignments: "85%" },
+        { name: "Taylor Kim", points: 58, flag: null, theme: "Environmental Science", attendance: "100%", assignments: "100%" },
+        { name: "Morgan Davis", points: 45, flag: null, theme: "Digital Arts", attendance: "94%", assignments: "92%" }
+      ];
+      const [reviewing, setReviewing] = useState(null);
+
+      return (
+        <div style={{ minHeight: '100vh', background: brand.gray100, paddingTop: '64px' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+              <div>
+                <h1 style={{ fontSize: '28px', fontWeight: '700', color: brand.primary, margin: 0 }}>Chemistry - Period 3</h1>
+                <p style={{ color: brand.gray500, fontSize: '14px', marginTop: '4px' }}>Mrs. Rodriguez • 24 students • 3 AI insights pending</p>
+              </div>
+              <div style={{ display: 'flex', gap: '12px' }}>
+                <button style={{ background: '#fff', border: `1px solid ${brand.gray200}`, borderRadius: '10px', padding: '10px 16px', color: brand.primary, fontSize: '13px', fontWeight: '500', cursor: 'pointer' }}>⚡ Assignment Transformer</button>
+                <button style={{ background: `linear-gradient(135deg, ${brand.primary} 0%, ${brand.primaryDark} 100%)`, border: 'none', borderRadius: '10px', padding: '10px 16px', color: '#fff', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>View All Purpose Cards</button>
+              </div>
+            </div>
+
+            <div style={{ background: '#fff', borderRadius: '12px', padding: '16px 24px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '32px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+              <span style={{ fontSize: '13px', color: brand.gray500, fontWeight: '500' }}>Live Data From:</span>
+              {Object.entries(integrationSources).map(([k, s]) => (
+                <div key={k} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><span style={{ fontSize: '16px' }}>{s.icon}</span><span style={{ fontSize: '13px', color: brand.gray800 }}>{s.name}</span><span style={{ width: '8px', height: '8px', background: brand.success, borderRadius: '50%' }} /></div>
+              ))}
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '32px' }}>
+              {[
+                { label: 'Class Avg Points', value: '54.5', trend: '+3.2' },
+                { label: 'Avg Attendance', value: '95%', source: 'PowerSchool' },
+                { label: 'Assignment Completion', value: '94%', source: 'Schoology' },
+                { label: 'AI Insights Pending', value: '3', highlight: true }
+              ].map((s, i) => (
+                <div key={i} style={{ background: s.highlight ? `${brand.gold}20` : '#fff', borderRadius: '16px', padding: '20px', boxShadow: '0 4px 24px rgba(0,0,0,0.04)', border: s.highlight ? `2px solid ${brand.gold}` : 'none' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}><span style={{ color: brand.gray500, fontSize: '12px' }}>{s.label}</span>{s.source && <span style={{ fontSize: '10px', color: brand.primary, fontWeight: '500' }}>{s.source}</span>}</div>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}><span style={{ fontSize: '28px', fontWeight: '700', color: s.highlight ? brand.goldDark : brand.primary }}>{s.value}</span>{s.trend && <span style={{ color: brand.success, fontSize: '13px', fontWeight: '600' }}>{s.trend}</span>}</div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ background: '#fff', borderRadius: '20px', boxShadow: '0 4px 24px rgba(0,0,0,0.04)', overflow: 'hidden' }}>
+              <div style={{ padding: '20px 24px', borderBottom: `1px solid ${brand.gray200}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <h2 style={{ fontSize: '16px', fontWeight: '600', color: brand.primary, margin: 0 }}>Student Roster</h2>
+                <div style={{ display: 'flex', gap: '16px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '12px', height: '12px', background: brand.warning, borderRadius: '3px' }} /><span style={{ fontSize: '12px', color: brand.gray500 }}>Needs Check-In</span></div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '12px', height: '12px', background: brand.gold, borderRadius: '3px' }} /><span style={{ fontSize: '12px', color: brand.gray500 }}>Insight to Review</span></div>
+                </div>
+              </div>
+              {students.map((s, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', padding: '16px 24px', borderBottom: i < students.length - 1 ? `1px solid ${brand.gray200}` : 'none', background: s.flag ? s.flag.type === 'warning' ? `${brand.warning}08` : `${brand.gold}08` : '#fff' }}>
+                  <div style={{ width: '40px', height: '40px', background: s.flag ? s.flag.type === 'warning' ? `linear-gradient(135deg, ${brand.warning} 0%, #FF8F00 100%)` : `linear-gradient(135deg, ${brand.gold} 0%, ${brand.goldDark} 100%)` : brand.gray200, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: s.flag ? '#fff' : brand.gray500, fontWeight: '600', fontSize: '14px', marginRight: '16px' }}>{s.name.split(' ').map(n => n[0]).join('')}</div>
+                  <div style={{ flex: 1 }}><div style={{ fontWeight: '600', color: brand.primary, fontSize: '14px' }}>{s.name}</div><div style={{ color: brand.gray500, fontSize: '12px' }}>{s.theme}</div></div>
+                  <div style={{ width: '80px', textAlign: 'center' }}><div style={{ fontSize: '13px', color: brand.gray800 }}>{s.attendance}</div><div style={{ fontSize: '10px', color: brand.gray500 }}>Attendance</div></div>
+                  <div style={{ width: '80px', textAlign: 'center' }}><div style={{ fontSize: '13px', color: brand.gray800 }}>{s.assignments}</div><div style={{ fontSize: '10px', color: brand.gray500 }}>Assignments</div></div>
+                  <div style={{ width: '80px', textAlign: 'center' }}><div style={{ fontWeight: '700', color: brand.gold, fontSize: '16px' }}>{s.points}</div><div style={{ fontSize: '10px', color: brand.gray500 }}>Points</div></div>
+                  {s.flag ? <button onClick={() => setReviewing(s)} style={{ background: s.flag.type === 'warning' ? `${brand.warning}15` : `${brand.gold}20`, border: `1px solid ${s.flag.type === 'warning' ? brand.warning : brand.gold}`, borderRadius: '8px', padding: '8px 16px', color: s.flag.type === 'warning' ? brand.warning : brand.goldDark, fontSize: '12px', fontWeight: '600', cursor: 'pointer', marginLeft: '16px' }}>{s.flag.type === 'warning' ? 'Check In' : 'Review'}</button> : <div style={{ width: '95px', marginLeft: '16px' }} />}
+                </div>
+              ))}
+            </div>
+
+            {reviewing && (
+              <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 }}>
+                <div style={{ background: '#fff', borderRadius: '24px', padding: '32px', width: '500px', maxWidth: '90vw' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+                    <div style={{ width: '56px', height: '56px', background: reviewing.flag?.type === 'warning' ? `linear-gradient(135deg, ${brand.warning} 0%, #FF8F00 100%)` : `linear-gradient(135deg, ${brand.gold} 0%, ${brand.goldDark} 100%)`, borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: '700', fontSize: '18px' }}>{reviewing.name.split(' ').map(n => n[0]).join('')}</div>
+                    <div><div style={{ fontWeight: '700', color: brand.primary, fontSize: '18px' }}>{reviewing.name}</div><div style={{ color: brand.gray500, fontSize: '13px' }}>{reviewing.flag?.type === 'warning' ? 'AI detected a pattern that may need attention' : 'AI observed a strength pattern'}</div></div>
+                  </div>
+                  <div style={{ background: reviewing.flag?.type === 'warning' ? `${brand.warning}10` : `${brand.gold}15`, border: `1px solid ${reviewing.flag?.type === 'warning' ? brand.warning : brand.gold}40`, borderRadius: '12px', padding: '20px', marginBottom: '16px' }}>
+                    <div style={{ color: reviewing.flag?.type === 'warning' ? brand.warning : brand.goldDark, fontSize: '11px', fontWeight: '700', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{reviewing.flag?.type === 'warning' ? '⚠️ Pattern Detected' : '🧠 AI Insight'}</div>
+                    <p style={{ color: brand.primary, fontSize: '15px', lineHeight: 1.6, margin: 0 }}>"{reviewing.flag?.text}"</p>
+                  </div>
+                  {reviewing.flag?.type === 'warning' && (
+                    <div style={{ background: brand.gray100, borderRadius: '12px', padding: '16px', marginBottom: '24px' }}>
+                      <div style={{ fontSize: '11px', color: brand.gray500, marginBottom: '8px', fontWeight: '600' }}>DATA FROM INTEGRATED SYSTEMS</div>
+                      <div style={{ display: 'flex', gap: '24px' }}><div><span style={{ fontSize: '12px', color: '#1976D2' }}>📊 PowerSchool:</span><span style={{ fontSize: '12px', color: brand.gray800, marginLeft: '4px' }}>2 absences</span></div><div><span style={{ fontSize: '12px', color: '#7B1FA2' }}>📚 Schoology:</span><span style={{ fontSize: '12px', color: brand.gray800, marginLeft: '4px' }}>2 late assignments</span></div></div>
+                    </div>
+                  )}
+                  <p style={{ color: brand.gray500, fontSize: '13px', marginBottom: '24px', lineHeight: 1.6 }}>{reviewing.flag?.type === 'warning' ? `Should this trigger a check-in with ${reviewing.name.split(' ')[0]}?` : `Record this to ${reviewing.name.split(' ')[0]}'s Purpose Profile?`}</p>
+                  <div style={{ display: 'flex', gap: '12px' }}>
+                    {reviewing.flag?.type === 'warning' ? (
+                      <><button onClick={() => setReviewing(null)} style={{ flex: 1, background: brand.primary, border: 'none', borderRadius: '12px', padding: '14px', color: '#fff', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>Schedule Check-In</button><button onClick={() => setReviewing(null)} style={{ flex: 1, background: '#fff', border: `1px solid ${brand.gray200}`, borderRadius: '12px', padding: '14px', color: brand.gray500, fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>Keep Monitoring</button></>
+                    ) : (
+                      <><button onClick={() => setReviewing(null)} style={{ flex: 1, background: brand.success, border: 'none', borderRadius: '12px', padding: '14px', color: '#fff', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>✓ Record</button><button onClick={() => setReviewing(null)} style={{ flex: 1, background: '#fff', border: `1px solid ${brand.gray200}`, borderRadius: '12px', padding: '14px', color: brand.gray500, fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>Keep Watching</button><button onClick={() => setReviewing(null)} style={{ flex: 1, background: '#fff', border: `1px solid ${brand.gray200}`, borderRadius: '12px', padding: '14px', color: brand.gray500, fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>Dismiss</button></>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    // Main App
+    function App() {
+      const [view, setView] = useState('architecture');
+      const views = { architecture: ArchitectureView, concept: ConceptView, dashboard: DashboardView, bridge: BridgeView, futureself: FutureSelfView, teacher: TeacherView };
+      const View = views[view];
+      return <><Navigation currentView={view} setCurrentView={setView} /><View /></>;
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
