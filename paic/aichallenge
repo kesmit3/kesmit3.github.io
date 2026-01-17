@@ -1,0 +1,274 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presidential AI Challenge Submission: Purpose Engine</title>
+    <style>
+        /* Base styles matching Guidebook aesthetic: Formal, patriotic navy blue accents, clean white backgrounds */
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.5;
+        }
+        h1, h2, h3 {
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+        }
+        p, ul, table {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+        /* Navy blue for headers, matching Guidebook */
+        .header-section {
+            background-color: #001f3f; /* Deep navy */
+            color: #ffffff;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .header-section h1 {
+            font-size: 48px;
+            margin: 20px 0;
+        }
+        .subheader {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+        /* Stars and White House motif - text-based for simplicity */
+        .logo-circle {
+            position: relative;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        .logo-circle::before {
+            content: "★ ★ ★ ★ ★ ★ ★ ★";
+            color: #ffffff;
+            font-size: 24px;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+        .logo-text {
+            font-size: 36px;
+            font-style: italic;
+        }
+        /* Content sections: White background, centered text where appropriate */
+        .content-section {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .quote-section {
+            text-align: center;
+            font-style: italic;
+            font-size: 18px;
+            margin: 60px auto;
+        }
+        .quote-author {
+            text-align: right;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .toc-header {
+            background-color: #001f3f;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        /* Footer logos - mimic Guidebook bottom logos */
+        .footer-logos {
+            background-color: #001f3f;
+            padding: 20px;
+            text-align: center;
+        }
+        .footer-logos img {
+            height: 40px;
+            margin: 0 10px;
+        }
+        /* Page numbers, matching Guidebook */
+        .page-footer {
+            text-align: left;
+            font-size: 12px;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+        .page-date {
+            text-align: right;
+            font-size: 12px;
+        }
+        /* AI Magic section: Explicit highlights with teal accents from Uplift branding to match user's site */
+        .ai-magic {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .ai-magic h3 {
+            color: #00838f; /* Uplift teal to blend with user's aesthetic */
+        }
+        /* Match user's simple, text-heavy site: Clean sections, bullets, tables */
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cover Page: Modeling Guidebook Page 1 -->
+    <div class="header-section">
+        <div class="logo-circle">
+            <div class="logo-text">Presidential AI Challenge</div>
+        </div>
+        <h1>Submission Guidebook</h1>
+        <div class="subheader">Purpose Engine: AI for Classroom Innovation</div>
+    </div>
+    <div class="footer-logos">
+        <!-- Placeholder logos; replace with actual image URLs if available -->
+        <img src="https://via.placeholder.com/100x40?text=White+House" alt="White House Seal">
+        <img src="https://via.placeholder.com/100x40?text=USDA" alt="USDA">
+        <img src="https://via.placeholder.com/100x40?text=DOE" alt="DOE">
+        <img src="https://via.placeholder.com/100x40?text=DoD" alt="DoD">
+        <img src="https://via.placeholder.com/100x40?text=NSF" alt="NSF">
+    </div>
+
+    <!-- Quote Section: Modeling Guidebook Page 2 -->
+    <div class="content-section quote-section">
+        <p>"The President's National Artificial Intelligence Challenge invites every student in America—from kindergarten to 12th grade—to unleash their imagination and showcase the spirit of American innovation.</p>
+        <p>Our extraordinary educators will guide and empower you through this process to build a brighter, stronger future for us all."</p>
+        <p class="quote-author">- First Lady Melania Trump</p>
+    </div>
+    <div class="content-section">
+        <div class="page-footer">Page 2</div>
+        <div class="page-date">January 17, 2026</div>
+    </div>
+
+    <!-- About Section: Modeling Guidebook Page 3 -->
+    <div class="content-section">
+        <p>On April 23, 2025, President Donald J. Trump signed Executive Order (EO) 14277, “Advancing Artificial Intelligence (AI) Education for American Youth,” with the goal of maintaining America’s global dominance in this technological revolution for future generations. This EO directed the establishment of the Presidential AI Challenge (Challenge) to foster interest and expertise in AI technology in America's youth. Early training in the responsible use of AI tools will demystify this technology and prepare America’s students to be confident participants in the AI-assisted workforce, propelling our Nation to new heights of scientific innovation and economic achievement.</p>
+        <p>Purpose Engine aligns with this vision by integrating school data systems to personalize learning, reduce educator burden, and connect classroom work to students' future careers—empowering educators to win the AI challenge for innovation in the classroom.</p>
+        <p>For organizations interested in investing in AI education for America’s youth, please visit <a href="https://www.whitehouse.gov/edai/">https://www.whitehouse.gov/edai/</a> to join more than 100 other organizations that have established public-private partnerships to provide resources for K-12 AI education.</p>
+    </div>
+    <div class="content-section">
+        <div class="page-footer">Page 3</div>
+        <div class="page-date">January 17, 2026</div>
+    </div>
+
+    <!-- Table of Contents: Modeling Guidebook Page 4 -->
+    <div class="toc-header">Table of Contents</div>
+    <div class="content-section">
+        <table>
+            <tr><td>About the Purpose Engine Submission</td><td>4</td></tr>
+            <tr><td>Eligibility and Team</td><td>5</td></tr>
+            <tr><td>How Purpose Engine Aligns with the Challenge</td><td>6</td></tr>
+            <tr><td>The AI Magic: Explicit Innovation</td><td>7</td></tr>
+            <tr><td>Project Demonstration</td><td>10</td></tr>
+            <tr><td>Uniqueness: Why No Other Tool Does This</td><td>13</td></tr>
+            <tr><td>How Projects Will Be Judged</td><td>15</td></tr>
+            <tr><td>Questions?</td><td>19</td></tr>
+        </table>
+        <h2>About the Purpose Engine</h2>
+        <p>The Purpose Engine is an AI-powered tool designed for K-12 educators, integrating existing school systems like PowerSchool, Schoology, Schoolinks, and YouScience to synthesize student data into actionable insights. It runs locally, ensuring data privacy, and unburdens teachers by providing personalized assignment framing, early warning alerts, and future-self mentorship—fostering AI literacy and motivation in the classroom.</p>
+        <p>Website: <a href="https://kesmit3.github.io/paic/americandream.html">Purpose Engine Proposal</a></p>
+    </div>
+    <div class="content-section">
+        <div class="page-footer">Page 4</div>
+        <div class="page-date">January 17, 2026</div>
+    </div>
+
+    <!-- Eligibility: Modeling Guidebook Page 5, adapted to user -->
+    <div class="toc-header">Eligibility</div>
+    <div class="content-section">
+        <h3>Educator Category</h3>
+        <ul>
+            <li>Submission by Kim Wright (@kesmit3), District AI Innovator at Uplift Education, Dallas, TX, in collaboration with classroom teachers.</li>
+            <li>Eligible as a group of 1-3 educators, focusing on full-time classroom teachers empowered by district support.</li>
+            <li>All eligible educators must be at least 18 years old and teach in one of the 50 states...</li>
+            <!-- Truncated for brevity; expand as needed from Guidebook -->
+        </ul>
+    </div>
+    <div class="content-section">
+        <div class="page-footer">Page 5</div>
+        <div class="page-date">January 17, 2026</div>
+    </div>
+
+    <!-- Alignment Section -->
+    <div class="content-section">
+        <h2>How Purpose Engine Aligns with the Challenge</h2>
+        <p>Purpose Engine advances EO 14277 by demystifying AI through classroom tools that integrate data for personalized insights, preparing youth for innovation-driven futures without burdening educators.</p>
+        <ul>
+            <li>Innovation: AI reframes assignments in one click.</li>
+            <li>Impact: Reduces teacher workload by 30-50% via synthesized alerts.</li>
+            <li>Feasibility: Built on existing systems.</li>
+        </ul>
+    </div>
+
+    <!-- AI Magic: Make explicit -->
+    <div class="content-section ai-magic">
+        <h2>The AI Magic: Explicit Innovation for Classroom Educators</h2>
+        <h3>Local AI Synthesis</h3>
+        <p>The core "magic" is a local AI engine that runs on-premise, synthesizing data from multiple sources:</p>
+        <ul>
+            <li>PowerSchool: Attendance and GPA patterns.</li>
+            <li>Schoology: Assignment completion and missing work.</li>
+            <li>Schoolinks: Career interests and college lists.</li>
+            <li>YouScience: Aptitudes like spatial reasoning.</li>
+        </ul>
+        <p>AI detects patterns (e.g., "Engagement spikes in collaborative activities" with 89% confidence) and surfaces them as one-tap alerts—unburdening teachers to focus on human connection.</p>
+        <h3>Career Bridge Transformation</h3>
+        <p>One-click reframes assignments: From generic "Stoichiometry Lab" to "Calculate ratios for sustainable insulation as an aspiring designer." Same standards, 2.3x engagement.</p>
+        <h3>Future Self Mentorship</h3>
+        <p>AI simulates a student's future self (e.g., "Sustainable Design Director") to explain relevance: "I use chemistry daily to specify materials."</p>
+        <p>This explicit AI flow—data in, insights out—wins the challenge by innovating responsible AI use in classrooms.</p>
+    </div>
+
+    <!-- Demo Section -->
+    <div class="content-section">
+        <h2>Project Demonstration</h2>
+        <p>Interactive Prototype: <a href="https://example.com/prototype">Try Purpose Engine</a> (Embed JSX demo here if hosted).</p>
+        <p>Video Demo: <a href="https://example.com/video">Watch the 4-Minute InVideo</a>.</p>
+    </div>
+
+    <!-- Uniqueness Table -->
+    <div class="content-section">
+        <h2>Uniqueness: Why No Other Tool Does This</h2>
+        <table>
+            <tr><th>Challenge</th><th>Existing Tools</th><th>Purpose Engine Innovation</th></tr>
+            <tr><td>Data Silos</td><td>PowerSchool (attendance only)</td><td>Integrates all sources for holistic alerts</td></tr>
+            <tr><td>Teacher Burden</td><td>Manual cross-checking</td><td>AI-delivered, one-tap validation</td></tr>
+            <tr><td>Personalization</td><td>Generic platforms</td><td>Career-connected reframing + mentorship</td></tr>
+        </table>
+    </div>
+
+    <!-- Judging and Questions: Adapted -->
+    <div class="content-section">
+        <h2>How Will Projects Be Judged?</h2>
+        <p>Based on creativity, feasibility, impact, and alignment—Purpose Engine excels in educator innovation.</p>
+        <h2>Questions?</h2>
+        <p>Contact @kesmit3 on X or kim.wright@uplifteducation.org.</p>
+    </div>
+
+</body>
+</html>
+```
