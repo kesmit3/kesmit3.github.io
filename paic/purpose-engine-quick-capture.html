@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Purpose Engine | Quick Capture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #00838F;
+      --teal-dark: #006064;
+      --teal-light: #4DB6AC;
+      --teal-glow: rgba(0, 131, 143, 0.25);
+      --orange: #FF6F00;
+      --orange-light: #FFB74D;
+      --navy: #0D1421;
+      --success: #10B981;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --purple: #8B5CF6;
+      --pink: #EC4899;
+      --blue: #3B82F6;
+      --gray-50: #F8FAFC;
+      --gray-100: #F1F5F9;
+      --gray-200: #E2E8F0;
+      --gray-300: #CBD5E1;
+      --gray-400: #94A3B8;
+      --gray-500: #64748B;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1E293B;
+      --gray-900: #0F172A;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      --card-shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--gray-100);
+      color: var(--gray-800);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 64px;
+      background: white;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px var(--teal-glow);
+    }
+
+    .logo-icon svg { width: 20px; height: 20px; }
+
+    .logo-text {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--teal);
+    }
+
+    .nav-class {
+      font-size: 13px;
+      color: var(--gray-500);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Main Container */
+    .container {
+      padding: 84px 16px 100px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Security Notice */
+    .security-banner {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .security-banner .icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .security-banner .text {
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    .security-banner .text strong {
+      color: var(--blue);
+    }
+
+    /* Class Roster - Compact */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .section-header h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .section-header .count {
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+
+    .roster-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .roster-item {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--gray-100);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .roster-item:last-child { border-bottom: none; }
+    .roster-item:hover { background: var(--gray-50); }
+    .roster-item.selected { background: rgba(0, 131, 143, 0.06); }
+
+    .roster-avatar {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .roster-avatar.selected {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      color: white;
+    }
+
+    .roster-info { flex: 1; min-width: 0; }
+    .roster-info .name { 
+      font-weight: 600; 
+      color: var(--navy); 
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .roster-info .goal { 
+      font-size: 11px; 
+      color: var(--gray-400); 
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .roster-check {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--gray-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+
+    .roster-item.selected .roster-check {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: white;
+    }
+
+    /* Recent Uploads */
+    .recent-uploads {
+      background: white;
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      padding: 16px;
+    }
+
+    .upload-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .upload-item:last-child { border-bottom: none; }
+
+    .upload-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .upload-icon.voice { background: rgba(139, 92, 246, 0.12); }
+    .upload-icon.photo { background: rgba(236, 72, 153, 0.12); }
+    .upload-icon.video { background: rgba(59, 130, 246, 0.12); }
+    .upload-icon.link { background: rgba(16, 185, 129, 0.12); }
+    .upload-icon.text { background: rgba(255, 111, 0, 0.12); }
+
+    .upload-content { flex: 1; min-width: 0; }
+    .upload-content .student { font-size: 13px; font-weight: 600; color: var(--navy); }
+    .upload-content .preview { 
+      font-size: 12px; 
+      color: var(--gray-500); 
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .upload-content .meta { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+
+    .upload-status {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      align-self: flex-start;
+    }
+
+    .upload-status.processing { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+    .upload-status.complete { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+
+    /* Floating Action Button */
+    .fab-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 200;
+    }
+
+    .fab {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px var(--teal-glow), 0 4px 12px rgba(0,0,0,0.15);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fab:hover { transform: scale(1.05); }
+    .fab:active { transform: scale(0.98); }
+
+    .fab-label {
+      position: absolute;
+      right: 76px;
+      background: var(--navy);
+      color: white;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      box-shadow: var(--card-shadow);
+    }
+
+    .fab-label::after {
+      content: '';
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 6px solid transparent;
+      border-left-color: var(--navy);
+    }
+
+    /* Capture Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 1000;
+      padding: 16px;
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .capture-modal {
+      background: white;
+      border-radius: 24px 24px 24px 24px;
+      width: 100%;
+      max-width: 480px;
+      max-height: 90vh;
+      overflow: hidden;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(100px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-handle {
+      width: 40px;
+      height: 4px;
+      background: var(--gray-300);
+      border-radius: 2px;
+      margin: 12px auto;
+    }
+
+    .modal-header {
+      padding: 0 20px 16px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .modal-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .modal-header .subtitle {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      max-height: 60vh;
+    }
+
+    /* Student Selector in Modal */
+    .student-selector {
+      background: var(--gray-50);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 20px;
+    }
+
+    .student-selector .label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    .student-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .student-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .student-pill:hover { border-color: var(--teal); }
+    
+    .student-pill.selected {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: white;
+    }
+
+    .student-pill .avatar {
+      width: 24px; height: 24px;
+      border-radius: 6px;
+      background: var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gray-500);
+    }
+
+    .student-pill.selected .avatar {
+      background: rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    /* Capture Options */
+    .capture-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .capture-option {
+      background: white;
+      border: 2px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 20px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .capture-option:hover {
+      border-color: var(--teal);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .capture-option.active {
+      border-color: var(--teal);
+      background: rgba(0, 131, 143, 0.04);
+    }
+
+    .capture-option .icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .capture-option.voice .icon { background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%); }
+    .capture-option.photo .icon { background: linear-gradient(135deg, #EC4899 0%, #F472B6 100%); }
+    .capture-option.video .icon { background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%); }
+    .capture-option.link .icon { background: linear-gradient(135deg, #10B981 0%, #34D399 100%); }
+
+    .capture-option .title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .capture-option .desc {
+      font-size: 11px;
+      color: var(--gray-400);
+    }
+
+    /* Voice Recording UI */
+    .voice-recorder {
+      display: none;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(139, 92, 246, 0.02) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .voice-recorder.active { display: block; }
+
+    .voice-visualizer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 60px;
+      margin-bottom: 16px;
+    }
+
+    .voice-bar {
+      width: 4px;
+      background: var(--purple);
+      border-radius: 2px;
+      animation: voicePulse 0.5s ease-in-out infinite;
+    }
+
+    .voice-bar:nth-child(1) { height: 20px; animation-delay: 0s; }
+    .voice-bar:nth-child(2) { height: 35px; animation-delay: 0.1s; }
+    .voice-bar:nth-child(3) { height: 50px; animation-delay: 0.2s; }
+    .voice-bar:nth-child(4) { height: 40px; animation-delay: 0.3s; }
+    .voice-bar:nth-child(5) { height: 25px; animation-delay: 0.4s; }
+    .voice-bar:nth-child(6) { height: 45px; animation-delay: 0.5s; }
+    .voice-bar:nth-child(7) { height: 30px; animation-delay: 0.6s; }
+
+    @keyframes voicePulse {
+      0%, 100% { transform: scaleY(1); opacity: 0.7; }
+      50% { transform: scaleY(1.5); opacity: 1; }
+    }
+
+    .voice-timer {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--purple);
+      margin-bottom: 8px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .voice-hint {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 20px;
+    }
+
+    .voice-controls {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .voice-btn {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: all 0.15s ease;
+    }
+
+    .voice-btn.stop {
+      background: var(--danger);
+      color: white;
+    }
+
+    .voice-btn.done {
+      background: var(--success);
+      color: white;
+    }
+
+    .voice-btn.cancel {
+      background: var(--gray-200);
+      color: var(--gray-600);
+    }
+
+    /* Photo/Video Upload UI */
+    .upload-zone {
+      display: none;
+      border: 2px dashed var(--gray-300);
+      border-radius: 16px;
+      padding: 32px 20px;
+      text-align: center;
+      margin-bottom: 20px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .upload-zone.active { display: block; }
+    .upload-zone:hover { border-color: var(--teal); background: rgba(0, 131, 143, 0.02); }
+    .upload-zone.dragover { border-color: var(--teal); background: rgba(0, 131, 143, 0.06); }
+
+    .upload-zone .icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .upload-zone .title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .upload-zone .desc {
+      font-size: 12px;
+      color: var(--gray-400);
+      margin-bottom: 16px;
+    }
+
+    .upload-zone .camera-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, var(--pink) 0%, #F472B6 100%);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .upload-zone .camera-btn:hover { transform: translateY(-2px); }
+
+    /* Link Input */
+    .link-input-container {
+      display: none;
+      margin-bottom: 20px;
+    }
+
+    .link-input-container.active { display: block; }
+
+    .link-input {
+      display: flex;
+      gap: 10px;
+    }
+
+    .link-input input {
+      flex: 1;
+      padding: 14px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.15s ease;
+    }
+
+    .link-input input:focus { border-color: var(--teal); }
+
+    .link-input .paste-btn {
+      padding: 14px 20px;
+      background: var(--success);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    /* Link Preview */
+    .link-preview {
+      display: none;
+      background: var(--gray-50);
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 12px;
+    }
+
+    .link-preview.active { display: flex; gap: 12px; align-items: center; }
+
+    .link-preview .favicon {
+      width: 40px; height: 40px;
+      background: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .link-preview .info { flex: 1; }
+    .link-preview .info .title { font-size: 13px; font-weight: 600; color: var(--navy); }
+    .link-preview .info .url { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+
+    /* Text Note */
+    .text-note-container {
+      margin-bottom: 20px;
+    }
+
+    .text-note-container textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      resize: none;
+      min-height: 100px;
+      transition: all 0.15s ease;
+    }
+
+    .text-note-container textarea:focus { border-color: var(--teal); }
+
+    .text-note-container .char-count {
+      text-align: right;
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-top: 4px;
+    }
+
+    /* AI Context Preview */
+    .ai-context {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(236, 72, 153, 0.04) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.15);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .ai-context .header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .ai-context .header .badge {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .ai-context .header .title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-600);
+    }
+
+    .ai-context .context-text {
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    .ai-context .context-text .highlight {
+      background: rgba(139, 92, 246, 0.15);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    /* Submit Button */
+    .submit-section {
+      padding: 16px 20px 20px;
+      border-top: 1px solid var(--gray-100);
+      background: white;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      border: none;
+      border-radius: 14px;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px var(--teal-glow); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* Privacy Footer */
+    .privacy-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      font-size: 11px;
+      color: var(--gray-400);
+    }
+
+    .privacy-note .icon { font-size: 14px; }
+
+    /* Success Animation */
+    .success-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 255, 255, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      flex-direction: column;
+    }
+
+    .success-overlay.active { display: flex; }
+
+    .success-icon {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, var(--success) 0%, #34D399 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: white;
+      margin-bottom: 20px;
+      animation: successPop 0.5s ease;
+    }
+
+    @keyframes successPop {
+      0% { transform: scale(0); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .success-overlay h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .success-overlay p {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    /* Preview thumbnail for uploaded content */
+    .preview-thumbnail {
+      display: none;
+      margin-bottom: 16px;
+    }
+
+    .preview-thumbnail.active { display: block; }
+
+    .preview-thumbnail img, .preview-thumbnail video {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .preview-thumbnail .remove-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+      background: rgba(0,0,0,0.6);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Audio playback preview */
+    .audio-preview {
+      display: none;
+      background: var(--gray-50);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .audio-preview.active { 
+      display: flex; 
+      align-items: center;
+      gap: 12px;
+    }
+
+    .audio-preview .play-btn {
+      width: 44px;
+      height: 44px;
+      background: var(--purple);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .audio-preview .waveform {
+      flex: 1;
+      height: 40px;
+      background: linear-gradient(90deg, var(--purple) 30%, var(--gray-300) 30%);
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .audio-preview .duration {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-600);
+      min-width: 50px;
+      text-align: right;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .capture-options {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      
+      .capture-option {
+        padding: 16px 12px;
+      }
+      
+      .capture-option .icon {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="white" opacity="0.9"/>
+          <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <path d="M2 12L12 17L22 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="logo-text">uplift</div>
+    </div>
+    <div class="nav-class">
+      <span>📚</span>
+      Chemistry P3
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Security Banner -->
+    <div class="security-banner">
+      <div class="icon">🔒</div>
+      <div class="text">
+        <strong>BYOD Secure Mode:</strong> You can add observations for any student. AI will match your input to their Purpose Profile—you only see names and goals, nothing more.
+      </div>
+    </div>
+
+    <!-- Class Roster -->
+    <div class="section-header">
+      <h2>Your Students</h2>
+      <span class="count">24 students</span>
+    </div>
+
+    <div class="roster-card">
+      <div class="roster-item" onclick="selectStudent(this, 'maya')">
+        <div class="roster-avatar">MC</div>
+        <div class="roster-info">
+          <div class="name">Maya Chen</div>
+          <div class="goal">🎯 Sustainable Design Director</div>
+        </div>
+        <div class="roster-check">✓</div>
+      </div>
+      <div class="roster-item" onclick="selectStudent(this, 'jordan')">
+        <div class="roster-avatar">JW</div>
+        <div class="roster-info">
+          <div class="name">Jordan Williams</div>
+          <div class="goal">🎯 Tech startup founder</div>
+        </div>
+        <div class="roster-check">✓</div>
+      </div>
+      <div class="roster-item" onclick="selectStudent(this, 'alex')">
+        <div class="roster-avatar">AR</div>
+        <div class="roster-info">
+          <div class="name">Alex Rivera</div>
+          <div class="goal">🎯 Pediatric surgeon</div>
+        </div>
+        <div class="roster-check">✓</div>
+      </div>
+      <div class="roster-item" onclick="selectStudent(this, 'sam')">
+        <div class="roster-avatar">ST</div>
+        <div class="roster-info">
+          <div class="name">Sam Thompson</div>
+          <div class="goal">🎯 Robotics engineer</div>
+        </div>
+        <div class="roster-check">✓</div>
+      </div>
+      <div class="roster-item" onclick="selectStudent(this, 'taylor')">
+        <div class="roster-avatar">TK</div>
+        <div class="roster-info">
+          <div class="name">Taylor Kim</div>
+          <div class="goal">🎯 Marine conservationist</div>
+        </div>
+        <div class="roster-check">✓</div>
+      </div>
+    </div>
+
+    <!-- Recent Uploads -->
+    <div class="section-header">
+      <h2>Your Recent Uploads</h2>
+      <span class="count">Today</span>
+    </div>
+
+    <div class="recent-uploads">
+      <div class="upload-item">
+        <div class="upload-icon voice">🎤</div>
+        <div class="upload-content">
+          <div class="student">Maya Chen</div>
+          <div class="preview">"She connected stoichiometry to building materials without prompting..."</div>
+          <div class="meta">Voice note • 42 seconds • 10:34 AM</div>
+        </div>
+        <span class="upload-status complete">✓ Added</span>
+      </div>
+      <div class="upload-item">
+        <div class="upload-icon photo">📸</div>
+        <div class="upload-content">
+          <div class="student">Jordan Williams</div>
+          <div class="preview">Photo of whiteboard presentation</div>
+          <div class="meta">Photo • 9:15 AM</div>
+        </div>
+        <span class="upload-status processing">Processing</span>
+      </div>
+      <div class="upload-item">
+        <div class="upload-icon link">🔗</div>
+        <div class="upload-content">
+          <div class="student">Sam Thompson</div>
+          <div class="preview">robotics-competition.org/results</div>
+          <div class="meta">Link • Yesterday</div>
+        </div>
+        <span class="upload-status complete">✓ Added</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Action Button -->
+  <div class="fab-container">
+    <span class="fab-label">Quick Capture</span>
+    <button class="fab" onclick="openCaptureModal()">+</button>
+  </div>
+
+  <!-- Capture Modal -->
+  <div class="modal-overlay" id="capture-modal" onclick="closeCaptureModal(event)">
+    <div class="capture-modal" onclick="event.stopPropagation()">
+      <div class="modal-handle"></div>
+      
+      <div class="modal-header">
+        <h2>📝 Quick Capture</h2>
+        <div class="subtitle">Add an observation about a student</div>
+      </div>
+
+      <div class="modal-body">
+        <!-- Student Selector -->
+        <div class="student-selector">
+          <div class="label">Who is this about?</div>
+          <div class="student-pills">
+            <div class="student-pill" onclick="selectModalStudent(this, 'maya')">
+              <div class="avatar">MC</div>
+              Maya
+            </div>
+            <div class="student-pill" onclick="selectModalStudent(this, 'jordan')">
+              <div class="avatar">JW</div>
+              Jordan
+            </div>
+            <div class="student-pill" onclick="selectModalStudent(this, 'alex')">
+              <div class="avatar">AR</div>
+              Alex
+            </div>
+            <div class="student-pill" onclick="selectModalStudent(this, 'sam')">
+              <div class="avatar">ST</div>
+              Sam
+            </div>
+            <div class="student-pill" onclick="selectModalStudent(this, 'taylor')">
+              <div class="avatar">TK</div>
+              Taylor
+            </div>
+            <div class="student-pill" onclick="selectModalStudent(this, 'other')">
+              <div class="avatar">+</div>
+              Other
+            </div>
+          </div>
+        </div>
+
+        <!-- Capture Type Options -->
+        <div class="capture-options">
+          <div class="capture-option voice" onclick="selectCaptureType('voice')">
+            <div class="icon">🎤</div>
+            <div class="title">Voice Note</div>
+            <div class="desc">Tap to record</div>
+          </div>
+          <div class="capture-option photo" onclick="selectCaptureType('photo')">
+            <div class="icon">📸</div>
+            <div class="title">Photo</div>
+            <div class="desc">Work sample or moment</div>
+          </div>
+          <div class="capture-option video" onclick="selectCaptureType('video')">
+            <div class="icon">🎬</div>
+            <div class="title">Video</div>
+            <div class="desc">Quick clip (30s max)</div>
+          </div>
+          <div class="capture-option link" onclick="selectCaptureType('link')">
+            <div class="icon">🔗</div>
+            <div class="title">Link</div>
+            <div class="desc">Article, resource, etc.</div>
+          </div>
+        </div>
+
+        <!-- Voice Recorder -->
+        <div class="voice-recorder" id="voice-recorder">
+          <div class="voice-visualizer">
+            <div class="voice-bar"></div>
+            <div class="voice-bar"></div>
+            <div class="voice-bar"></div>
+            <div class="voice-bar"></div>
+            <div class="voice-bar"></div>
+            <div class="voice-bar"></div>
+            <div class="voice-bar"></div>
+          </div>
+          <div class="voice-timer" id="voice-timer">0:00</div>
+          <div class="voice-hint">Recording... Speak naturally about what you observed</div>
+          <div class="voice-controls">
+            <button class="voice-btn cancel" onclick="cancelRecording()">✕</button>
+            <button class="voice-btn stop" onclick="stopRecording()">⬛</button>
+            <button class="voice-btn done" onclick="finishRecording()">✓</button>
+          </div>
+        </div>
+
+        <!-- Audio Preview -->
+        <div class="audio-preview" id="audio-preview">
+          <button class="play-btn">▶</button>
+          <div class="waveform"></div>
+          <div class="duration">0:42</div>
+        </div>
+
+        <!-- Upload Zone (Photo/Video) -->
+        <div class="upload-zone" id="upload-zone">
+          <div class="icon">📤</div>
+          <div class="title">Drop file here or tap to browse</div>
+          <div class="desc">JPG, PNG, MP4 up to 25MB</div>
+          <button class="camera-btn" onclick="openCamera()">
+            📷 Open Camera
+          </button>
+          <input type="file" id="file-input" accept="image/*,video/*" style="display:none" onchange="handleFileSelect(event)">
+        </div>
+
+        <!-- Preview Thumbnail -->
+        <div class="preview-thumbnail" id="preview-thumbnail" style="position:relative;">
+          <img id="preview-image" src="" alt="Preview">
+          <button class="remove-btn" onclick="removePreview()">✕</button>
+        </div>
+
+        <!-- Link Input -->
+        <div class="link-input-container" id="link-input-container">
+          <div class="link-input">
+            <input type="url" id="link-input" placeholder="Paste a URL..." oninput="handleLinkInput(event)">
+            <button class="paste-btn" onclick="pasteFromClipboard()">Paste</button>
+          </div>
+          <div class="link-preview" id="link-preview">
+            <div class="favicon">🌐</div>
+            <div class="info">
+              <div class="title">Tesla Gigafactory Virtual Tour</div>
+              <div class="url">tesla.com/gigafactory/virtual-tour</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text Note (always available) -->
+        <div class="text-note-container">
+          <textarea id="note-text" placeholder="Add a note (optional)... What did you observe? How does it connect to their goals?"></textarea>
+          <div class="char-count"><span id="char-count">0</span>/500</div>
+        </div>
+
+        <!-- AI Context Preview -->
+        <div class="ai-context" id="ai-context" style="display:none;">
+          <div class="header">
+            <span class="badge">🤖 AI</span>
+            <span class="title">Will be matched to:</span>
+          </div>
+          <div class="context-text">
+            <span class="highlight">Maya Chen</span>'s Purpose Profile → 
+            Goal: <span class="highlight">Sustainable Design Director</span> → 
+            Theme: <span class="highlight">Environmental Science</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="submit-section">
+        <button class="submit-btn" id="submit-btn" onclick="submitCapture()" disabled>
+          <span>📤</span>
+          Submit Observation
+        </button>
+        <div class="privacy-note">
+          <span class="icon">🔒</span>
+          <span>Encrypted & processed locally. Only relevant insights are added to student profiles.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Overlay -->
+  <div class="success-overlay" id="success-overlay">
+    <div class="success-icon">✓</div>
+    <h3>Observation Added!</h3>
+    <p>AI will process and match to Maya's Purpose Profile</p>
+  </div>
+
+  <script>
+    let selectedStudent = null;
+    let captureType = null;
+    let isRecording = false;
+    let recordingSeconds = 0;
+    let recordingInterval = null;
+    let hasContent = false;
+
+    function openCaptureModal() {
+      document.getElementById('capture-modal').classList.add('active');
+    }
+
+    function closeCaptureModal(event) {
+      if (event.target === event.currentTarget) {
+        document.getElementById('capture-modal').classList.remove('active');
+        resetModal();
+      }
+    }
+
+    function selectStudent(element, id) {
+      document.querySelectorAll('.roster-item').forEach(el => {
+        el.classList.remove('selected');
+        el.querySelector('.roster-avatar').classList.remove('selected');
+      });
+      element.classList.add('selected');
+      element.querySelector('.roster-avatar').classList.add('selected');
+    }
+
+    function selectModalStudent(element, id) {
+      document.querySelectorAll('.student-pill').forEach(el => el.classList.remove('selected'));
+      element.classList.add('selected');
+      selectedStudent = id;
+      updateAIContext();
+      checkSubmitEnabled();
+    }
+
+    function selectCaptureType(type) {
+      document.querySelectorAll('.capture-option').forEach(el => el.classList.remove('active'));
+      document.querySelector(`.capture-option.${type}`).classList.add('active');
+      captureType = type;
+
+      // Hide all capture UIs
+      document.getElementById('voice-recorder').classList.remove('active');
+      document.getElementById('upload-zone').classList.remove('active');
+      document.getElementById('link-input-container').classList.remove('active');
+      document.getElementById('audio-preview').classList.remove('active');
+      document.getElementById('preview-thumbnail').classList.remove('active');
+
+      // Show relevant UI
+      switch(type) {
+        case 'voice':
+          startRecording();
+          break;
+        case 'photo':
+        case 'video':
+          document.getElementById('upload-zone').classList.add('active');
+          break;
+        case 'link':
+          document.getElementById('link-input-container').classList.add('active');
+          break;
+      }
+    }
+
+    function startRecording() {
+      isRecording = true;
+      recordingSeconds = 0;
+      document.getElementById('voice-recorder').classList.add('active');
+      
+      recordingInterval = setInterval(() => {
+        recordingSeconds++;
+        const mins = Math.floor(recordingSeconds / 60);
+        const secs = recordingSeconds % 60;
+        document.getElementById('voice-timer').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    function stopRecording() {
+      clearInterval(recordingInterval);
+      isRecording = false;
+    }
+
+    function cancelRecording() {
+      clearInterval(recordingInterval);
+      isRecording = false;
+      document.getElementById('voice-recorder').classList.remove('active');
+      document.querySelector('.capture-option.voice').classList.remove('active');
+      captureType = null;
+    }
+
+    function finishRecording() {
+      stopRecording();
+      document.getElementById('voice-recorder').classList.remove('active');
+      document.getElementById('audio-preview').classList.add('active');
+      document.querySelector('.audio-preview .duration').textContent = document.getElementById('voice-timer').textContent;
+      hasContent = true;
+      checkSubmitEnabled();
+    }
+
+    function openCamera() {
+      document.getElementById('file-input').click();
+    }
+
+    function handleFileSelect(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('preview-image').src = e.target.result;
+          document.getElementById('preview-thumbnail').classList.add('active');
+          document.getElementById('upload-zone').classList.remove('active');
+          hasContent = true;
+          checkSubmitEnabled();
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function removePreview() {
+      document.getElementById('preview-thumbnail').classList.remove('active');
+      document.getElementById('upload-zone').classList.add('active');
+      hasContent = false;
+      checkSubmitEnabled();
+    }
+
+    function handleLinkInput(event) {
+      const url = event.target.value;
+      if (url.length > 10 && url.includes('.')) {
+        document.getElementById('link-preview').classList.add('active');
+        hasContent = true;
+      } else {
+        document.getElementById('link-preview').classList.remove('active');
+        hasContent = false;
+      }
+      checkSubmitEnabled();
+    }
+
+    async function pasteFromClipboard() {
+      try {
+        const text = await navigator.clipboard.readText();
+        document.getElementById('link-input').value = text;
+        handleLinkInput({ target: { value: text } });
+      } catch (err) {
+        console.log('Clipboard access denied');
+      }
+    }
+
+    function updateAIContext() {
+      const contextEl = document.getElementById('ai-context');
+      if (selectedStudent && selectedStudent !== 'other') {
+        contextEl.style.display = 'block';
+        const names = {
+          'maya': { name: 'Maya Chen', goal: 'Sustainable Design Director', theme: 'Environmental Science' },
+          'jordan': { name: 'Jordan Williams', goal: 'Tech Startup Founder', theme: 'Entrepreneurship' },
+          'alex': { name: 'Alex Rivera', goal: 'Pediatric Surgeon', theme: 'Healthcare' },
+          'sam': { name: 'Sam Thompson', goal: 'Robotics Engineer', theme: 'Engineering' },
+          'taylor': { name: 'Taylor Kim', goal: 'Marine Conservationist', theme: 'Environmental Science' }
+        };
+        const data = names[selectedStudent];
+        contextEl.querySelector('.context-text').innerHTML = `
+          <span class="highlight">${data.name}</span>'s Purpose Profile → 
+          Goal: <span class="highlight">${data.goal}</span> → 
+          Theme: <span class="highlight">${data.theme}</span>
+        `;
+      } else {
+        contextEl.style.display = 'none';
+      }
+    }
+
+    // Text area character count
+    document.getElementById('note-text').addEventListener('input', function() {
+      document.getElementById('char-count').textContent = this.value.length;
+      if (this.value.length > 0 && !hasContent) {
+        hasContent = true;
+        checkSubmitEnabled();
+      }
+    });
+
+    function checkSubmitEnabled() {
+      const btn = document.getElementById('submit-btn');
+      const noteText = document.getElementById('note-text').value;
+      btn.disabled = !(selectedStudent && (hasContent || noteText.length > 0));
+    }
+
+    function submitCapture() {
+      document.getElementById('capture-modal').classList.remove('active');
+      document.getElementById('success-overlay').classList.add('active');
+      
+      setTimeout(() => {
+        document.getElementById('success-overlay').classList.remove('active');
+        resetModal();
+      }, 2000);
+    }
+
+    function resetModal() {
+      selectedStudent = null;
+      captureType = null;
+      hasContent = false;
+      document.querySelectorAll('.student-pill').forEach(el => el.classList.remove('selected'));
+      document.querySelectorAll('.capture-option').forEach(el => el.classList.remove('active'));
+      document.getElementById('voice-recorder').classList.remove('active');
+      document.getElementById('upload-zone').classList.remove('active');
+      document.getElementById('link-input-container').classList.remove('active');
+      document.getElementById('audio-preview').classList.remove('active');
+      document.getElementById('preview-thumbnail').classList.remove('active');
+      document.getElementById('ai-context').style.display = 'none';
+      document.getElementById('note-text').value = '';
+      document.getElementById('char-count').textContent = '0';
+      document.getElementById('submit-btn').disabled = true;
+      clearInterval(recordingInterval);
+    }
+
+    // Drag and drop
+    const uploadZone = document.getElementById('upload-zone');
+    uploadZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadZone.classList.add('dragover');
+    });
+    uploadZone.addEventListener('dragleave', () => {
+      uploadZone.classList.remove('dragover');
+    });
+    uploadZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadZone.classList.remove('dragover');
+      const file = e.dataTransfer.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          document.getElementById('preview-image').src = ev.target.result;
+          document.getElementById('preview-thumbnail').classList.add('active');
+          document.getElementById('upload-zone').classList.remove('active');
+          hasContent = true;
+          checkSubmitEnabled();
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Close on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.getElementById('capture-modal').classList.remove('active');
+        resetModal();
+      }
+    });
+  </script>
+</body>
+</html>
