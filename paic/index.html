@@ -1,889 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Purpose Engine | Uplift Education</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Purpose Engine | Uplift Education – AI Innovation for Classroom Educators</title>
+  <meta name="description" content="Purpose Engine: AI that connects learning to real purpose, empowering educators to sustain student motivation and agency. Aligned with the Presidential AI Challenge." />
   
-  <!-- Favicon and Social Sharing -->
-  <link rel="icon" type="image/png" href="uplift-logo.png">
-  <link rel="apple-touch-icon" href="uplift-logo.png">
-  <meta property="og:title" content="Purpose Engine | Uplift Education">
-  <meta property="og:description" content="AI-powered student motivation. Contextualizing schoolwork for each student's future.">
-  <meta property="og:image" content="uplift-logo.png">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Favicon / Logo -->
+  <link rel="icon" type="image/png" href="assets/upliftlogo.png" />
+  <link rel="apple-touch-icon" href="assets/upliftlogo.png" />
   
   <!-- Shared Styles -->
-  <link rel="stylesheet" href="variables.css">
+  <link rel="stylesheet" href="assets/variables.css" />
+  
+  <!-- Optional: Google Fonts if not in variables.css -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   
   <style>
-    /* Page-specific styles */
-    body {
-      background: var(--navy);
-      color: white;
-    }
-
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 120px 40px 80px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: 
-        radial-gradient(ellipse at 30% 20%, rgba(0, 103, 177, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 196, 37, 0.15);
-      border: 1px solid rgba(255, 196, 37, 0.3);
-      padding: 8px 16px;
-      border-radius: 20px;
-      margin-bottom: 24px;
-      position: relative;
-    }
-
-    .hero-badge span {
-      color: var(--yellow);
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .hero h1 {
-      font-size: 56px;
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 24px;
-      max-width: 900px;
-      position: relative;
-    }
-
-    .hero h1 .highlight {
-      color: var(--yellow);
-    }
-
-    .hero p {
-      font-size: 20px;
-      color: var(--gray-400);
-      max-width: 700px;
-      line-height: 1.6;
-      margin-bottom: 40px;
-      position: relative;
-    }
-
-    .hero p em {
-      color: var(--yellow);
-      font-style: normal;
-      font-weight: 500;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 16px;
-      position: relative;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .btn-primary {
-      padding: 16px 32px;
-      background: var(--yellow);
-      color: var(--navy);
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(255, 196, 37, 0.4);
-    }
-
-    .btn-secondary {
-      padding: 16px 32px;
-      background: transparent;
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.5);
-    }
-
-    /* Problem Section */
-    .problem-section {
-      padding: 100px 40px;
-      background: var(--navy-light);
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .section-header h2 {
-      font-size: 40px;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-
-    .section-header p {
-      font-size: 18px;
-      color: var(--gray-400);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .comparison-grid {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-
-    .comparison-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 32px;
-      width: 340px;
-      text-align: left;
-    }
-
-    .comparison-card.before {
-      border-color: rgba(239, 68, 68, 0.3);
-      background: rgba(239, 68, 68, 0.05);
-    }
-
-    .comparison-card.after {
-      border-color: rgba(0, 103, 177, 0.4);
-      background: rgba(0, 103, 177, 0.08);
-    }
-
-    .comparison-card .emoji {
-      font-size: 40px;
-      margin-bottom: 16px;
-    }
-
-    .comparison-card h3 {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .comparison-card.before h3 { color: var(--danger); }
-    .comparison-card.after h3 { color: var(--primary-light); }
-
-    .comparison-card .quote {
-      font-size: 15px;
-      color: var(--gray-400);
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .comparison-card .thought {
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 10px;
-      padding: 14px;
-      font-size: 13px;
-      color: var(--gray-400);
-    }
-
-    .comparison-card.after .thought {
-      background: rgba(0, 103, 177, 0.2);
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-    .comparison-arrow {
-      font-size: 32px;
-      color: var(--yellow);
-    }
-
-    /* Pillars Section */
-    .pillars-section {
-      padding: 100px 40px;
-      background: var(--navy);
-    }
-
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .pillar-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 32px;
-      text-align: left;
-      transition: all 0.3s ease;
-    }
-
-    .pillar-card:hover {
-      border-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-4px);
-    }
-
-    .pillar-icon {
-      width: 56px; height: 56px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-
-    .pillar-card:nth-child(1) .pillar-icon { background: rgba(0, 103, 177, 0.2); }
-    .pillar-card:nth-child(2) .pillar-icon { background: rgba(139, 92, 246, 0.2); }
-    .pillar-card:nth-child(3) .pillar-icon { background: rgba(16, 185, 129, 0.2); }
-
-    .pillar-card h3 {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: white;
-    }
-
-    .pillar-card p {
-      font-size: 15px;
-      color: var(--gray-400);
-      line-height: 1.6;
-    }
-
-    /* Stats Section */
-    .stats-section {
-      padding: 80px 40px;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    }
-
-    .stats-grid {
-      display: flex;
-      justify-content: center;
-      gap: 80px;
-      max-width: 1000px;
-      margin: 0 auto;
-      flex-wrap: wrap;
-    }
-
-    .stat-item {
-      text-align: center;
-    }
-
-    .stat-item .number {
-      font-size: 56px;
-      font-weight: 800;
-      color: var(--yellow);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .stat-item .label {
-      font-size: 15px;
-      color: rgba(255, 255, 255, 0.8);
-      max-width: 180px;
-    }
-
-    /* Integration Section */
-    .integration-section {
-      padding: 100px 40px;
-      background: var(--navy-light);
-    }
-
-    .integration-diagram {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 24px;
-      max-width: 1100px;
-      margin: 0 auto;
-      flex-wrap: wrap;
-    }
-
-    .source-column, .output-column {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .source-card {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 16px 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      min-width: 200px;
-    }
-
-    .source-card .icon {
-      font-size: 24px;
-    }
-
-    .source-card .info .name {
-      font-size: 14px;
-      font-weight: 600;
-      color: white;
-    }
-
-    .source-card .info .status {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--success);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .source-card .info .status::before {
-      content: '';
-      width: 6px; height: 6px;
-      background: var(--success);
-      border-radius: 50%;
-    }
-
-    .flow-arrows {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      color: var(--yellow);
-      font-size: 20px;
-    }
-
-    .ai-engine {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      border-radius: 20px;
-      padding: 40px;
-      text-align: center;
-      box-shadow: 0 0 40px rgba(0, 103, 177, 0.3);
-    }
-
-    .ai-engine .icon {
-      width: 64px; height: 64px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      margin: 0 auto 16px;
-    }
-
-    .ai-engine h3 {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .ai-engine p {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.7);
-      max-width: 200px;
-      margin: 0 auto;
-    }
-
-    /* CTA Section */
-    .cta-section {
-      padding: 100px 40px;
-      background: var(--navy);
-      text-align: center;
-    }
-
-    .cta-section h2 {
-      font-size: 40px;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-
-    .cta-section p {
-      font-size: 18px;
-      color: var(--gray-400);
-      margin-bottom: 32px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Footer */
-    footer {
-      padding: 40px;
-      background: var(--navy-light);
-      text-align: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    footer p {
-      color: var(--gray-500);
-      font-size: 14px;
-    }
-
-    footer a {
-      color: var(--primary-light);
-      text-decoration: none;
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 1024px) {
-      .pillars-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .integration-diagram {
-        gap: 20px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        padding: 100px 24px 60px;
-        min-height: auto;
-      }
-      
-      .hero-badge {
-        padding: 6px 12px;
-      }
-      
-      .hero-badge span {
-        font-size: 12px;
-      }
-      
-      .hero h1 {
-        font-size: 32px;
-        margin-bottom: 20px;
-      }
-      
-      .hero p {
-        font-size: 16px;
-        margin-bottom: 32px;
-      }
-      
-      .hero-ctas {
-        flex-direction: column;
-        width: 100%;
-        max-width: 300px;
-      }
-      
-      .btn-primary, .btn-secondary {
-        width: 100%;
-        justify-content: center;
-        padding: 14px 24px;
-        font-size: 15px;
-      }
-      
-      .problem-section,
-      .pillars-section,
-      .integration-section,
-      .cta-section {
-        padding: 60px 24px;
-      }
-      
-      .section-header {
-        margin-bottom: 40px;
-      }
-      
-      .section-header h2 {
-        font-size: 28px;
-      }
-      
-      .section-header p {
-        font-size: 15px;
-      }
-      
-      .comparison-grid {
-        flex-direction: column;
-        gap: 24px;
-      }
-      
-      .comparison-card {
-        width: 100%;
-        max-width: 400px;
-        padding: 24px;
-      }
-      
-      .comparison-arrow {
-        transform: rotate(90deg);
-      }
-      
-      .pillars-grid {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-        margin: 0 auto;
-      }
-      
-      .pillar-card {
-        padding: 24px;
-      }
-      
-      .pillar-card h3 {
-        font-size: 18px;
-      }
-      
-      .pillar-card p {
-        font-size: 14px;
-      }
-      
-      .stats-section {
-        padding: 60px 24px;
-      }
-      
-      .stats-grid {
-        flex-direction: column;
-        gap: 40px;
-      }
-      
-      .stat-item .number {
-        font-size: 44px;
-      }
-      
-      .stat-item .label {
-        font-size: 14px;
-        max-width: 240px;
-        margin: 0 auto;
-      }
-      
-      .integration-diagram {
-        flex-direction: column;
-      }
-      
-      .flow-arrows {
-        flex-direction: row;
-        gap: 12px;
-      }
-      
-      .source-column, .output-column {
-        width: 100%;
-        max-width: 280px;
-      }
-      
-      .ai-engine {
-        padding: 28px;
-      }
-      
-      .cta-section h2 {
-        font-size: 28px;
-      }
-      
-      .cta-section p {
-        font-size: 15px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 28px;
-      }
-      
-      .hero p {
-        font-size: 15px;
-      }
-      
-      .comparison-card {
-        padding: 20px;
-      }
-      
-      .source-card {
-        padding: 12px 16px;
-        min-width: auto;
-        width: 100%;
-      }
-      
-      .ai-engine {
-        padding: 24px;
-      }
-      
-      .ai-engine h3 {
-        font-size: 18px;
-      }
-    }
+    /* Quick inline tweaks if needed; prefer variables.css */
+    body { background: var(--navy); color: white; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .hero { padding: 140px 40px 80px; text-align: center; }
+    .quote { font-style: italic; max-width: 800px; margin: 40px auto; padding: 20px; border-left: 4px solid var(--yellow); background: rgba(255,196,37,0.05); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin: 40px auto; max-width: 1100px; }
+    .stat-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 24px; text-align: center; }
+    .stat-number { font-size: 48px; font-weight: 800; color: var(--yellow); }
   </style>
 </head>
 <body>
-  <!-- Navigation -->
+
+  <!-- Fixed Navigation Menu – Connects to all resources -->
   <nav class="nav nav--dark">
-    <a href="index.html" class="nav__logo">
-      <img src="uplift-logo.png" alt="Uplift Education" class="nav__logo-img">
-      <div class="nav__divider"></div>
-      <span class="nav__product">Purpose Engine</span>
+    <a href="/" class="nav__logo">
+      <img src="assets/upliftlogo.png" alt="Uplift Education Logo" style="height: 44px;" />
     </a>
-    <button class="nav__toggle" onclick="toggleNav()">☰</button>
-    <div class="nav__links" id="navLinks">
-      <a href="index.html" class="nav__link nav__link--active">
-        <span class="nav__link-icon">🏠</span>
-        <span class="nav__link-text">Home</span>
-      </a>
-      <a href="student-dashboard.html" class="nav__link">
-        <span class="nav__link-icon">📊</span>
-        <span class="nav__link-text">Student</span>
-      </a>
-      <a href="career-bridge.html" class="nav__link">
-        <span class="nav__link-icon">🎯</span>
-        <span class="nav__link-text">Career Bridge</span>
-      </a>
-      <a href="future-self.html" class="nav__link">
-        <span class="nav__link-icon">🔮</span>
-        <span class="nav__link-text">Future Self</span>
-      </a>
-      <a href="educator-dashboard.html" class="nav__link">
-        <span class="nav__link-icon">👩‍🏫</span>
-        <span class="nav__link-text">Educator</span>
-      </a>
+    <div class="nav__links">
+      <a href="americandream.html">Vision & Principles</a>
+      <a href="aichallenge.html">AI Ethics & Techniques</a>
+      <a href="project-research.html">Research & References</a>
+      <a href="technical-architecture.html">Technical Architecture</a>
+      <a href="#demo">Quick Capture / Demo</a>
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero Section with Guidebook Quote -->
   <section class="hero">
-    <div class="hero-badge">
-      <span>🎓 AI-Powered Student Motivation</span>
-    </div>
-    <h1>
-      <span class="highlight">Motivation Collapses</span><br>
-      When Work Feels Disconnected
-    </h1>
-    <p>
-      73% of students feel their schoolwork is disconnected from their future. 
-      AI can bridge this gap—not by doing work for them, but by 
-      <em>contextualizing work for them specifically</em>.
-    </p>
-    <div class="hero-ctas">
-      <a href="educator-dashboard.html" class="btn-primary">
-        See Educator Dashboard →
-      </a>
-      <a href="student-dashboard.html" class="btn-secondary">
-        View Student Experience
-      </a>
+    <h1>Purpose Engine</h1>
+    <p class="lead">AI as a student-centered ally: Connecting schoolwork to real purpose, sustaining motivation, and empowering educators to guide innovation in every classroom.</p>
+    
+    <!-- Presidential AI Challenge Quote – Ties directly to challenge spirit -->
+    <div class="quote">
+      <p>“The President’s National Artificial Intelligence Challenge invites every student in America—from kindergarten to 12th grade—to unleash their imagination and showcase the spirit of American innovation.</p>
+      <p>Our extraordinary educators will guide and empower you through this process to build a brighter, stronger future for us all.”</p>
+      <p><strong>– First Lady Melania Trump</strong><br>August 26, 2025</p>
     </div>
   </section>
 
-  <!-- Problem/Solution Section -->
-  <section class="problem-section">
-    <div class="section-header">
-      <h2>The Transformation</h2>
-      <p>Same learning objectives. Completely different motivation.</p>
-    </div>
-    <div class="comparison-grid">
-      <div class="comparison-card before">
-        <div class="emoji">😐</div>
-        <h3>Traditional Approach</h3>
-        <p class="quote">
-          "Complete this stoichiometry worksheet for tomorrow. It's on the test."
-        </p>
-        <div class="thought">
-          Student thought: "Why does this matter to me?"
+  <!-- Problem & Solution -->
+  <section class="section" style="padding: 80px 40px; background: var(--navy-light);">
+    <div class="section-inner" style="max-width: 1100px; margin: 0 auto;">
+      <h2>The Challenge We Face</h2>
+      <p>73% of students report feeling disconnected from their schoolwork—despite ability remaining high. Motivation collapses before potential can be realized.</p>
+      
+      <h2>Purpose Engine: The Solution</h2>
+      <p>An AI layer that reframes standards-aligned tasks into personally meaningful contexts, detects early disengagement, and provides low-friction tools for educators to intervene and guide—without replacing human leadership.</p>
+      
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">&lt;30s</div>
+          <p>Teacher validation time per reframed prompt</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2.3×</div>
+          <p>Average engagement boost in motivation pilots</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100%</div>
+          <p>Local/on-premise AI – FERPA-compliant privacy</p>
         </div>
       </div>
-      <div class="comparison-arrow">→</div>
-      <div class="comparison-card after">
-        <div class="emoji">🚀</div>
-        <h3>Purpose Engine</h3>
-        <p class="quote">
-          "As an aspiring sustainable designer, calculate the chemical ratios for eco-friendly building insulation."
-        </p>
-        <div class="thought">
-          Student thought: "This is relevant to MY future."
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Three Pillars Section -->
-  <section class="pillars-section">
-    <div class="section-header">
-      <h2>Three Pillars of Purpose</h2>
-      <p>A comprehensive approach to connecting learning with meaning</p>
-    </div>
-    <div class="pillars-grid">
-      <div class="pillar-card">
-        <div class="pillar-icon">🎯</div>
-        <h3>Personalized Purpose Engine</h3>
-        <p>AI re-skins assignments based on each student's career interests and aptitudes from their scorecard.</p>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-icon">🔮</div>
-        <h3>Future Self Simulations</h3>
-        <p>Students consult an AI persona of their successful future self for mentorship and motivation.</p>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-icon">🚀</div>
-        <h3>AI Co-Founder Capstone</h3>
-        <p>Semester-long venture where classwork becomes R&D for a real micro-business or nonprofit.</p>
-      </div>
+      
+      <!-- Integrations -->
+      <h3>Seamless Integrations</h3>
+      <p>PowerSchool SIS • Schoology LMS • Schoolinks Advising • YouScience Aptitude Signals</p>
     </div>
   </section>
 
-  <!-- Stats Section -->
-  <section class="stats-section">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="number">73%</div>
-        <div class="label">of students feel schoolwork is disconnected from their future</div>
-      </div>
-      <div class="stat-item">
-        <div class="number">2.3x</div>
-        <div class="label">engagement increase when work is career-contextualized</div>
-      </div>
-      <div class="stat-item">
-        <div class="number">&lt;30s</div>
-        <div class="label">teacher time per student validation (exception-based)</div>
-      </div>
+  <!-- Quick Capture / Demo Anchor -->
+  <section id="demo" class="section alt" style="padding: 80px 40px;">
+    <div class="section-inner" style="max-width: 1100px; margin: 0 auto; text-align: center;">
+      <h2>Quick Capture: Try It Now</h2>
+      <p>Enter an assignment → See AI generate a purpose-framed prompt (local mock simulation). Educator approval in seconds.</p>
+      <!-- Placeholder for simulator.js integration -->
+      <input type="text" id="assignment-input" placeholder="e.g., Write a 5-paragraph essay on the American Revolution" style="padding: 12px; width: 60%; max-width: 500px; border-radius: 8px; border: 1px solid var(--gray-400); margin: 20px 0;" />
+      <button onclick="simulateQuickCapture()" class="btn-primary" style="padding: 12px 32px; background: var(--yellow); color: var(--navy); border: none; border-radius: 12px; font-weight: 700;">Generate Purpose Prompt</button>
+      <div id="demo-output" style="margin-top: 30px; min-height: 100px;"></div>
     </div>
   </section>
 
-  <!-- Integration Section -->
-  <section class="integration-section">
-    <div class="section-header">
-      <h2>Connects Your Existing Systems</h2>
-      <p>AI synthesizes data from tools you already use</p>
-    </div>
-    <div class="integration-diagram">
-      <div class="source-column">
-        <div class="source-card">
-          <span class="icon">📊</span>
-          <div class="info">
-            <div class="name">PowerSchool</div>
-            <div class="status">Live sync</div>
-          </div>
-        </div>
-        <div class="source-card">
-          <span class="icon">📚</span>
-          <div class="info">
-            <div class="name">Schoology LMS</div>
-            <div class="status">Live sync</div>
-          </div>
-        </div>
-        <div class="source-card">
-          <span class="icon">🎯</span>
-          <div class="info">
-            <div class="name">Schoolinks</div>
-            <div class="status">Live sync</div>
-          </div>
-        </div>
-        <div class="source-card">
-          <span class="icon">🧠</span>
-          <div class="info">
-            <div class="name">YouScience</div>
-            <div class="status">Synced</div>
-          </div>
-        </div>
-      </div>
-      <div class="flow-arrows">
-        <span>→</span>
-        <span>→</span>
-        <span>→</span>
-        <span>→</span>
-      </div>
-      <div class="ai-engine">
-        <div class="icon">🧠</div>
-        <h3>Local AI Engine</h3>
-        <p>Runs on-premise. Student data never leaves campus.</p>
-      </div>
-      <div class="flow-arrows">
-        <span>→</span>
-        <span>→</span>
-        <span>→</span>
-      </div>
-      <div class="output-column">
-        <div class="source-card">
-          <span class="icon">🎯</span>
-          <div class="info">
-            <div class="name">Career-Bridge Challenges</div>
-            <div class="status">Personalized framing</div>
-          </div>
-        </div>
-        <div class="source-card">
-          <span class="icon">🔮</span>
-          <div class="info">
-            <div class="name">Future Self AI</div>
-            <div class="status">Mentorship simulations</div>
-          </div>
-        </div>
-        <div class="source-card">
-          <span class="icon">⚠️</span>
-          <div class="info">
-            <div class="name">Early Warning Signals</div>
-            <div class="status">Pattern detection</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <h2>See It In Action</h2>
-    <p>Explore the different views of the Purpose Engine system</p>
-    <div class="hero-ctas">
-      <a href="educator-dashboard.html" class="btn-primary">
-        Educator Dashboard →
-      </a>
-      <a href="student-dashboard.html" class="btn-secondary">
-        Student Dashboard
-      </a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>
-      Purpose Engine — An <a href="https://www.uplifteducation.org" target="_blank">Uplift Education</a> Initiative
-    </p>
+  <!-- Footer CTA -->
+  <footer style="padding: 60px 40px; text-align: center; background: var(--navy);">
+    <p>Purpose Engine — An <a href="https://www.uplifteducation.org" target="_blank" style="color: var(--yellow);">Uplift Education</a> Initiative for the Presidential AI Challenge</p>
+    <p>Empowering educators to build brighter futures, one purposeful connection at a time.</p>
   </footer>
 
+  <!-- Simple JS for demo placeholder (expand with simulator.js later) -->
   <script>
-    function toggleNav() {
-      document.getElementById('navLinks').classList.toggle('open');
+    function simulateQuickCapture() {
+      const input = document.getElementById('assignment-input').value || "Sample assignment";
+      const output = document.getElementById('demo-output');
+      output.innerHTML = `<p><strong>AI-Reframed Purpose Prompt:</strong> Imagine you're a young innovator building the next big app—how does understanding the American Revolution's fight for independence inspire modern ideas of freedom in tech and society? (Educator review: Approve in <30s to empower student ownership.)</p>`;
     }
-    
-    // Close nav when clicking outside
-    document.addEventListener('click', function(e) {
-      const nav = document.getElementById('navLinks');
-      const toggle = document.querySelector('.nav__toggle');
-      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
-        nav.classList.remove('open');
-      }
-    });
   </script>
+
 </body>
 </html>
