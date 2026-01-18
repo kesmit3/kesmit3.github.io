@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Challenge | Purpose Engine</title>
+
+  <!-- Favicon and Social Sharing -->
+  <link rel="icon" type="image/png" href="upliftlogo.png" />
+  <link rel="apple-touch-icon" href="upliftlogo.png" />
+  <meta property="og:title" content="AI Challenge | Purpose Engine" />
+  <meta property="og:description" content="A humane, privacy-forward vision for AI in education." />
+  <meta property="og:image" content="upliftlogo.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="variables.css" />
+
+  <style>
+    body { background: var(--navy); color: white; }
+
+    /* Soft background glow */
+    .page-hero {
+      padding: 120px 40px 70px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(0, 103, 177, 0.15) 0%, transparent 55%),
+        radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.10) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 196, 37, 0.14);
+      border: 1px solid rgba(255, 196, 37, 0.28);
+      padding: 8px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      position: relative;
+    }
+    .badge span {
+      color: var(--yellow);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0 auto 16px;
+      max-width: 980px;
+      position: relative;
+    }
+    h1 .highlight { color: var(--yellow); }
+
+    .lead {
+      font-size: 18px;
+      line-height: 1.75;
+      color: var(--gray-400);
+      max-width: 920px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .lead strong { color: rgba(255,255,255,0.92); font-weight: 700; }
+    .lead em { color: var(--yellow); font-style: normal; font-weight: 650; }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 26px;
+      position: relative;
+    }
+    .btn-primary {
+      padding: 14px 26px;
+      background: var(--yellow);
+      color: var(--navy);
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 18px rgba(255, 196, 37, 0.30);
+    }
+    .btn-secondary {
+      padding: 14px 26px;
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 650;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* Sections */
+    .section { padding: 80px 40px; background: var(--navy-light); }
+    .section.alt { background: var(--navy); }
+
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+    .section-header h2 {
+      font-size: 34px;
+      font-weight: 800;
+      margin: 0 0 10px;
+    }
+    .section-header p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--gray-400);
+      margin: 0 auto;
+      max-width: 860px;
+    }
+
+    .prose {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      gap: 14px;
+    }
+    .prose p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.85);
+    }
+    .prose p.muted { color: var(--gray-400); }
+    .prose p strong { color: white; font-weight: 750; }
+    .prose p em { color: var(--yellow); font-style: normal; font-weight: 650; }
+
+    /* Callout */
+    .callout {
+      max-width: 900px;
+      margin: 22px auto 0;
+      background: rgba(0, 103, 177, 0.12);
+      border: 1px solid rgba(0, 103, 177, 0.25);
+      border-radius: 18px;
+      padding: 18px 18px;
+    }
+    .callout .label {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 8px;
+    }
+    .callout p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.86);
+    }
+
+    /* Technique cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 18px;
+      padding: 22px;
+      text-align: left;
+    }
+    .card .kicker {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.70);
+      margin-bottom: 10px;
+    }
+    .card h3 {
+      font-size: 18px;
+      font-weight: 850;
+      margin: 0 0 10px;
+      color: white;
+    }
+    .card p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--gray-400);
+    }
+    .card .where {
+      margin-top: 12px;
+      background: rgba(0,0,0,0.28);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 12px;
+      color: rgba(255,255,255,0.82);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .card .where strong { color: white; font-weight: 800; }
+
+    /* Footer */
+    footer {
+      padding: 40px;
+      background: var(--navy-light);
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    footer p { color: var(--gray-500); font-size: 14px; margin: 0; }
+    footer a { color: var(--primary-light); text-decoration: none; }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      h1 { font-size: 38px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .page-hero { padding: 100px 24px 56px; }
+      h1 { font-size: 30px; }
+      .lead { font-size: 15px; }
+      .section { padding: 56px 24px; }
+      .section-header h2 { font-size: 24px; }
+      .section-header p { font-size: 14px; }
+      .hero-ctas { flex-direction: column; max-width: 320px; margin-left: auto; margin-right: auto; }
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="nav nav--dark">
+    <a href="americandream.html" class="nav__logo">
+      <img src="upliftlogo.png" alt="Uplift Education" class="nav__logo-img" />
+      <div class="nav__divider"></div>
+      <span class="nav__product">Purpose Engine</span>
+    </a>
+    <button class="nav__toggle" onclick="toggleNav()">☰</button>
+    <div class="nav__links" id="navLinks">
+      <a href="americandream.html" class="nav__link">
+        <span class="nav__link-icon">🏠</span>
+        <span class="nav__link-text">American Dream</span>
+      </a>
+      <a href="aichallenge.html" class="nav__link nav__link--active">
+        <span class="nav__link-icon">🔍</span>
+        <span class="nav__link-text">AI Challenge</span>
+      </a>
+      <a href="purpose-engine-technical-architecture.html" class="nav__link">
+        <span class="nav__link-icon">⚙️</span>
+        <span class="nav__link-text">Technical</span>
+      </a>
+      <a href="project-research.html" class="nav__link">
+        <span class="nav__link-icon">📚</span>
+        <span class="nav__link-text">Research</span>
+      </a>
+      <a href="index.html" class="nav__link" style="background: var(--yellow); color: var(--navy);">
+        <span class="nav__link-icon">🚀</span>
+        <span class="nav__link-text">View Demo</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="page-hero" id="top">
+    <div class="badge"><span>Why the AI Challenge</span></div>
+
+    <h1>
+      AI should <span class="highlight">reconnect</span> human intelligence,
+      not replace it.
+    </h1>
+
+    <p class="lead">
+      We already live in a world overflowing with information. The challenge now is how we
+      <em>integrate</em> it with wisdom, how we help young people build discernment, and how we use
+      technology to strengthen learning without weakening relationship.
+      <br /><br />
+      I also think of AI as a modern opportunity to <strong>undo the Tower of Babel</strong>—not by erasing
+      difference, but by helping us translate across languages, contexts, and lived experience so we can
+      understand one another more clearly and build a future together.
+    </p>
+
+    <div class="hero-ctas">
+      <a class="btn-primary" href="#challenge">The Challenge →</a>
+      <a class="btn-secondary" href="#techniques">How Purpose Engine Uses AI</a>
+    </div>
+  </header>
+
+  <!-- The Challenge -->
+  <section class="section" id="challenge">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>The Challenge</h2>
+        <p>
+          AI is already part of our children's world. The question is not whether it will be used,
+          but whether we will shape its role with clarity, compassion, and responsibility.
+        </p>
+      </div>
+
+      <div class="prose">
+        <p class="muted">
+          Much of the public conversation collapses AI into a single interface or model. In reality,
+          AI is a broad set of techniques spanning language, images, audio, pattern recognition, and decision support.
+        </p>
+        <p>
+          As visual AI and multimodal systems mature, the most important questions become practical and human:
+          <strong>Where should AI live?</strong> <strong>Who should it serve?</strong> <strong>What boundaries protect learners?</strong>
+        </p>
+        <p>
+          In education, the goal should not be shortcuts. It should be literacy, agency, and support:
+          helping students connect effort to meaning and build the confidence to navigate a complex world.
+        </p>
+      </div>
+
+      <div class="callout">
+        <div class="label">Design stance</div>
+        <p>
+          For children, AI should strengthen learning and connection, protect privacy, and reinforce
+          human leadership—not replace it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why I Chose This -->
+  <section class="section alt" id="why">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>Why I Chose to Do This</h2>
+        <p>
+          My interest in AI is not trend-driven. It comes from disciplined curiosity and a commitment to
+          understanding consequences as well as capabilities.
+        </p>
+      </div>
+
+      <div class="prose">
+        <p>
+          I'm relentlessly curious, but not in the novelty-seeking sense. My curiosity is a deliberate practice:
+          seeking understanding at both <strong>rational</strong> and <strong>post-rational</strong> levels,
+          reflecting on meaning, responsibility, and the long arc of cause and effect.
+        </p>
+        <p>
+          Over the past two years, I've pursued formal coursework, applied technical learning, and ongoing hands-on experimentation,
+          including industry study and deep learning modules, while also paying close attention to how students are actually using AI.
+        </p>
+        <p>
+          My background in theology and ethics has helped surface the questions that matter alongside innovation:
+          human dignity, environmental impact, bias, and what we are training young people to become.
+        </p>
+        <p>
+          I also believe it is possible to hold innovation and responsibility together, and to pursue progress that strengthens
+          learning, opportunity, and national competitiveness without losing compassion.
+        </p>
+        <p>
+          And as a parent, this is personal. I want the tools we build to help children grow into capable,
+          connected adults—not more isolated or dependent.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is AI -->
+  <section class="section" id="what">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>What AI Is (and Isn't)</h2>
+        <p>
+          AI is not "just GPT." It's a family of techniques that can translate, compare, infer, and synthesize across modalities.
+        </p>
+      </div>
+
+      <div class="prose">
+        <p>
+          AI can help us recognize patterns, map meaning, and connect signals across text, images, audio, and behavior.
+          As these capabilities mature, the design question becomes: <strong>How do we use them to support human development?</strong>
+        </p>
+        <p class="muted">
+          The Purpose Engine is built around that question. It uses multiple AI techniques, each selected for a specific role,
+          with guardrails that prioritize privacy, agency, and educational integrity.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Techniques -->
+  <section class="section alt" id="techniques">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>How the Purpose Engine Uses AI</h2>
+        <p>
+          Four techniques, four distinct jobs in the system architecture. Personalization with privacy and fidelity.
+        </p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="kicker">AI Technique #1</div>
+          <h3>Joint Embedding</h3>
+          <p>
+            A neural approach that maps different data types (text, interests, assessments, patterns) into a shared mathematical space
+            so meaningful relationships can be computed.
+          </p>
+          <div class="where">
+            <strong>Where it's used:</strong> Joint Embedding can reveal that a student's passion for world-building
+            correlates with spatial reasoning often used in architecture or engineering—helping connect interests to pathways.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="kicker">AI Technique #2</div>
+          <h3>Semantic Alignment</h3>
+          <p>
+            A verification process that ensures personalized reframing preserves the original learning requirements,
+            using similarity scoring against curriculum embeddings and standards constraints.
+          </p>
+          <div class="where">
+            <strong>Where it's used:</strong> When an assignment is reframed as a real-world challenge,
+            Semantic Alignment checks that the required objectives remain fully covered before delivery.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="kicker">AI Technique #3</div>
+          <h3>Edge-Based Inference</h3>
+          <p>
+            Model inference executed locally on school infrastructure rather than in the cloud. Data stays within the campus network boundary,
+            supported by optimization techniques for efficient local deployment.
+          </p>
+          <div class="where">
+            <strong>Where it's used:</strong> Pattern detection and profile updates run locally. Raw inputs can be processed
+            and discarded with only derived insights retained, reducing exposure of sensitive student data.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="kicker">AI Technique #4</div>
+          <h3>Cross-Modal Reasoning</h3>
+          <p>
+            The ability to synthesize context across modalities (text, audio, visual) so the system can respond to the full picture,
+            not just a single signal.
+          </p>
+          <div class="where">
+            <strong>Where it's used:</strong> If a student's reflection sounds positive in words but shows fatigue in tone or expression,
+            the system can respond with more supportive scaffolding rather than pushing harder.
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-ctas" style="margin-top: 28px;">
+        <a class="btn-primary" href="purpose-engine-technical-architecture.html">Technical Architecture →</a>
+        <a class="btn-secondary" href="americandream.html">Back to American Dream</a>
+        <a class="btn-secondary" href="#top">Back to Top</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Purpose Engine — An <a href="https://www.uplifteducation.org" target="_blank">Uplift Education</a> Initiative
+      · <a href="americandream.html">American Dream</a>
+      · <a href="purpose-engine-technical-architecture.html">Technical Architecture</a>
+      · <a href="project-research.html">Research</a>
+    </p>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    document.addEventListener('click', function(e) {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.querySelector('.nav__toggle');
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>

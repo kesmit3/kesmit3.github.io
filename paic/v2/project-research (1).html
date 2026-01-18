@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research & References | Purpose Engine</title>
+
+  <!-- Favicon and Social Sharing -->
+  <link rel="icon" type="image/png" href="upliftlogo.png" />
+  <link rel="apple-touch-icon" href="upliftlogo.png" />
+  <meta property="og:title" content="Research & References | Purpose Engine" />
+  <meta property="og:description" content="AI transparency, research sources, and methodology documentation." />
+  <meta property="og:image" content="upliftlogo.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="variables.css" />
+
+  <style>
+    body { background: var(--navy); color: white; }
+
+    /* Soft background glow */
+    .page-hero {
+      padding: 120px 40px 60px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(0, 103, 177, 0.15) 0%, transparent 55%),
+        radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.10) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 196, 37, 0.14);
+      border: 1px solid rgba(255, 196, 37, 0.28);
+      padding: 8px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      position: relative;
+    }
+    .badge span {
+      color: var(--yellow);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      font-size: 44px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0 auto 16px;
+      max-width: 900px;
+      position: relative;
+    }
+    h1 .highlight { color: var(--yellow); }
+
+    .lead {
+      font-size: 18px;
+      line-height: 1.75;
+      color: var(--gray-400);
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Sections */
+    .section { padding: 70px 40px; background: var(--navy-light); }
+    .section.alt { background: var(--navy); }
+
+    .section-inner { max-width: 1000px; margin: 0 auto; }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .section-header h2 {
+      font-size: 32px;
+      font-weight: 800;
+      margin: 0 0 10px;
+    }
+    .section-header p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--gray-400);
+      margin: 0 auto;
+      max-width: 700px;
+    }
+
+    /* Tool cards */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .tool-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: left;
+    }
+
+    .tool-card .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .tool-card .icon.claude { background: rgba(139, 92, 246, 0.15); }
+    .tool-card .icon.figma { background: rgba(236, 72, 153, 0.15); }
+    .tool-card .icon.veed { background: rgba(59, 130, 246, 0.15); }
+    .tool-card .icon.react { background: rgba(16, 185, 129, 0.15); }
+    .tool-card .icon.research { background: rgba(255, 183, 77, 0.15); }
+
+    .tool-card h3 {
+      font-size: 18px;
+      font-weight: 750;
+      margin: 0 0 8px;
+      color: white;
+    }
+
+    .tool-card .role {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--yellow);
+      margin-bottom: 10px;
+    }
+
+    .tool-card p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--gray-400);
+    }
+
+    /* Reference list */
+    .reference-section {
+      margin-bottom: 32px;
+    }
+
+    .reference-section h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--yellow);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 196, 37, 0.2);
+    }
+
+    .reference-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .reference-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .reference-list li:last-child {
+      border-bottom: none;
+    }
+
+    .reference-list li strong {
+      color: white;
+      font-weight: 600;
+    }
+
+    .reference-list li em {
+      color: var(--gray-400);
+      font-style: normal;
+    }
+
+    /* Callout */
+    .callout {
+      max-width: 900px;
+      margin: 30px auto 0;
+      background: rgba(0, 103, 177, 0.12);
+      border: 1px solid rgba(0, 103, 177, 0.25);
+      border-radius: 18px;
+      padding: 20px 24px;
+    }
+    .callout .label {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 8px;
+    }
+    .callout p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.86);
+    }
+
+    /* CTA buttons */
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 26px;
+      position: relative;
+    }
+    .btn-primary {
+      padding: 14px 26px;
+      background: var(--yellow);
+      color: var(--navy);
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 18px rgba(255, 196, 37, 0.30);
+    }
+    .btn-secondary {
+      padding: 14px 26px;
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 650;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px;
+      background: var(--navy-light);
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    footer p { color: var(--gray-500); font-size: 14px; margin: 0; }
+    footer a { color: var(--primary-light); text-decoration: none; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-hero { padding: 100px 24px 50px; }
+      h1 { font-size: 30px; }
+      .lead { font-size: 15px; }
+      .section { padding: 50px 24px; }
+      .tool-grid { grid-template-columns: 1fr; }
+      .hero-ctas { flex-direction: column; max-width: 320px; margin-left: auto; margin-right: auto; }
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="nav nav--dark">
+    <a href="americandream.html" class="nav__logo">
+      <img src="upliftlogo.png" alt="Uplift Education" class="nav__logo-img" />
+      <div class="nav__divider"></div>
+      <span class="nav__product">Purpose Engine</span>
+    </a>
+    <button class="nav__toggle" onclick="toggleNav()">☰</button>
+    <div class="nav__links" id="navLinks">
+      <a href="americandream.html" class="nav__link">
+        <span class="nav__link-icon">🏠</span>
+        <span class="nav__link-text">American Dream</span>
+      </a>
+      <a href="aichallenge.html" class="nav__link">
+        <span class="nav__link-icon">🔍</span>
+        <span class="nav__link-text">AI Challenge</span>
+      </a>
+      <a href="purpose-engine-technical-architecture.html" class="nav__link">
+        <span class="nav__link-icon">⚙️</span>
+        <span class="nav__link-text">Technical</span>
+      </a>
+      <a href="project-research.html" class="nav__link nav__link--active">
+        <span class="nav__link-icon">📚</span>
+        <span class="nav__link-text">Research</span>
+      </a>
+      <a href="index.html" class="nav__link" style="background: var(--yellow); color: var(--navy);">
+        <span class="nav__link-icon">🚀</span>
+        <span class="nav__link-text">View Demo</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="page-hero" id="top">
+    <div class="badge"><span>📚 Transparency & Attribution</span></div>
+
+    <h1>
+      Project <span class="highlight">Research</span> & References
+    </h1>
+
+    <p class="lead">
+      This page documents the AI tools, research sources, and methodology used to create the Purpose Engine 
+      proposal and submission materials. Transparency is a core principle of this project.
+    </p>
+  </header>
+
+  <!-- AI Tools Used -->
+  <section class="section" id="tools">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>AI Tools Used in This Project</h2>
+        <p>
+          The following AI tools assisted in various aspects of creating this proposal, 
+          prototype, and documentation materials.
+        </p>
+      </div>
+
+      <div class="tool-grid">
+        <div class="tool-card">
+          <div class="icon claude">🤖</div>
+          <div class="role">Primary AI Assistant</div>
+          <h3>Claude (Anthropic)</h3>
+          <p>
+            Used for brainstorming, drafting written content, code generation for the interactive prototype, 
+            iterating on UI/UX concepts, and refining documentation. All outputs were reviewed, edited, and 
+            curated by the human author.
+          </p>
+        </div>
+
+        <div class="tool-card">
+          <div class="icon figma">🎨</div>
+          <div class="role">Visual Design</div>
+          <h3>Design Tools</h3>
+          <p>
+            Figma and related design tools were used for wireframing and visual concepting. 
+            The final prototype was built with React components and CSS, with design iteration 
+            informed by AI-assisted exploration.
+          </p>
+        </div>
+
+        <div class="tool-card">
+          <div class="icon veed">🎬</div>
+          <div class="role">Video Production</div>
+          <h3>Video Creation Tools</h3>
+          <p>
+            Video editing and presentation tools were used to create the submission video. 
+            AI-assisted tools may have been used for script refinement, voiceover, or visual 
+            generation where applicable.
+          </p>
+        </div>
+
+        <div class="tool-card">
+          <div class="icon react">⚛️</div>
+          <div class="role">Prototype Development</div>
+          <h3>React & Web Technologies</h3>
+          <p>
+            The interactive prototype was built using React, HTML, CSS, and JavaScript. 
+            AI assisted with code generation and debugging, with human oversight on all 
+            architecture and implementation decisions.
+          </p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="label">Human-AI Collaboration</div>
+        <p>
+          All AI-generated content was reviewed, edited, and validated by the human author. 
+          AI served as a collaborative tool to accelerate ideation and execution, not as a replacement 
+          for human judgment, creativity, or domain expertise.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Sources -->
+  <section class="section alt" id="research">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>Research & Theoretical Foundations</h2>
+        <p>
+          The Purpose Engine concept draws on established research in motivation, 
+          learning science, and educational technology.
+        </p>
+      </div>
+
+      <div class="reference-section">
+        <h3>🎯 Motivation & Self-Determination Theory</h3>
+        <ul class="reference-list">
+          <li>
+            <strong>Ryan, R.M. & Deci, E.L. (2000).</strong> Self-Determination Theory and the Facilitation of Intrinsic Motivation, Social Development, and Well-Being. <em>American Psychologist, 55(1), 68-78.</em>
+          </li>
+          <li>
+            <strong>Deci, E.L. & Ryan, R.M. (2008).</strong> Self-Determination Theory: A Macrotheory of Human Motivation, Development, and Health. <em>Canadian Psychology, 49(3), 182-185.</em>
+          </li>
+          <li>
+            <strong>Pink, D.H. (2009).</strong> Drive: The Surprising Truth About What Motivates Us. <em>Riverhead Books.</em>
+          </li>
+        </ul>
+      </div>
+
+      <div class="reference-section">
+        <h3>📚 Educational Psychology & Learning Science</h3>
+        <ul class="reference-list">
+          <li>
+            <strong>Dweck, C.S. (2006).</strong> Mindset: The New Psychology of Success. <em>Random House.</em>
+          </li>
+          <li>
+            <strong>Yeager, D.S. et al. (2014).</strong> Boring but Important: A Self-Transcendent Purpose for Learning Fosters Academic Self-Regulation. <em>Journal of Personality and Social Psychology, 107(4), 559-580.</em>
+          </li>
+          <li>
+            <strong>Duckworth, A. (2016).</strong> Grit: The Power of Passion and Perseverance. <em>Scribner.</em>
+          </li>
+        </ul>
+      </div>
+
+      <div class="reference-section">
+        <h3>🔒 AI Ethics & Privacy in Education</h3>
+        <ul class="reference-list">
+          <li>
+            <strong>U.S. Department of Education (2023).</strong> Artificial Intelligence and the Future of Teaching and Learning. <em>Office of Educational Technology.</em>
+          </li>
+          <li>
+            <strong>Future of Privacy Forum (2023).</strong> Student Privacy Principles for AI in Education. <em>FPF.org.</em>
+          </li>
+          <li>
+            <strong>FERPA (Family Educational Rights and Privacy Act).</strong> <em>20 U.S.C. § 1232g; 34 CFR Part 99.</em>
+          </li>
+          <li>
+            <strong>Texas Education Code, Chapter 32.</strong> Student Data Privacy and Security Requirements.
+          </li>
+        </ul>
+      </div>
+
+      <div class="reference-section">
+        <h3>🏫 Career & Technical Education</h3>
+        <ul class="reference-list">
+          <li>
+            <strong>Texas Education Agency.</strong> Career and Technical Education (CTE) Programs of Study.
+          </li>
+          <li>
+            <strong>Association for Career and Technical Education (ACTE).</strong> High-Quality CTE Framework.
+          </li>
+          <li>
+            <strong>Schoolinks.</strong> College and Career Readiness Platform documentation.
+          </li>
+          <li>
+            <strong>YouScience.</strong> Aptitude-based career discovery research and methodology.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Methodology -->
+  <section class="section" id="methodology">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>Project Methodology</h2>
+        <p>
+          How this proposal was developed, from initial concept to final submission.
+        </p>
+      </div>
+
+      <div class="tool-grid">
+        <div class="tool-card">
+          <div class="icon research">🔬</div>
+          <div class="role">Phase 1</div>
+          <h3>Research & Discovery</h3>
+          <p>
+            Reviewed existing research on student motivation, spoke with educators and counselors, 
+            and analyzed current EdTech solutions to identify gaps and opportunities.
+          </p>
+        </div>
+
+        <div class="tool-card">
+          <div class="icon research">💡</div>
+          <div class="role">Phase 2</div>
+          <h3>Concept Development</h3>
+          <p>
+            Developed the "Career Scorecard" architecture and three-pillar framework (Purpose Engine, 
+            Future Self, AI Co-Founder) based on Self-Determination Theory principles.
+          </p>
+        </div>
+
+        <div class="tool-card">
+          <div class="icon research">🛠️</div>
+          <div class="role">Phase 3</div>
+          <h3>Prototype Building</h3>
+          <p>
+            Created interactive web prototypes to demonstrate key user experiences: student dashboard, 
+            educator view, assignment transformation, and Future Self conversations.
+          </p>
+        </div>
+
+        <div class="tool-card">
+          <div class="icon research">📝</div>
+          <div class="role">Phase 4</div>
+          <h3>Documentation & Refinement</h3>
+          <p>
+            Developed technical architecture documentation, privacy compliance analysis, and 
+            submission materials with iterative review and refinement.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section alt">
+    <div class="section-inner">
+      <div class="hero-ctas">
+        <a class="btn-primary" href="aichallenge.html">← Back to AI Challenge</a>
+        <a class="btn-secondary" href="purpose-engine-technical-architecture.html">Technical Architecture</a>
+        <a class="btn-secondary" href="americandream.html">American Dream</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Purpose Engine — An <a href="https://www.uplifteducation.org" target="_blank">Uplift Education</a> Initiative
+      · <a href="aichallenge.html">AI Challenge</a>
+      · <a href="americandream.html">American Dream</a>
+      · <a href="purpose-engine-technical-architecture.html">Technical Architecture</a>
+    </p>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    document.addEventListener('click', function(e) {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.querySelector('.nav__toggle');
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>
