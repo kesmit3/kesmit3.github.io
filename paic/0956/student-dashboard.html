@@ -454,7 +454,6 @@
       align-items: center;
       gap: 8px;
       transition: all 0.2s ease;
-      text-decoration: none;
     }
 
     .action-btn:hover {
@@ -466,141 +465,6 @@
       background: linear-gradient(135deg, var(--yellow) 0%, #FFB300 100%);
       border: none;
       color: var(--navy);
-    }
-
-    /* Log Experience Modal */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .modal-content {
-      background: white;
-      border-radius: 20px;
-      padding: 32px;
-      max-width: 540px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 16px;
-      right: 20px;
-      background: none;
-      border: none;
-      font-size: 28px;
-      color: var(--gray-400);
-      cursor: pointer;
-    }
-
-    .modal-textarea {
-      width: 100%;
-      min-height: 100px;
-      padding: 16px;
-      border: 1px solid var(--gray-200);
-      border-radius: 12px;
-      font-family: inherit;
-      font-size: 14px;
-      resize: vertical;
-      margin-bottom: 16px;
-      box-sizing: border-box;
-    }
-
-    .modal-textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    .modal-submit {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 14px 24px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    .ai-response {
-      margin-top: 24px;
-      padding-top: 24px;
-      border-top: 1px solid var(--gray-100);
-    }
-
-    .ai-response-header {
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 16px;
-    }
-
-    .ai-insight {
-      display: flex;
-      gap: 12px;
-      padding: 16px;
-      background: var(--gray-50);
-      border-radius: 12px;
-      margin-bottom: 12px;
-    }
-
-    .insight-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .insight-content {
-      flex: 1;
-    }
-
-    .insight-content strong {
-      color: var(--navy);
-      font-size: 14px;
-    }
-
-    .insight-content p {
-      font-size: 13px;
-      color: var(--gray-500);
-      margin: 4px 0 10px 0;
-    }
-
-    .insight-action {
-      background: white;
-      border: 1px solid var(--primary);
-      color: var(--primary);
-      border-radius: 6px;
-      padding: 6px 12px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .insight-action.added {
-      background: var(--success);
-      border-color: var(--success);
-      color: white;
     }
 
     /* Mobile Responsive */
@@ -657,10 +521,6 @@
         width: 100%;
         justify-content: center;
       }
-
-      .modal-content {
-        padding: 24px;
-      }
     }
 
     @media (max-width: 480px) {
@@ -699,6 +559,139 @@
         font-size: 14px;
       }
     }
+    /* Log Experience Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 540px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--gray-400);
+  cursor: pointer;
+}
+
+.modal-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 16px;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  margin-bottom: 16px;
+}
+
+.modal-textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.modal-submit {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+}
+
+.ai-response {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--gray-100);
+}
+
+.ai-response-header {
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+
+.ai-insight {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: var(--gray-50);
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.insight-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.insight-content {
+  flex: 1;
+}
+
+.insight-content strong {
+  color: var(--navy);
+  font-size: 14px;
+}
+
+.insight-content p {
+  font-size: 13px;
+  color: var(--gray-500);
+  margin: 4px 0 10px 0;
+}
+
+.insight-action {
+  background: white;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.insight-action.added {
+  background: var(--success);
+  border-color: var(--success);
+  color: white;
+}
   </style>
 </head>
 <body>
@@ -790,9 +783,10 @@
               <div class="theme-bar">
                 <div class="theme-bar-fill" style="width: 72%; background: #4CAF50;"></div>
               </div>
-            </div>
-            <div class="theme-percent" style="color: #4CAF50;">72%</div>
-          </div>
+            <button class="action-btn" onclick="openLogModal()">
+              <span>🎯</span>
+              <span>Log Experience</span>
+            </button>
           
           <div class="theme-item" style="background: rgba(255, 183, 77, 0.06); border-color: rgba(255, 183, 77, 0.15);">
             <div class="theme-icon" style="background: rgba(255, 183, 77, 0.15);">💡</div>
@@ -863,7 +857,7 @@
         <!-- Future Self Access -->
         <div class="future-self-card">
           <h2>Talk to Your Future Self</h2>
-          <p>Get advice from the successful version of you, 10 years from now—a Sustainable Design Director.</p>
+          <p>Get advice from the successful version of you, 10 years from now as a Sustainable Design Director.</p>
           <a href="future-self.html" class="future-self-btn">
             <span>Start Conversation</span>
             <span>→</span>
@@ -871,11 +865,10 @@
         </div>
 
         <!-- Journey Progress -->
-        <div class="card">
-          <div class="card-header" style="margin-bottom: 8px;">
-            <h2 class="card-title">Your Journey</h2>
-          </div>
-          <p style="font-size: 13px; color: var(--gray-500); margin-bottom: 16px;">Purpose Points earned each year—tracking how you connect learning to your goals</p>
+        <div class="card-header" style="margin-bottom: 8px;">
+          <h2 class="card-title">Your Journey</h2>
+        </div>
+        <p style="font-size: 13px; color: var(--gray-500); margin-bottom: 16px;">Purpose Points earned each year—tracking how you connect learning to your goals</p>
           <div class="journey-chart">
             <div class="journey-bar-wrapper">
               <div class="journey-bar" style="height: 39%; background: linear-gradient(180deg, rgba(0, 103, 177, 0.3) 0%, rgba(0, 103, 177, 0.15) 100%);">
@@ -924,7 +917,7 @@
               <span>🔍</span>
               <span>Why does this matter?</span>
             </a>
-            <button class="action-btn" onclick="openLogModal()">
+            <button class="action-btn">
               <span>🎯</span>
               <span>Log Experience</span>
             </button>
@@ -933,49 +926,48 @@
               <span>Explore Careers</span>
             </button>
           </div>
+        <!-- Log Experience Modal -->
+<div class="modal-overlay" id="logModal" onclick="closeLogModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeLogModal()">&times;</button>
+    <h2 style="margin-bottom: 8px;">What's on your mind?</h2>
+    <p style="font-size: 13px; color: var(--gray-500); margin-bottom: 16px;">Share what's happening — I'll help connect it to your goals.</p>
+    
+    <textarea id="experienceInput" class="modal-textarea" placeholder="Example: I babysat my little brother last night, have soccer after school, and heard about the tech expo..."></textarea>
+    
+    <button class="modal-submit" onclick="processExperience()">Share with Purpose Engine</button>
+    
+    <div id="aiResponse" class="ai-response" style="display: none;">
+      <div class="ai-response-header">
+        <span>✨</span> Here's what I noticed:
+      </div>
+      <div class="ai-insight">
+        <div class="insight-icon" style="background: rgba(232, 107, 107, 0.15);">👶</div>
+        <div class="insight-content">
+          <strong>Babysitting → Leadership & Responsibility</strong>
+          <p>This shows reliability and care — great for your resume under "Experience." Want me to add it?</p>
+          <button class="insight-action">+ Add to Resume</button>
+        </div>
+      </div>
+      <div class="ai-insight">
+        <div class="insight-icon" style="background: rgba(76, 175, 80, 0.15);">⚽</div>
+        <div class="insight-content">
+          <strong>Soccer → Teamwork & Discipline</strong>
+          <p>Athletics builds collaboration skills. I'll log this to your activity profile.</p>
+          <button class="insight-action added">✓ Logged to Profile</button>
+        </div>
+      </div>
+      <div class="ai-insight">
+        <div class="insight-icon" style="background: rgba(0, 103, 177, 0.15);">🔬</div>
+        <div class="insight-content">
+          <strong>Tech Expo → March 15th in Schoolinks</strong>
+          <p>This aligns with your Creative Technology interest! I've flagged you as interested and notified Ms. Rodriguez.</p>
+          <button class="insight-action">📅 Add to Calendar</button>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Log Experience Modal -->
-  <div class="modal-overlay" id="logModal" onclick="closeLogModal(event)">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeLogModal()">&times;</button>
-      <h2 style="margin-bottom: 8px; color: var(--navy);">What's on your mind?</h2>
-      <p style="font-size: 13px; color: var(--gray-500); margin-bottom: 16px;">Share what's happening — I'll help connect it to your goals.</p>
-      
-      <textarea id="experienceInput" class="modal-textarea" placeholder="Example: I babysat my little brother last night, have soccer after school, and heard about the tech expo..."></textarea>
-      
-      <button class="modal-submit" id="submitBtn" onclick="processExperience()">Share with Purpose Engine</button>
-      
-      <div id="aiResponse" class="ai-response" style="display: none;">
-        <div class="ai-response-header">
-          <span>✨</span> Here's what I noticed:
-        </div>
-        <div class="ai-insight">
-          <div class="insight-icon" style="background: rgba(232, 107, 107, 0.15);">👶</div>
-          <div class="insight-content">
-            <strong>Babysitting → Leadership & Responsibility</strong>
-            <p>This shows reliability and care — great for your resume under "Experience." Want me to add it?</p>
-            <button class="insight-action">+ Add to Resume</button>
-          </div>
-        </div>
-        <div class="ai-insight">
-          <div class="insight-icon" style="background: rgba(76, 175, 80, 0.15);">⚽</div>
-          <div class="insight-content">
-            <strong>Soccer → Teamwork & Discipline</strong>
-            <p>Athletics builds collaboration skills. I'll log this to your activity profile.</p>
-            <button class="insight-action added">✓ Logged to Profile</button>
-          </div>
-        </div>
-        <div class="ai-insight">
-          <div class="insight-icon" style="background: rgba(0, 103, 177, 0.15);">🔬</div>
-          <div class="insight-content">
-            <strong>Tech Expo → March 15th in Schoolinks</strong>
-            <p>This aligns with your Creative Technology interest! I've flagged you as interested and notified Ms. Rodriguez.</p>
-            <button class="insight-action">📅 Add to Calendar</button>
-          </div>
+</div>
         </div>
       </div>
     </div>
@@ -993,12 +985,10 @@
         nav.classList.remove('open');
       }
     });
-
     function openLogModal() {
       document.getElementById('logModal').classList.add('active');
       document.getElementById('aiResponse').style.display = 'none';
       document.getElementById('experienceInput').value = '';
-      document.getElementById('submitBtn').textContent = 'Share with Purpose Engine';
     }
 
     function closeLogModal(event) {
@@ -1009,7 +999,7 @@
 
     function processExperience() {
       document.getElementById('aiResponse').style.display = 'block';
-      document.getElementById('submitBtn').textContent = '✓ Processed';
+      document.querySelector('.modal-submit').textContent = '✓ Processed';
     }
   </script>
 </body>
