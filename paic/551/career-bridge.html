@@ -458,36 +458,27 @@
       <div class="nav__divider"></div>
       <span class="nav__product">Purpose Engine</span>
     </a>
-    <span class="nav__badge">Student View</span>
-    <button class="nav__toggle" onclick="toggleNav()">â˜°</button>
+    <button class="nav__toggle" onclick="toggleNav()">☰</button>
     <div class="nav__links" id="navLinks">
       <a href="index.html" class="nav__link">
-        <span class="nav__link-icon">ðŸ </span>
+        <span class="nav__link-icon">🏠</span>
         <span class="nav__link-text">Home</span>
       </a>
       <a href="student-dashboard.html" class="nav__link">
-        <span class="nav__link-icon">&#128104;â€&#127891;</span>
+        <span class="nav__link-icon">👨‍🎓</span>
         <span class="nav__link-text">Student</span>
       </a>
       <a href="career-bridge.html" class="nav__link nav__link--active">
-        <span class="nav__link-icon">&#127919;</span>
+        <span class="nav__link-icon">🎯</span>
         <span class="nav__link-text">Career Bridge</span>
       </a>
       <a href="future-self.html" class="nav__link">
-        <span class="nav__link-icon">ðŸ’¬</span>
+        <span class="nav__link-icon">💬</span>
         <span class="nav__link-text">Future Self</span>
       </a>
       <a href="educator-dashboard.html" class="nav__link">
-        <span class="nav__link-icon">&#128105;â€ðŸ«</span>
+        <span class="nav__link-icon">👩‍🏫</span>
         <span class="nav__link-text">Educator</span>
-      </a>
-          <a href="demo.html" class="nav__link">
-        <span class="nav__link-icon">&#9658;</span>
-        <span class="nav__link-text">Demo</span>
-      </a>
-      <a href="rtcc-demo.html" class="nav__link">
-        <span class="nav__link-icon">&#128176;</span>
-        <span class="nav__link-text">RTCC</span>
       </a>
     </div>
   </nav>
@@ -503,15 +494,15 @@
 
       <!-- Student Context -->
       <div class="student-context">
-        <div class="student-avatar">ðŸ‘¤</div>
+        <div class="student-avatar">👤</div>
         <div class="student-info">
           <div class="student-name">Maya Chen</div>
           <div class="student-interests">Interests from Schoolinks: Sustainable Architecture, Environmental Engineering, Urban Planning</div>
         </div>
         <div class="theme-badges">
-          <span class="theme-badge" style="background: rgba(232, 107, 107, 0.2); color: #E86B6B;">ðŸŽ¨ 85%</span>
-          <span class="theme-badge" style="background: rgba(76, 175, 80, 0.2); color: #4CAF50;">&#127793; 72%</span>
-          <span class="theme-badge" style="background: rgba(255, 183, 77, 0.2); color: #FFB74D;">ðŸ’¡ 64%</span>
+          <span class="theme-badge" style="background: rgba(232, 107, 107, 0.2); color: #E86B6B;">🎨 85%</span>
+          <span class="theme-badge" style="background: rgba(76, 175, 80, 0.2); color: #4CAF50;">🌱 72%</span>
+          <span class="theme-badge" style="background: rgba(255, 183, 77, 0.2); color: #FFB74D;">💡 64%</span>
         </div>
       </div>
 
@@ -535,18 +526,18 @@
 
         <!-- Transform Button -->
         <div class="transform-control">
-          <button class="transform-btn" id="transformBtn" onclick="toggleTransform()">&#9889;</button>
+          <button class="transform-btn" id="transformBtn" onclick="toggleTransform()">⚡</button>
           <span class="transform-label" id="transformLabel">Transform</span>
         </div>
 
         <!-- After Card -->
         <div class="assignment-card after" id="afterCard">
           <span class="assignment-tag">PURPOSE ENGINE</span>
-          <h3 class="assignment-title">&#127793; Eco-Material Design Challenge</h3>
+          <h3 class="assignment-title">🌱 Eco-Material Design Challenge</h3>
           <p class="assignment-desc">
             <strong>As an aspiring sustainable designer,</strong> calculate 
             the exact chemical ratios for plant-based building insulation. A local green construction 
-            startup needs your help&#8212;if your ratios are off, the material won't meet fire safety standards.
+            startup needs your help—if your ratios are off, the material won't meet fire safety standards.
           </p>
           <div class="mindset-box">
             <div class="mindset-label">STUDENT MINDSET</div>
@@ -560,17 +551,17 @@
       <!-- Learning Objectives Bar -->
       <div class="objectives-bar">
         <div class="objective-item">
-          <div class="objective-icon" style="color: var(--success);">âœ“</div>
+          <div class="objective-icon" style="color: var(--success);">✓</div>
           <div class="objective-text">Same TEKS Standards</div>
         </div>
         <div class="objective-divider"></div>
         <div class="objective-item">
-          <div class="objective-icon" style="color: var(--success);">âœ“</div>
+          <div class="objective-icon" style="color: var(--success);">✓</div>
           <div class="objective-text">Same Learning Objectives</div>
         </div>
         <div class="objective-divider"></div>
         <div class="objective-item">
-          <div class="objective-icon" style="color: var(--primary);">â†‘</div>
+          <div class="objective-icon" style="color: var(--primary);">↑</div>
           <div class="objective-text">2.3x More Engagement</div>
         </div>
       </div>
@@ -611,13 +602,13 @@
       const afterCard = document.getElementById('afterCard');
       
       if (isTransformed) {
-        btn.textContent = 'âœ“';
+        btn.textContent = '✓';
         btn.classList.add('active');
         label.textContent = 'Transformed!';
         beforeCard.classList.add('faded');
         afterCard.classList.add('active');
       } else {
-        btn.textContent = '&#9889;';
+        btn.textContent = '⚡';
         btn.classList.remove('active');
         label.textContent = 'Transform';
         beforeCard.classList.remove('faded');

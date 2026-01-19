@@ -18,9 +18,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Shared Styles -->
-  <link rel="stylesheet" href="variables.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
@@ -570,46 +567,20 @@
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="nav nav--light">
-    <a href="index.html" class="nav__logo">
-      <img src="https://kesmit3.github.io/paic/upliftlogo.png" alt="Uplift Education" class="nav__logo-img">
-      <div class="nav__divider"></div>
-      <span class="nav__product">Purpose Engine</span>
+  <!-- Header -->
+  <div class="header">
+    <a href="index.html" class="logo-link">
+      <img src="https://kesmit3.github.io/paic/upliftlogo.png" alt="Uplift Education" class="logo-img">
+      <div class="logo-divider"></div>
+      <span class="logo-product">Future Self</span>
     </a>
-    <span class="nav__badge">Student View</span>
-    <button class="nav__toggle" onclick="toggleNav()">&#9776;</button>
-    <div class="nav__links" id="navLinks">
-      <a href="index.html" class="nav__link">
-        <span class="nav__link-icon">&#127968;</span>
-        <span class="nav__link-text">Home</span>
-      </a>
-      <a href="student-dashboard.html" class="nav__link">
-        <span class="nav__link-icon">&#128202;</span>
-        <span class="nav__link-text">Student</span>
-      </a>
-      <a href="career-bridge.html" class="nav__link">
-        <span class="nav__link-icon">&#127919;</span>
-        <span class="nav__link-text">Career Bridge</span>
-      </a>
-      <a href="future-self.html" class="nav__link nav__link--active">
-        <span class="nav__link-icon">&#128302;</span>
-        <span class="nav__link-text">Future Self</span>
-      </a>
-      <a href="educator-dashboard.html" class="nav__link">
-        <span class="nav__link-icon">&#128105;&#8205;&#127979;</span>
-        <span class="nav__link-text">Educator</span>
-      </a>
-      <a href="demo.html" class="nav__link">
-        <span class="nav__link-icon">&#9658;</span>
-        <span class="nav__link-text">Demo</span>
-      </a>
-      <a href="rtcc-demo.html" class="nav__link">
-        <span class="nav__link-icon">&#128176;</span>
-        <span class="nav__link-text">RTCC</span>
+    <div class="header-nav">
+      <span class="header-subtitle">Purpose Engine Demo</span>
+      <a href="index.html" class="home-link">
+        <span>&#127968;</span> Home
       </a>
     </div>
-  </nav>
+  </div>
 
   <!-- Step Indicator -->
   <div class="steps">
@@ -680,16 +651,6 @@
           <div class="profile-avatar" style="background: linear-gradient(135deg, #a855f7, #9333ea)">NR</div>
           <div class="profile-name">Nina Rodriguez</div>
           <div class="profile-meta">12th Grade &bull; Dance</div>
-        </div>
-        <div class="profile-card" onclick="selectProfile(this, 'Marcus Day', '11th Grade &bull; Electrician apprenticeship', '#f59e0b', 'MD')">
-          <div class="profile-avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706)">MD</div>
-          <div class="profile-name">Marcus Day</div>
-          <div class="profile-meta">11th Grade &bull; Electrician</div>
-        </div>
-        <div class="profile-card" onclick="selectProfile(this, 'Ivan Rodriguez', '12th Grade &bull; Cybersecurity (SOC)', '#10b981', 'IR')">
-          <div class="profile-avatar" style="background: linear-gradient(135deg, #10b981, #059669)">IR</div>
-          <div class="profile-name">Ivan Rodriguez</div>
-          <div class="profile-meta">12th Grade &bull; Cybersecurity</div>
         </div>
       </div>
 
@@ -840,20 +801,6 @@
         giveup: `After college, I moved to New York with $800 and a lot of hope. For two years, I went to auditions and got rejected. Over and over. I worked as a server, took classes, and questioned everything.\n\nThe breakthrough came when I least expected it. A choreographer I'd worked with once remembered me and called me in for a workshop. That workshop led to a regional tour, which led to Broadway.\n\nThis industry runs on relationships and persistence. You need both.`,
         focus: `Train in multiple styles. Ballet is foundation, but contemporary, jazz, hip-hop--versatility gets you hired. Broadway wants dancers who can do everything.\n\nTake care of your body. Stretch, cross-train, rest. I've seen so many talented dancers burn out from injuries they could have prevented.\n\nAnd take acting classes. Seriously. The dancers who get principal roles are the ones who can act. You're telling stories with your body--you need to understand character and emotion.`,
         default: `Dance is brutal and beautiful. There's constant rejection, physical pain, and financial uncertainty. But there's also this feeling when you're performing--when the music and the movement and the audience all sync up--that's unlike anything else.\n\nIf you can imagine doing anything else and being happy, do that instead. But if dance is the only thing that makes you feel alive? Then fight for it. We did.`
-      },
-      'Marcus Day': {
-        greeting: `Hey Marcus--it's you. The future you. I'm 32, and I just got my master electrician license last year. Now I run my own electrical contracting business with three employees. We specialize in solar installations and EV charger setups.\n\nI remember being in 11th grade, already doing that apprenticeship after school, wondering if skipping the traditional college route was the right call. It was.\n\nWhat's on your mind?`,
-        chemistry: `Brother, electrical work IS applied chemistry and physics. Ohm's Law? That's your bread and butter. Understanding how electrons flow, how resistance works, how different materials conduct--that's literally what keeps you and your customers safe.\n\nAnd with solar and battery systems now? You need to understand electrochemistry. How lithium-ion batteries charge and discharge, why certain connections corrode, how temperature affects resistance.\n\nThe guys who treat this as "just pulling wire" stay helpers forever. The ones who understand the science become masters.`,
-        giveup: `Second year of my apprenticeship, I failed my journeyman exam. First time. I was embarrassed--some of the guys at work found out and gave me grief about it.\n\nBut my mentor, this old-timer named Ray, told me something I never forgot: "The exam isn't testing if you're smart. It's testing if you studied. Go study."\n\nSo I did. Studied every night for two months. Passed with a 94 the second time. That failure taught me that preparation matters more than natural talent.`,
-        focus: `Get as many hours as you can in different areas--residential, commercial, industrial. Each one teaches you something different. Don't just stick with what's comfortable.\n\nLearn the code book inside and out. Not just to pass the exam, but because understanding WHY the codes exist makes you a better electrician. Every rule is written because someone got hurt.\n\nAnd start thinking about business now. Take a night class in accounting or business management. The technical skills get you hired, but business skills let you build something of your own.`,
-        default: `People look down on trades, but let me tell you--I make more than most of my friends who went to four-year colleges, I have zero student debt, and I own my own business at 32.\n\nPlus, electricians can't be outsourced. You can't install a panel from overseas. With solar, EVs, and smart homes taking off, demand for skilled electricians is only going up.\n\nYou picked a solid path. Stay with it.`
-      },
-      'Ivan Rodriguez': {
-        greeting: `Hey Ivan--it's you. The future you. I'm 32, and I'm a Senior Security Analyst at a Fortune 500 company's Security Operations Center. Last week, I helped stop a ransomware attack that would have cost the company millions.\n\nI remember being in 12th grade, staying up late reading about hackers and watching Mr. Robot, wondering if I could actually do this for a living. You can. We did.\n\nWhat's going on?`,
-        chemistry: `Okay, I won't lie--I don't use chemistry directly in my day-to-day work. But here's the thing: cybersecurity is about understanding systems. How things connect, how they can fail, how small changes cascade into big problems.\n\nThat systematic thinking? Chemistry teaches it. Balancing equations, understanding reactions, predicting outcomes--that's the same mental model you use when analyzing network traffic or tracing an attack vector.\n\nPlus, some of the most interesting security work is in industrial control systems--power plants, water treatment, manufacturing. Those environments? Chemistry everywhere.`,
-        giveup: `After I got my Security+ certification, I applied to probably 50 SOC analyst positions. Got rejected from all of them. "Not enough experience." How do you get experience if no one will hire you?\n\nI almost gave up and went into regular IT support. But instead, I built a home lab, did capture-the-flag competitions, contributed to open-source security tools, and documented everything on a blog.\n\nSix months later, a hiring manager found my blog, liked what she saw, and gave me a chance. That "wasted" time building my skills was actually the best investment I made.`,
-        focus: `Get your certifications--Security+, then work toward CySA+ or CEH. They're not everything, but they get you past HR filters.\n\nBuild a home lab. Set up virtual machines, practice with security tools, break things and fix them. Hands-on experience matters more than theory.\n\nAnd network. Join local security meetups, participate in online communities, go to conferences if you can. This field is all about who you know and what you can demonstrate.`,
-        default: `Cybersecurity is one of the few fields where there are literally more jobs than qualified people. The Bureau of Labor Statistics says demand is growing 35% over the next decade.\n\nBut here's what they don't tell you: it's not just about hacking. Most of the job is reading logs, following procedures, and communicating with non-technical people about technical problems.\n\nIf you can combine technical skills with clear communication, you'll go far. That combination is rarer than you'd think.`
       }
     };
 
@@ -881,9 +828,7 @@
         "Ethan O'Brien": 'A construction manager who builds sustainable communities',
         'Priya Sharma': 'A veterinarian who helps animals and their families',
         'Chris Taylor': 'An app developer with a startup that helps millions',
-        'Nina Rodriguez': 'A professional dancer performing on Broadway',
-        'Marcus Day': 'A journeyman electrician who runs my own electrical business and keeps people safe',
-        'Ivan Rodriguez': 'A cybersecurity analyst working in a Security Operations Center (SOC) protecting organizations from attacks'
+        'Nina Rodriguez': 'A professional dancer performing on Broadway'
       };
       
       if (goalMap[name]) {
@@ -1027,18 +972,6 @@
         sendCustomMessage();
       }
     }
-
-    // Navigation toggle for mobile
-    function toggleNav() {
-      document.getElementById('navLinks').classList.toggle('open');
-    }
-    document.addEventListener('click', function(e) {
-      const nav = document.getElementById('navLinks');
-      const toggle = document.querySelector('.nav__toggle');
-      if (nav && toggle && !nav.contains(e.target) && !toggle.contains(e.target)) {
-        nav.classList.remove('open');
-      }
-    });
   </script>
 
 </body>
