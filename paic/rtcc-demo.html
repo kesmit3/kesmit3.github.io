@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RTCC Demo | Purpose Engine</title>
+  
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/upliftlogo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy-light: #1a2332;
+      --yellow: #FFC425;
+      --primary: #0067b1;
+      --primary-dark: #004b85;
+      --primary-light: #5091cd;
+      --success: #10B981;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --purple: #8B5CF6;
+      --gray-400: #94A3B8;
+      --gray-500: #64748B;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: var(--navy);
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 64px;
+      background: rgba(10, 22, 40, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      z-index: 1000;
+    }
+
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav__logo img {
+      height: 36px;
+    }
+
+    .nav__divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .nav__product {
+      font-weight: 700;
+      font-size: 15px;
+      color: white;
+    }
+
+    .nav__badge {
+      margin-left: 12px;
+      background: var(--purple);
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .nav__demo-links {
+      display: flex;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .nav__demo-link {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-400);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .nav__demo-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .nav__demo-link.active {
+      background: var(--purple);
+      color: white;
+    }
+
+    /* Main Container */
+    .demo-container {
+      padding: 100px 32px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .demo-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .demo-header h1 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .demo-header h1 .highlight {
+      color: var(--yellow);
+    }
+
+    .demo-header h1 .bad {
+      color: var(--danger);
+    }
+
+    .demo-header p {
+      font-size: 18px;
+      color: var(--gray-400);
+      max-width: 750px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Scenario Card */
+    .scenario-card {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.02) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .scenario-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--purple) 0%, #A78BFA 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      flex-shrink: 0;
+    }
+
+    .scenario-content {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .scenario-content h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .scenario-content p {
+      font-size: 16px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    .scenario-content p strong {
+      color: white;
+    }
+
+    .scenario-content p em {
+      color: var(--yellow);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    .funding-box {
+      background: rgba(0,0,0,0.3);
+      border-radius: 16px;
+      padding: 20px 28px;
+      text-align: center;
+    }
+
+    .funding-box .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray-500);
+      margin-bottom: 4px;
+    }
+
+    .funding-box .amount {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--success);
+    }
+
+    .funding-box .caveat {
+      font-size: 12px;
+      color: var(--warning);
+      margin-top: 4px;
+    }
+
+    /* The Question */
+    .the-question {
+      background: rgba(255, 196, 37, 0.08);
+      border: 2px solid rgba(255, 196, 37, 0.3);
+      border-radius: 16px;
+      padding: 24px 32px;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .the-question .label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .the-question .question-text {
+      font-size: 22px;
+      font-weight: 600;
+      color: white;
+      line-height: 1.5;
+    }
+
+    /* Comparison Section */
+    .comparison-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .comparison-panel {
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .comparison-panel.hell {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.02) 100%);
+      border: 2px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .comparison-panel.solution {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.02) 100%);
+      border: 2px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .panel-header .icon {
+      font-size: 28px;
+    }
+
+    .panel-header h3 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .comparison-panel.hell .panel-header h3 { color: #FCA5A5; }
+    .comparison-panel.solution .panel-header h3 { color: #6EE7B7; }
+
+    /* Hell Steps */
+    .hell-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .hell-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 10px;
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .hell-step .step-num {
+      width: 24px;
+      height: 24px;
+      background: rgba(239, 68, 68, 0.3);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #FCA5A5;
+      flex-shrink: 0;
+    }
+
+    .hell-step .login-badge {
+      background: rgba(239, 68, 68, 0.2);
+      color: #FCA5A5;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: auto;
+    }
+
+    .repeat-indicator {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px dashed rgba(239, 68, 68, 0.4);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .repeat-indicator .big {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--danger);
+    }
+
+    .repeat-indicator .small {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin-top: 4px;
+    }
+
+    .time-estimate {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px;
+    }
+
+    .time-estimate .time {
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .comparison-panel.hell .time-estimate .time { color: var(--danger); }
+    .comparison-panel.solution .time-estimate .time { color: var(--success); }
+
+    .time-estimate .context {
+      font-size: 13px;
+      color: var(--gray-400);
+      text-align: right;
+    }
+
+    /* Solution Query */
+    .solution-query {
+      margin-bottom: 24px;
+    }
+
+    .query-box {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .query-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .query-text {
+      font-size: 16px;
+      color: white;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .answer-box {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .answer-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--success);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .answer-content {
+      font-size: 15px;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.7;
+    }
+
+    .answer-content strong {
+      color: white;
+      font-weight: 700;
+    }
+
+    .answer-content .pathway-list {
+      margin: 12px 0;
+      padding-left: 20px;
+    }
+
+    .answer-content .pathway-list li {
+      margin-bottom: 6px;
+      color: var(--gray-400);
+    }
+
+    .answer-content .pathway-list li strong {
+      color: white;
+    }
+
+    .export-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: rgba(139, 92, 246, 0.15);
+      border-radius: 8px;
+      font-size: 13px;
+      color: #A78BFA;
+    }
+
+    /* Outcome Section */
+    .outcome-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .outcome-card {
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+    }
+
+    .outcome-card.bad {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .outcome-card.good {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .outcome-card .emoji {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .outcome-card h4 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .outcome-card.bad h4 { color: #FCA5A5; }
+    .outcome-card.good h4 { color: #6EE7B7; }
+
+    .outcome-card p {
+      font-size: 14px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    /* More Examples */
+    .more-examples {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 48px;
+    }
+
+    .more-examples h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .example-item {
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .example-item .query {
+      font-size: 14px;
+      color: rgba(255,255,255,0.9);
+      font-style: italic;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .example-item .old-way {
+      font-size: 12px;
+      color: var(--danger);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      text-align: center;
+    }
+
+    .cta-section h3 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .cta-section p {
+      font-size: 16px;
+      color: var(--gray-400);
+      margin-bottom: 28px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      padding: 16px 28px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      border: none;
+    }
+
+    .cta-btn.primary {
+      background: var(--yellow);
+      color: var(--navy);
+    }
+
+    .cta-btn.secondary {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .comparison-section,
+      .outcome-section {
+        grid-template-columns: 1fr;
+      }
+      
+      .examples-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav__demo-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .demo-container {
+        padding: 80px 20px 40px;
+      }
+      
+      .demo-header h1 {
+        font-size: 28px;
+      }
+      
+      .scenario-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .funding-box {
+        width: 100%;
+      }
+      
+      .the-question .question-text {
+        font-size: 18px;
+      }
+      
+      .comparison-panel {
+        padding: 24px;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+      
+      .cta-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      <img src="https://kesmit3.github.io/paic/upliftlogo.png" alt="Uplift Education">
+      <div class="nav__divider"></div>
+      <span class="nav__product">Purpose Engine</span>
+    </a>
+    <span class="nav__badge">RTCC View</span>
+    <div class="nav__demo-links">
+      <a href="index.html" class="nav__demo-link">Home</a>
+      <a href="demo.html" class="nav__demo-link">Educator Demo</a>
+      <a href="rtcc-demo.html" class="nav__demo-link active">RTCC Demo</a>
+    </div>
+  </nav>
+
+  <div class="demo-container">
+    <!-- Header -->
+    <div class="demo-header">
+      <h1>Programs <span class="bad">Die</span> in <span class="highlight">Spreadsheet Hell</span></h1>
+      <p>
+        CTE funding exists. Student interest exists. But the administrative burden of 
+        <strong>proving eligibility</strong> across disconnected systems means programs 
+        often never get started. Kids lose. Here's how AI fixes it.
+      </p>
+    </div>
+
+    <!-- Scenario -->
+    <div class="scenario-card">
+      <div class="scenario-icon">🤖</div>
+      <div class="scenario-content">
+        <h2>You Want to Start a Robotics Club</h2>
+        <p>
+          <strong>20 students signed up.</strong> State CTE funding can cover equipment, materials, competition fees. 
+          But here's the catch: funding is tied to <em>CTE pathway enrollment</em>. 
+          If only 10 of your 20 students are on a qualifying pathway, you can only justify half the budget.
+        </p>
+      </div>
+      <div class="funding-box">
+        <div class="label">Available Funding</div>
+        <div class="amount">$4,200</div>
+        <div class="caveat">*If you can prove eligibility</div>
+      </div>
+    </div>
+
+    <!-- The Question -->
+    <div class="the-question">
+      <div class="label">❓ The Question You Need Answered</div>
+      <div class="question-text">
+        "Which of my 20 interested students are currently enrolled in a CTE pathway that qualifies for state funding?"
+      </div>
+    </div>
+
+    <!-- Comparison -->
+    <div class="comparison-section">
+      <!-- Hell Panel -->
+      <div class="comparison-panel hell">
+        <div class="panel-header">
+          <span class="icon">😩</span>
+          <h3>Current Process</h3>
+        </div>
+        
+        <div class="hell-steps">
+          <div class="hell-step">
+            <span class="step-num">1</span>
+            <span>Log into SIS</span>
+            <span class="login-badge">🔐 Login #1</span>
+          </div>
+          <div class="hell-step">
+            <span class="step-num">2</span>
+            <span>Search for Student #1</span>
+          </div>
+          <div class="hell-step">
+            <span class="step-num">3</span>
+            <span>Navigate to their course schedule</span>
+          </div>
+          <div class="hell-step">
+            <span class="step-num">4</span>
+            <span>Scan classes... is any of this CTE?</span>
+          </div>
+          <div class="hell-step">
+            <span class="step-num">5</span>
+            <span>Open CCMR system in new tab</span>
+            <span class="login-badge">🔐 Login #2</span>
+          </div>
+          <div class="hell-step">
+            <span class="step-num">6</span>
+            <span>Cross-reference pathway codes</span>
+          </div>
+          <div class="hell-step">
+            <span class="step-num">7</span>
+            <span>Write down result in spreadsheet</span>
+          </div>
+        </div>
+
+        <div class="repeat-indicator">
+          <div class="big">× 20 students</div>
+          <div class="small">Repeat this entire process for each interested student</div>
+        </div>
+
+        <div class="time-estimate">
+          <div class="time">~2 hours</div>
+          <div class="context">
+            If you don't make mistakes<br>
+            If the systems don't log you out<br>
+            If you don't get interrupted
+          </div>
+        </div>
+      </div>
+
+      <!-- Solution Panel -->
+      <div class="comparison-panel solution">
+        <div class="panel-header">
+          <span class="icon">✨</span>
+          <h3>With Purpose Engine</h3>
+        </div>
+        
+        <div class="solution-query">
+          <div class="query-box">
+            <div class="query-label">
+              <span>💬</span> You Ask
+            </div>
+            <div class="query-text">
+              "Which students interested in Robotics Club are on a CTE pathway that qualifies for state funding?"
+            </div>
+          </div>
+
+          <div class="answer-box">
+            <div class="answer-label">
+              <span>🧠</span> Instant Answer
+            </div>
+            <div class="answer-content">
+              <strong>12 of 20 students</strong> are on qualifying CTE pathways:
+              <ul class="pathway-list">
+                <li><strong>8 students</strong> — Engineering & Technology</li>
+                <li><strong>3 students</strong> — Advanced Manufacturing</li>
+                <li><strong>1 student</strong> — Information Technology</li>
+              </ul>
+              <strong>Funding eligibility: 60%</strong> → $2,520 justified immediately
+            </div>
+            <div class="export-note">
+              <span>📄</span>
+              <span>Export funding justification report with one click</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-estimate">
+          <div class="time">&lt;10 seconds</div>
+          <div class="context">
+            AI has access to both systems<br>
+            Cross-references automatically<br>
+            No tab switching, no guessing
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Outcomes -->
+    <div class="outcome-section">
+      <div class="outcome-card bad">
+        <div class="emoji">🚫</div>
+        <h4>Without This Tool</h4>
+        <p>
+          "It's easier to just NOT start the club."<br><br>
+          Teachers give up. Programs don't happen. Students miss out on robotics, 
+          entrepreneurship, healthcare pathways — not because funding doesn't exist, 
+          but because <strong>proving eligibility is a nightmare</strong>.
+        </p>
+      </div>
+      <div class="outcome-card good">
+        <div class="emoji">🚀</div>
+        <h4>With Purpose Engine</h4>
+        <p>
+          The club happens. 20 students build robots. 12 get CTE credit. 
+          The funding justification takes 10 seconds instead of 2 hours.<br><br>
+          <strong>Teachers teach. Students thrive. Systems just work.</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- More Examples -->
+    <div class="more-examples">
+      <h3>Other Questions That Used to Take Hours</h3>
+      <div class="examples-grid">
+        <div class="example-item">
+          <div class="query">"Which seniors haven't completed their FAFSA and are first-gen college students?"</div>
+          <div class="old-way">⏱️ Old way: 3+ hours across 3 systems</div>
+        </div>
+        <div class="example-item">
+          <div class="query">"Show me students with declining grades who were previously high-performing"</div>
+          <div class="old-way">⏱️ Old way: Manual grade history review per student</div>
+        </div>
+        <div class="example-item">
+          <div class="query">"Which students interested in healthcare haven't signed up for the hospital internship?"</div>
+          <div class="old-way">⏱️ Old way: Cross-reference interest surveys with applications</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <h3>AI Isn't About Replacing People</h3>
+      <p>It's about removing the barriers that prevent good things from happening.</p>
+      <div class="cta-buttons">
+        <a href="demo.html" class="cta-btn primary">
+          <span>👩‍🏫</span>
+          <span>See Educator Demo</span>
+        </a>
+        <a href="educator-dashboard.html" class="cta-btn secondary">
+          <span>📊</span>
+          <span>Educator Dashboard</span>
+        </a>
+        <a href="index.html" class="cta-btn secondary">
+          <span>🏠</span>
+          <span>Back to Home</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

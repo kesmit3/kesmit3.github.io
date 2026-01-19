@@ -6,11 +6,12 @@
   <title>Purpose Engine | Uplift Education</title>
   
   <!-- Favicon and Social Sharing -->
-  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/upliftlogo.png">
-  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/upliftlogo.png">
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/purpose-engine-og.png">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purpose-engine-og.png">
   <meta property="og:title" content="Purpose Engine | Uplift Education">
   <meta property="og:description" content="AI-powered student motivation. Contextualizing schoolwork for each student's future.">
-  <meta property="og:image" content="https://kesmit3.github.io/paic/upliftlogo.png">
+  <meta property="og:url" content="https://kesmit3.github.io/paic/index.html">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/purpose-engine-og.png">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   
@@ -493,80 +494,6 @@
       margin-right: auto;
     }
 
-    /* Problem Demo Section */
-    .problem-demo-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .problem-demo-card {
-      background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.02) 100%);
-      border: 2px solid rgba(239, 68, 68, 0.2);
-      border-radius: 20px;
-      padding: 32px;
-      text-align: left;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .problem-demo-card:hover {
-      border-color: rgba(255, 196, 37, 0.5);
-      transform: translateY(-4px);
-    }
-
-    .problem-demo-card .demo-icon {
-      font-size: 40px;
-      margin-bottom: 16px;
-    }
-
-    .problem-demo-card .demo-badge {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: rgba(239, 68, 68, 0.2);
-      color: #FCA5A5;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 20px;
-    }
-
-    .problem-demo-card h3 {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: white;
-    }
-
-    .problem-demo-card p {
-      font-size: 15px;
-      color: var(--gray-400);
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .demo-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--yellow);
-      color: var(--navy);
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .demo-link:hover {
-      transform: translateX(4px);
-      box-shadow: 0 4px 16px rgba(255, 196, 37, 0.3);
-    }
-
     /* Footer */
     footer {
       padding: 40px;
@@ -651,15 +578,6 @@
       
       .section-header h2 {
         font-size: 28px;
-      }
-
-      .problem-demo-grid {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-      }
-
-      .problem-demo-card {
-        padding: 24px;
       }
       
       .comparison-grid {
@@ -784,11 +702,14 @@
       </a>
     </div>
     <div class="secondary-links">
-      <a href="americandream.html" class="secondary-link">
-        <span>ðŸ‡ºðŸ‡¸</span> Why This Matters
+      <a href="ai-demo.html" class="secondary-link" style="color: #a78bfa;">
+        <span>🧠</span> Live AI Demo
       </a>
       <a href="aichallenge.html" class="secondary-link">
         <span>&#129302;</span> How We Use AI
+      </a>
+      <a href="americandream.html" class="secondary-link">
+        <span>&#127482;&#127480;</span> Why This Matters
       </a>
     </div>
   </section>
@@ -888,28 +809,28 @@
         <div class="source-card">
           <span class="icon">&#128202;</span>
           <div class="info">
-            <div class="name">SIS</div>
+            <div class="name">PowerSchool</div>
             <div class="status">Live sync</div>
           </div>
         </div>
         <div class="source-card">
           <span class="icon">&#128218;</span>
           <div class="info">
-            <div class="name">LMS</div>
+            <div class="name">Schoology LMS</div>
             <div class="status">Live sync</div>
           </div>
         </div>
         <div class="source-card">
           <span class="icon">&#127919;</span>
           <div class="info">
-            <div class="name">CCMR</div>
+            <div class="name">Schoolinks</div>
             <div class="status">Live sync</div>
           </div>
         </div>
         <div class="source-card">
           <span class="icon">&#129504;</span>
           <div class="info">
-            <div class="name">Other Tools</div>
+            <div class="name">YouScience</div>
             <div class="status">Synced</div>
           </div>
         </div>
@@ -956,46 +877,13 @@
     </div>
   </section>
 
-  <!-- THE PROBLEM: Data Silos Section -->
-  <section class="section section--dark" id="problem">
-    <div class="section-header">
-      <h2>The Problem: Data Lives in Silos</h2>
-      <p>Every insight requires logging into multiple systems. Teachers give up. Programs don't happen. Students lose.</p>
-    </div>
-    <div class="problem-demo-grid">
-      <div class="problem-demo-card">
-        <div class="demo-icon">😩</div>
-        <div class="demo-badge">4 Logins</div>
-        <h3>Understanding One Student</h3>
-        <p>To see the full picture of a single student, educators must log into SIS, LMS, CCMR tools, and more — each with separate credentials, each showing fragments of the story.</p>
-        <a href="demo.html" class="demo-link">
-          <span>See the Educator View Demo</span>
-          <span>&rarr;</span>
-        </a>
-      </div>
-      <div class="problem-demo-card">
-        <div class="demo-icon">💰</div>
-        <div class="demo-badge">2+ Hours</div>
-        <h3>Justifying Program Funding</h3>
-        <p>"Which students qualify for CTE funding?" A simple question that requires manually checking each student across multiple systems. Most teachers just don't start the club.</p>
-        <a href="rtcc-demo.html" class="demo-link">
-          <span>See the RTCC Demo</span>
-          <span>&rarr;</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA Section -->
   <section class="cta-section">
     <h2>See It In Action</h2>
-    <p>Explore how Purpose Engine transforms fragmented data into meaningful context</p>
+    <p>Explore the different views of the Purpose Engine system</p>
     <div class="hero-ctas">
-      <a href="demo.html" class="btn-primary">
-        &#128269; See The Problem &rarr;
-      </a>
-      <a href="educator-dashboard.html" class="btn-secondary">
-        Educator Dashboard
+      <a href="educator-dashboard.html" class="btn-primary">
+        Educator Dashboard &rarr;
       </a>
       <a href="student-dashboard.html" class="btn-secondary">
         Student Dashboard

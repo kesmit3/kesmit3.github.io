@@ -3,501 +3,1022 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Future Self | Purpose Engine</title>
-  
+  <title>Future Self | Purpose Engine Demo</title>
   <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/upliftlogo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/variables.css">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
     body {
-      background: linear-gradient(180deg, var(--navy) 0%, #0f0f1a 100%);
-      color: white;
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
       min-height: 100vh;
-    }
-
-    .future-page {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: calc(var(--nav-height) + 20px) 20px 40px;
-    }
-
-    .chat-container {
-      width: 100%;
-      max-width: 700px;
-      display: flex;
-      flex-direction: column;
+      color: #1e293b;
     }
 
     /* Header */
-    .chat-header {
+    .header {
+      background: white;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      height: 40px;
+    }
+
+    .logo-divider {
+      width: 1px;
+      height: 24px;
+      background: #e2e8f0;
+      margin: 0 4px;
+    }
+
+    .logo-product {
+      font-weight: 600;
+      color: #1B5A90;
+      font-size: 16px;
+    }
+
+    .header-subtitle {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    /* Step Indicator */
+    .steps {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 24px;
+    }
+
+    .step-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      transition: all 0.3s ease;
+    }
+
+    .step-dot.active {
+      background: #1B5A90;
+      width: 32px;
+      border-radius: 5px;
+    }
+
+    .step-dot.done {
+      background: #F7B618;
+    }
+
+    /* Screens Container */
+    .screens {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 48px;
+    }
+
+    .screen {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Demo Banner */
+    .demo-banner {
+      background: linear-gradient(135deg, #FEF9E7 0%, #FCF3CF 100%);
+      border: 1px solid #F7B618;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
       text-align: center;
+    }
+
+    .demo-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #1B5A90 0%, #14456e 100%);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .demo-banner p {
+      font-size: 14px;
+      color: #92600e;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Screen 1: Choose Profile */
+    .screen-title {
+      text-align: center;
+      margin-bottom: 8px;
+      font-size: 28px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .screen-subtitle {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 32px;
+      font-size: 16px;
+    }
+
+    .profiles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
+
+    .profile-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    .profile-card:hover {
+      border-color: #1B5A90;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(27,90,144,0.12);
+    }
+
+    .profile-card.selected {
+      border-color: #1B5A90;
+      background: linear-gradient(135deg, rgba(27,90,144,0.04) 0%, rgba(27,90,144,0.08) 100%);
+    }
+
+    .profile-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .profile-name {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 4px;
+      color: #0f172a;
+    }
+
+    .profile-meta {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    /* Screen 2: Set Your Goal */
+    .goal-container {
+      background: white;
+      border-radius: 24px;
+      padding: 48px;
+      max-width: 560px;
+      margin: 0 auto;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
+    .selected-profile {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: #f8fafc;
+      border-radius: 12px;
       margin-bottom: 32px;
     }
 
-    .avatar-ring {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 16px;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    .selected-profile .profile-avatar {
+      width: 56px;
+      height: 56px;
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .selected-profile .info {
+      flex: 1;
+    }
+
+    .selected-profile .name {
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .selected-profile .meta {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .change-btn {
+      font-size: 13px;
+      color: #1B5A90;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .goal-prompt {
+      font-size: 20px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 16px;
+    }
+
+    .goal-input {
+      width: 100%;
+      padding: 16px 20px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: border-color 0.2s ease;
+      margin-bottom: 16px;
+    }
+
+    .goal-input:focus {
+      outline: none;
+      border-color: #1B5A90;
+    }
+
+    .goal-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .suggestion-chip {
+      padding: 8px 14px;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      font-size: 13px;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .suggestion-chip:hover {
+      background: #e2e8f0;
+      border-color: #cbd5e1;
+    }
+
+    /* Screen 3: Conversation */
+    .chat-container {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      max-width: 640px;
+      margin: 0 auto;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      height: 600px;
+    }
+
+    .chat-header {
+      padding: 20px 24px;
+      background: linear-gradient(135deg, #1B5A90 0%, #14456e 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .future-avatar {
+      width: 56px;
+      height: 56px;
+      background: rgba(255,255,255,0.2);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 36px;
-      box-shadow: 0 0 40px rgba(0, 103, 177, 0.4);
+      font-size: 24px;
+      position: relative;
     }
 
-    .chat-header h1 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 8px;
+    .future-avatar::after {
+      content: '✨';
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      font-size: 16px;
     }
 
-    .chat-header p {
-      color: var(--gray-400);
-      font-size: 14px;
+    .future-info .name {
+      font-weight: 600;
+      font-size: 17px;
     }
 
-    /* Chat Box */
-    .chat-box {
+    .future-info .role {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    .back-btn {
+      margin-left: auto;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .chat-messages {
       flex: 1;
-      background: rgba(255, 255, 255, 0.02);
-      border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow-y: auto;
       padding: 24px;
       display: flex;
       flex-direction: column;
       gap: 16px;
-      margin-bottom: 24px;
-      max-height: 50vh;
-      overflow-y: auto;
+      background: #fafbfc;
     }
 
-    /* Messages */
     .message {
-      display: flex;
+      max-width: 85%;
+      animation: messageIn 0.3s ease;
     }
 
-    .message.user {
-      justify-content: flex-end;
+    @keyframes messageIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .message.system {
-      justify-content: center;
+    .message.future {
+      align-self: flex-start;
+    }
+
+    .message.student {
+      align-self: flex-end;
     }
 
     .message-bubble {
-      max-width: 85%;
-      padding: 16px 20px;
-      border-radius: 20px;
-      font-size: 14px;
+      padding: 14px 18px;
+      border-radius: 18px;
+      font-size: 15px;
       line-height: 1.6;
     }
 
-    .message.user .message-bubble {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    .message.future .message-bubble {
+      background: white;
+      color: #1e293b;
+      border: 1px solid #e2e8f0;
+      border-bottom-left-radius: 4px;
+    }
+
+    .message.student .message-bubble {
+      background: linear-gradient(135deg, #1B5A90 0%, #2563eb 100%);
       color: white;
-      border-bottom-right-radius: 6px;
+      border-bottom-right-radius: 4px;
     }
 
-    .message.assistant .message-bubble {
-      background: rgba(255, 255, 255, 0.08);
-      color: white;
-      border-bottom-left-radius: 6px;
+    .message-time {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 4px;
+      padding: 0 4px;
     }
 
-    .message.system .message-bubble {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--gray-400);
-      font-size: 12px;
-      padding: 12px 16px;
-      border-radius: 12px;
-      text-align: center;
-      max-width: 100%;
+    .message.student .message-time {
+      text-align: right;
     }
 
-    /* Suggested Questions */
-    .suggestions {
+    .typing-dots {
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .typing-dots span {
+      width: 8px;
+      height: 8px;
+      background: #94a3b8;
+      border-radius: 50%;
+      animation: bounce 1.4s infinite ease-in-out;
+    }
+
+    .typing-dots span:nth-child(1) { animation-delay: 0s; }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-6px); }
+    }
+
+    .chat-input-area {
+      padding: 16px 20px;
+      background: white;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .quick-prompts {
       display: flex;
       gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
+      overflow-x: auto;
+      padding-bottom: 4px;
     }
 
-    .suggestion-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 10px 16px;
-      color: rgba(255, 255, 255, 0.7);
+    .quick-prompt {
+      padding: 8px 14px;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
       font-size: 13px;
+      color: #475569;
       cursor: pointer;
-      transition: all 0.2s ease;
+      white-space: nowrap;
+      transition: all 0.15s ease;
       font-family: inherit;
     }
 
-    .suggestion-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
-      color: white;
+    .quick-prompt:hover {
+      background: #e2e8f0;
+      border-color: #1B5A90;
+      color: #1B5A90;
     }
 
-    .suggestion-btn:disabled {
+    .quick-prompt:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
 
-    /* Input Area */
-    .input-area {
+    .input-row {
       display: flex;
       gap: 12px;
     }
 
     .chat-input {
       flex: 1;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 16px 20px;
-      color: white;
-      font-size: 14px;
-      outline: none;
+      padding: 14px 18px;
+      border: 2px solid #e2e8f0;
+      border-radius: 24px;
+      font-size: 15px;
       font-family: inherit;
-    }
-
-    .chat-input::placeholder {
-      color: rgba(255, 255, 255, 0.3);
+      transition: border-color 0.2s ease;
     }
 
     .chat-input:focus {
-      border-color: var(--primary);
+      outline: none;
+      border-color: #1B5A90;
+    }
+
+    .chat-input:disabled {
+      background: #f8fafc;
     }
 
     .send-btn {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #1B5A90 0%, #14456e 100%);
       border: none;
-      border-radius: 16px;
-      padding: 0 24px;
+      border-radius: 50%;
       color: white;
-      font-size: 14px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .send-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 15px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
       font-family: inherit;
+      border: none;
     }
 
-    .send-btn:hover {
+    .btn-primary {
+      background: linear-gradient(135deg, #1B5A90 0%, #14456e 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 103, 177, 0.4);
+      box-shadow: 0 4px 16px rgba(27,90,144,0.3);
     }
 
-    /* Info Card */
-    .info-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 20px;
-      margin-top: 24px;
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
     }
 
-    .info-card h3 {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 12px;
+    .btn-secondary {
+      background: white;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
+
+    .btn-row {
       display: flex;
-      align-items: center;
-      gap: 8px;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 32px;
     }
 
-    .info-card p {
-      color: var(--gray-400);
+    /* Error message */
+    .error-msg {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      padding: 12px 16px;
+      border-radius: 8px;
       font-size: 13px;
-      line-height: 1.6;
-    }
-
-    /* Typing indicator */
-    .typing-indicator {
+      margin-top: 12px;
       display: none;
-      padding: 16px 20px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
-      border-bottom-left-radius: 6px;
-      max-width: 80px;
     }
 
-    .typing-indicator.visible {
-      display: flex;
-      gap: 4px;
+    .error-msg.show {
+      display: block;
     }
 
-    .typing-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--gray-400);
-      border-radius: 50%;
-      animation: typingBounce 1.4s infinite ease-in-out;
-    }
-
-    .typing-dot:nth-child(1) { animation-delay: 0s; }
-    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-    @keyframes typingBounce {
-      0%, 60%, 100% { transform: translateY(0); }
-      30% { transform: translateY(-4px); }
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-      .future-page {
-        padding: calc(var(--nav-height) + 16px) 16px 32px;
-      }
-
-      .avatar-ring {
-        width: 64px;
-        height: 64px;
-        font-size: 28px;
-      }
-
-      .chat-header h1 {
-        font-size: 24px;
-      }
-
-      .chat-box {
-        padding: 16px;
-        max-height: 45vh;
-      }
-
-      .message-bubble {
+    /* Responsive */
+    @media (max-width: 640px) {
+      .header {
         padding: 12px 16px;
-        font-size: 13px;
       }
 
-      .suggestions {
-        flex-direction: column;
+      .profiles-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .suggestion-btn {
-        width: 100%;
-        text-align: center;
+      .goal-container {
+        padding: 32px 24px;
       }
 
-      .input-area {
-        flex-direction: column;
-      }
-
-      .send-btn {
-        padding: 14px 24px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .chat-header h1 {
-        font-size: 22px;
-      }
-
-      .chat-header p {
-        font-size: 12px;
-      }
-
-      .chat-box {
-        padding: 12px;
+      .chat-container {
+        height: calc(100vh - 180px);
         border-radius: 16px;
       }
 
-      .message-bubble {
-        max-width: 90%;
-        padding: 10px 14px;
+      .screen-title {
+        font-size: 24px;
+      }
+
+      .screens {
+        padding: 0 16px 32px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="nav nav--dark">
-    <a href="index.html" class="nav__logo">
-      <img src="https://kesmit3.github.io/paic/upliftlogo.png" alt="Uplift Education" class="nav__logo-img">
-      <div class="nav__divider"></div>
-      <span class="nav__product">Purpose Engine</span>
-    </a>
-    <button class="nav__toggle" onclick="toggleNav()">☰</button>
-    <div class="nav__links" id="navLinks">
-      <a href="index.html" class="nav__link">
-        <span class="nav__link-icon">🏠</span>
-        <span class="nav__link-text">Home</span>
-      </a>
-      <a href="student-dashboard.html" class="nav__link">
-        <span class="nav__link-icon">📊</span>
-        <span class="nav__link-text">Student</span>
-      </a>
-      <a href="career-bridge.html" class="nav__link">
-        <span class="nav__link-icon">🎯</span>
-        <span class="nav__link-text">Career Bridge</span>
-      </a>
-      <a href="future-self.html" class="nav__link nav__link--active">
-        <span class="nav__link-icon">🔮</span>
-        <span class="nav__link-text">Future Self</span>
-      </a>
-      <a href="educator-dashboard.html" class="nav__link">
-        <span class="nav__link-icon">👩‍🏫</span>
-        <span class="nav__link-text">Educator</span>
-      </a>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <img src="https://kesmit3.github.io/paic/upliftlogo.png" alt="Uplift Education" class="logo-img">
+      <div class="logo-divider"></div>
+      <span class="logo-product">Future Self</span>
     </div>
-  </nav>
+    <span class="header-subtitle">Purpose Engine Demo</span>
+  </div>
 
-  <div class="future-page">
-    <div class="chat-container">
-      <!-- Header -->
-      <div class="chat-header">
-        <div class="avatar-ring">🔮</div>
-        <h1>Your Future Self</h1>
-        <p>Maya Chen, 10 years from now • Sustainable Design Director</p>
+  <!-- Step Indicator -->
+  <div class="steps">
+    <div class="step-dot active" id="dot1"></div>
+    <div class="step-dot" id="dot2"></div>
+    <div class="step-dot" id="dot3"></div>
+  </div>
+
+  <div class="screens">
+
+    <!-- Screen 1: Choose Profile -->
+    <div class="screen active" id="screen1">
+      <div class="demo-banner">
+        <span class="demo-badge">✨ LIVE AI DEMO</span>
+        <p>This demo uses fictional student personas to show how the Purpose Engine works.<br>Select a character to step into their shoes and talk to their AI-powered Future Self.</p>
       </div>
 
-      <!-- Chat Box -->
-      <div class="chat-box" id="chatBox">
-        <div class="message system">
-          <div class="message-bubble">
-            Connected to Maya Chen's Future Self — Sustainable Design Director at an award-winning eco-architecture firm, 10 years from now.
-          </div>
+      <h1 class="screen-title">Step Into Their Shoes</h1>
+      <p class="screen-subtitle">Choose a fictional student persona to experience the Future Self AI</p>
+
+      <div class="profiles-grid">
+        <div class="profile-card" onclick="selectProfile(this, 'Maya Chen', '11th Grade • Eco-architecture', '#1B5A90', 'MC')">
+          <div class="profile-avatar" style="background: linear-gradient(135deg, #1B5A90, #14456e)">MC</div>
+          <div class="profile-name">Maya Chen</div>
+          <div class="profile-meta">11th Grade • Eco-architecture</div>
         </div>
-        <div class="message assistant">
-          <div class="message-bubble">
-            Hey Maya! It's so good to hear from you. I remember being exactly where you are—11th grade, wondering if any of this chemistry stuff actually matters. Trust me, it does. What's on your mind?
-          </div>
+        <div class="profile-card" onclick="selectProfile(this, 'Jordan Williams', '12th Grade • Tech startups', '#8b5cf6', 'JW')">
+          <div class="profile-avatar" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9)">JW</div>
+          <div class="profile-name">Jordan Williams</div>
+          <div class="profile-meta">12th Grade • Tech startups</div>
         </div>
-        <div class="message assistant typing-indicator" id="typingIndicator">
-          <div class="typing-dot"></div>
-          <div class="typing-dot"></div>
-          <div class="typing-dot"></div>
+        <div class="profile-card" onclick="selectProfile(this, 'Marcus Rivera', '9th Grade • Music production', '#f59e0b', 'MR')">
+          <div class="profile-avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706)">MR</div>
+          <div class="profile-name">Marcus Rivera</div>
+          <div class="profile-meta">9th Grade • Music production</div>
+        </div>
+        <div class="profile-card" onclick="selectProfile(this, 'Sarah Kim', '11th Grade • Pediatric surgery', '#10b981', 'SK')">
+          <div class="profile-avatar" style="background: linear-gradient(135deg, #10b981, #059669)">SK</div>
+          <div class="profile-name">Sarah Kim</div>
+          <div class="profile-meta">11th Grade • Pediatric surgery</div>
+        </div>
+        <div class="profile-card" onclick="selectProfile(this, 'Tyler Brooks', '10th Grade • Game design', '#64748b', 'TB')">
+          <div class="profile-avatar" style="background: linear-gradient(135deg, #64748b, #475569)">TB</div>
+          <div class="profile-name">Tyler Brooks</div>
+          <div class="profile-meta">10th Grade • Game design</div>
+        </div>
+        <div class="profile-card" onclick="selectProfile(this, 'Aisha Patel', '12th Grade • Data science', '#ec4899', 'AP')">
+          <div class="profile-avatar" style="background: linear-gradient(135deg, #ec4899, #db2777)">AP</div>
+          <div class="profile-name">Aisha Patel</div>
+          <div class="profile-meta">12th Grade • Data science</div>
+        </div>
+        <div class="profile-card" onclick="selectProfile(this, 'Ethan O\'Brien', '11th Grade • Construction mgmt', '#0891b2', 'EO')">
+          <div class="profile-avatar" style="background: linear-gradient(135deg, #0891b2, #0e7490)">EO</div>
+          <div class="profile-name">Ethan O'Brien</div>
+          <div class="profile-meta">11th Grade • Construction</div>
+        </div>
+        <div class="profile-card" onclick="selectProfile(this, 'Priya Sharma', '10th Grade • Veterinary medicine', '#84cc16', 'PS')">
+          <div class="profile-avatar" style="background: linear-gradient(135deg, #84cc16, #65a30d)">PS</div>
+          <div class="profile-name">Priya Sharma</div>
+          <div class="profile-meta">10th Grade • Veterinary</div>
+        </div>
+        <div class="profile-card" onclick="selectProfile(this, 'Chris Taylor', '9th Grade • App development', '#f43f5e', 'CT')">
+          <div class="profile-avatar" style="background: linear-gradient(135deg, #f43f5e, #e11d48)">CT</div>
+          <div class="profile-name">Chris Taylor</div>
+          <div class="profile-meta">9th Grade • App development</div>
+        </div>
+        <div class="profile-card" onclick="selectProfile(this, 'Nina Rodriguez', '12th Grade • Professional dance', '#a855f7', 'NR')">
+          <div class="profile-avatar" style="background: linear-gradient(135deg, #a855f7, #9333ea)">NR</div>
+          <div class="profile-name">Nina Rodriguez</div>
+          <div class="profile-meta">12th Grade • Dance</div>
         </div>
       </div>
 
-      <!-- Suggested Questions -->
-      <div class="suggestions" id="suggestions">
-        <button class="suggestion-btn" onclick="askQuestion('stoich')">Why do I need stoichiometry?</button>
-        <button class="suggestion-btn" onclick="askQuestion('giveup')">Did you ever feel like giving up?</button>
-        <button class="suggestion-btn" onclick="askQuestion('focus')">What should I focus on this year?</button>
-      </div>
-
-      <!-- Input Area -->
-      <div class="input-area">
-        <input type="text" class="chat-input" id="chatInput" placeholder="Ask your Future Self anything..." onkeypress="handleKeyPress(event)">
-        <button class="send-btn" onclick="sendCustomMessage()">Send</button>
-      </div>
-
-      <!-- Info Card -->
-      <div class="info-card">
-        <h3>💡 About Future Self AI</h3>
-        <p>
-          This AI persona is built from Maya's Purpose Card—her career interests, aptitudes, and goals. 
-          It provides mentorship from the perspective of her successful future self, helping connect 
-          today's work to tomorrow's dreams.
-        </p>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="nextBtn1" disabled onclick="goToScreen(2)">Continue →</button>
       </div>
     </div>
+
+    <!-- Screen 2: Set Your Goal -->
+    <div class="screen" id="screen2">
+      <div class="goal-container">
+        <div class="selected-profile">
+          <div class="profile-avatar" id="selectedAvatar" style="background: linear-gradient(135deg, #1B5A90, #14456e)">MC</div>
+          <div class="info">
+            <div class="name" id="selectedName">Maya Chen</div>
+            <div class="meta" id="selectedMeta">11th Grade • Eco-architecture</div>
+          </div>
+          <button class="change-btn" onclick="goToScreen(1)">Change</button>
+        </div>
+
+        <div class="goal-prompt">As this student, what's your dream?</div>
+        <input type="text" class="goal-input" id="goalInput" placeholder="e.g., A sustainable architect who designs eco-friendly buildings" oninput="checkGoal()">
+
+        <div class="goal-suggestions">
+          <span class="suggestion-chip" onclick="setGoal('A sustainable architect who designs eco-friendly buildings')">🏗️ Architect</span>
+          <span class="suggestion-chip" onclick="setGoal('A Grammy-winning music producer')">🎵 Producer</span>
+          <span class="suggestion-chip" onclick="setGoal('A pediatric surgeon who helps sick children')">🏥 Doctor</span>
+          <span class="suggestion-chip" onclick="setGoal('A video game designer at a major studio')">🎮 Game Dev</span>
+          <span class="suggestion-chip" onclick="setGoal('A tech startup founder')">🚀 Founder</span>
+          <span class="suggestion-chip" onclick="setGoal('A data scientist fighting for social justice')">📊 Data Scientist</span>
+        </div>
+
+        <div class="btn-row" style="margin-top: 16px;">
+          <button class="btn btn-secondary" onclick="goToScreen(1)">← Back</button>
+          <button class="btn btn-primary" id="nextBtn2" disabled onclick="startChat()">Meet Your Future Self →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 3: Conversation -->
+    <div class="screen" id="screen3">
+      <div class="chat-container">
+        <div class="chat-header">
+          <div class="future-avatar">👤</div>
+          <div class="future-info">
+            <div class="name" id="futureName">Maya Chen, age 32</div>
+            <div class="role" id="futureRole">Sustainable Design Director</div>
+          </div>
+          <button class="back-btn" onclick="goToScreen(2)">← Edit Goal</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+          <!-- Messages populated dynamically -->
+        </div>
+
+        <div class="chat-input-area">
+          <div class="quick-prompts" id="quickPrompts">
+            <button class="quick-prompt" onclick="sendMessage('Why do I even need to learn chemistry?')">Why do I need chemistry?</button>
+            <button class="quick-prompt" onclick="sendMessage('Did you ever feel like giving up in high school?')">Did you ever want to give up?</button>
+            <button class="quick-prompt" onclick="sendMessage('What should I focus on this year to reach my goals?')">What should I focus on?</button>
+          </div>
+          <div class="input-row">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Ask your Future Self anything..." onkeypress="handleKeyPress(event)">
+            <button class="send-btn" id="sendBtn" onclick="sendCustomMessage()">→</button>
+          </div>
+          <div class="error-msg" id="errorMsg"></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script>
-    const responses = {
-      stoich: "I use it almost weekly! When specifying sustainable materials—bio-based insulation, low-VOC paints, carbon-sequestering concrete—I need to understand the chemistry. Last month, a supplier tried to pass off a formulation that would have failed fire codes. I caught it because I understood the ratios. That chemistry class? It's not about the grade. It's about protecting the integrity of your future work.",
-      giveup: "More times than I can count. Junior year was brutal—I remember feeling like none of it mattered. But here's what I wish someone had told me: the struggle IS the preparation. Every time you push through something hard, you're building resilience you'll need when a client rejects your design. And that happens. But you get back up because you've practiced.",
-      focus: "Three things: First, don't just complete assignments—find the connection to real problems. Second, start documenting your projects. That Science Fair solar catcher? That's portfolio material. Finally, find one adult in sustainability and ask them questions. LinkedIn exists—use it. That's how I got my first internship.",
-      default: "That's a great question. From where I'm standing now, I can tell you that everything you're going through is building toward something bigger than you can see right now. Keep pushing, keep questioning, and most importantly—keep connecting what you're learning to what you want to build. You've got this."
-    };
+    // =====================
+    // STATE
+    // =====================
+    let selectedProfile = null;
+    let selectedGoal = '';
+    let conversationHistory = [];
+    let isLoading = false;
 
-    const usedQuestions = new Set();
-
-    function askQuestion(questionId) {
-      if (usedQuestions.has(questionId)) return;
-      usedQuestions.add(questionId);
+    // =====================
+    // PROFILE SELECTION
+    // =====================
+    function selectProfile(el, name, meta, color, initials) {
+      document.querySelectorAll('.profile-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedProfile = { name, meta, color, initials };
+      document.getElementById('nextBtn1').disabled = false;
       
-      const questionTexts = {
-        stoich: "Why do I need stoichiometry?",
-        giveup: "Did you ever feel like giving up?",
-        focus: "What should I focus on this year?"
+      // Update screen 2
+      document.getElementById('selectedName').textContent = name;
+      document.getElementById('selectedMeta').textContent = meta;
+      document.getElementById('selectedAvatar').textContent = initials;
+      document.getElementById('selectedAvatar').style.background = `linear-gradient(135deg, ${color}, ${color}dd)`;
+      
+      // Pre-fill goal based on persona
+      const goalMap = {
+        'Maya Chen': 'A sustainable architect who designs eco-friendly buildings',
+        'Jordan Williams': 'A tech startup founder who builds companies that matter',
+        'Marcus Rivera': 'A Grammy-winning music producer with my own studio',
+        'Sarah Kim': 'A pediatric surgeon who helps sick children',
+        'Tyler Brooks': 'A video game designer at a major studio',
+        'Aisha Patel': 'A data scientist fighting for social justice',
+        "Ethan O'Brien": 'A construction manager who builds sustainable communities',
+        'Priya Sharma': 'A veterinarian who helps animals and their families',
+        'Chris Taylor': 'An app developer with a startup that helps millions',
+        'Nina Rodriguez': 'A professional dancer performing on Broadway'
       };
       
-      const questionText = questionTexts[questionId];
-      const response = responses[questionId];
+      if (goalMap[name]) {
+        document.getElementById('goalInput').value = goalMap[name];
+        selectedGoal = goalMap[name];
+        checkGoal();
+      }
+    }
+
+    function setGoal(goal) {
+      document.getElementById('goalInput').value = goal;
+      selectedGoal = goal;
+      checkGoal();
+    }
+
+    function checkGoal() {
+      const goal = document.getElementById('goalInput').value;
+      document.getElementById('nextBtn2').disabled = goal.length < 5;
+      selectedGoal = goal;
+    }
+
+    // =====================
+    // NAVIGATION
+    // =====================
+    function goToScreen(num) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen' + num).classList.add('active');
       
-      // Disable the button
-      event.target.disabled = true;
+      // Update dots
+      document.querySelectorAll('.step-dot').forEach((d, i) => {
+        d.classList.remove('active', 'done');
+        if (i + 1 < num) d.classList.add('done');
+        if (i + 1 === num) d.classList.add('active');
+      });
+    }
+
+    // =====================
+    // CHAT
+    // =====================
+    function startChat() {
+      goToScreen(3);
+      
+      // Update header
+      const firstName = selectedProfile.name.split(' ')[0];
+      document.getElementById('futureName').textContent = `${selectedProfile.name}, age 32`;
+      document.getElementById('futureRole').textContent = selectedGoal;
+      
+      // Reset conversation
+      conversationHistory = [];
+      document.getElementById('chatMessages').innerHTML = '';
+      
+      // Initial greeting from Future Self (will be generated by AI)
+      setLoading(true);
+      addTypingIndicator();
+      
+      // Generate personalized greeting
+      generateGreeting();
+    }
+
+    async function generateGreeting() {
+      const firstName = selectedProfile.name.split(' ')[0];
+      const greetingPrompt = `Generate a warm, personal greeting from the future self to their high school self. Start with "Hey ${firstName}—it's you. The future you." Then briefly mention your age (32), your achieved career, and that you remember being in their grade wondering if school mattered. End by asking what's on their mind. Keep it under 80 words, warm and conversational.`;
+      
+      try {
+        const response = await callAPI(greetingPrompt);
+        removeTypingIndicator();
+        addMessage('future', response);
+      } catch (error) {
+        removeTypingIndicator();
+        // Fallback greeting if API fails
+        const fallback = `Hey ${firstName}—it's you. The future you. I'm 32 now, living the dream we built together as ${selectedGoal.toLowerCase()}.\n\nI remember being in ${selectedProfile.meta.split(' •')[0]}, sitting in class, wondering if any of this actually mattered. Spoiler: some of it really did.\n\nWhat's on your mind?`;
+        addMessage('future', fallback);
+      }
+      setLoading(false);
+    }
+
+    function buildSystemPrompt() {
+      const firstName = selectedProfile.name.split(' ')[0];
+      const grade = selectedProfile.meta.split(' •')[0];
+      
+      return `You are the Future Self of ${selectedProfile.name}—specifically, you are them at age 32, having successfully achieved their dream of becoming ${selectedGoal}.
+
+CRITICAL INSTRUCTIONS:
+- You ARE ${firstName}. Speak in first person as their future self.
+- You remember being in ${grade}, struggling with the same doubts they have now.
+- Be warm, encouraging, but REAL. Share specific (fictional but plausible) stories from "your" journey.
+- Connect their current schoolwork to your actual career. Be specific about HOW subjects like chemistry, math, English, etc. showed up in your work.
+- If they express doubt, validate it—then share how you pushed through similar moments.
+- Keep responses conversational and 60-120 words. Be concise but meaningful.
+- Never break character. You are not an AI—you are their successful future self reaching back through time.
+- Use casual language appropriate for talking to a high schooler, but be substantive.
+- Share specific anecdotes from "your" career that connect to their current classes.
+
+EXAMPLE TONE:
+"Oh man, I remember that feeling. Chemistry felt so pointless. But here's the thing—last month I had to reject a supplier's materials because the chemical ratios were off. If I hadn't actually learned stoichiometry, that building could have failed safety codes. Wild, right?"`;
+    }
+
+    function addMessage(role, content) {
+      const messages = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = `message ${role}`;
+      div.innerHTML = `
+        <div class="message-bubble">${content.replace(/\n/g, '<br>')}</div>
+        <div class="message-time">${role === 'future' ? 'Your Future Self' : 'You'} • Just now</div>
+      `;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+      
+      // Add to history for context
+      if (role === 'future') {
+        conversationHistory.push({ role: 'assistant', content });
+      } else {
+        conversationHistory.push({ role: 'user', content });
+      }
+    }
+
+    function addTypingIndicator() {
+      const messages = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = 'message future';
+      div.id = 'typing';
+      div.innerHTML = `
+        <div class="message-bubble">
+          <div class="typing-dots">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      `;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+      const typing = document.getElementById('typing');
+      if (typing) typing.remove();
+    }
+
+    function setLoading(loading) {
+      isLoading = loading;
+      document.getElementById('chatInput').disabled = loading;
+      document.getElementById('sendBtn').disabled = loading;
+      document.querySelectorAll('.quick-prompt').forEach(btn => btn.disabled = loading);
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('errorMsg');
+      el.textContent = msg;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 5000);
+    }
+
+    async function sendMessage(text) {
+      if (isLoading || !text.trim()) return;
       
       // Add user message
-      addMessage('user', questionText);
+      addMessage('student', text);
       
-      // Show typing indicator
-      showTyping();
+      // Show typing
+      setLoading(true);
+      addTypingIndicator();
       
-      // Add response after delay
-      setTimeout(() => {
-        hideTyping();
-        addMessage('assistant', response);
-      }, 1500);
+      try {
+        const response = await callAPI(text);
+        removeTypingIndicator();
+        addMessage('future', response);
+      } catch (error) {
+        removeTypingIndicator();
+        showError('Connection error. Please try again.');
+        console.error(error);
+      }
+      
+      setLoading(false);
     }
 
     function sendCustomMessage() {
       const input = document.getElementById('chatInput');
-      const message = input.value.trim();
-      
-      if (!message) return;
-      
-      input.value = '';
-      addMessage('user', message);
-      showTyping();
-      
-      setTimeout(() => {
-        hideTyping();
-        addMessage('assistant', responses.default);
-      }, 1500);
+      if (input.value.trim()) {
+        sendMessage(input.value.trim());
+        input.value = '';
+      }
     }
 
-    function handleKeyPress(event) {
-      if (event.key === 'Enter') {
+    function handleKeyPress(e) {
+      if (e.key === 'Enter' && !isLoading) {
         sendCustomMessage();
       }
     }
 
-    function addMessage(type, text) {
-      const chatBox = document.getElementById('chatBox');
-      const indicator = document.getElementById('typingIndicator');
+    // =====================
+    // API CALL (via local proxy)
+    // =====================
+    async function callAPI(userMessage) {
+      const systemPrompt = buildSystemPrompt();
       
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `message ${type}`;
-      messageDiv.innerHTML = `<div class="message-bubble">${text}</div>`;
+      // Build messages array with history
+      const messages = [...conversationHistory];
+      messages.push({ role: 'user', content: userMessage });
       
-      chatBox.insertBefore(messageDiv, indicator);
-      chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    function showTyping() {
-      const indicator = document.getElementById('typingIndicator');
-      indicator.classList.add('visible');
-      const chatBox = document.getElementById('chatBox');
-      chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    function hideTyping() {
-      const indicator = document.getElementById('typingIndicator');
-      indicator.classList.remove('visible');
-    }
-
-    function toggleNav() {
-      document.getElementById('navLinks').classList.toggle('open');
-    }
-    
-    document.addEventListener('click', function(e) {
-      const nav = document.getElementById('navLinks');
-      const toggle = document.querySelector('.nav__toggle');
-      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
-        nav.classList.remove('open');
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          system: systemPrompt,
+          messages: messages
+        })
+      });
+      
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error?.message || 'API request failed');
       }
-    });
+      
+      const data = await response.json();
+      return data.content[0].text;
+    }
   </script>
+
 </body>
 </html>

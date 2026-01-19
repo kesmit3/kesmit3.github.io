@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educator View Demo | Purpose Engine</title>
+  
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/upliftlogo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy-light: #1a2332;
+      --yellow: #FFC425;
+      --primary: #0067b1;
+      --primary-dark: #004b85;
+      --primary-light: #5091cd;
+      --success: #10B981;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --purple: #8B5CF6;
+      --gray-400: #94A3B8;
+      --gray-500: #64748B;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: var(--navy);
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 64px;
+      background: rgba(10, 22, 40, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      z-index: 1000;
+    }
+
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav__logo img {
+      height: 36px;
+    }
+
+    .nav__divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .nav__product {
+      font-weight: 700;
+      font-size: 15px;
+      color: white;
+    }
+
+    .nav__badge {
+      margin-left: 12px;
+      background: var(--yellow);
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .nav__demo-links {
+      display: flex;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .nav__demo-link {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-400);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .nav__demo-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .nav__demo-link.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Main Container */
+    .demo-container {
+      padding: 100px 32px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .demo-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .demo-header h1 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .demo-header h1 .highlight {
+      color: var(--yellow);
+    }
+
+    .demo-header p {
+      font-size: 18px;
+      color: var(--gray-400);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Phase Indicator */
+    .phase-indicator {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+
+    .phase-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .phase-dot.active {
+      background: var(--yellow);
+      box-shadow: 0 0 20px rgba(255, 196, 37, 0.5);
+    }
+
+    /* ============ PHASE 1: LOGIN WALL ============ */
+    .login-wall {
+      transition: all 0.6s ease;
+    }
+
+    .login-wall.hidden {
+      opacity: 0;
+      transform: scale(0.95);
+      pointer-events: none;
+      position: absolute;
+    }
+
+    .pain-point-banner {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.05) 100%);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 16px;
+      padding: 20px 28px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .pain-icon {
+      font-size: 32px;
+    }
+
+    .pain-text h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #FCA5A5;
+      margin-bottom: 4px;
+    }
+
+    .pain-text p {
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .pain-timer {
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .pain-timer .time {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--danger);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pain-timer .label {
+      font-size: 11px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Login Cards Grid */
+    .login-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .login-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+
+    .login-card.sis::before { background: #1976D2; }
+    .login-card.lms::before { background: #7B1FA2; }
+    .login-card.ccmr::before { background: #00897B; }
+    .login-card.other::before { background: #F57C00; }
+
+    .login-card .logo-area {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .login-card .logo-area .brand {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .login-card.sis .brand { color: #1976D2; }
+    .login-card.lms .brand { color: #7B1FA2; }
+    .login-card.ccmr .brand { color: #00897B; }
+    .login-card.other .brand { color: #F57C00; }
+
+    .login-card .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .login-card input {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: var(--gray-400);
+      font-family: inherit;
+    }
+
+    .login-card .login-btn {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      color: var(--gray-400);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: not-allowed;
+    }
+
+    .login-card .data-preview {
+      background: rgba(0,0,0,0.3);
+      border-radius: 10px;
+      padding: 14px;
+      text-align: left;
+      margin-top: 16px;
+    }
+
+    .login-card .data-preview .label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--gray-500);
+      margin-bottom: 8px;
+    }
+
+    .login-card .data-preview .data-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .login-card .data-preview .data-row:last-child {
+      border-bottom: none;
+    }
+
+    .login-card .data-preview .data-row .key {
+      color: var(--gray-500);
+    }
+
+    .login-card .data-preview .data-row .value {
+      color: var(--gray-400);
+      font-weight: 500;
+    }
+
+    .login-card .lock-icon {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 16px;
+      opacity: 0.5;
+    }
+
+    /* Teacher Thought Bubble */
+    .thought-bubble {
+      background: rgba(255,255,255,0.05);
+      border: 1px dashed rgba(255,255,255,0.2);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .thought-bubble .avatar {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 16px;
+    }
+
+    .thought-bubble .thought {
+      font-size: 18px;
+      font-style: italic;
+      color: var(--gray-400);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .thought-bubble .thought em {
+      color: var(--yellow);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* Transform Button */
+    .transform-section {
+      text-align: center;
+    }
+
+    .transform-btn {
+      background: linear-gradient(135deg, var(--yellow) 0%, #FFB300 100%);
+      border: none;
+      border-radius: 16px;
+      padding: 20px 48px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: inherit;
+      box-shadow: 0 4px 24px rgba(255, 196, 37, 0.3);
+    }
+
+    .transform-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(255, 196, 37, 0.4);
+    }
+
+    .transform-btn .icon {
+      font-size: 24px;
+    }
+
+    /* ============ PHASE 2: TRANSFORMATION ============ */
+    .transformation-phase {
+      display: none;
+      text-align: center;
+      padding: 80px 0;
+    }
+
+    .transformation-phase.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .ai-processing {
+      margin-bottom: 40px;
+    }
+
+    .ai-orb {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--purple) 100%);
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      animation: pulse 1.5s ease-in-out infinite;
+      box-shadow: 0 0 60px rgba(0, 103, 177, 0.5);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 60px rgba(0, 103, 177, 0.5); }
+      50% { transform: scale(1.05); box-shadow: 0 0 80px rgba(139, 92, 246, 0.6); }
+    }
+
+    .ai-processing h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .ai-processing p {
+      color: var(--gray-400);
+      font-size: 16px;
+    }
+
+    /* Data Streams */
+    .data-streams {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .data-stream {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 12px 20px;
+      animation: streamIn 0.6s ease backwards;
+    }
+
+    .data-stream:nth-child(1) { animation-delay: 0.2s; }
+    .data-stream:nth-child(2) { animation-delay: 0.4s; }
+    .data-stream:nth-child(3) { animation-delay: 0.6s; }
+    .data-stream:nth-child(4) { animation-delay: 0.8s; }
+
+    @keyframes streamIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .data-stream .source {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .data-stream .arrow {
+      color: var(--yellow);
+    }
+
+    .data-stream .status {
+      font-size: 11px;
+      color: var(--success);
+    }
+
+    /* ============ PHASE 3: UNIFIED VIEW ============ */
+    .unified-view {
+      display: none;
+    }
+
+    .unified-view.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .success-banner {
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 16px;
+      padding: 20px 28px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .success-banner .icon {
+      font-size: 32px;
+    }
+
+    .success-banner h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #6EE7B7;
+      margin-bottom: 4px;
+    }
+
+    .success-banner p {
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .success-banner .stats {
+      margin-left: auto;
+      display: flex;
+      gap: 24px;
+    }
+
+    .success-banner .stat {
+      text-align: center;
+    }
+
+    .success-banner .stat .number {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--success);
+    }
+
+    .success-banner .stat .label {
+      font-size: 10px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+    }
+
+    /* View Toggle */
+    .view-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .toggle-btn {
+      padding: 12px 28px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: var(--gray-400);
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .toggle-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .toggle-btn:hover:not(.active) {
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* Insight Panels */
+    .insight-panel {
+      display: none;
+    }
+
+    .insight-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .student-card-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .student-card-header .avatar {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .student-card-header .info h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .student-card-header .info .meta {
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .student-card-header .goal {
+      margin-left: auto;
+      background: rgba(255, 196, 37, 0.1);
+      border: 1px solid rgba(255, 196, 37, 0.3);
+      border-radius: 12px;
+      padding: 16px 20px;
+      max-width: 280px;
+    }
+
+    .student-card-header .goal .label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .student-card-header .goal .text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.9);
+      font-weight: 500;
+    }
+
+    /* Insight Cards Grid */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .insight-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.2s ease;
+    }
+
+    .insight-card:hover {
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .insight-card.alert {
+      border-left: 4px solid var(--warning);
+    }
+
+    .insight-card.celebration {
+      border-left: 4px solid var(--success);
+    }
+
+    .insight-card.context {
+      border-left: 4px solid var(--primary);
+    }
+
+    .insight-card.strength {
+      border-left: 4px solid var(--purple);
+    }
+
+    .insight-card .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .insight-card .card-header .icon {
+      font-size: 24px;
+    }
+
+    .insight-card .card-header h3 {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .insight-card.alert .card-header h3 { color: var(--warning); }
+    .insight-card.celebration .card-header h3 { color: var(--success); }
+    .insight-card.context .card-header h3 { color: var(--primary-light); }
+    .insight-card.strength .card-header h3 { color: var(--purple); }
+
+    .insight-card .content {
+      font-size: 15px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .insight-card .content strong {
+      color: white;
+    }
+
+    .insight-card .sources {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .source-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .source-tag.sis { background: rgba(25, 118, 210, 0.2); color: #64B5F6; }
+    .source-tag.lms { background: rgba(123, 31, 162, 0.2); color: #BA68C8; }
+    .source-tag.ccmr { background: rgba(0, 137, 123, 0.2); color: #4DB6AC; }
+    .source-tag.other { background: rgba(245, 124, 0, 0.2); color: #FFB74D; }
+    .source-tag.ai { background: rgba(139, 92, 246, 0.2); color: #A78BFA; }
+
+    /* Student Perspective Specific */
+    .purpose-connection {
+      background: linear-gradient(135deg, rgba(0, 103, 177, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+      border: 1px solid rgba(0, 103, 177, 0.3);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .purpose-connection h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .purpose-connection .connection-text {
+      font-size: 16px;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.7;
+    }
+
+    .purpose-connection .connection-text em {
+      color: var(--yellow);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* Action Buttons */
+    .action-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+      justify-content: center;
+    }
+
+    .action-btn {
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-btn.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .action-btn.secondary {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Reset Button */
+    .reset-btn {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 12px 20px;
+      color: var(--gray-400);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      display: none;
+    }
+
+    .reset-btn.visible {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .reset-btn:hover {
+      background: rgba(255,255,255,0.15);
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .login-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .insights-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .success-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .success-banner .stats {
+        margin-left: 0;
+        margin-top: 16px;
+      }
+
+      .nav__demo-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .demo-container {
+        padding: 80px 20px 40px;
+      }
+      
+      .demo-header h1 {
+        font-size: 28px;
+      }
+      
+      .login-grid {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+        margin: 0 auto 32px;
+      }
+      
+      .pain-point-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .pain-timer {
+        margin-left: 0;
+        text-align: center;
+      }
+      
+      .student-card-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .student-card-header .goal {
+        margin-left: 0;
+        max-width: 100%;
+      }
+      
+      .view-toggle {
+        flex-direction: column;
+        max-width: 280px;
+        margin: 0 auto 32px;
+      }
+      
+      .toggle-btn {
+        width: 100%;
+      }
+      
+      .action-row {
+        flex-direction: column;
+        max-width: 280px;
+        margin: 32px auto 0;
+      }
+      
+      .action-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      <img src="https://kesmit3.github.io/paic/upliftlogo.png" alt="Uplift Education">
+      <div class="nav__divider"></div>
+      <span class="nav__product">Purpose Engine</span>
+    </a>
+    <span class="nav__badge">Educator View</span>
+    <div class="nav__demo-links">
+      <a href="index.html" class="nav__demo-link">Home</a>
+      <a href="demo.html" class="nav__demo-link active">Educator Demo</a>
+      <a href="rtcc-demo.html" class="nav__demo-link">RTCC Demo</a>
+    </div>
+  </nav>
+
+  <div class="demo-container">
+    <!-- Header -->
+    <div class="demo-header">
+      <h1>From <span class="highlight">4 Logins</span> to <span class="highlight">1 Insight</span></h1>
+      <p>See how the Purpose Engine transforms fragmented data across systems into meaningful context for educators and students.</p>
+    </div>
+
+    <!-- Phase Indicator -->
+    <div class="phase-indicator">
+      <div class="phase-dot active" id="dot1"></div>
+      <div class="phase-dot" id="dot2"></div>
+      <div class="phase-dot" id="dot3"></div>
+    </div>
+
+    <!-- ============ PHASE 1: LOGIN WALL ============ -->
+    <div class="login-wall" id="phase1">
+      <!-- Pain Point Banner -->
+      <div class="pain-point-banner">
+        <div class="pain-icon">😩</div>
+        <div class="pain-text">
+          <h3>The Current Reality: "Tab Hell"</h3>
+          <p>To understand ONE student, educators must log into 4 different systems, each with separate credentials.</p>
+        </div>
+        <div class="pain-timer">
+          <div class="time" id="timer">0:00</div>
+          <div class="label">Time to gather context</div>
+        </div>
+      </div>
+
+      <!-- Login Cards -->
+      <div class="login-grid">
+        <!-- SIS -->
+        <div class="login-card sis">
+          <div class="lock-icon">🔐</div>
+          <div class="logo-area">
+            <span class="brand">SIS</span>
+          </div>
+          <div class="login-form">
+            <input type="text" value="teacher_rodriguez@uplift.edu" disabled>
+            <input type="password" value="••••••••••••" disabled>
+            <button class="login-btn">Sign In + 2FA</button>
+          </div>
+          <div class="data-preview">
+            <div class="label">Student Information System</div>
+            <div class="data-row">
+              <span class="key">GPA</span>
+              <span class="value">3.4</span>
+            </div>
+            <div class="data-row">
+              <span class="key">Attendance</span>
+              <span class="value">93%</span>
+            </div>
+            <div class="data-row">
+              <span class="key">This Week</span>
+              <span class="value">2 absences</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- LMS -->
+        <div class="login-card lms">
+          <div class="lock-icon">🔐</div>
+          <div class="logo-area">
+            <span class="brand">LMS</span>
+          </div>
+          <div class="login-form">
+            <input type="text" value="mrodriguez@uplift.edu" disabled>
+            <input type="password" value="••••••••" disabled>
+            <button class="login-btn">SSO Login</button>
+          </div>
+          <div class="data-preview">
+            <div class="label">Learning Management System</div>
+            <div class="data-row">
+              <span class="key">Assignments</span>
+              <span class="value">23/25</span>
+            </div>
+            <div class="data-row">
+              <span class="key">Missing</span>
+              <span class="value">2 this week</span>
+            </div>
+            <div class="data-row">
+              <span class="key">Engagement</span>
+              <span class="value">Varied</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CCMR -->
+        <div class="login-card ccmr">
+          <div class="lock-icon">🔐</div>
+          <div class="logo-area">
+            <span class="brand">CCMR</span>
+          </div>
+          <div class="login-form">
+            <input type="text" value="maria.rodriguez@uplift.edu" disabled>
+            <input type="password" value="••••••••••" disabled>
+            <button class="login-btn">Login</button>
+          </div>
+          <div class="data-preview">
+            <div class="label">College, Career & Military Readiness</div>
+            <div class="data-row">
+              <span class="key">Goal</span>
+              <span class="value">Design Director</span>
+            </div>
+            <div class="data-row">
+              <span class="key">Pathway</span>
+              <span class="value">Architecture</span>
+            </div>
+            <div class="data-row">
+              <span class="key">Colleges</span>
+              <span class="value">UT, Rice, A&M</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Other Tools -->
+        <div class="login-card other">
+          <div class="lock-icon">🔐</div>
+          <div class="logo-area">
+            <span class="brand">Other Tools</span>
+          </div>
+          <div class="login-form">
+            <input type="text" value="m.rodriguez@uplift.edu" disabled>
+            <input type="password" value="•••••••••" disabled>
+            <button class="login-btn">Enter</button>
+          </div>
+          <div class="data-preview">
+            <div class="label">Aptitudes & Assessments</div>
+            <div class="data-row">
+              <span class="key">Spatial</span>
+              <span class="value">92nd %ile</span>
+            </div>
+            <div class="data-row">
+              <span class="key">Numerical</span>
+              <span class="value">67th %ile</span>
+            </div>
+            <div class="data-row">
+              <span class="key">Style</span>
+              <span class="value">Visual learner</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Teacher Thought -->
+      <div class="thought-bubble">
+        <div class="avatar">👩‍🏫</div>
+        <p class="thought">
+          "I just want to know <em>why Maya is struggling this week</em>. I have 150 students. 
+          I don't have time to play detective across 4 different systems."
+        </p>
+      </div>
+
+      <!-- Transform Button -->
+      <div class="transform-section">
+        <button class="transform-btn" onclick="startTransformation()">
+          <span class="icon">🧠</span>
+          <span>Run Purpose Engine</span>
+          <span>→</span>
+        </button>
+      </div>
+
+      <!-- Real World Pain Point -->
+      <div class="real-world-example">
+        <div class="example-header">
+          <span class="example-badge">💰 Real Example: CTE Funding</span>
+          <h3>Why This Matters Beyond the Classroom</h3>
+        </div>
+        <div class="example-content">
+          <div class="example-scenario">
+            <div class="scenario-icon">🤖</div>
+            <div class="scenario-text">
+              <strong>You want to start a Robotics Club.</strong><br>
+              20 students are interested. State funding is tied to CTE pathway enrollment. If only 10 are on a qualifying pathway, you can only use half the funding.
+            </div>
+          </div>
+          <div class="example-comparison">
+            <div class="comparison-box painful">
+              <div class="comparison-label">😩 Current Process</div>
+              <div class="comparison-steps">
+                <div class="step">1. Log into SIS</div>
+                <div class="step">2. Look up Student #1</div>
+                <div class="step">3. Check their course schedule</div>
+                <div class="step">4. Guess if it qualifies as CTE</div>
+                <div class="step">5. Write it down somewhere</div>
+                <div class="step">6. Repeat 19 more times</div>
+                <div class="step">7. Cross-reference with CCMR pathways</div>
+                <div class="step">8. Build justification manually</div>
+              </div>
+              <div class="comparison-result">
+                <span class="time">~2 hours</span>
+                <span class="outcome">Most teachers just don't start the club.</span>
+              </div>
+            </div>
+            <div class="comparison-box easy">
+              <div class="comparison-label">✨ With Purpose Engine</div>
+              <div class="comparison-query">
+                <div class="query-prompt">"Which students interested in Robotics Club are on a CTE pathway that qualifies for state funding?"</div>
+              </div>
+              <div class="comparison-answer">
+                <div class="answer-header">Instant Answer:</div>
+                <div class="answer-content">
+                  <strong>12 of 20 students</strong> are on qualifying pathways:<br>
+                  • 8 on Engineering & Technology<br>
+                  • 4 on Advanced Manufacturing<br>
+                  <em>Funding justification report ready to export.</em>
+                </div>
+              </div>
+              <div class="comparison-result">
+                <span class="time">&lt;10 seconds</span>
+                <span class="outcome">Club happens. Students thrive.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ PHASE 2: TRANSFORMATION ============ -->
+    <div class="transformation-phase" id="phase2">
+      <div class="ai-processing">
+        <div class="ai-orb">🧠</div>
+        <h2>Synthesizing Context...</h2>
+        <p>AI is connecting data across all systems locally and securely</p>
+      </div>
+      <div class="data-streams">
+        <div class="data-stream">
+          <span class="source" style="color: #64B5F6;">SIS</span>
+          <span class="arrow">→</span>
+          <span class="status">✓ Synced</span>
+        </div>
+        <div class="data-stream">
+          <span class="source" style="color: #BA68C8;">LMS</span>
+          <span class="arrow">→</span>
+          <span class="status">✓ Synced</span>
+        </div>
+        <div class="data-stream">
+          <span class="source" style="color: #4DB6AC;">CCMR</span>
+          <span class="arrow">→</span>
+          <span class="status">✓ Synced</span>
+        </div>
+        <div class="data-stream">
+          <span class="source" style="color: #FFB74D;">Other Tools</span>
+          <span class="arrow">→</span>
+          <span class="status">✓ Synced</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ PHASE 3: UNIFIED VIEW ============ -->
+    <div class="unified-view" id="phase3">
+      <!-- Success Banner -->
+      <div class="success-banner">
+        <div class="icon">✨</div>
+        <div>
+          <h3>One Login. Complete Context.</h3>
+          <p>All systems synthesized into meaningful, actionable insights</p>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <div class="number">1</div>
+            <div class="label">Login</div>
+          </div>
+          <div class="stat">
+            <div class="number">&lt;5s</div>
+            <div class="label">Load Time</div>
+          </div>
+          <div class="stat">
+            <div class="number">4</div>
+            <div class="label">Sources</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View Toggle -->
+      <div class="view-toggle">
+        <button class="toggle-btn active" onclick="switchView('educator')">
+          👩‍🏫 Educator View
+        </button>
+        <button class="toggle-btn" onclick="switchView('student')">
+          🎓 Student View
+        </button>
+      </div>
+
+      <!-- EDUCATOR VIEW -->
+      <div class="insight-panel active" id="educatorView">
+        <div class="student-card-header">
+          <div class="avatar">MC</div>
+          <div class="info">
+            <h2>Maya Chen</h2>
+            <div class="meta">11th Grade • Uplift Hampton Prep • Chemistry Period 3</div>
+          </div>
+          <div class="goal">
+            <div class="label">🎯 Her Goal</div>
+            <div class="text">"Become a Sustainable Design Director who creates buildings that heal the planet"</div>
+          </div>
+        </div>
+
+        <div class="insights-grid">
+          <div class="insight-card alert">
+            <div class="card-header">
+              <span class="icon">⚠️</span>
+              <h3>Needs Attention</h3>
+            </div>
+            <div class="content">
+              <strong>2 absences + 2 missing assignments this week</strong> — this is unusual for Maya, who typically has 93% attendance. Pattern suggests something may be happening outside of class.
+            </div>
+            <div class="sources">
+              <span class="source-tag sis">📊 SIS</span>
+              <span class="source-tag lms">📚 LMS</span>
+              <span class="source-tag ai">🧠 AI Pattern</span>
+            </div>
+          </div>
+
+          <div class="insight-card context">
+            <div class="card-header">
+              <span class="icon">💡</span>
+              <h3>Reframe Opportunity</h3>
+            </div>
+            <div class="content">
+              The missing Chemistry assignment is <strong>stoichiometry</strong> — the exact math used for calculating eco-material ratios in sustainable construction. Reframing as "Green Building Material Challenge" aligns with her career goal.
+            </div>
+            <div class="sources">
+              <span class="source-tag lms">📚 LMS</span>
+              <span class="source-tag ccmr">🎯 CCMR</span>
+              <span class="source-tag ai">🧠 AI Synthesis</span>
+            </div>
+          </div>
+
+          <div class="insight-card strength">
+            <div class="card-header">
+              <span class="icon">💪</span>
+              <h3>Strength to Leverage</h3>
+            </div>
+            <div class="content">
+              <strong>92nd percentile spatial reasoning</strong> — Maya learns best through visual approaches. Consider offering a diagram-based explanation or 3D model of the chemical structures.
+            </div>
+            <div class="sources">
+              <span class="source-tag other">🧪 Aptitudes</span>
+            </div>
+          </div>
+
+          <div class="insight-card celebration">
+            <div class="card-header">
+              <span class="icon">🎉</span>
+              <h3>Recent Win to Celebrate</h3>
+            </div>
+            <div class="content">
+              Last week, Maya <strong>connected chemistry concepts to sustainable building materials</strong> without prompting during class discussion. This breakthrough moment was validated by Ms. Rodriguez.
+            </div>
+            <div class="sources">
+              <span class="source-tag ai">🧠 AI Observed</span>
+              <span class="source-tag sis">👩‍🏫 Teacher Note</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button class="action-btn primary">💬 Quick Check-In</button>
+          <button class="action-btn secondary">⚡ Transform Assignment</button>
+          <button class="action-btn secondary">📝 Add Note</button>
+        </div>
+      </div>
+
+      <!-- STUDENT VIEW -->
+      <div class="insight-panel" id="studentView">
+        <div class="student-card-header">
+          <div class="avatar">MC</div>
+          <div class="info">
+            <h2>Hey Maya! 👋</h2>
+            <div class="meta">Here's how your work connects to your future</div>
+          </div>
+          <div class="goal">
+            <div class="label">🎯 Your Goal</div>
+            <div class="text">"Become a Sustainable Design Director"</div>
+          </div>
+        </div>
+
+        <div class="purpose-connection">
+          <h3>💡 Why This Assignment Matters</h3>
+          <p class="connection-text">
+            That Chemistry homework on stoichiometry? It's <em>exactly</em> the math sustainable architects use every day. 
+            When calculating ratios for eco-friendly insulation or carbon-sequestering concrete, getting the chemistry wrong 
+            means the material fails safety tests. <em>Your future clients will need you to understand this.</em>
+          </p>
+        </div>
+
+        <div class="insights-grid">
+          <div class="insight-card strength">
+            <div class="card-header">
+              <span class="icon">🌟</span>
+              <h3>Your Superpower</h3>
+            </div>
+            <div class="content">
+              Your <strong>spatial reasoning is in the 92nd percentile</strong> — that means you're naturally gifted at visualizing how things fit together in space. This is HUGE for architecture and design.
+            </div>
+            <div class="sources">
+              <span class="source-tag other">🧪 Aptitudes</span>
+            </div>
+          </div>
+
+          <div class="insight-card celebration">
+            <div class="card-header">
+              <span class="icon">🏆</span>
+              <h3>Recent Win</h3>
+            </div>
+            <div class="content">
+              Last week you made a connection between chemistry and sustainable materials that <strong>impressed your teacher</strong>. You're already thinking like a designer!
+            </div>
+            <div class="sources">
+              <span class="source-tag ai">🧠 Purpose Engine</span>
+            </div>
+          </div>
+
+          <div class="insight-card context">
+            <div class="card-header">
+              <span class="icon">🔮</span>
+              <h3>Career Connection</h3>
+            </div>
+            <div class="content">
+              Your pathway toward <strong>Architecture & Green Building</strong> is on track. UT Austin, Rice, and Texas A&M all have strong sustainable design programs that value chemistry knowledge.
+            </div>
+            <div class="sources">
+              <span class="source-tag ccmr">🎯 CCMR</span>
+            </div>
+          </div>
+
+          <div class="insight-card alert">
+            <div class="card-header">
+              <span class="icon">📋</span>
+              <h3>Quick To-Do</h3>
+            </div>
+            <div class="content">
+              You have <strong>2 assignments to catch up on</strong> this week. Want to see how they connect to sustainable design? Your Future Self has some advice.
+            </div>
+            <div class="sources">
+              <span class="source-tag lms">📚 LMS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button class="action-btn primary">🔮 Talk to Future Self</button>
+          <button class="action-btn secondary">📝 View Missing Work</button>
+          <button class="action-btn secondary">🎯 Explore Careers</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reset Button -->
+  <button class="reset-btn" id="resetBtn" onclick="resetDemo()">
+    ↺ Reset Demo
+  </button>
+
+  <script>
+    let timerInterval;
+    let seconds = 0;
+
+    function updateTimer() {
+      seconds++;
+      const mins = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      document.getElementById('timer').textContent = 
+        `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // Start timer on page load
+    window.onload = function() {
+      timerInterval = setInterval(updateTimer, 1000);
+    };
+
+    function startTransformation() {
+      // Stop timer
+      clearInterval(timerInterval);
+      
+      // Update phase dots
+      document.getElementById('dot1').classList.remove('active');
+      document.getElementById('dot2').classList.add('active');
+      
+      // Hide phase 1, show phase 2
+      document.getElementById('phase1').classList.add('hidden');
+      document.getElementById('phase2').classList.add('active');
+      
+      // After 2.5 seconds, move to phase 3
+      setTimeout(() => {
+        document.getElementById('dot2').classList.remove('active');
+        document.getElementById('dot3').classList.add('active');
+        document.getElementById('phase2').classList.remove('active');
+        document.getElementById('phase3').classList.add('active');
+        document.getElementById('resetBtn').classList.add('visible');
+      }, 2500);
+    }
+
+    function switchView(view) {
+      // Update toggle buttons
+      document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      // Switch panels
+      document.querySelectorAll('.insight-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      
+      if (view === 'educator') {
+        document.getElementById('educatorView').classList.add('active');
+      } else {
+        document.getElementById('studentView').classList.add('active');
+      }
+    }
+
+    function resetDemo() {
+      // Reset timer
+      seconds = 0;
+      document.getElementById('timer').textContent = '0:00';
+      timerInterval = setInterval(updateTimer, 1000);
+      
+      // Reset phase dots
+      document.getElementById('dot1').classList.add('active');
+      document.getElementById('dot2').classList.remove('active');
+      document.getElementById('dot3').classList.remove('active');
+      
+      // Reset views
+      document.getElementById('phase1').classList.remove('hidden');
+      document.getElementById('phase2').classList.remove('active');
+      document.getElementById('phase3').classList.remove('active');
+      document.getElementById('resetBtn').classList.remove('visible');
+      
+      // Reset to educator view
+      document.querySelectorAll('.toggle-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === 0);
+      });
+      document.getElementById('educatorView').classList.add('active');
+      document.getElementById('studentView').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
