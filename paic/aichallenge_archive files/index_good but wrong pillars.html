@@ -279,25 +279,6 @@
       margin: 0 auto;
     }
 
-    /* Center the last row when it has fewer items */
-    .pillars-grid.five-pillars {
-      grid-template-columns: repeat(6, 1fr);
-    }
-
-    .pillars-grid.five-pillars .pillar-card:nth-child(1),
-    .pillars-grid.five-pillars .pillar-card:nth-child(2),
-    .pillars-grid.five-pillars .pillar-card:nth-child(3) {
-      grid-column: span 2;
-    }
-
-    .pillars-grid.five-pillars .pillar-card:nth-child(4) {
-      grid-column: 2 / span 2;
-    }
-
-    .pillars-grid.five-pillars .pillar-card:nth-child(5) {
-      grid-column: 4 / span 2;
-    }
-
     .pillar-card {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -325,9 +306,7 @@
 
     .pillar-card:nth-child(1) .pillar-icon { background: rgba(0, 103, 177, 0.2); }
     .pillar-card:nth-child(2) .pillar-icon { background: rgba(139, 92, 246, 0.2); }
-    .pillar-card:nth-child(3) .pillar-icon { background: rgba(245, 158, 11, 0.2); }
-    .pillar-card:nth-child(4) .pillar-icon { background: rgba(16, 185, 129, 0.2); }
-    .pillar-card:nth-child(5) .pillar-icon { background: rgba(236, 72, 153, 0.2); }
+    .pillar-card:nth-child(3) .pillar-icon { background: rgba(16, 185, 129, 0.2); }
 
     .pillar-card h3 {
       font-size: 20px;
@@ -513,23 +492,8 @@
 
     /* === Responsive === */
     @media (max-width: 1024px) {
-      .pillars-grid,
-      .pillars-grid.five-pillars {
+      .pillars-grid {
         grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .pillars-grid.five-pillars .pillar-card:nth-child(1),
-      .pillars-grid.five-pillars .pillar-card:nth-child(2),
-      .pillars-grid.five-pillars .pillar-card:nth-child(3),
-      .pillars-grid.five-pillars .pillar-card:nth-child(4),
-      .pillars-grid.five-pillars .pillar-card:nth-child(5) {
-        grid-column: span 1;
-      }
-      
-      .pillars-grid.five-pillars .pillar-card:nth-child(5) {
-        grid-column: 1 / -1;
-        max-width: 400px;
-        margin: 0 auto;
       }
     }
 
@@ -594,15 +558,10 @@
         transform: rotate(90deg);
       }
       
-      .pillars-grid,
-      .pillars-grid.five-pillars {
+      .pillars-grid {
         grid-template-columns: 1fr;
         max-width: 400px;
         margin: 0 auto;
-      }
-      
-      .pillars-grid.five-pillars .pillar-card:nth-child(5) {
-        max-width: none;
       }
       
       .stats-grid {
@@ -644,26 +603,26 @@
       <div class="nav__divider"></div>
       <span class="nav__product">Purpose Engine</span>
     </a>
-    <button class="nav__toggle" onclick="toggleNav()">â˜°</button>
+    <button class="nav__toggle" onclick="toggleNav()">☰</button>
     <div class="nav__links" id="navLinks">
       <a href="index.html" class="nav__link nav__link--active">
-        <span class="nav__link-icon">&#127968;</span>
+        <span class="nav__link-icon">🏠</span>
         <span class="nav__link-text">Home</span>
       </a>
       <a href="student-dashboard.html" class="nav__link">
-        <span class="nav__link-icon">&#128202;</span>
+        <span class="nav__link-icon">📊</span>
         <span class="nav__link-text">Student</span>
       </a>
       <a href="career-bridge.html" class="nav__link">
-        <span class="nav__link-icon">&#127919;</span>
+        <span class="nav__link-icon">🎯</span>
         <span class="nav__link-text">Career Bridge</span>
       </a>
       <a href="future-self.html" class="nav__link">
-        <span class="nav__link-icon">&#128302;</span>
+        <span class="nav__link-icon">🔮</span>
         <span class="nav__link-text">Future Self</span>
       </a>
       <a href="educator-dashboard.html" class="nav__link">
-        <span class="nav__link-icon">&#128105;&#8205;&#127979;</span>
+        <span class="nav__link-icon">👩‍🏫</span>
         <span class="nav__link-text">Educator</span>
       </a>
     </div>
@@ -672,17 +631,17 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-badge">
-      <span>&#127891; AI-Powered Student Motivation</span>
+      <span>🎓 AI-Powered Student Motivation</span>
     </div>
     <h1>
       <span class="highlight">Motivation Collapses</span><br>
       When Work Feels Disconnected
     </h1>
     <p>
-  &ldquo;Fewer than <em>two in 10 students</em> strongly agree that what they are learning in class 
+  “Fewer than <em>two in 10 students</em> strongly agree that what they are learning in class 
       feels <b>important, interesting, challenging, or aligned</b> with their natural talents. 
-      This disconnect is especially high among students who do not want to attend college...&rdquo;<br>
-      &mdash; Gallup / Walton Family Foundation, <em>Voices of Gen Z Study</em> (2025)
+      This disconnect is especially high among students who do not want to attend college...”<br>
+      — Gallup / Walton Family Foundation, <em>Voices of Gen Z Study</em> (2025)
       <br><br>
   <b>Our insight:</b><br>
   When meaning collapses, effort collapses.<br>
@@ -694,7 +653,7 @@
 </p>
     <div class="hero-ctas">
       <a href="educator-dashboard.html" class="btn-primary">
-        See Educator Dashboard â†’
+        See Educator Dashboard →
       </a>
       <a href="student-dashboard.html" class="btn-secondary">
         View Student Experience
@@ -702,10 +661,10 @@
     </div>
     <div class="secondary-links">
       <a href="americandream.html" class="secondary-link">
-        <span>&#127482;&#127480;</span> Why This Matters
+        <span>🇺🇸</span> Why This Matters
       </a>
       <a href="aichallenge.html" class="secondary-link">
-        <span>&#129302;</span> How We Use AI
+        <span>🤖</span> How We Use AI
       </a>
     </div>
   </section>
@@ -718,7 +677,7 @@
     </div>
     <div class="comparison-grid">
       <div class="comparison-card before">
-        <div class="emoji">&#128528;</div>
+        <div class="emoji">😐</div>
         <h3>Traditional Approach</h3>
         <p class="quote">
           "Complete this stoichiometry worksheet for tomorrow. It's on the test."
@@ -727,9 +686,9 @@
           Student thought: "Why does this matter to me?"
         </div>
       </div>
-      <div class="comparison-arrow">â†’</div>
+      <div class="comparison-arrow">→</div>
       <div class="comparison-card after">
-        <div class="emoji">&#128640;</div>
+        <div class="emoji">🚀</div>
         <h3>Purpose Engine</h3>
         <p class="quote">
           "As an aspiring sustainable designer, calculate the chemical ratios for eco-friendly building insulation."
@@ -741,37 +700,27 @@
     </div>
   </section>
 
-  <!-- Five Pillars of Purpose Section -->
+  <!-- Three Pillars Section -->
   <section class="section section--dark">
     <div class="section-header">
-      <h2>Five Pillars of Purpose</h2>
+      <h2>Three Pillars of Purpose</h2>
       <p>A comprehensive approach to connecting learning with meaning</p>
     </div>
-    <div class="pillars-grid five-pillars">
+    <div class="pillars-grid">
       <div class="pillar-card">
-        <div class="pillar-icon">&#127919;</div>
-        <h3>Career-Bridge Challenges</h3>
-        <p>AI reframes assignments through each student&rsquo;s career interests&mdash;same learning objectives, completely different motivation.</p>
+        <div class="pillar-icon">🎯</div>
+        <h3>Personalized Purpose Engine</h3>
+        <p>AI re-skins assignments based on each student's career interests and aptitudes from their scorecard.</p>
       </div>
       <div class="pillar-card">
-        <div class="pillar-icon">&#128302;</div>
-        <h3>Future Self Mentorship</h3>
-        <p>Students consult an AI persona of their successful future self for guidance when motivation wavers.</p>
+        <div class="pillar-icon">🔮</div>
+        <h3>Future Self Simulations</h3>
+        <p>Students consult an AI persona of their successful future self for mentorship and motivation.</p>
       </div>
       <div class="pillar-card">
-        <div class="pillar-icon">&#9888;</div>
-        <h3>Early Warning Signals</h3>
-        <p>AI detects disengagement patterns across systems&mdash;surfacing struggles before they become crises.</p>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-icon">&#127881;</div>
-        <h3>Recognition &amp; Celebration</h3>
-        <p>Breakthrough moments and quiet wins are surfaced for educators to acknowledge&mdash;building momentum through recognition.</p>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-icon">&#128065;</div>
-        <h3>Shared Visibility Layer</h3>
-        <p>Students, educators, and counselors see the same meaningful context&mdash;enabling support that feels personal because it is.</p>
+        <div class="pillar-icon">🚀</div>
+        <h3>AI Co-Founder Capstone</h3>
+        <p>Semester-long venture where classwork becomes R&D for a real micro-business or nonprofit.</p>
       </div>
     </div>
   </section>
@@ -803,28 +752,28 @@
     <div class="integration-diagram">
       <div class="source-column">
         <div class="source-card">
-          <span class="icon">&#128202;</span>
+          <span class="icon">📊</span>
           <div class="info">
             <div class="name">PowerSchool</div>
             <div class="status">Live sync</div>
           </div>
         </div>
         <div class="source-card">
-          <span class="icon">&#128218;</span>
+          <span class="icon">📚</span>
           <div class="info">
             <div class="name">Schoology LMS</div>
             <div class="status">Live sync</div>
           </div>
         </div>
         <div class="source-card">
-          <span class="icon">&#127919;</span>
+          <span class="icon">🎯</span>
           <div class="info">
             <div class="name">Schoolinks</div>
             <div class="status">Live sync</div>
           </div>
         </div>
         <div class="source-card">
-          <span class="icon">&#129504;</span>
+          <span class="icon">🧠</span>
           <div class="info">
             <div class="name">YouScience</div>
             <div class="status">Synced</div>
@@ -832,38 +781,38 @@
         </div>
       </div>
       <div class="flow-arrows">
-        <span>â†’</span>
-        <span>â†’</span>
-        <span>â†’</span>
-        <span>â†’</span>
+        <span>→</span>
+        <span>→</span>
+        <span>→</span>
+        <span>→</span>
       </div>
       <div class="ai-engine">
-        <div class="icon">&#129504;</div>
+        <div class="icon">🧠</div>
         <h3>Local AI Engine</h3>
         <p>Runs on-premise. Student data never leaves campus.</p>
       </div>
       <div class="flow-arrows">
-        <span>â†’</span>
-        <span>â†’</span>
-        <span>â†’</span>
+        <span>→</span>
+        <span>→</span>
+        <span>→</span>
       </div>
       <div class="output-column">
         <div class="source-card">
-          <span class="icon">&#127919;</span>
+          <span class="icon">🎯</span>
           <div class="info">
             <div class="name">Career-Bridge Challenges</div>
             <div class="status">Personalized framing</div>
           </div>
         </div>
         <div class="source-card">
-          <span class="icon">&#128302;</span>
+          <span class="icon">🔮</span>
           <div class="info">
             <div class="name">Future Self AI</div>
             <div class="status">Mentorship simulations</div>
           </div>
         </div>
         <div class="source-card">
-          <span class="icon">âš ï¸</span>
+          <span class="icon">⚠️</span>
           <div class="info">
             <div class="name">Early Warning Signals</div>
             <div class="status">Pattern detection</div>
@@ -879,7 +828,7 @@
     <p>Explore the different views of the Purpose Engine system</p>
     <div class="hero-ctas">
       <a href="educator-dashboard.html" class="btn-primary">
-        Educator Dashboard â†’
+        Educator Dashboard →
       </a>
       <a href="student-dashboard.html" class="btn-secondary">
         Student Dashboard
@@ -890,7 +839,7 @@
   <!-- Footer -->
   <footer>
     <p>
-      Purpose Engine &mdash; An <a href="https://www.uplifteducation.org" target="_blank">Uplift Education</a> Initiative
+      Purpose Engine — An <a href="https://www.uplifteducation.org" target="_blank">Uplift Education</a> Initiative
     </p>
   </footer>
 
