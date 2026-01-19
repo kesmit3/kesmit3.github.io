@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>American Dream | Purpose Engine</title>
 
   <!-- Favicon and Social Sharing -->
-  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/upliftlogo.png">
-  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/upliftlogo.png">
-  <meta property="og:title" content="American Dream | Purpose Engine">
-  <meta property="og:description" content="A vision for AI that reconnects people and helps us build a future together.">
-  <meta property="og:image" content="https://kesmit3.github.io/paic/upliftlogo.png">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="upliftlogo.png" />
+  <link rel="apple-touch-icon" href="upliftlogo.png" />
+  <meta property="og:title" content="American Dream | Purpose Engine" />
+  <meta property="og:description" content="A vision for AI that reconnects people and helps us build a future together." />
+  <meta property="og:image" content="upliftlogo.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Shared Styles -->
-  <link rel="stylesheet" href="assets/variables.css">
+  <link rel="stylesheet" href="assets/variables.css" />
+  <link rel="icon" type="image/png" href="assets/upliftlogo.png" />
 
   <style>
     body {
@@ -30,13 +31,13 @@
 
     /* Hero */
     .hero {
-      min-height: 100vh;
+      min-height: 92vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 120px 40px 80px;
+      padding: 120px 40px 70px;
       position: relative;
       overflow: hidden;
     }
@@ -70,11 +71,11 @@
     }
 
     .hero h1 {
-      font-size: 52px;
+      font-size: 54px;
       font-weight: 800;
       line-height: 1.1;
-      margin-bottom: 24px;
-      max-width: 900px;
+      margin-bottom: 18px;
+      max-width: 980px;
       position: relative;
     }
 
@@ -85,9 +86,9 @@
     .hero p {
       font-size: 18px;
       color: var(--gray-400);
-      max-width: 800px;
+      max-width: 840px;
       line-height: 1.7;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       position: relative;
     }
 
@@ -108,16 +109,16 @@
       position: relative;
       flex-wrap: wrap;
       justify-content: center;
-      margin-top: 16px;
+      margin-top: 18px;
     }
 
     .btn-primary {
-      padding: 16px 28px;
+      padding: 16px 32px;
       background: var(--yellow);
       color: var(--navy);
       border: none;
       border-radius: 12px;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -133,12 +134,12 @@
     }
 
     .btn-secondary {
-      padding: 16px 28px;
+      padding: 16px 32px;
       background: transparent;
       color: white;
       border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 12px;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -156,13 +157,10 @@
     /* Sections */
     .section {
       padding: 100px 40px;
-    }
-
-    .section--light {
       background: var(--navy-light);
     }
 
-    .section--dark {
+    .section.alt {
       background: var(--navy);
     }
 
@@ -172,7 +170,7 @@
     }
 
     .section-header h2 {
-      font-size: 36px;
+      font-size: 40px;
       font-weight: 800;
       margin-bottom: 16px;
     }
@@ -180,13 +178,13 @@
     .section-header p {
       font-size: 18px;
       color: var(--gray-400);
-      max-width: 700px;
+      max-width: 760px;
       margin: 0 auto;
       line-height: 1.6;
     }
 
-    /* Cards Grid */
-    .cards-grid {
+    /* Cards */
+    .grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
@@ -234,7 +232,7 @@
       margin: 0;
     }
 
-    /* Proposal Section */
+    /* Proposal layout */
     .proposal-wrap {
       max-width: 1100px;
       margin: 0 auto;
@@ -340,101 +338,74 @@
 
     /* Responsive */
     @media (max-width: 1024px) {
-      .cards-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .proposal-wrap {
-        grid-template-columns: 1fr;
-      }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .proposal-wrap { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 768px) {
-      .hero {
-        padding: 100px 24px 60px;
-        min-height: auto;
-      }
-      
-      .hero h1 {
-        font-size: 32px;
-      }
-      
-      .hero p {
-        font-size: 15px;
-      }
-      
-      .hero-ctas {
-        flex-direction: column;
-        width: 100%;
-        max-width: 320px;
-      }
-      
-      .btn-primary, .btn-secondary {
-        width: 100%;
-        justify-content: center;
-        padding: 14px 24px;
-      }
-      
-      .section {
-        padding: 60px 24px;
-      }
-      
-      .section-header h2 {
-        font-size: 28px;
-      }
-      
-      .section-header p {
-        font-size: 15px;
-      }
-      
-      .cards-grid {
-        grid-template-columns: 1fr;
-        max-width: 420px;
-      }
-      
-      .proposal-main, .proposal-side {
-        padding: 24px;
-      }
-      
-      .proposal-main h3 {
-        font-size: 20px;
-      }
+      .hero { padding: 100px 24px 60px; min-height: auto; }
+      .hero h1 { font-size: 32px; }
+      .hero p { font-size: 15px; }
+      .hero-ctas { flex-direction: column; width: 100%; max-width: 320px; }
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; padding: 14px 24px; font-size: 15px; }
+      .section { padding: 60px 24px; }
+      .section-header h2 { font-size: 28px; }
+      .section-header p { font-size: 15px; }
+      .grid { grid-template-columns: 1fr; max-width: 420px; }
+      .proposal-main, .proposal-side { padding: 24px; }
+      .proposal-main h3 { font-size: 20px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Navigation -->
-  <nav class="nav nav--dark">
-    <a href="index.html" class="nav__logo">
-      <img src="https://kesmit3.github.io/paic/upliftlogo.png" alt="Uplift Education" class="nav__logo-img">
-      <div class="nav__divider"></div>
-      <span class="nav__product">Purpose Engine</span>
+  <!-- Universal Navigation – Consistent across all pages -->
+<nav class="nav nav--dark">
+  <a href="index.html" class="nav__logo">
+    <img src="assets/upliftlogo.png" alt="Uplift Education" class="nav__logo-img" />
+    <div class="nav__divider"></div>
+    <span class="nav__product">Purpose Engine</span>
+  </a>
+  <button class="nav__toggle" onclick="toggleNav()">☰</button>
+  <div class="nav__links" id="navLinks">
+    <a href="index.html" class="nav__link">
+      <span class="nav__link-icon">🏠</span>
+      <span class="nav__link-text">Home</span>
     </a>
-    <button class="nav__toggle" onclick="toggleNav()">☰</button>
-    <div class="nav__links" id="navLinks">
-      <a href="index.html" class="nav__link">
-        <span class="nav__link-icon">🏠</span>
-        <span class="nav__link-text">Home</span>
-      </a>
-      <a href="student-dashboard.html" class="nav__link">
-        <span class="nav__link-icon">📊</span>
-        <span class="nav__link-text">Student</span>
-      </a>
-      <a href="career-bridge.html" class="nav__link">
-        <span class="nav__link-icon">🎯</span>
-        <span class="nav__link-text">Career Bridge</span>
-      </a>
-      <a href="future-self.html" class="nav__link">
-        <span class="nav__link-icon">🔮</span>
-        <span class="nav__link-text">Future Self</span>
-      </a>
-      <a href="educator-dashboard.html" class="nav__link">
-        <span class="nav__link-icon">👩‍🏫</span>
-        <span class="nav__link-text">Educator</span>
-      </a>
-    </div>
-  </nav>
+    <a href="student-dashboard.html" class="nav__link">
+      <span class="nav__link-icon">🎓</span>
+      <span class="nav__link-text">Student</span>
+    </a>
+    <a href="career-bridge.html" class="nav__link">
+      <span class="nav__link-icon">🌉</span>
+      <span class="nav__link-text">Career Bridge</span>
+    </a>
+    <a href="future-self.html" class="nav__link">
+      <span class="nav__link-icon">🔮</span>
+      <span class="nav__link-text">Future Self</span>
+    </a>
+    <a href="educator-dashboard.html" class="nav__link">
+      <span class="nav__link-icon">👩‍🏫</span>
+      <span class="nav__link-text">Educator</span>
+    </a>
+    <a href="americandream.html" class="nav__link">
+      <span class="nav__link-icon">🇺🇸</span>
+      <span class="nav__link-text">American Dream</span>
+    </a>
+    <a href="aichallenge.html" class="nav__link">
+      <span class="nav__link-icon">🤖</span>
+      <span class="nav__link-text">AI Challenge</span>
+    </a>
+    <a href="technical-architecture.html" class="nav__link">
+      <span class="nav__link-icon">🛠️</span>
+      <span class="nav__link-text">Technical</span>
+    </a>
+    <a href="project-research.html" class="nav__link">
+      <span class="nav__link-icon">📚</span>
+      <span class="nav__link-text">Research</span>
+    </a>
+  </div>
+</nav>
 
   <!-- HERO: Vision statement -->
   <section class="hero" id="top">
@@ -466,7 +437,7 @@
   </section>
 
   <!-- Bridge: why this matters -->
-  <section class="section section--light">
+  <section class="section">
     <div class="section-header">
       <h2>Why This Page Exists</h2>
       <p>
@@ -476,7 +447,7 @@
       </p>
     </div>
 
-    <div class="cards-grid">
+    <div class="grid">
       <div class="card">
         <div class="kicker">Principle</div>
         <h3>Human Connection First</h3>
@@ -496,7 +467,7 @@
   </section>
 
   <!-- Proposal -->
-  <section class="section section--dark" id="proposal">
+  <section class="section alt" id="proposal">
     <div class="section-header">
       <h2>App Proposal</h2>
       <p>
@@ -549,7 +520,7 @@
 
         <div class="side-block">
           <div class="label">Guardrails</div>
-          <div class="text">Transparent prompts, role-based access, logging, bias checks, and clear "AI is a tool" messaging.</div>
+          <div class="text">Transparent prompts, role-based access, logging, bias checks, and clear “AI is a tool” messaging.</div>
         </div>
 
         <div class="side-block">
@@ -566,16 +537,16 @@
   </section>
 
   <!-- Next: modules -->
-  <section class="section section--light">
+  <section class="section">
     <div class="section-header">
-      <h2>What We're Building</h2>
+      <h2>What We’re Building</h2>
       <p>
         A small number of high-impact modules that work together. Each module is useful on its own,
         but stronger as a system.
       </p>
     </div>
 
-    <div class="cards-grid">
+    <div class="grid">
       <div class="card">
         <div class="kicker">Module 01</div>
         <h3>Purpose Prompts</h3>
@@ -589,13 +560,13 @@
       <div class="card">
         <div class="kicker">Module 03</div>
         <h3>Early Warning Signals</h3>
-        <p>Pattern detection for disengagement risk, surfaced as educator-friendly "next best actions."</p>
+        <p>Pattern detection for disengagement risk, surfaced as educator-friendly “next best actions.”</p>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="section section--dark">
+  <section class="section alt">
     <div class="section-header">
       <h2>Build the Future Together</h2>
       <p>
@@ -630,5 +601,10 @@
       }
     });
   </script>
+  <script>
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+</script>
 </body>
 </html>
