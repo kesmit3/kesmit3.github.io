@@ -840,6 +840,432 @@
       display: none;
     }
 
+    /* ============ TRANSFORM ENGINE STYLES ============ */
+    .transform-engine-section {
+      display: none;
+      background: linear-gradient(180deg, var(--navy) 0%, #0f0f1a 100%);
+      padding: 80px 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .transform-engine-section.visible {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .transform-engine-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .transform-engine-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .engine-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--yellow) 0%, #FFB300 100%);
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 800;
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .transform-engine-header h2 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .transform-engine-header p {
+      font-size: 16px;
+      color: var(--gray-400);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Assignment Selector */
+    .assignment-selector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .selector-label {
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .selector-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .selector-btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: var(--gray-400);
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .selector-btn:hover {
+      background: rgba(255,255,255,0.05);
+      color: white;
+    }
+
+    .selector-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    /* Transform Display */
+    .transform-display {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 24px;
+      align-items: start;
+      margin-bottom: 40px;
+    }
+
+    .transform-card {
+      border-radius: 20px;
+      padding: 28px;
+      transition: all 0.5s ease;
+    }
+
+    .transform-card.before {
+      background: rgba(239, 68, 68, 0.08);
+      border: 2px solid rgba(239, 68, 68, 0.25);
+    }
+
+    .transform-card.before.faded {
+      opacity: 0.5;
+      transform: scale(0.98);
+    }
+
+    .transform-card.after {
+      background: rgba(16, 185, 129, 0.05);
+      border: 2px solid rgba(16, 185, 129, 0.2);
+      opacity: 0.4;
+    }
+
+    .transform-card.after.active {
+      opacity: 1;
+      background: rgba(16, 185, 129, 0.12);
+      border-color: var(--success);
+      transform: scale(1.02);
+    }
+
+    .transform-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .card-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .before-badge {
+      background: rgba(239, 68, 68, 0.2);
+      color: #FCA5A5;
+    }
+
+    .after-badge {
+      background: rgba(16, 185, 129, 0.2);
+      color: #6EE7B7;
+    }
+
+    .subject-tag {
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+
+    .transform-card-content h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .transform-card-content p {
+      font-size: 14px;
+      color: var(--gray-400);
+      line-height: 1.7;
+    }
+
+    .transform-card.after .transform-card-content p strong {
+      color: var(--success);
+    }
+
+    .student-reaction {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 12px;
+    }
+
+    .before-reaction {
+      background: rgba(0,0,0,0.3);
+    }
+
+    .after-reaction {
+      background: rgba(16, 185, 129, 0.15);
+    }
+
+    .reaction-avatar {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .reaction-thought {
+      font-size: 13px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .before-reaction .reaction-thought {
+      color: var(--gray-400);
+    }
+
+    .after-reaction .reaction-thought {
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* Transform Arrow Container */
+    .transform-arrow-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px 0;
+    }
+
+    .engine-transform-btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--purple) 100%);
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 24px rgba(0, 103, 177, 0.4);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-family: inherit;
+    }
+
+    .engine-transform-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 32px rgba(139, 92, 246, 0.5);
+    }
+
+    .engine-transform-btn.processing {
+      animation: pulse 1s ease-in-out infinite;
+    }
+
+    .engine-transform-btn.done {
+      background: linear-gradient(135deg, var(--success) 0%, #34D399 100%);
+      box-shadow: 0 4px 24px rgba(16, 185, 129, 0.4);
+    }
+
+    .engine-transform-btn .btn-icon {
+      font-size: 24px;
+    }
+
+    .engine-transform-btn .btn-text {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .transform-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .transform-steps.visible {
+      opacity: 1;
+    }
+
+    .transform-steps .step {
+      font-size: 11px;
+      color: var(--gray-500);
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s ease;
+    }
+
+    .transform-steps .step.active {
+      opacity: 1;
+      transform: translateX(0);
+      color: var(--primary-light);
+    }
+
+    .transform-steps .step.done {
+      color: var(--success);
+    }
+
+    /* Objectives Verification */
+    .objectives-verification {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+
+    .objectives-verification.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .verification-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--success);
+    }
+
+    .check-icon {
+      font-size: 20px;
+    }
+
+    .objectives-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .objective-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+
+    .obj-check {
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .verification-note {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      font-style: italic;
+    }
+
+    /* Other Students */
+    .other-students {
+      margin-top: 48px;
+    }
+
+    .other-students-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .other-students-header h4 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .other-students-header p {
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .other-students-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .other-student-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .other-student-card .os-avatar {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--purple) 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .other-student-card .os-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .other-student-card .os-goal {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-bottom: 12px;
+    }
+
+    .other-student-card .os-transform {
+      font-size: 13px;
+      color: var(--gray-400);
+      font-style: italic;
+      line-height: 1.5;
+      padding: 12px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+    }
+
     .reset-btn.visible {
       display: flex;
       align-items: center;
@@ -873,6 +1299,49 @@
 
       .nav__demo-links {
         display: none;
+      }
+
+      .transform-display {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .transform-arrow-container {
+        flex-direction: row;
+        padding: 16px 0;
+      }
+
+      .other-students-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .transform-engine-section {
+        padding: 60px 20px;
+      }
+
+      .transform-engine-header h2 {
+        font-size: 24px;
+      }
+
+      .transform-card {
+        padding: 20px;
+      }
+
+      .transform-card-content h3 {
+        font-size: 18px;
+      }
+
+      .engine-transform-btn {
+        width: 64px;
+        height: 64px;
+      }
+
+      .engine-transform-btn .btn-icon {
+        font-size: 20px;
       }
     }
 
@@ -1400,6 +1869,136 @@
     </div>
   </div>
 
+  <!-- ============ TRANSFORM ENGINE SECTION ============ -->
+  <div class="transform-engine-section" id="transformEngine">
+    <div class="transform-engine-container">
+      <div class="transform-engine-header">
+        <div class="engine-badge">⚡ Live Transform Engine</div>
+        <h2>See the Assignment Transformation</h2>
+        <p>Same learning objectives. Personalized to Maya's goal of becoming a Sustainable Design Director.</p>
+      </div>
+
+      <!-- Assignment Selector -->
+      <div class="assignment-selector">
+        <span class="selector-label">Select an assignment:</span>
+        <div class="selector-buttons">
+          <button class="selector-btn active" onclick="selectAssignment('chemistry')">🧪 Chemistry</button>
+          <button class="selector-btn" onclick="selectAssignment('english')">📝 English</button>
+          <button class="selector-btn" onclick="selectAssignment('math')">📐 Math</button>
+          <button class="selector-btn" onclick="selectAssignment('history')">📜 History</button>
+        </div>
+      </div>
+
+      <!-- Transform Display -->
+      <div class="transform-display">
+        <!-- Before Card -->
+        <div class="transform-card before" id="beforeAssignment">
+          <div class="transform-card-header">
+            <span class="card-badge before-badge">📋 Original Assignment</span>
+            <span class="subject-tag" id="beforeSubject">Chemistry</span>
+          </div>
+          <div class="transform-card-content">
+            <h3 id="beforeTitle">Stoichiometry Lab #7</h3>
+            <p id="beforeDesc">Calculate the molar ratios needed to balance the following chemical equations. Complete problems 1-15 in your workbook. Show all work. Due tomorrow.</p>
+          </div>
+          <div class="student-reaction before-reaction">
+            <div class="reaction-avatar">😐</div>
+            <div class="reaction-thought" id="beforeThought">"I want to design buildings, not be a chemist. When will I ever use this?"</div>
+          </div>
+        </div>
+
+        <!-- Transform Button -->
+        <div class="transform-arrow-container">
+          <button class="engine-transform-btn" id="engineTransformBtn" onclick="runTransform()">
+            <span class="btn-icon">🧠</span>
+            <span class="btn-text">Transform</span>
+          </button>
+          <div class="transform-steps" id="transformSteps">
+            <div class="step" id="step1">Reading Maya's Purpose Card...</div>
+            <div class="step" id="step2">Matching to career context...</div>
+            <div class="step" id="step3">Preserving learning objectives...</div>
+            <div class="step" id="step4">Generating personalized frame...</div>
+          </div>
+        </div>
+
+        <!-- After Card -->
+        <div class="transform-card after" id="afterAssignment">
+          <div class="transform-card-header">
+            <span class="card-badge after-badge">✨ Purpose Engine Version</span>
+            <span class="subject-tag" id="afterSubject">Chemistry → Sustainable Design</span>
+          </div>
+          <div class="transform-card-content">
+            <h3 id="afterTitle">🌱 Eco-Material Design Challenge</h3>
+            <p id="afterDesc"><strong>Client Brief:</strong> A green construction startup needs your help. They're developing plant-based building insulation but the last batch failed fire safety tests because the chemical ratios were wrong. Calculate the exact molar ratios for their bio-composite formula. Your calculations will determine if this sustainable material can go to market.</p>
+          </div>
+          <div class="student-reaction after-reaction">
+            <div class="reaction-avatar">🤩</div>
+            <div class="reaction-thought" id="afterThought">"Wait, this is actually what sustainable architects do? I need to understand this!"</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Learning Objectives Verification -->
+      <div class="objectives-verification" id="objectivesCheck">
+        <div class="verification-header">
+          <span class="check-icon">✅</span>
+          <span>Learning Objectives Preserved</span>
+        </div>
+        <div class="objectives-list">
+          <div class="objective-item">
+            <span class="obj-check">✓</span>
+            <span class="obj-text">TEKS C.8.D: Calculate stoichiometric quantities</span>
+          </div>
+          <div class="objective-item">
+            <span class="obj-check">✓</span>
+            <span class="obj-text">TEKS C.8.E: Balance chemical equations</span>
+          </div>
+          <div class="objective-item">
+            <span class="obj-check">✓</span>
+            <span class="obj-text">TEKS C.8.F: Differentiate between empirical and molecular formulas</span>
+          </div>
+        </div>
+        <div class="verification-note">
+          Same rigor. Same standards. Different motivation.
+        </div>
+      </div>
+
+      <!-- Other Student Examples -->
+      <div class="other-students">
+        <div class="other-students-header">
+          <h4>Same Assignment, Different Students</h4>
+          <p>The Purpose Engine personalizes for each student's goals:</p>
+        </div>
+        <div class="other-students-grid">
+          <div class="other-student-card">
+            <div class="os-avatar">JW</div>
+            <div class="os-info">
+              <div class="os-name">Jordan Williams</div>
+              <div class="os-goal">Goal: Launch a tech startup</div>
+            </div>
+            <div class="os-transform">"Calculate chemical ratios for battery production scaling — investors need unit economics."</div>
+          </div>
+          <div class="other-student-card">
+            <div class="os-avatar">AR</div>
+            <div class="os-info">
+              <div class="os-name">Alex Rivera</div>
+              <div class="os-goal">Goal: Become a pediatric surgeon</div>
+            </div>
+            <div class="os-transform">"Calculate medication dosage ratios — the difference between healing and harm."</div>
+          </div>
+          <div class="other-student-card">
+            <div class="os-avatar">TK</div>
+            <div class="os-info">
+              <div class="os-name">Taylor Kim</div>
+              <div class="os-goal">Goal: Marine conservation</div>
+            </div>
+            <div class="os-transform">"Calculate ocean acidification rates — your data informs conservation policy."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Reset Button -->
   <button class="reset-btn" id="resetBtn" onclick="resetDemo()">
     ↺ Reset Demo
@@ -1441,6 +2040,11 @@
         document.getElementById('phase2').classList.remove('active');
         document.getElementById('phase3').classList.add('active');
         document.getElementById('resetBtn').classList.add('visible');
+        
+        // Show transform engine after a short delay
+        setTimeout(() => {
+          document.getElementById('transformEngine').classList.add('visible');
+        }, 500);
       }, 2500);
     }
 
@@ -1480,12 +2084,179 @@
       document.getElementById('phase3').classList.remove('active');
       document.getElementById('resetBtn').classList.remove('visible');
       
+      // Hide transform engine
+      document.getElementById('transformEngine').classList.remove('visible');
+      resetTransformEngine();
+      
       // Reset to educator view
       document.querySelectorAll('.toggle-btn').forEach((btn, i) => {
         btn.classList.toggle('active', i === 0);
       });
       document.getElementById('educatorView').classList.add('active');
       document.getElementById('studentView').classList.remove('active');
+    }
+
+    // ============ TRANSFORM ENGINE FUNCTIONS ============
+    
+    const assignments = {
+      chemistry: {
+        subject: 'Chemistry',
+        beforeTitle: 'Stoichiometry Lab #7',
+        beforeDesc: 'Calculate the molar ratios needed to balance the following chemical equations. Complete problems 1-15 in your workbook. Show all work. Due tomorrow.',
+        beforeThought: '"I want to design buildings, not be a chemist. When will I ever use this?"',
+        afterSubject: 'Chemistry → Sustainable Design',
+        afterTitle: '🌱 Eco-Material Design Challenge',
+        afterDesc: '<strong>Client Brief:</strong> A green construction startup needs your help. They\'re developing plant-based building insulation but the last batch failed fire safety tests because the chemical ratios were wrong. Calculate the exact molar ratios for their bio-composite formula. Your calculations will determine if this sustainable material can go to market.',
+        afterThought: '"Wait, this is actually what sustainable architects do? I need to understand this!"',
+        objectives: [
+          'TEKS C.8.D: Calculate stoichiometric quantities',
+          'TEKS C.8.E: Balance chemical equations',
+          'TEKS C.8.F: Differentiate between empirical and molecular formulas'
+        ]
+      },
+      english: {
+        subject: 'English',
+        beforeTitle: 'Persuasive Essay Assignment',
+        beforeDesc: 'Write a 5-paragraph persuasive essay on a topic of your choice. Include a thesis statement, supporting arguments, and a conclusion. MLA format, 500-750 words. Due Friday.',
+        beforeThought: '"Another essay about nothing that matters to me..."',
+        afterSubject: 'English → Sustainable Design',
+        afterTitle: '📝 Green Building Proposal',
+        afterDesc: '<strong>Real Challenge:</strong> Your city council is deciding whether to require LEED certification for new buildings. Write a persuasive proposal to the council explaining why sustainable building standards matter. Use evidence about environmental impact, cost savings, and public health. Your writing could influence real policy.',
+        afterThought: '"I\'m actually arguing for something I believe in. This could make a difference!"',
+        objectives: [
+          'TEKS E2.11.A: Compose argumentative texts',
+          'TEKS E2.11.B: Develop drafts with clear thesis',
+          'TEKS E2.11.C: Revise for clarity and coherence'
+        ]
+      },
+      math: {
+        subject: 'Algebra II',
+        beforeTitle: 'Quadratic Functions Worksheet',
+        beforeDesc: 'Graph the following quadratic functions and identify the vertex, axis of symmetry, and roots. Complete problems 1-20. Show all work.',
+        beforeThought: '"When am I ever going to graph parabolas in real life?"',
+        afterSubject: 'Math → Sustainable Design',
+        afterTitle: '📐 Solar Panel Optimization',
+        afterDesc: '<strong>Design Challenge:</strong> A sustainable architect needs to position solar panels on a curved roof. The sun\'s path creates a parabolic efficiency curve. Calculate the optimal panel angles to maximize energy capture throughout the day. Your math determines whether this net-zero building meets its energy goals.',
+        afterThought: '"The curve of the roof IS a parabola! This is how architects think about energy!"',
+        objectives: [
+          'TEKS A2.4.A: Graph quadratic functions',
+          'TEKS A2.4.B: Identify key features of parabolas',
+          'TEKS A2.4.C: Solve optimization problems'
+        ]
+      },
+      history: {
+        subject: 'US History',
+        beforeTitle: 'Industrial Revolution Essay',
+        beforeDesc: 'Write a 3-page essay on the effects of the Industrial Revolution on American society. Include primary and secondary sources. Due next Monday.',
+        beforeThought: '"This happened 200 years ago. How is this relevant to anything?"',
+        afterSubject: 'History → Sustainable Design',
+        afterTitle: '📜 Building the Future: Lessons from the Past',
+        afterDesc: '<strong>Historical Analysis:</strong> The Industrial Revolution transformed how we build—and created environmental challenges we\'re still solving. Analyze how 19th-century building innovations (steel frames, mass production) shaped modern cities. Then propose how sustainable architects today can learn from both the successes and mistakes of that era.',
+        afterThought: '"Understanding how buildings evolved helps me design better ones. History IS relevant!"',
+        objectives: [
+          'TEKS H.15.A: Analyze effects of industrialization',
+          'TEKS H.15.B: Evaluate technological innovations',
+          'TEKS H.29.A: Use primary and secondary sources'
+        ]
+      }
+    };
+
+    let currentAssignment = 'chemistry';
+    let isTransformed = false;
+
+    function selectAssignment(type) {
+      // Update buttons
+      document.querySelectorAll('.selector-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      currentAssignment = type;
+      const assignment = assignments[type];
+      
+      // Reset transform state
+      resetTransformEngine();
+      
+      // Update content
+      document.getElementById('beforeSubject').textContent = assignment.subject;
+      document.getElementById('beforeTitle').textContent = assignment.beforeTitle;
+      document.getElementById('beforeDesc').textContent = assignment.beforeDesc;
+      document.getElementById('beforeThought').textContent = assignment.beforeThought;
+      
+      document.getElementById('afterSubject').textContent = assignment.afterSubject;
+      document.getElementById('afterTitle').textContent = assignment.afterTitle;
+      document.getElementById('afterDesc').innerHTML = assignment.afterDesc;
+      document.getElementById('afterThought').textContent = assignment.afterThought;
+      
+      // Update objectives
+      const objList = document.querySelector('.objectives-list');
+      objList.innerHTML = assignment.objectives.map(obj => `
+        <div class="objective-item">
+          <span class="obj-check">✓</span>
+          <span class="obj-text">${obj}</span>
+        </div>
+      `).join('');
+    }
+
+    function runTransform() {
+      if (isTransformed) {
+        resetTransformEngine();
+        return;
+      }
+      
+      const btn = document.getElementById('engineTransformBtn');
+      const steps = document.getElementById('transformSteps');
+      const stepElements = steps.querySelectorAll('.step');
+      
+      btn.classList.add('processing');
+      steps.classList.add('visible');
+      
+      // Animate steps
+      stepElements.forEach((step, i) => {
+        setTimeout(() => {
+          step.classList.add('active');
+        }, i * 400);
+        
+        setTimeout(() => {
+          step.classList.remove('active');
+          step.classList.add('done');
+        }, (i + 1) * 400);
+      });
+      
+      // After steps complete, show transformation
+      setTimeout(() => {
+        btn.classList.remove('processing');
+        btn.classList.add('done');
+        btn.querySelector('.btn-icon').textContent = '✓';
+        btn.querySelector('.btn-text').textContent = 'Reset';
+        
+        document.getElementById('beforeAssignment').classList.add('faded');
+        document.getElementById('afterAssignment').classList.add('active');
+        document.getElementById('objectivesCheck').classList.add('visible');
+        
+        isTransformed = true;
+      }, 1800);
+    }
+
+    function resetTransformEngine() {
+      isTransformed = false;
+      
+      const btn = document.getElementById('engineTransformBtn');
+      const steps = document.getElementById('transformSteps');
+      const stepElements = steps.querySelectorAll('.step');
+      
+      btn.classList.remove('processing', 'done');
+      btn.querySelector('.btn-icon').textContent = '🧠';
+      btn.querySelector('.btn-text').textContent = 'Transform';
+      
+      steps.classList.remove('visible');
+      stepElements.forEach(step => {
+        step.classList.remove('active', 'done');
+      });
+      
+      document.getElementById('beforeAssignment').classList.remove('faded');
+      document.getElementById('afterAssignment').classList.remove('active');
+      document.getElementById('objectivesCheck').classList.remove('visible');
     }
   </script>
 </body>

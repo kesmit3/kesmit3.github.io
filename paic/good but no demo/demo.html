@@ -85,6 +85,32 @@
       letter-spacing: 0.5px;
     }
 
+    .nav__demo-links {
+      display: flex;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .nav__demo-link {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-400);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .nav__demo-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .nav__demo-link.active {
+      background: var(--primary);
+      color: white;
+    }
+
     /* Main Container */
     .demo-container {
       padding: 100px 32px 60px;
@@ -844,6 +870,10 @@
         margin-left: 0;
         margin-top: 16px;
       }
+
+      .nav__demo-links {
+        display: none;
+      }
     }
 
     @media (max-width: 768px) {
@@ -913,6 +943,11 @@
       <span class="nav__product">Purpose Engine</span>
     </a>
     <span class="nav__badge">Educator View</span>
+    <div class="nav__demo-links">
+      <a href="index.html" class="nav__demo-link">Home</a>
+      <a href="demo.html" class="nav__demo-link active">Educator Demo</a>
+      <a href="rtcc-demo.html" class="nav__demo-link">RTCC Demo</a>
+    </div>
   </nav>
 
   <div class="demo-container">
