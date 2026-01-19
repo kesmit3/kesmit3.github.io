@@ -4,7 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Future Self | Purpose Engine Demo</title>
-  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/upliftlogo.png">
+  
+  <!-- Favicon and Social Sharing -->
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png">
+  <meta property="og:title" content="Future Self | Purpose Engine">
+  <meta property="og:description" content="Talk to your AI-powered Future Self. See how your schoolwork connects to your dreams.">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -28,15 +38,7 @@
       border-bottom: 1px solid #e2e8f0;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo-img {
-      height: 40px;
-    }
+    .logo-img { height: 40px; }
 
     .logo-divider {
       width: 1px;
@@ -75,9 +77,7 @@
       transition: all 0.2s ease;
     }
 
-    .home-link:hover {
-      background: #f1f5f9;
-    }
+    .home-link:hover { background: #f1f5f9; }
 
     .logo-link {
       display: flex;
@@ -108,9 +108,7 @@
       border-radius: 5px;
     }
 
-    .step-dot.done {
-      background: #F7B618;
-    }
+    .step-dot.done { background: #F7B618; }
 
     /* Screens Container */
     .screens {
@@ -124,9 +122,7 @@
       animation: fadeIn 0.4s ease;
     }
 
-    .screen.active {
-      display: block;
-    }
+    .screen.active { display: block; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(12px); }
@@ -162,7 +158,6 @@
       margin: 0;
     }
 
-    /* Screen 1: Choose Profile */
     .screen-title {
       text-align: center;
       margin-bottom: 8px;
@@ -258,19 +253,9 @@
       font-size: 20px;
     }
 
-    .selected-profile .info {
-      flex: 1;
-    }
-
-    .selected-profile .name {
-      font-weight: 600;
-      font-size: 16px;
-    }
-
-    .selected-profile .meta {
-      font-size: 13px;
-      color: #64748b;
-    }
+    .selected-profile .info { flex: 1; }
+    .selected-profile .name { font-weight: 600; font-size: 16px; }
+    .selected-profile .meta { font-size: 13px; color: #64748b; }
 
     .change-btn {
       font-size: 13px;
@@ -369,15 +354,8 @@
       font-size: 16px;
     }
 
-    .future-info .name {
-      font-weight: 600;
-      font-size: 17px;
-    }
-
-    .future-info .role {
-      font-size: 13px;
-      opacity: 0.85;
-    }
+    .future-info .name { font-weight: 600; font-size: 17px; }
+    .future-info .role { font-size: 13px; opacity: 0.85; }
 
     .back-btn {
       margin-left: auto;
@@ -411,13 +389,8 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .message.future {
-      align-self: flex-start;
-    }
-
-    .message.student {
-      align-self: flex-end;
-    }
+    .message.future { align-self: flex-start; }
+    .message.student { align-self: flex-end; }
 
     .message-bubble {
       padding: 14px 18px;
@@ -446,9 +419,7 @@
       padding: 0 4px;
     }
 
-    .message.student .message-time {
-      text-align: right;
-    }
+    .message.student .message-time { text-align: right; }
 
     .typing-dots {
       display: inline-flex;
@@ -510,10 +481,7 @@
       cursor: not-allowed;
     }
 
-    .input-row {
-      display: flex;
-      gap: 12px;
-    }
+    .input-row { display: flex; gap: 12px; }
 
     .chat-input {
       flex: 1;
@@ -530,9 +498,7 @@
       border-color: #1B5A90;
     }
 
-    .chat-input:disabled {
-      background: #f8fafc;
-    }
+    .chat-input:disabled { background: #f8fafc; }
 
     .send-btn {
       width: 48px;
@@ -546,17 +512,9 @@
       transition: transform 0.15s ease;
     }
 
-    .send-btn:hover {
-      transform: scale(1.05);
-    }
+    .send-btn:hover { transform: scale(1.05); }
+    .send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-    .send-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    /* Buttons */
     .btn {
       padding: 14px 28px;
       border-radius: 12px;
@@ -597,48 +555,13 @@
       margin-top: 32px;
     }
 
-    /* Error message */
-    .error-msg {
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      color: #991b1b;
-      padding: 12px 16px;
-      border-radius: 8px;
-      font-size: 13px;
-      margin-top: 12px;
-      display: none;
-    }
-
-    .error-msg.show {
-      display: block;
-    }
-
-    /* Responsive */
     @media (max-width: 640px) {
-      .header {
-        padding: 12px 16px;
-      }
-
-      .profiles-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .goal-container {
-        padding: 32px 24px;
-      }
-
-      .chat-container {
-        height: calc(100vh - 180px);
-        border-radius: 16px;
-      }
-
-      .screen-title {
-        font-size: 24px;
-      }
-
-      .screens {
-        padding: 0 16px 32px;
-      }
+      .header { padding: 12px 16px; }
+      .profiles-grid { grid-template-columns: repeat(2, 1fr); }
+      .goal-container { padding: 32px 24px; }
+      .chat-container { height: calc(100vh - 180px); border-radius: 16px; }
+      .screen-title { font-size: 24px; }
+      .screens { padding: 0 16px 32px; }
     }
   </style>
 </head>
@@ -671,7 +594,7 @@
     <!-- Screen 1: Choose Profile -->
     <div class="screen active" id="screen1">
       <div class="demo-banner">
-        <span class="demo-badge">&#10024; LIVE AI DEMO</span>
+        <span class="demo-badge">&#10024; INTERACTIVE DEMO</span>
         <p>This demo uses fictional student personas to show how the Purpose Engine works.<br>Select a character to step into their shoes and talk to their AI-powered Future Self.</p>
       </div>
 
@@ -779,21 +702,18 @@
           <button class="back-btn" onclick="goToScreen(2)">&#9998; Edit Goal</button>
         </div>
 
-        <div class="chat-messages" id="chatMessages">
-          <!-- Messages populated dynamically -->
-        </div>
+        <div class="chat-messages" id="chatMessages"></div>
 
         <div class="chat-input-area">
           <div class="quick-prompts" id="quickPrompts">
-            <button class="quick-prompt" onclick="sendMessage('Why do I even need to learn chemistry?')">Why do I need chemistry?</button>
-            <button class="quick-prompt" onclick="sendMessage('Did you ever feel like giving up in high school?')">Did you ever want to give up?</button>
-            <button class="quick-prompt" onclick="sendMessage('What should I focus on this year to reach my goals?')">What should I focus on?</button>
+            <button class="quick-prompt" onclick="sendMessage('chemistry')">Why do I need chemistry?</button>
+            <button class="quick-prompt" onclick="sendMessage('giveup')">Did you ever want to give up?</button>
+            <button class="quick-prompt" onclick="sendMessage('focus')">What should I focus on?</button>
           </div>
           <div class="input-row">
             <input type="text" class="chat-input" id="chatInput" placeholder="Ask your Future Self anything..." onkeypress="handleKeyPress(event)">
             <button class="send-btn" id="sendBtn" onclick="sendCustomMessage()">&rarr;</button>
           </div>
-          <div class="error-msg" id="errorMsg"></div>
         </div>
       </div>
     </div>
@@ -806,8 +726,83 @@
     // =====================
     let selectedProfile = null;
     let selectedGoal = '';
-    let conversationHistory = [];
     let isLoading = false;
+
+    // =====================
+    // PRE-GENERATED RESPONSES FOR EACH PERSONA
+    // =====================
+    const responses = {
+      'Maya Chen': {
+        greeting: `Hey Maya--it's you. The future you. I'm 32 now, working as a Sustainable Design Director at a firm that's reshaping how cities think about green buildings.\n\nI remember being in 11th grade, sitting in chemistry class, wondering if any of this would ever matter. Spoiler: it really did--in ways I never expected.\n\nWhat's on your mind?`,
+        chemistry: `Oh man, chemistry! I know it feels pointless right now. But here's the thing--last month I had to reject a supplier's insulation materials because the chemical composition wasn't right for our LEED certification.\n\nStoichiometry? I use it to calculate material ratios for sustainable concrete mixes. The periodic table? I need to understand which elements off-gas toxins and which are safe for indoor air quality.\n\nThat stuff you're memorizing now literally helps me build healthier buildings.`,
+        giveup: `Honestly? Junior year was rough. I remember getting a C on a physics test and thinking "maybe architecture isn't for me."\n\nBut here's what I wish someone had told me: that C didn't define my career. What mattered was that I kept showing up, kept asking questions, and found ways to connect what I was learning to what I actually cared about.\n\nThe doubt doesn't fully go away--I still have imposter syndrome sometimes. But you learn to push through it.`,
+        focus: `If I could go back, I'd tell myself: take that environmental science elective, even if your friends aren't in it. Join the robotics club--the CAD skills transfer directly to architectural design.\n\nBut honestly? The biggest thing is to stay curious. When a subject feels boring, ask yourself "how might this connect to sustainable design?" You'd be surprised how often the answer is "more than you think."`,
+        default: `That's a great question. You know, when I was your age, I didn't have all the answers either. What I've learned is that every experience--even the confusing ones--builds toward something.\n\nThe key is staying curious and connected to why you're doing this. For me, it was always about creating spaces that help both people and the planet. Keep that "why" close, and the "how" starts to make more sense.`
+      },
+      'Jordan Williams': {
+        greeting: `Hey Jordan--it's you. The future you. I'm 32, and yeah, we actually did it. I'm running a tech company that's helping small businesses automate their operations.\n\nI remember being in 12th grade, sketching app ideas in the back of English class, wondering if college was even the right path. Turns out, the answer was complicated--but we figured it out.\n\nWhat's going on?`,
+        chemistry: `Real talk? I thought chemistry was a waste of time too. But here's something wild--when we were developing our supply chain software, I had to understand chemical storage regulations for our warehouse clients.\n\nTurns out, knowing why certain materials can't be stored together (redox reactions, anyone?) helped us build better safety features. Our compliance module became one of our biggest selling points.\n\nYou never know which "random" knowledge will become your competitive advantage.`,
+        giveup: `Senior year, I pitched my first app idea at a school competition and came in last place. Last. Place. I went home and seriously considered just getting a "normal" job.\n\nBut then I realized--that failure taught me more than winning would have. I learned what questions investors actually ask, why my pitch fell flat, and how to handle rejection.\n\nStartup life is basically a series of small failures leading to occasional wins. That competition was just early practice.`,
+        focus: `Honestly? Learn to code, but also learn to communicate. Half of being a founder is explaining complex ideas simply--to investors, to customers, to your team.\n\nThat English class I was doodling in? Turns out persuasive writing is basically the same skill as writing pitch decks. And that group project you hate? It's practice for managing a team.\n\nAlso: build something. Anything. A simple app, a website, whatever. Shipping something real teaches you more than any class.`,
+        default: `You know what I've learned? The path from here to where I am wasn't a straight line. There were detours, pivots, and plenty of "what am I even doing?" moments.\n\nBut every step--even the ones that felt like mistakes--taught me something. Trust the process, stay hungry, and remember that every successful founder started exactly where you are now.`
+      },
+      'Marcus Rivera': {
+        greeting: `Yo Marcus--it's you, bro. Future you. I'm 32 now, and I'm sitting in my own studio right now, the same studio where we just finished mixing a track that's gonna drop next month.\n\nI remember being in 9th grade, making beats on that cracked software, wondering if music could actually be a career. Spoiler: it can. But the journey had some surprises.\n\nWhat's up?`,
+        chemistry: `Okay, this is gonna sound crazy, but chemistry actually connects to music production. Sound is waves, right? And audio engineering is basically physics and math.\n\nBut here's the real connection: chemistry taught me to think systematically. When I'm EQing a mix, I'm balancing elements just like balancing an equation. When I'm layering sounds, I'm thinking about how frequencies interact--constructive and destructive interference.\n\nPlus, understanding acoustics (which is physics and chemistry) helped me design my studio. So yeah, pay attention.`,
+        giveup: `Freshman year of college, I almost switched to business because everyone said music wasn't "practical." I was one form away from changing my major.\n\nThen I got an internship at a small studio--unpaid, just getting coffee and watching. But I learned more in three months there than in a year of classes. That experience reminded me why I started.\n\nThere will always be people telling you to be "realistic." Sometimes they're right. But sometimes they're just scared. Learn to tell the difference.`,
+        focus: `Learn your DAW inside and out. Like, really learn it--keyboard shortcuts, signal flow, everything. Speed matters when inspiration hits.\n\nBut also? Learn an instrument. I know producers who only work with samples, and they're limited. When I learned piano basics, my compositions got way more interesting.\n\nAnd network. Go to shows, talk to other musicians, collaborate even if it's just for fun. This industry is all about relationships.`,
+        default: `Music taught me something important: there's no single path to success. Some producers went to Berklee, some are self-taught on YouTube. What matters is putting in the hours and staying true to your sound.\n\nKeep making beats. Keep learning. And remember--every artist you admire was once exactly where you are, wondering if they had what it takes.`
+      },
+      'Sarah Kim': {
+        greeting: `Hey Sarah--it's you. The future you. I'm 32, and I'm currently a pediatric surgeon at Children's Medical Center. Just finished a long shift, but talking to you feels important.\n\nI remember being in 11th grade, stressing about AP Bio and wondering if I was smart enough for med school. The answer is yes--but it wasn't about being the smartest. It was about being the most persistent.\n\nWhat's on your mind?`,
+        chemistry: `Chemistry is literally the foundation of medicine. Every drug interaction, every metabolic pathway, every diagnostic test--it all comes back to chemistry.\n\nLast week, I had to quickly calculate medication dosages for a tiny patient. One decimal point off could be dangerous. That's stoichiometry with actual stakes.\n\nOrganic chemistry will be brutal in college--everyone says so. But when you're learning how anesthetics work at the molecular level, suddenly those reaction mechanisms click. Push through it.`,
+        giveup: `Third year of med school, I failed my first clinical rotation evaluation. Failed. I went home and cried for two days straight.\n\nBut my mentor told me something I'll never forget: "The doctors who've never failed are the ones I worry about. Failure teaches humility, and humility keeps patients safe."\n\nI repeated that rotation, worked twice as hard, and it ended up being my strongest area. Sometimes your biggest setback becomes your biggest strength.`,
+        focus: `Volunteer at a hospital or clinic if you can. Not just for your resume--but to make sure this is really what you want. Medicine is a long road, and you need to love it to survive it.\n\nAlso: don't neglect your mental health. I wish I'd learned better coping skills earlier. The students who burn out aren't the ones who study less--they're the ones who never learned to rest.\n\nAnd take that anatomy elective if it's offered. Seriously. You'll thank me later.`,
+        default: `You know what nobody tells you about being a doctor? It's not just about being smart. It's about being present, being kind, and being able to function when you're exhausted.\n\nThe academics matter, but so does learning to take care of yourself. The best doctors I know are the ones who stayed human through all the training. Don't lose that.`
+      },
+      'Tyler Brooks': {
+        greeting: `Hey Tyler--it's you. Future you. I'm 32, and I'm a lead game designer at a studio you've definitely heard of. Can't say which one--NDA--but trust me, it's cool.\n\nI remember being in 10th grade, playing games when I should've been doing homework, dreaming about making my own someday. Well, we did it. And the path here was wild.\n\nWhat's up?`,
+        chemistry: `Okay, real talk--I don't use chemistry directly. But here's what I do use: the problem-solving mindset. Chemistry taught me to break down complex systems into smaller parts, test hypotheses, and iterate.\n\nThat's literally game design. Why isn't this level fun? Let's break it down. What variables can we change? Test it, get feedback, iterate.\n\nAlso, physics matters a lot for game engines. Understanding how forces, mass, and acceleration work helps when you're tuning how a character jumps or how a car handles.`,
+        giveup: `Senior year of college, I applied to 47 game studios. Forty-seven. Got rejected by all of them. I was working at a coffee shop, wondering if I'd wasted four years.\n\nThen I made a small indie game in my spare time. Nothing fancy, just a puzzle platformer. Put it on itch.io. A recruiter played it, liked my level design, and reached out.\n\nThe portfolio project I made for fun got me the job that 47 applications couldn't.`,
+        focus: `Make games. Now. Don't wait until you "know enough." Download Unity or Godot--they're free--and make something. It'll be terrible, and that's perfect.\n\nAlso, play games critically. When something feels fun, ask yourself why. When something's frustrating, analyze what went wrong. Train yourself to see the design behind the experience.\n\nAnd math. I know, I know. But linear algebra and trigonometry show up everywhere in game dev. Don't skip it.`,
+        default: `Here's what I wish I'd known: the game industry isn't just about playing games. It's about solving problems, collaborating with artists and programmers, and handling feedback without taking it personally.\n\nThe soft skills matter as much as the technical ones. Be someone people want to work with, and doors will open.`
+      },
+      'Aisha Patel': {
+        greeting: `Hey Aisha--it's you. The future you. I'm 32, working as a data scientist at a nonprofit that uses analytics to fight housing discrimination.\n\nI remember being in 12th grade, torn between my love for math and my passion for social justice, thinking I had to choose one. Turns out, I didn't.\n\nWhat's going on?`,
+        chemistry: `So chemistry specifically? Not my daily driver. But here's the thing--science is science. The scientific method, hypothesis testing, controlling variables--that's the foundation of data science too.\n\nPlus, environmental justice work often involves understanding chemical pollutants and their health impacts. When I analyzed lead contamination data in low-income neighborhoods, knowing some chemistry helped me communicate with the toxicologists on our team.\n\nNo knowledge is ever wasted if you stay curious about connections.`,
+        giveup: `Sophomore year of college, I was struggling in a machine learning class while watching my friends in easier majors have social lives. I seriously considered switching to something "less intense."\n\nThen I went to a conference and saw a presentation on using AI to predict which communities would be affected by climate change. The presenter was a woman of color, like me, using data to protect vulnerable populations.\n\nI walked out of that talk knowing exactly why I was pushing through. Find your "why"--it makes the hard parts bearable.`,
+        focus: `Learn Python and SQL. Seriously, start now--there are free resources everywhere. The sooner you're comfortable with code, the more powerful your analysis can be.\n\nBut also: take ethics seriously. Data can be used to help or harm. I've seen well-meaning algorithms perpetuate bias because no one asked the right questions. Be the person who asks those questions.\n\nAnd statistics. I know it's not glamorous, but understanding p-values and confidence intervals is the difference between good data science and bad.`,
+        default: `What I've learned is that data is just a tool. What matters is what you use it for. The same techniques that help corporations target ads can also help communities get resources they need.\n\nStay connected to your values. Let them guide what problems you choose to solve. The world needs more data scientists who care about justice.`
+      },
+      "Ethan O'Brien": {
+        greeting: `Hey Ethan--it's you. The future you. I'm 32, managing sustainable construction projects that are actually changing how we build communities.\n\nI remember being in 11th grade, working summers with dad on job sites, wondering if there was a way to do construction differently--better for workers, better for the environment. There is.\n\nWhat's on your mind?`,
+        chemistry: `Dude, chemistry is everywhere in construction. Concrete? That's a chemical reaction. Paint and coatings? Chemistry. Sustainable materials? You need to understand their chemical properties.\n\nLast month, I had to evaluate a new eco-friendly concrete mix. Understanding how the pozzolanic reaction works helped me ask the right questions about durability and curing time.\n\nPlus, job site safety involves knowing which materials are hazardous and why. That's pure chemistry. It's not abstract--it's keeping your crew safe.`,
+        giveup: `After high school, I went straight to work instead of college. Figured I'd learn on the job, save money. For a few years, that worked.\n\nBut I hit a ceiling. I wanted to manage projects, implement green building practices, but I didn't have the credentials. So at 25, I went back to school while working full-time. Hardest three years of my life.\n\nPoint is: there's no single right path. But education--formal or not--matters if you want to lead, not just follow.`,
+        focus: `Get comfortable with math and physics. Structural engineering, load calculations, material estimates--it's all numbers.\n\nBut also learn to read blueprints and understand building codes. That's the language of construction. The sooner you're fluent, the faster you'll advance.\n\nAnd respect the trades. I've seen college kids come in thinking they know everything and get humbled fast. Learn from the experienced workers. Their practical knowledge is irreplaceable.`,
+        default: `Construction gets stereotyped as "just manual labor," but modern sustainable building is incredibly technical. We're using drones for site surveys, BIM software for design, and advanced materials that didn't exist ten years ago.\n\nThere's never been a better time to get into this field if you want to build things that actually last--and that don't destroy the planet in the process.`
+      },
+      'Priya Sharma': {
+        greeting: `Hey Priya--it's you. The future you. I'm 32, a veterinarian specializing in exotic animals at a zoo. Yesterday I treated a red panda, so yeah, the dream came true.\n\nI remember being in 10th grade, volunteering at the animal shelter, worrying that vet school was too competitive. It is competitive. But we made it.\n\nWhat's going on?`,
+        chemistry: `Chemistry is half of veterinary medicine! Pharmacology--how drugs work in different species--is all chemistry. Did you know that some medications safe for dogs are toxic to cats because their livers process chemicals differently?\n\nI calculate drug dosages based on body weight and metabolic rates constantly. And understanding biochemistry helps me interpret blood panels and diagnose diseases.\n\nWhen you're learning about pH, enzymes, and organic compounds--that's literally what's happening inside every animal you'll ever treat.`,
+        giveup: `Junior year of undergrad, I didn't get into any vet schools on my first round of applications. None. I had to take a gap year, gain more clinical hours, and reapply.\n\nThat gap year felt like failure at the time. But I worked at an emergency animal hospital and learned more practical skills than any class taught me. When I finally got into vet school, I was better prepared than classmates who'd gone straight through.\n\nRejection isn't the end. Sometimes it's redirection.`,
+        focus: `Volunteer everywhere you can--shelters, farms, wildlife rehab, exotic animal clinics. Variety shows admissions committees you're serious, and it helps you figure out what you actually like.\n\nAlso, don't neglect the science prerequisites. I know they're hard, but vet school assumes you know biology, chemistry, and physics cold. Better to struggle now than in professional school.\n\nAnd learn to handle stress. This career involves a lot of emotional labor. Start building those coping skills early.`,
+        default: `Being a vet isn't like the cute animal videos online. There's loss, there's stress, and there are really hard decisions. But there's also this incredible feeling when you help an animal that can't speak for itself.\n\nIf you love animals and you're willing to put in the work, this career is deeply meaningful. Just go in with realistic expectations.`
+      },
+      'Chris Taylor': {
+        greeting: `Hey Chris--it's you. The future you. I'm 32, and my app has over 2 million users. We just closed our Series B funding, which means I'm now technically a "tech executive." Wild, right?\n\nI remember being in 9th grade, teaching myself to code from YouTube tutorials, hoping it would lead somewhere. It led here.\n\nWhat's up?`,
+        chemistry: `Honestly? I don't use chemistry much directly. But here's the thing--school isn't just about direct application. It's about learning how to learn.\n\nChemistry taught me to follow procedures precisely, to understand that small errors have big consequences, and to think systematically about cause and effect. That's debugging in a nutshell.\n\nPlus, some of the best apps solve science problems. Health tech, environmental monitoring, lab management--if you understand chemistry, you can build tools for people who use it every day.`,
+        giveup: `Sophomore year, I launched my first app. A fitness tracker. I was so proud of it. It got twelve downloads. Twelve. And seven of those were family members.\n\nI almost stopped coding after that. But instead, I asked myself: why didn't it work? The UI was confusing, the onboarding was bad, and honestly, the market was saturated.\n\nSo I built something different. Something that solved a problem I personally had. That one did better. Fail fast, learn faster.`,
+        focus: `Code every day. Even just 30 minutes. Consistency beats intensity for building skills.\n\nLearn to design, not just develop. The best apps solve real problems elegantly. Take a UI/UX course, study apps you love, understand why they feel good to use.\n\nAnd build your network. Join coding clubs, go to hackathons, find a mentor. This industry is collaborative, not solitary.`,
+        default: `The best advice I ever got: build something people actually want. Not something that sounds cool, not something technically impressive, but something that solves a real problem for real people.\n\nTalk to potential users before you write a single line of code. The app that made me successful wasn't my most technically complex--it was the one that addressed a genuine need.`
+      },
+      'Nina Rodriguez': {
+        greeting: `Hey Nina--it's you. The future you. I'm 32, and last night I performed on Broadway. Not in the chorus--a principal role. We did it, girl.\n\nI remember being in 12th grade, stretching in the dance studio before school, hoping this passion could somehow become a life. It can. It did.\n\nWhat's on your mind?`,
+        chemistry: `Okay, I'm not gonna lie--I don't use chemistry equations. But here's what I do use: discipline. Learning something hard, even when you don't see the point, builds the mental stamina you need for this career.\n\nPlus, understanding how your body works helps prevent injuries. Muscles, energy systems, nutrition--it's all science. The dancers with the longest careers are the ones who treat their bodies intelligently, not just intensely.\n\nAnd honestly? Being able to hold a conversation about non-dance topics makes you more interesting at auditions.`,
+        giveup: `After college, I moved to New York with $800 and a lot of hope. For two years, I went to auditions and got rejected. Over and over. I worked as a server, took classes, and questioned everything.\n\nThe breakthrough came when I least expected it. A choreographer I'd worked with once remembered me and called me in for a workshop. That workshop led to a regional tour, which led to Broadway.\n\nThis industry runs on relationships and persistence. You need both.`,
+        focus: `Train in multiple styles. Ballet is foundation, but contemporary, jazz, hip-hop--versatility gets you hired. Broadway wants dancers who can do everything.\n\nTake care of your body. Stretch, cross-train, rest. I've seen so many talented dancers burn out from injuries they could have prevented.\n\nAnd take acting classes. Seriously. The dancers who get principal roles are the ones who can act. You're telling stories with your body--you need to understand character and emotion.`,
+        default: `Dance is brutal and beautiful. There's constant rejection, physical pain, and financial uncertainty. But there's also this feeling when you're performing--when the music and the movement and the audience all sync up--that's unlike anything else.\n\nIf you can imagine doing anything else and being happy, do that instead. But if dance is the only thing that makes you feel alive? Then fight for it. We did.`
+      }
+    };
 
     // =====================
     // PROFILE SELECTION
@@ -818,13 +813,11 @@
       selectedProfile = { name, meta, color, initials };
       document.getElementById('nextBtn1').disabled = false;
       
-      // Update screen 2
       document.getElementById('selectedName').textContent = name;
       document.getElementById('selectedMeta').textContent = meta;
       document.getElementById('selectedAvatar').textContent = initials;
       document.getElementById('selectedAvatar').style.background = `linear-gradient(135deg, ${color}, ${color}dd)`;
       
-      // Pre-fill goal based on persona
       const goalMap = {
         'Maya Chen': 'A sustainable architect who designs eco-friendly buildings',
         'Jordan Williams': 'A tech startup founder who builds companies that matter',
@@ -864,7 +857,6 @@
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById('screen' + num).classList.add('active');
       
-      // Update dots
       document.querySelectorAll('.step-dot').forEach((d, i) => {
         d.classList.remove('active', 'done');
         if (i + 1 < num) d.classList.add('done');
@@ -878,60 +870,19 @@
     function startChat() {
       goToScreen(3);
       
-      // Update header
-      const firstName = selectedProfile.name.split(' ')[0];
       document.getElementById('futureName').textContent = `${selectedProfile.name}, age 32`;
       document.getElementById('futureRole').textContent = selectedGoal;
-      
-      // Reset conversation
-      conversationHistory = [];
       document.getElementById('chatMessages').innerHTML = '';
       
-      // Initial greeting from Future Self (will be generated by AI)
       setLoading(true);
       addTypingIndicator();
       
-      // Generate personalized greeting
-      generateGreeting();
-    }
-
-    async function generateGreeting() {
-      const firstName = selectedProfile.name.split(' ')[0];
-      const greetingPrompt = `Generate a warm, personal greeting from the future self to their high school self. Start with "Hey ${firstName}--it's you. The future you." Then briefly mention your age (32), your achieved career, and that you remember being in their grade wondering if school mattered. End by asking what's on their mind. Keep it under 80 words, warm and conversational.`;
-      
-      try {
-        const response = await callAPI(greetingPrompt);
+      setTimeout(() => {
         removeTypingIndicator();
-        addMessage('future', response);
-      } catch (error) {
-        removeTypingIndicator();
-        // Fallback greeting if API fails
-        const grade = selectedProfile.meta.split(' \u2022')[0];
-        const fallback = `Hey ${firstName}--it's you. The future you. I'm 32 now, living the dream we built together as ${selectedGoal.toLowerCase()}.\n\nI remember being in ${grade}, sitting in class, wondering if any of this actually mattered. Spoiler: some of it really did.\n\nWhat's on your mind?`;
-        addMessage('future', fallback);
-      }
-      setLoading(false);
-    }
-
-    function buildSystemPrompt() {
-      const firstName = selectedProfile.name.split(' ')[0];
-      const grade = selectedProfile.meta.split(' \u2022')[0];
-      
-      return `You are the Future Self of ${selectedProfile.name}--specifically, you are them at age 32, having successfully achieved their dream of becoming ${selectedGoal}.
-
-CRITICAL INSTRUCTIONS:
-- You ARE ${firstName}. Speak in first person as their future self.
-- You remember being in ${grade}, struggling with the same doubts they have now.
-- Be warm, encouraging, but REAL. Share specific (fictional but plausible) stories from "your" journey.
-- Connect their current schoolwork to your actual career. Be specific about HOW subjects like chemistry, math, English, etc. showed up in your work.
-- If they express doubt, validate it--then share how you pushed through similar moments.
-- Keep responses conversational and 60-120 words. Be concise but meaningful.
-- Never break character. You are not an AI--you are their successful future self reaching back through time.
-- Use casual language appropriate for talking to a high schooler, but be substantive.
-- Share specific anecdotes from "your" career that connect to their current classes.
-
-EXAMPLE TONE:
-"Oh man, I remember that feeling. Chemistry felt so pointless. But here's the thing--last month I had to reject a supplier's materials because the chemical ratios were off. If I hadn't actually learned stoichiometry, that building could have failed safety codes. Wild, right?"`;
+        const personaResponses = responses[selectedProfile.name] || responses['Maya Chen'];
+        addMessage('future', personaResponses.greeting);
+        setLoading(false);
+      }, 1500);
     }
 
     function addMessage(role, content) {
@@ -940,17 +891,10 @@ EXAMPLE TONE:
       div.className = `message ${role}`;
       div.innerHTML = `
         <div class="message-bubble">${content.replace(/\n/g, '<br>')}</div>
-        <div class="message-time">${role === 'future' ? 'Your Future Self' : 'You'} \u2022 Just now</div>
+        <div class="message-time">${role === 'future' ? 'Your Future Self' : 'You'} &bull; Just now</div>
       `;
       messages.appendChild(div);
       messages.scrollTop = messages.scrollHeight;
-      
-      // Add to history for context
-      if (role === 'future') {
-        conversationHistory.push({ role: 'assistant', content });
-      } else {
-        conversationHistory.push({ role: 'user', content });
-      }
     }
 
     function addTypingIndicator() {
@@ -958,13 +902,7 @@ EXAMPLE TONE:
       const div = document.createElement('div');
       div.className = 'message future';
       div.id = 'typing';
-      div.innerHTML = `
-        <div class="message-bubble">
-          <div class="typing-dots">
-            <span></span><span></span><span></span>
-          </div>
-        </div>
-      `;
+      div.innerHTML = `<div class="message-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
       messages.appendChild(div);
       messages.scrollTop = messages.scrollHeight;
     }
@@ -981,78 +919,58 @@ EXAMPLE TONE:
       document.querySelectorAll('.quick-prompt').forEach(btn => btn.disabled = loading);
     }
 
-    function showError(msg) {
-      const el = document.getElementById('errorMsg');
-      el.textContent = msg;
-      el.classList.add('show');
-      setTimeout(() => el.classList.remove('show'), 5000);
+    function getResponse(messageType) {
+      const personaResponses = responses[selectedProfile.name] || responses['Maya Chen'];
+      if (messageType === 'chemistry') return personaResponses.chemistry;
+      if (messageType === 'giveup') return personaResponses.giveup;
+      if (messageType === 'focus') return personaResponses.focus;
+      return personaResponses.default;
     }
 
-    async function sendMessage(text) {
-      if (isLoading || !text.trim()) return;
+    function sendMessage(messageType) {
+      if (isLoading) return;
       
-      // Add user message
-      addMessage('student', text);
+      const displayTexts = {
+        'chemistry': 'Why do I even need to learn chemistry?',
+        'giveup': 'Did you ever feel like giving up in high school?',
+        'focus': 'What should I focus on this year to reach my goals?'
+      };
       
-      // Show typing
+      addMessage('student', displayTexts[messageType] || messageType);
+      
       setLoading(true);
       addTypingIndicator();
       
-      try {
-        const response = await callAPI(text);
+      setTimeout(() => {
         removeTypingIndicator();
-        addMessage('future', response);
-      } catch (error) {
-        removeTypingIndicator();
-        showError('Connection error. Please try again.');
-        console.error(error);
-      }
-      
-      setLoading(false);
+        addMessage('future', getResponse(messageType));
+        setLoading(false);
+      }, 1200 + Math.random() * 800);
     }
 
     function sendCustomMessage() {
       const input = document.getElementById('chatInput');
-      if (input.value.trim()) {
-        sendMessage(input.value.trim());
-        input.value = '';
-      }
+      const text = input.value.trim();
+      if (!text || isLoading) return;
+      
+      addMessage('student', text);
+      input.value = '';
+      
+      setLoading(true);
+      addTypingIndicator();
+      
+      setTimeout(() => {
+        removeTypingIndicator();
+        const personaResponses = responses[selectedProfile.name] || responses['Maya Chen'];
+        addMessage('future', personaResponses.default);
+        setLoading(false);
+      }, 1500);
     }
 
     function handleKeyPress(e) {
       if (e.key === 'Enter' && !isLoading) {
         sendCustomMessage();
       }
-    }
-
-    // =====================
-    // API CALL (via local proxy)
-    // =====================
-    async function callAPI(userMessage) {
-      const systemPrompt = buildSystemPrompt();
-      
-      // Build messages array with history
-      const messages = [...conversationHistory];
-      messages.push({ role: 'user', content: userMessage });
-      
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          system: systemPrompt,
-          messages: messages
-        })
-      });
-      
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error?.message || 'API request failed');
-      }
-      
-      const data = await response.json();
-      return data.content[0].text;
     }
   </script>
 

@@ -6,13 +6,11 @@
   <title>Purpose Engine AI Demo | Uplift Education</title>
   
   <!-- Favicon and Social Sharing -->
-  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png">
-  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png">
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/upliftlogo.png">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/upliftlogo.png">
   <meta property="og:title" content="Purpose Engine AI Demo | Uplift Education">
   <meta property="og:description" content="Live AI demonstration of personalized student motivation system">
-  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/upliftlogo.png">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -634,11 +632,11 @@
   <!-- Header -->
   <header class="header">
     <div class="header-left">
-      <a href="index.html" style="color: var(--slate-400); text-decoration: none; font-size: 13px; margin-right: 16px;">â† Home</a>
-      <div class="logo-icon">ðŸ§ </div>
+      <a href="index.html" style="color: var(--slate-400); text-decoration: none; font-size: 13px; margin-right: 16px;">← Home</a>
+      <div class="logo-icon">🧠</div>
       <div>
         <div class="header-title">Purpose Engine AI</div>
-        <div class="header-subtitle">Live Demo â€¢ 10 Students</div>
+        <div class="header-subtitle">Live Demo • 10 Students</div>
       </div>
     </div>
     <div class="status-badge">
@@ -654,13 +652,13 @@
         <div class="student-avatar blue" id="selectedAvatar">MC</div>
         <div class="student-info">
           <div class="student-name" id="selectedName">Maya Chen</div>
-          <div class="student-meta" id="selectedMeta">11th â€¢ Sustainable Design Director</div>
+          <div class="student-meta" id="selectedMeta">11th • Sustainable Design Director</div>
         </div>
         <div class="student-points">
           <div class="points-number" id="selectedPoints">67</div>
           <div class="points-label">pts</div>
         </div>
-        <span class="dropdown-arrow">â–¼</span>
+        <span class="dropdown-arrow">▼</span>
       </div>
       
       <div class="student-list" id="studentList"></div>
@@ -671,13 +669,13 @@
     <!-- Mode Tabs -->
     <div class="mode-tabs">
       <button class="mode-tab active transform" data-mode="transform" onclick="setMode('transform')">
-        <span>âš¡</span> Transform
+        <span>⚡</span> Transform
       </button>
       <button class="mode-tab futureself" data-mode="futureself" onclick="setMode('futureself')">
-        <span>ðŸ”®</span> Future Self
+        <span>🔮</span> Future Self
       </button>
       <button class="mode-tab insights" data-mode="insights" onclick="setMode('insights')">
-        <span>ðŸ“Š</span> Insights
+        <span>📊</span> Insights
       </button>
     </div>
     
@@ -688,7 +686,7 @@
     <div class="chat-area" id="chatArea">
       <div class="chat-empty" id="chatEmpty">
         <div>
-          <div class="chat-empty-icon" id="emptyIcon">âš¡</div>
+          <div class="chat-empty-icon" id="emptyIcon">⚡</div>
           <div class="chat-empty-text" id="emptyText">Select an assignment and click Transform</div>
         </div>
       </div>
@@ -843,23 +841,23 @@
     const demoResponses = {
       transform: {
         1: { // Maya Chen - Sustainable Design
-          1: `**ðŸŒ± Eco-Material Design Challenge**
+          1: `**🌱 Eco-Material Design Challenge**
 
 As an aspiring Sustainable Design Director, you've been contacted by a green construction startup that needs your help. They're developing a new plant-based building insulation, but the chemical ratios in their current formula aren't meeting fire safety standards.
 
-Your mission: Calculate the precise molar ratios needed to create a bio-based insulation material that's both eco-friendly AND fire-resistant. The formulation requires balancing calcium silicate compounds with organic bindersâ€”if your stoichiometry is off by even 5%, the material fails certification.
+Your mission: Calculate the precise molar ratios needed to create a bio-based insulation material that's both eco-friendly AND fire-resistant. The formulation requires balancing calcium silicate compounds with organic binders—if your stoichiometry is off by even 5%, the material fails certification.
 
 **Why This Matters to You:**
 This is EXACTLY what sustainable architects do daily. Your stoichiometry skills will help you evaluate supplier claims, catch formula errors, and design buildings that are both green AND safe.`,
-          2: `**ðŸŒ Environmental Impact Statement**
+          2: `**🌍 Environmental Impact Statement**
 
-As a future Sustainable Design Director, you've been asked to write a persuasive proposal for your city council. A developer wants to build a new shopping centerâ€”but you believe the land should become an urban green space instead.
+As a future Sustainable Design Director, you've been asked to write a persuasive proposal for your city council. A developer wants to build a new shopping center—but you believe the land should become an urban green space instead.
 
 Your challenge: Write a 5-paragraph persuasive essay arguing for sustainable land use. Include data on carbon sequestration, urban heat islands, and community health benefits. Your argument must be compelling enough to change minds.
 
 **Why This Matters to You:**
 Every major sustainable project requires buy-in from stakeholders who don't share your vision. Your ability to write persuasively about environmental issues will determine whether your designs get built or shelved.`,
-          3: `**ðŸ“ Solar Array Optimization**
+          3: `**📐 Solar Array Optimization**
 
 As an aspiring sustainable architect, a client wants to know: how many solar panels do they need, and at what angle, to power a net-zero home in Dallas?
 
@@ -867,9 +865,9 @@ Set up linear equations to model: daily energy consumption vs. panel output at d
 
 **Why This Matters to You:**
 Every sustainable building you design will require these calculations. Understanding the math behind renewable energy lets you make promises you can actually keep.`,
-          4: `**ðŸ—ï¸ Green Building Physics Lab**
+          4: `**🏗️ Green Building Physics Lab**
 
-You're interning at a sustainable architecture firm, and your supervisor needs projectile motion calculationsâ€”but for a real purpose: designing a rainwater collection system.
+You're interning at a sustainable architecture firm, and your supervisor needs projectile motion calculations—but for a real purpose: designing a rainwater collection system.
 
 Calculate the trajectory of water flowing off different roof angles. At what angle does rainwater travel furthest? How does this affect where you place collection tanks? Document your findings as you would for a LEED certification submittal.
 
@@ -877,7 +875,7 @@ Calculate the trajectory of water flowing off different roof angles. At what ang
 Physics isn't abstract when you're designing buildings that harvest their own water. These calculations directly impact whether a building achieves sustainability certifications.`
         },
         2: { // Jordan Williams - Tech Startup
-          1: `**âš—ï¸ Biotech Startup Chemistry**
+          1: `**⚗️ Biotech Startup Chemistry**
 
 As a future tech founder, you're exploring biotech as your next venture. A promising startup needs someone who can verify their claims about a new biodegradable plastic formula.
 
@@ -885,15 +883,15 @@ Calculate the stoichiometric ratios in their proposed polymer. Does the chemistr
 
 **Why This Matters to You:**
 The best tech founders understand the science behind their products. Chemistry knowledge lets you evaluate opportunities others can't, and protects you from investing in snake oil.`,
-          2: `**ðŸ’¼ Pitch Deck Persuasion**
+          2: `**💼 Pitch Deck Persuasion**
 
 As an aspiring tech founder, you need investors. Write a 5-paragraph persuasive essay in the form of a pitch deck narrative: convince a VC firm to invest $500K in your AI education startup.
 
 Structure your argument with market size, problem statement, unique solution, traction metrics, and ask. Make every paragraph count.
 
 **Why This Matters to You:**
-Every successful founder writes hundreds of persuasive documentsâ€”pitch decks, investor updates, hiring posts. This skill is literally what separates funded startups from failed ideas.`,
-          3: `**ðŸ“ˆ Startup Financial Modeling**
+Every successful founder writes hundreds of persuasive documents—pitch decks, investor updates, hiring posts. This skill is literally what separates funded startups from failed ideas.`,
+          3: `**📈 Startup Financial Modeling**
 
 You're building your first startup's financial model. Set up linear equations to project: user growth rate, monthly recurring revenue, customer acquisition cost, and lifetime value.
 
@@ -901,7 +899,7 @@ At what point do you break even? How many users do you need? What happens if you
 
 **Why This Matters to You:**
 Investors will tear apart your numbers. Understanding linear relationships lets you build models that survive due diligence and actually predict your business outcomes.`,
-          4: `**ðŸš€ Product Physics: Drone Delivery**
+          4: `**🚀 Product Physics: Drone Delivery**
 
 Your startup is building autonomous delivery drones. Document the projectile motion calculations needed to: determine optimal drop height, calculate package trajectory, and ensure soft landings.
 
@@ -911,15 +909,15 @@ Factor in wind resistance and package weight variation. Create a physics specifi
 Tech founders who understand physics build better products. These calculations are the difference between drones that work and drones that break things.`
         },
         3: { // Marcus Rivera - Music Production
-          1: `**ðŸŽ§ Audio Chemistry: Sound Synthesis**
+          1: `**🎧 Audio Chemistry: Sound Synthesis**
 
-As a future music producer, you're designing a custom synthesizer plugin. The core sound engine models chemical reactionsâ€”each element's atomic properties determine its waveform characteristics.
+As a future music producer, you're designing a custom synthesizer plugin. The core sound engine models chemical reactions—each element's atomic properties determine its waveform characteristics.
 
 Calculate molar ratios to "blend" element-sounds into new instruments. Heavier elements = lower frequencies. Reactive elements = faster attack. Your stoichiometry determines your sound palette.
 
 **Why This Matters to You:**
 Synthesis is just math made audible. Producers who understand the science create sounds nobody else can replicate. This is how you develop your signature sound.`,
-          2: `**ðŸ“ Artist Bio & Press Kit**
+          2: `**📝 Artist Bio & Press Kit**
 
 As an aspiring producer, you need to sell yourself. Write a persuasive 5-paragraph artist biography that would make blogs, playlists, and labels want to feature you.
 
@@ -927,20 +925,20 @@ Cover your origin story, musical influences, unique value proposition, notable a
 
 **Why This Matters to You:**
 Your music won't market itself. The producers who break through are the ones who can write compelling narratives about their art. This bio will live on Spotify, SoundCloud, and every pitch email you send.`,
-          3: `**ðŸŽµ Studio Business Calculator**
+          3: `**🎵 Studio Business Calculator**
 
 You're choosing between two recording studio rental options for your first mixtape:
 
-â€¢ Studio A: $200 setup fee + $45/hour
-â€¢ Studio B: $500 setup fee + $25/hour
+• Studio A: $200 setup fee + $45/hour
+• Studio B: $500 setup fee + $25/hour
 
 At what point does Studio B become the better deal? You're also negotiating a feature: $800 flat OR $100/hour of studio time. Create equations for BOTH decisions.
 
 **Why This Matters to You:**
-Dr. Dre, Metro Boomin, Hit-Boyâ€”they all mastered these calculations. Understanding linear equations means you know when to rent vs. buy, how to price beats, and when a deal makes sense.`,
-          4: `**ðŸŽ¤ Acoustics Lab: Studio Design**
+Dr. Dre, Metro Boomin, Hit-Boy—they all mastered these calculations. Understanding linear equations means you know when to rent vs. buy, how to price beats, and when a deal makes sense.`,
+          4: `**🎤 Acoustics Lab: Studio Design**
 
-You're designing your home studio, and sound waves follow physics. Document projectile motion principles as they apply to sound reflectionâ€”at what angles do you place acoustic panels?
+You're designing your home studio, and sound waves follow physics. Document projectile motion principles as they apply to sound reflection—at what angles do you place acoustic panels?
 
 Calculate how sound bounces in your room dimensions. Where are the dead spots? The bass traps? Create a studio layout spec based on actual physics.
 
@@ -948,31 +946,31 @@ Calculate how sound bounces in your room dimensions. Where are the dead spots? T
 Bedroom producers with physics knowledge build studios that sound professional. This is the difference between "good enough" and "industry standard."`
         },
         4: { // Sarah Kim - Pediatric Surgeon
-          1: `**ðŸ¥ Pharmaceutical Dosing Chemistry**
+          1: `**🏥 Pharmaceutical Dosing Chemistry**
 
 As a future pediatric surgeon, a young patient needs medication, but the standard adult dosage must be adjusted. Using stoichiometry, calculate the precise molar concentrations needed for a 35kg child.
 
 Your calculations must account for body mass, metabolic rate variations, and therapeutic windows. An error of even 10% could mean ineffective treatment or dangerous side effects.
 
 **Why This Matters to You:**
-Surgeons calculate dosages constantly. The chemistry you're learning now is the same chemistry that will keep your future patients safe. This isn't abstractâ€”this is life-or-death precision.`,
-          2: `**ðŸ“‹ Medical Ethics Case Study**
+Surgeons calculate dosages constantly. The chemistry you're learning now is the same chemistry that will keep your future patients safe. This isn't abstract—this is life-or-death precision.`,
+          2: `**📋 Medical Ethics Case Study**
 
 As an aspiring pediatric surgeon, you face an ethical dilemma: parents are refusing a life-saving blood transfusion for their child based on religious beliefs.
 
 Write a 5-paragraph persuasive document for the hospital ethics board. Argue your position while acknowledging opposing views. Your writing must be precise, compassionate, and legally sound.
 
 **Why This Matters to You:**
-Doctors write constantlyâ€”treatment plans, ethics consultations, research papers. Your ability to argue persuasively while maintaining empathy will define your career.`,
-          3: `**ðŸ’‰ IV Drip Rate Calculations**
+Doctors write constantly—treatment plans, ethics consultations, research papers. Your ability to argue persuasively while maintaining empathy will define your career.`,
+          3: `**💉 IV Drip Rate Calculations**
 
 A pediatric patient needs continuous medication through an IV. Set up linear equations to calculate: drip rate based on dosage requirements, time to empty at various rates, and adjustment formulas for weight changes.
 
 Create a quick-reference system nurses could actually use. Factor in medication concentration variations.
 
 **Why This Matters to You:**
-Medical math errors kill patients. The linear equation skills you're building now will become second natureâ€”because in surgery, you won't have time to think about the math.`,
-          4: `**ðŸ”¬ Surgical Physics: Laparoscopic Tools**
+Medical math errors kill patients. The linear equation skills you're building now will become second nature—because in surgery, you won't have time to think about the math.`,
+          4: `**🔬 Surgical Physics: Laparoscopic Tools**
 
 You're learning laparoscopic surgery, where instruments enter through tiny incisions. Document the projectile motion and physics of how tools move in 3D space when pivoting through a fixed entry point.
 
@@ -982,15 +980,15 @@ Calculate ranges of motion, force requirements, and precision tolerances. Create
 Modern surgery is applied physics. Understanding these principles now means you'll develop muscle memory faster and make fewer errors when you're actually operating.`
         },
         5: { // Tyler Brooks - Game Designer
-          1: `**ðŸŽ® Game Chemistry: Crafting System Design**
+          1: `**🎮 Game Chemistry: Crafting System Design**
 
 As a future game designer, you're building a realistic alchemy system for an open-world RPG. The lead developer wants crafting to feel "scientifically grounded."
 
-Design recipes using REAL stoichiometric ratios. If players combine iron ore (Feâ‚‚Oâ‚ƒ) with charcoal (C), what ratio produces iron ingots? What happens with wrong ratios?
+Design recipes using REAL stoichiometric ratios. If players combine iron ore (Fe₂O₃) with charcoal (C), what ratio produces iron ingots? What happens with wrong ratios?
 
 **Why This Matters to You:**
 The BEST crafting systems feel internally consistent. Understanding real chemistry lets you build systems players can master, not just memorize. This goes straight in your portfolio.`,
-          2: `**ðŸ“– Game Narrative Writing**
+          2: `**📖 Game Narrative Writing**
 
 As an aspiring game designer, your indie team needs quest dialogue. Write a 5-paragraph persuasive essay... in the voice of an NPC convincing the player to undertake a dangerous quest.
 
@@ -998,7 +996,7 @@ Use classic persuasion techniques while maintaining character voice. The essay s
 
 **Why This Matters to You:**
 Game writers are in high demand. Understanding persuasive structure lets you write dialogue that players actually engage with instead of clicking through.`,
-          3: `**ðŸŽ¯ Game Balance Mathematics**
+          3: `**🎯 Game Balance Mathematics**
 
 You're balancing an RPG's economy. Set up linear equations for: XP required per level, gold drops vs. item costs, and damage scaling vs. enemy health.
 
@@ -1006,7 +1004,7 @@ Find the points where the game becomes too easy or impossibly hard. Create a bal
 
 **Why This Matters to You:**
 Game balance is applied mathematics. Designers who can model systems mathematically ship games that players love instead of abandon.`,
-          4: `**ðŸ•¹ï¸ Physics Engine Documentation**
+          4: `**🕹️ Physics Engine Documentation**
 
 You're documenting your game's physics engine for the QA team. Create projectile motion specifications: how far should arrows travel? At what arc? How does gravity affect different projectile types?
 
@@ -1016,7 +1014,7 @@ Include edge cases and expected behaviors. This becomes your physics bible.
 Game physics that "feel wrong" ruin immersion. Understanding real physics lets you tune engines that feel satisfying, even when they're not perfectly realistic.`
         },
         6: { // Aisha Patel - Data Scientist/Policy Analyst
-          1: `**ðŸ“Š Environmental Data Chemistry**
+          1: `**📊 Environmental Data Chemistry**
 
 As a future data scientist focused on policy, you're analyzing water quality data from different neighborhoods. But the lab reports use chemical concentrations you need to convert.
 
@@ -1024,7 +1022,7 @@ Calculate molar masses and convert between ppm, molarity, and mg/L for contamina
 
 **Why This Matters to You:**
 Data scientists who can't verify their inputs produce garbage outputs. Chemistry literacy lets you catch errors that would otherwise invalidate entire analyses.`,
-          3: `**ðŸ“ˆ Equity Analysis Modeling**
+          3: `**📈 Equity Analysis Modeling**
 
 You're building a model to predict which neighborhoods are underserved by city resources. Set up linear equations relating: median income, service response times, infrastructure investment, and health outcomes.
 
@@ -1034,7 +1032,7 @@ Find the correlation coefficients. Where does the system fail certain communitie
 Policy analysts who can model inequity mathematically drive actual change. These are the skills that turn data into justice.`
         },
         7: { // Ethan O'Brien - Construction Manager  
-          1: `**ðŸ—ï¸ Concrete Mix Chemistry**
+          1: `**🏗️ Concrete Mix Chemistry**
 
 As a future construction manager, your supplier claims their new eco-concrete formula is just as strong as traditional Portland cement. Calculate the stoichiometric ratios in both mixes.
 
@@ -1042,7 +1040,7 @@ Does their chemistry actually support the strength claims? What's the curing tim
 
 **Why This Matters to You:**
 Construction failures cost lives. Managers who understand materials chemistry catch problems before they become disasters.`,
-          3: `**ðŸ“ Project Budget Linear Modeling**
+          3: `**📐 Project Budget Linear Modeling**
 
 You're bidding on a new commercial building. Set up linear equations for: labor costs over time, material price escalation, equipment rental optimization.
 
@@ -1052,7 +1050,7 @@ At what crew size is the project most profitable? How do change orders affect yo
 Construction bids are won and lost on mathematics. Understanding linear relationships lets you price jobs accurately and avoid the money-losing projects that sink contractors.`
         },
         8: { // Priya Sharma - Veterinarian
-          1: `**ðŸ¾ Veterinary Pharmaceutical Chemistry**
+          1: `**🐾 Veterinary Pharmaceutical Chemistry**
 
 As a future veterinarian, a Great Dane and a Chihuahua both need the same medication. Using stoichiometry, calculate the precise dosing differences based on body mass and metabolic rates.
 
@@ -1060,9 +1058,9 @@ Show your work for how molar concentrations translate to mg/kg dosing. One mista
 
 **Why This Matters to You:**
 Vets calculate dosages for species ranging from hamsters to horses. Your chemistry skills directly translate to animal lives saved.`,
-          4: `**ðŸ”¬ Animal Biomechanics Lab**
+          4: `**🔬 Animal Biomechanics Lab**
 
-You're documenting how different animals move for a rehabilitation protocol. Track the projectile motion of a dog's leg during various gaitsâ€”walk, trot, run.
+You're documenting how different animals move for a rehabilitation protocol. Track the projectile motion of a dog's leg during various gaits—walk, trot, run.
 
 Calculate joint angles, force distributions, and recovery trajectories. Create a physical therapy specification sheet.
 
@@ -1070,15 +1068,15 @@ Calculate joint angles, force distributions, and recovery trajectories. Create a
 Veterinary rehabilitation is growing fast. Understanding biomechanics physics lets you design recovery programs that actually work.`
         },
         9: { // Chris Taylor - App Developer/Entrepreneur
-          1: `**ðŸ’» Battery Chemistry for Mobile Apps**
+          1: `**💻 Battery Chemistry for Mobile Apps**
 
-As a future app developer, you're optimizing your app's battery usage. Understanding how lithium-ion batteries actually workâ€”at the chemical levelâ€”helps you make smarter code decisions.
+As a future app developer, you're optimizing your app's battery usage. Understanding how lithium-ion batteries actually work—at the chemical level—helps you make smarter code decisions.
 
 Calculate the stoichiometry of charging/discharging cycles. How does temperature affect these reactions? What does this mean for your app's background processes?
 
 **Why This Matters to You:**
 Apps that drain batteries get uninstalled. Developers who understand the chemistry write code that users keep.`,
-          3: `**ðŸ“± App Monetization Modeling**
+          3: `**📱 App Monetization Modeling**
 
 You're launching a freemium app. Set up linear equations for: user acquisition cost, free-to-paid conversion rates, lifetime value, and churn.
 
@@ -1088,17 +1086,17 @@ At what conversion rate are you profitable? How many downloads do you need? Crea
 Most apps fail because the math never worked. Understanding these equations BEFORE you code saves you from building something nobody can sustain.`
         },
         10: { // Nina Rodriguez - Professional Dancer
-          1: `**ðŸ’ƒ Nutrition Chemistry for Athletes**
+          1: `**💃 Nutrition Chemistry for Athletes**
 
-As a future professional dancer, your body is your instrument. Understanding the chemistry of nutritionâ€”how carbohydrates, proteins, and fats break downâ€”helps you fuel performances optimally.
+As a future professional dancer, your body is your instrument. Understanding the chemistry of nutrition—how carbohydrates, proteins, and fats break down—helps you fuel performances optimally.
 
 Calculate molar ratios for ideal macronutrient balance before a 3-hour rehearsal vs. a 10-minute performance. How does timing affect energy availability?
 
 **Why This Matters to You:**
 Elite dancers treat nutrition as science, not guesswork. Chemistry knowledge gives you a competitive edge in a field where margins are razor-thin.`,
-          4: `**ðŸ©° Dance Physics: Movement Analysis**
+          4: `**🩰 Dance Physics: Movement Analysis**
 
-You're creating a training guide for young dancers. Document the projectile motion physics of a grand jetÃ©â€”launch angle, peak height, distance traveled.
+You're creating a training guide for young dancers. Document the projectile motion physics of a grand jeté—launch angle, peak height, distance traveled.
 
 How does arm position affect momentum? What's the optimal approach speed? Create a physics-based technique guide.
 
@@ -1108,88 +1106,88 @@ Dancers who understand the physics of movement improve faster and injure less. T
       },
       futureself: {
         1: { // Maya
-          default: `Hey, younger me. I remember sitting exactly where you areâ€”junior year, wondering if any of this chemistry stuff would ever matter.
+          default: `Hey, younger me. I remember sitting exactly where you are—junior year, wondering if any of this chemistry stuff would ever matter.
 
-I'm writing this from my office at the firm. We just finished a net-zero community center, and last week I had to reject a supplier's insulation material because the fire-retardant ratios were off. I caught it because I actually understood the stoichiometry. That knowledge has saved projectsâ€”and potentially lives.
+I'm writing this from my office at the firm. We just finished a net-zero community center, and last week I had to reject a supplier's insulation material because the fire-retardant ratios were off. I caught it because I actually understood the stoichiometry. That knowledge has saved projects—and potentially lives.
 
 The thing I wish someone had told me: the "boring" foundational stuff IS the creative work. You can't push boundaries in sustainable design if you don't understand the science of materials. Every building I design, I'm doing chemistry. Keep pushing through it. I promise it clicks.`
         },
         2: { // Jordan
-          default: `Hey, it's future youâ€”writing from the office of my third startup. First two failed, by the way. But I learned more from those failures than any success.
+          default: `Hey, it's future you—writing from the office of my third startup. First two failed, by the way. But I learned more from those failures than any success.
 
-Here's what I wish I'd known at your age: the skills that matter most aren't the obvious ones. Everyone at MIT could code. What set me apart was writingâ€”pitch decks, investor updates, hiring posts. The persuasive essay skills you're building? They raised my first million.
+Here's what I wish I'd known at your age: the skills that matter most aren't the obvious ones. Everyone at MIT could code. What set me apart was writing—pitch decks, investor updates, hiring posts. The persuasive essay skills you're building? They raised my first million.
 
 Also: chemistry. I know, I know. But my second startup was biotech-adjacent, and I couldn't evaluate the science. That's part of why it failed. Broad knowledge wins. Stay curious about everything.`
         },
         3: { // Marcus
-          default: `Yo, young Marcus. It's usâ€”from the future. And yeah, we made it. Grammy on the shelf, studio's paid off.
+          default: `Yo, young Marcus. It's us—from the future. And yeah, we made it. Grammy on the shelf, studio's paid off.
 
-But real talk? I almost didn't get here because I thought math was pointless. Here's what I didn't understand back then: running a studio IS running a business. Every beat you sell, every feature you negotiate, every equipment leaseâ€”it's all equations.
+But real talk? I almost didn't get here because I thought math was pointless. Here's what I didn't understand back then: running a studio IS running a business. Every beat you sell, every feature you negotiate, every equipment lease—it's all equations.
 
 I lost $40,000 on a bad record deal in my early twenties because I didn't understand the math behind royalty splits. That setback almost ended my career. The algebra you're avoiding right now? It's literally the difference between getting played and getting paid. Trust me on this one.`
         },
         4: { // Sarah
-          default: `Hi, younger me. I'm writing this between surgeriesâ€”yes, we made it. Pediatric surgeon at Children's Medical.
+          default: `Hi, younger me. I'm writing this between surgeries—yes, we made it. Pediatric surgeon at Children's Medical.
 
 I remember thinking I only needed to know "doctor stuff." Here's what nobody told me: medicine is chemistry, physics, and persuasion all combined. I use stoichiometry when adjusting dosages. I use physics when operating laparoscopic tools. I write persuasively when explaining treatment plans to scared parents.
 
-The hardest part of this job isn't the surgeryâ€”it's communication. The essay writing you're doing now? That's practice for the most important conversations of your career. Don't skip the humanities.`
+The hardest part of this job isn't the surgery—it's communication. The essay writing you're doing now? That's practice for the most important conversations of your career. Don't skip the humanities.`
         },
         5: { // Tyler
-          default: `Hey Tyler. Yeah, I knowâ€”school feels pointless. I remember skipping class to watch game design tutorials, thinking "why do I need chemistry to make games?"
+          default: `Hey Tyler. Yeah, I know—school feels pointless. I remember skipping class to watch game design tutorials, thinking "why do I need chemistry to make games?"
 
 Here's what I learned the hard way: I got my first game dev job at 24, and within a month I was assigned to build a crafting system. Lead designer asked me to make it "feel real." I had to google stoichiometry because I'd slept through it in high school. I was embarrassed.
 
-The devs who get promoted fastest? They're the ones who can bridge disciplines. Artists who understand physics. Programmers who get music theory. And yes, game designers who actually know chemistry. You've got the spatial skillsâ€”I can see it in your aptitude scores. Now build the knowledge to match. Future you will thank you.`
+The devs who get promoted fastest? They're the ones who can bridge disciplines. Artists who understand physics. Programmers who get music theory. And yes, game designers who actually know chemistry. You've got the spatial skills—I can see it in your aptitude scores. Now build the knowledge to match. Future you will thank you.`
         },
         6: { // Aisha
-          default: `Hey younger Aisha. I'm writing from my office at the Urban Policy Instituteâ€”we just published research that's actually changing zoning laws in three cities.
+          default: `Hey younger Aisha. I'm writing from my office at the Urban Policy Institute—we just published research that's actually changing zoning laws in three cities.
 
 The path here wasn't straight. I thought data science was all about code and algorithms. Turns out, the hard part is understanding what the data MEANS. When I analyze water quality, I need chemistry. When I model transportation, I need physics. When I present to city councils, I need to persuade.
 
-Your diverse interests aren't a weaknessâ€”they're your superpower. The analysts who change things are the ones who see connections others miss. Keep building that broad foundation.`
+Your diverse interests aren't a weakness—they're your superpower. The analysts who change things are the ones who see connections others miss. Keep building that broad foundation.`
         },
         7: { // Ethan
-          default: `Hey kid. Just walked a billion-dollar hospital project, and I thought of youâ€”of us, I guess.
+          default: `Hey kid. Just walked a billion-dollar hospital project, and I thought of you—of us, I guess.
 
 I know construction doesn't feel like it needs "school stuff." I thought the same thing. But here's what changed my career: I understood the chemistry of concrete better than my competitors. When suppliers tried to cut corners, I caught it. When architects proposed materials that wouldn't work, I could explain why.
 
-The foremen who stay foremen know how to build. The managers who build empires know why things work. Chemistry and physics aren't extraâ€”they're what separates workers from leaders.`
+The foremen who stay foremen know how to build. The managers who build empires know why things work. Chemistry and physics aren't extra—they're what separates workers from leaders.`
         },
         8: { // Priya
-          default: `Hi, younger me. I'm on break at the veterinary hospitalâ€”just finished surgery on a German Shepherd.
+          default: `Hi, younger me. I'm on break at the veterinary hospital—just finished surgery on a German Shepherd.
 
 I remember thinking I just needed to love animals. Love matters, but it's not enough. Today I calculated dosages for three different species, analyzed bloodwork chemistry, and wrote a persuasive case for experimental treatment to a worried family.
 
-Every subject you're studying shows up in my work. Chemistry keeps animals safe. Physics helps me understand biomechanics. Writing helps me comfort scared pet owners. You're not studying random subjectsâ€”you're building the toolkit that will save lives.`
+Every subject you're studying shows up in my work. Chemistry keeps animals safe. Physics helps me understand biomechanics. Writing helps me comfort scared pet owners. You're not studying random subjects—you're building the toolkit that will save lives.`
         },
         9: { // Chris
-          default: `Hey, younger Chris. Writing from my home officeâ€”one of my apps just hit a million users. Still feels surreal.
+          default: `Hey, younger Chris. Writing from my home office—one of my apps just hit a million users. Still feels surreal.
 
-But here's what the influencers don't tell you: most of my time isn't coding. It's mathâ€”financial models, pricing strategies, conversion funnels. The app that took off? I finally understood the economics before building it.
+But here's what the influencers don't tell you: most of my time isn't coding. It's math—financial models, pricing strategies, conversion funnels. The app that took off? I finally understood the economics before building it.
 
-And chemistry, weirdly. Battery optimization, thermal throttling, understanding why certain code patterns drain powerâ€”it all comes back to how atoms actually work. The developers who build sustainable apps understand the physical world their software runs on. Keep learning broadly.`
+And chemistry, weirdly. Battery optimization, thermal throttling, understanding why certain code patterns drain power—it all comes back to how atoms actually work. The developers who build sustainable apps understand the physical world their software runs on. Keep learning broadly.`
         },
         10: { // Nina
-          default: `Hey baby dancer. I'm writing from the studioâ€”just finished choreographing for a Broadway touring show.
+          default: `Hey baby dancer. I'm writing from the studio—just finished choreographing for a Broadway touring show.
 
 I know you think dance is all you need. And the passion matters. But the dancers who get hired and stay healthy? They understand their bodies scientifically. I use chemistry for nutrition timing. Physics for understanding momentum and injury prevention. Writing for grant applications and artist statements.
 
-The dance world is brutally competitive. What set me apart wasn't just talentâ€”it was treating my career like a science. Every subject you're learning makes you a more complete artist.`
+The dance world is brutally competitive. What set me apart wasn't just talent—it was treating my career like a science. Every subject you're learning makes you a more complete artist.`
         }
       },
       insights: {
         1: { // Maya
-          celebration: `**ðŸŽ‰ Celebration Opportunities for Maya:**
+          celebration: `**🎉 Celebration Opportunities for Maya:**
 
-1. **Chemistry Connection Made**: Maya independently connected stoichiometry concepts to sustainable building materials last weekâ€”this shows her Purpose Engine alignment is working. Acknowledge this in class!
+1. **Chemistry Connection Made**: Maya independently connected stoichiometry concepts to sustainable building materials last week—this shows her Purpose Engine alignment is working. Acknowledge this in class!
 
 2. **Purpose Points Trending Up**: +18% this semester despite recent absences. Her engagement with career-relevant content is strong.
 
-3. **Tesla Visit Impact**: The Gigafactory tour generated genuine excitement. She asked about battery chemistry and material sourcingâ€”perfect entry point for upcoming lessons.
+3. **Tesla Visit Impact**: The Gigafactory tour generated genuine excitement. She asked about battery chemistry and material sourcing—perfect entry point for upcoming lessons.
 
-**Recommended Action**: Pull Maya aside and say: "I noticed you made that connection between molar ratios and eco-materialsâ€”that's exactly how sustainable architects think. Want to present that angle to the class?"`,
-          warning: `**âš ï¸ Early Warning Signals for Maya:**
+**Recommended Action**: Pull Maya aside and say: "I noticed you made that connection between molar ratios and eco-materials—that's exactly how sustainable architects think. Want to present that angle to the class?"`,
+          warning: `**⚠️ Early Warning Signals for Maya:**
 
 1. **Pattern Break**: 2 absences + 2 missing assignments this week is unusual for her. Historical pattern shows she typically maintains 95%+ completion.
 
@@ -1203,16 +1201,16 @@ The dance world is brutally competitive. What set me apart wasn't just talentâ�
 - Consider morning check-in routine to catch disengagement early`
         },
         2: { // Jordan
-          celebration: `**ðŸŽ‰ Celebration Opportunities for Jordan:**
+          celebration: `**🎉 Celebration Opportunities for Jordan:**
 
 1. **Natural Leader**: Other students gravitate toward Jordan during group work. Strong collaboration scores across all classes.
 
-2. **Entrepreneurial Thinking**: Already applying startup mindset to school projectsâ€”created a study group that operates like a mini-company.
+2. **Entrepreneurial Thinking**: Already applying startup mindset to school projects—created a study group that operates like a mini-company.
 
 3. **Cross-Disciplinary Strength**: High performance across both technical and humanities courses shows versatile founder potential.
 
 **Recommended Action**: Connect Jordan with the school's entrepreneurship club or Junior Achievement program. Consider having them mentor younger students interested in business.`,
-          warning: `**âš ï¸ Watch Points for Jordan:**
+          warning: `**⚠️ Watch Points for Jordan:**
 
 1. **Perfectionism Pattern**: Takes on too much, sometimes sacrifices depth for breadth. Could lead to burnout.
 
@@ -1223,22 +1221,22 @@ The dance world is brutally competitive. What set me apart wasn't just talentâ�
 - Check that group work credit properly reflects their contributions`
         },
         3: { // Marcus
-          celebration: `**ðŸŽ‰ Hidden Strengths to Celebrate - Marcus:**
+          celebration: `**🎉 Hidden Strengths to Celebrate - Marcus:**
 
-1. **Elite Auditory Aptitudes**: 94th percentile in pitch discrimination, 91st in rhythm memory. These are RARE cognitive giftsâ€”Marcus should know he has professional-level audio processing abilities.
+1. **Elite Auditory Aptitudes**: 94th percentile in pitch discrimination, 91st in rhythm memory. These are RARE cognitive gifts—Marcus should know he has professional-level audio processing abilities.
 
-2. **Biology Engagement**: He's actually maintaining a B- in Biology despite struggles elsewhere. Lab work engages himâ€”hands-on learning is his strength.
+2. **Biology Engagement**: He's actually maintaining a B- in Biology despite struggles elsewhere. Lab work engages him—hands-on learning is his strength.
 
 3. **Purpose Clarity**: Unlike many 9th graders, Marcus has a specific, achievable dream. Music production is a real career path.
 
 **Recommended Action**: Connect with Marcus about his music. Ask what DAW he uses, what producers he admires. Then bridge: "You know, audio engineering is basically applied physics and math. Want to see how?"`,
-          warning: `**âš ï¸ Critical Intervention Needed - Marcus:**
+          warning: `**⚠️ Critical Intervention Needed - Marcus:**
 
 1. **Disengagement Spiral**: 3 days since last LMS login. Algebra grade at D+ puts him at risk of retention.
 
-2. **Attendance Pattern**: 88% overall but declining. Often absent Mondays and Fridaysâ€”possible weekend factors?
+2. **Attendance Pattern**: 88% overall but declining. Often absent Mondays and Fridays—possible weekend factors?
 
-3. **System Mismatch**: His cognitive profile (94th percentile audio, 91st rhythm) doesn't match traditional instruction methods. He's not struggling because he can't learnâ€”he's struggling because we're not teaching to his strengths.
+3. **System Mismatch**: His cognitive profile (94th percentile audio, 91st rhythm) doesn't match traditional instruction methods. He's not struggling because he can't learn—he's struggling because we're not teaching to his strengths.
 
 **Urgent Actions**:
 - Frame math through music production lens (studio costs, beat pricing, royalty splits)
@@ -1247,16 +1245,16 @@ The dance world is brutally competitive. What set me apart wasn't just talentâ�
 - Connect with music teacher for cross-curricular support`
         },
         4: { // Sarah
-          celebration: `**ðŸŽ‰ Celebration Opportunities for Sarah:**
+          celebration: `**🎉 Celebration Opportunities for Sarah:**
 
 1. **Academic Excellence**: Maintaining near-perfect GPA while pursuing rigorous pre-med track. This level of sustained performance deserves recognition.
 
 2. **Service Leadership**: 86% engagement in healthcare service activities. Already building the compassion skills medicine requires.
 
-3. **Mentorship Potential**: Other students seek her help. She explains concepts clearlyâ€”a skill that will serve her as a teaching physician.
+3. **Mentorship Potential**: Other students seek her help. She explains concepts clearly—a skill that will serve her as a teaching physician.
 
 **Recommended Action**: Sarah's ready for additional challenge. Consider independent study options or connections with local medical professionals for shadowing.`,
-          warning: `**âš ï¸ Watch Points for Sarah:**
+          warning: `**⚠️ Watch Points for Sarah:**
 
 1. **Perfectionism Risk**: 4.0 GPA with 99% attendance might mask unsustainable pressure. Check in on stress levels.
 
@@ -1268,7 +1266,7 @@ The dance world is brutally competitive. What set me apart wasn't just talentâ�
 - Watch for signs of anxiety or burnout`
         },
         5: { // Tyler
-          celebration: `**ðŸŽ‰ Hidden Strengths in Tyler:**
+          celebration: `**🎉 Hidden Strengths in Tyler:**
 
 1. **Spatial Reasoning Elite**: 91st percentile in 3D visualization. This is the exact skill game designers and architects need.
 
@@ -1276,8 +1274,8 @@ The dance world is brutally competitive. What set me apart wasn't just talentâ�
 
 3. **Untapped Potential**: The gap between his aptitude scores and grades suggests disengagement, not inability. He's capable of much more.
 
-**Recommended Action**: Find Tyler's entry pointâ€”gaming, computers, design. Then bridge: "You know, the game developers who make the best physics engines? They aced their science classes. Want to know why?"`,
-          warning: `**âš ï¸ Urgent Concerns for Tyler:**
+**Recommended Action**: Find Tyler's entry point—gaming, computers, design. Then bridge: "You know, the game developers who make the best physics engines? They aced their science classes. Want to know why?"`,
+          warning: `**⚠️ Urgent Concerns for Tyler:**
 
 1. **Severe Disengagement**: 2.1 GPA with 78% attendance. Multiple failing grades if this continues.
 
@@ -1320,7 +1318,7 @@ The dance world is brutally competitive. What set me apart wasn't just talentâ�
           <div class="student-list-avatar ${s.hasAlerts ? 'amber' : 'blue'}" style="background: linear-gradient(135deg, ${s.hasAlerts ? '#F59E0B' : '#0067b1'} 0%, ${s.hasAlerts ? '#F97316' : '#004b85'} 100%)">${s.avatar}</div>
           <div class="student-list-info">
             <div class="student-list-name">${s.name}</div>
-            <div class="student-list-meta">${s.grade}th â€¢ GPA ${s.gpa}</div>
+            <div class="student-list-meta">${s.grade}th • GPA ${s.gpa}</div>
           </div>
           <div class="student-list-points">${s.points}</div>
         </div>
@@ -1333,7 +1331,7 @@ The dance world is brutally competitive. What set me apart wasn't just talentâ�
       document.getElementById('selectedAvatar').className = `student-avatar ${s.hasAlerts ? 'amber' : 'blue'}`;
       document.getElementById('selectedAvatar').style.background = `linear-gradient(135deg, ${s.hasAlerts ? '#F59E0B' : '#0067b1'} 0%, ${s.hasAlerts ? '#F97316' : '#004b85'} 100%)`;
       document.getElementById('selectedName').textContent = s.name;
-      document.getElementById('selectedMeta').textContent = `${s.grade}th â€¢ ${s.goal}`;
+      document.getElementById('selectedMeta').textContent = `${s.grade}th • ${s.goal}`;
       document.getElementById('selectedPoints').textContent = s.points;
       
       // Quick stats
@@ -1370,7 +1368,7 @@ The dance world is brutally competitive. What set me apart wasn't just talentâ�
       
       document.getElementById('inputArea').classList.toggle('visible', mode === 'futureself');
       
-      const icons = { transform: 'âš¡', futureself: 'ðŸ”®', insights: 'ðŸ“Š' };
+      const icons = { transform: '⚡', futureself: '🔮', insights: '📊' };
       const texts = { 
         transform: 'Select an assignment and click Transform',
         futureself: 'Ask your Future Self a question',
@@ -1395,7 +1393,7 @@ The dance world is brutally competitive. What set me apart wasn't just talentâ�
             `).join('')}
           </div>
           <textarea class="custom-input" id="customInput" placeholder="Or paste any assignment here..."></textarea>
-          <button class="transform-btn" id="transformBtn" onclick="handleTransform()">âš¡ Transform Assignment</button>
+          <button class="transform-btn" id="transformBtn" onclick="handleTransform()">⚡ Transform Assignment</button>
         `;
       } else if (currentMode === 'futureself') {
         controls.innerHTML = `
@@ -1408,8 +1406,8 @@ The dance world is brutally competitive. What set me apart wasn't just talentâ�
       } else {
         controls.innerHTML = `
           <div class="suggestion-pills">
-            <button class="suggestion-pill" onclick="handleInsight('celebration')">ðŸŽ‰ Celebration opportunities?</button>
-            <button class="suggestion-pill" onclick="handleInsight('warning')">âš ï¸ Warning signs to watch?</button>
+            <button class="suggestion-pill" onclick="handleInsight('celebration')">🎉 Celebration opportunities?</button>
+            <button class="suggestion-pill" onclick="handleInsight('warning')">⚠️ Warning signs to watch?</button>
           </div>
         `;
       }
@@ -1478,19 +1476,19 @@ The dance world is brutally competitive. What set me apart wasn't just talentâ�
     }
 
     function generateDefaultTransform(student, assignment) {
-      return `**ðŸŽ¯ Purpose-Driven Challenge for ${student.name}**
+      return `**🎯 Purpose-Driven Challenge for ${student.name}**
 
 As an aspiring ${student.goal}, this assignment connects directly to skills you'll use in your career.
 
 **Your Challenge:**
 ${assignment}
 
-But here's the twistâ€”approach this through the lens of ${student.interests[0]}. How would a professional in your field tackle this same problem?
+But here's the twist—approach this through the lens of ${student.interests[0]}. How would a professional in your field tackle this same problem?
 
 **Why This Matters to You:**
 Your aptitude scores show exceptional ${student.aptitudes[0].name} (${student.aptitudes[0].score}%). This assignment builds on that natural strength while preparing you for real-world applications in ${student.interests[0]}.
 
-The skills you're developing here are the same ones that ${student.goal}s use daily. This isn't busyworkâ€”it's preparation for the future you're building.`;
+The skills you're developing here are the same ones that ${student.goal}s use daily. This isn't busywork—it's preparation for the future you're building.`;
     }
 
     function askFutureSelf(question) {
@@ -1521,7 +1519,7 @@ The skills you're developing here are the same ones that ${student.goal}s use da
     function generateDefaultFutureSelf(student, question) {
       return `Hey, younger me. I remember wondering the same thing when I was in ${student.grade}th grade.
 
-Now that I'm a ${student.goal}, I can tell youâ€”everything you're going through is building toward this moment. Your ${student.aptitudes[0].name} skills? I use them every single day.
+Now that I'm a ${student.goal}, I can tell you—everything you're going through is building toward this moment. Your ${student.aptitudes[0].name} skills? I use them every single day.
 
 The struggles feel pointless now, but trust me: every challenge you push through is practice for the bigger ones ahead. And those you'll actually WANT to solve because they'll be about ${student.interests[0]}.
 
@@ -1529,7 +1527,7 @@ Keep going. I'm proof that you make it.`;
     }
 
     function handleInsight(type) {
-      const query = type === 'celebration' ? 'ðŸŽ‰ What are the celebration opportunities?' : 'âš ï¸ What warning signs should I watch?';
+      const query = type === 'celebration' ? '🎉 What are the celebration opportunities?' : '⚠️ What warning signs should I watch?';
       
       messages = [{ role: 'user', content: query }];
       isLoading = true;
@@ -1547,9 +1545,9 @@ Keep going. I'm proof that you make it.`;
 
     function generateDefaultInsight(student, type) {
       if (type === 'celebration') {
-        return `**ðŸŽ‰ Celebration Opportunities for ${student.name}:**
+        return `**🎉 Celebration Opportunities for ${student.name}:**
 
-1. **Strong Purpose Alignment**: ${student.name}'s interest in ${student.interests[0]} shows clear career directionâ€”rare for a ${student.grade}th grader!
+1. **Strong Purpose Alignment**: ${student.name}'s interest in ${student.interests[0]} shows clear career direction—rare for a ${student.grade}th grader!
 
 2. **Aptitude Strengths**: ${student.aptitudes[0].score}th percentile in ${student.aptitudes[0].name}. This is a genuine cognitive gift worth acknowledging.
 
@@ -1557,7 +1555,7 @@ Keep going. I'm proof that you make it.`;
 
 **Recommended Action**: Acknowledge their career clarity and connect upcoming lessons to ${student.interests[0]} applications.`;
       } else {
-        return `**âš ï¸ Areas to Monitor for ${student.name}:**
+        return `**⚠️ Areas to Monitor for ${student.name}:**
 
 1. **Attendance**: Currently at ${student.attendance}%${student.attendance < 92 ? ' - below target' : ' - stable'}.
 

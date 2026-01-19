@@ -4,21 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Educator Dashboard | Purpose Engine</title>
-  
-  <!-- Favicon and Social Sharing -->
-  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png">
-  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png">
-  <meta property="og:title" content="Educator Dashboard | Purpose Engine">
-  <meta property="og:description" content="AI-powered insights to help educators understand and support student engagement and purpose.">
-  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  
-  <!-- Fonts -->
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/upliftlogo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="variables.css">
+  <link rel="stylesheet" href="assets/variables.css">
   <style>
     :root {
       --primary: #0067b1;
@@ -1274,16 +1264,16 @@
                 <div class="title">Tesla Gigafactory Tour &mdash; Sustainable Manufacturing</div>
                 <div class="meta">Jan 12, 2025 &bull; <span class="source">via Schoolinks</span> &bull; 3 hours</div>
               </div>
-              <span class="event-status needs-input" id="eventStatus">&#10024; Feedback Needed</span>
+              <span class="event-status needs-input">&#10024; Feedback Needed</span>
             </div>
 
             <!-- Feedback Gestalt -->
-            <div class="feedback-gestalt" id="feedbackGestalt">
+            <div class="feedback-gestalt">
               <div class="gestalt-header">
                 <span class="title">Feedback Collected</span>
-                <span class="count" id="feedbackCount">2 of 4 expected</span>
+                <span class="count">2 of 4 expected</span>
               </div>
-              <div class="feedback-items" id="feedbackItems">
+              <div class="feedback-items">
                 <div class="feedback-item">
                   <div class="avatar student">&#128587;</div>
                   <div class="content">
@@ -1310,21 +1300,21 @@
             </div>
 
             <!-- Quick Feedback Form -->
-            <div class="quick-feedback" id="quickFeedbackForm">
+            <div class="quick-feedback">
               <div class="prompt">
                 <span class="ai-icon">&#129302;</span>
                 Did you observe Maya during or after the Tesla visit? Quick feedback helps complete the picture.
               </div>
-              <div class="quick-options" id="quickOptions">
-                <button class="quick-option" onclick="toggleOption(this)" data-label="Showed excitement">&#127775; Showed excitement</button>
-                <button class="quick-option" onclick="toggleOption(this)" data-label="Talked about it">&#128172; Talked about it</button>
-                <button class="quick-option" onclick="toggleOption(this)" data-label="Made connections">&#128279; Made connections</button>
-                <button class="quick-option" onclick="toggleOption(this)" data-label="Seemed neutral">&#128528; Seemed neutral</button>
-                <button class="quick-option" onclick="toggleOption(this)" data-label="Seemed confused">&#129300; Seemed confused</button>
+              <div class="quick-options">
+                <button class="quick-option" onclick="toggleOption(this)">&#127775; Showed excitement</button>
+                <button class="quick-option" onclick="toggleOption(this)">&#128172; Talked about it</button>
+                <button class="quick-option" onclick="toggleOption(this)">&#128279; Made connections</button>
+                <button class="quick-option" onclick="toggleOption(this)">&#128528; Seemed neutral</button>
+                <button class="quick-option" onclick="toggleOption(this)">&#129300; Seemed confused</button>
               </div>
-              <div class="feedback-note" id="feedbackNoteRow">
-                <input type="text" id="feedbackNoteInput" placeholder="Add a note (optional) &mdash; e.g., 'She mentioned the battery chemistry in class today'">
-                <button class="submit-btn" id="submitFeedbackBtn" onclick="submitFeedback()">Submit Feedback</button>
+              <div class="feedback-note">
+                <input type="text" placeholder="Add a note (optional) &mdash; e.g., 'She mentioned the battery chemistry in class today'">
+                <button class="submit-btn">Submit Feedback</button>
               </div>
               <div class="contributor-note">
                 <span class="icon">&#128101;</span>
@@ -1418,100 +1408,6 @@
 
     function closeModal() {
       document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
-    }
-
-    function submitFeedback() {
-      // Collect selected options
-      const selectedOptions = [];
-      document.querySelectorAll('#quickOptions .quick-option.selected').forEach(btn => {
-        selectedOptions.push(btn.getAttribute('data-label'));
-      });
-      
-      // Get note text
-      const noteText = document.getElementById('feedbackNoteInput').value.trim();
-      
-      // Validate - need at least one selection or a note
-      if (selectedOptions.length === 0 && !noteText) {
-        alert('Please select at least one observation or add a note.');
-        return;
-      }
-      
-      // Build the feedback text
-      let feedbackText = '';
-      if (selectedOptions.length > 0) {
-        feedbackText = 'Observed: ' + selectedOptions.join(', ') + '.';
-      }
-      if (noteText) {
-        feedbackText += (feedbackText ? ' ' : '') + '"' + noteText + '"';
-      }
-      
-      // Create new feedback item
-      const newFeedback = document.createElement('div');
-      newFeedback.className = 'feedback-item';
-      newFeedback.style.animation = 'fadeIn 0.4s ease';
-      newFeedback.innerHTML = `
-        <div class="avatar teacher">&#128104;&#8205;&#127979;</div>
-        <div class="content">
-          <div class="author">Mrs. Rodriguez <span class="role">&bull; Chemistry Teacher</span></div>
-          <div class="text">${feedbackText}</div>
-          <div class="sentiment">
-            ${selectedOptions.includes('Showed excitement') || selectedOptions.includes('Made connections') ? '<span class="sentiment-tag positive">Engaged</span>' : ''}
-            ${selectedOptions.includes('Talked about it') ? '<span class="sentiment-tag interest">Verbal Processing</span>' : ''}
-            ${noteText ? '<span class="sentiment-tag growth">Teacher Note</span>' : ''}
-          </div>
-        </div>
-      `;
-      
-      // Add to feedback items
-      document.getElementById('feedbackItems').appendChild(newFeedback);
-      
-      // Update count
-      document.getElementById('feedbackCount').textContent = '3 of 4 expected';
-      
-      // Transform the form into a success state
-      const form = document.getElementById('quickFeedbackForm');
-      form.innerHTML = `
-        <div style="text-align: center; padding: 24px 0;">
-          <div style="font-size: 48px; margin-bottom: 12px;">&#10004;</div>
-          <div style="font-size: 18px; font-weight: 600; color: var(--success); margin-bottom: 8px;">Feedback Submitted!</div>
-          <div style="font-size: 14px; color: var(--gray-500); margin-bottom: 16px;">Your observation has been added to Maya's record.</div>
-          <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
-            ${selectedOptions.map(opt => `<span style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;">${opt}</span>`).join('')}
-          </div>
-          ${noteText ? `<div style="margin-top: 12px; font-style: italic; color: var(--gray-600); font-size: 13px;">"${noteText}"</div>` : ''}
-          <button onclick="resetFeedbackForm()" style="margin-top: 20px; padding: 10px 20px; background: var(--gray-100); border: none; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--gray-600); cursor: pointer;">Add Another Observation</button>
-        </div>
-      `;
-      
-      // Update event status if we now have 3+ contributions
-      const statusEl = document.getElementById('eventStatus');
-      statusEl.className = 'event-status complete';
-      statusEl.innerHTML = '&#10003; 3 of 4 collected';
-    }
-    
-    function resetFeedbackForm() {
-      const form = document.getElementById('quickFeedbackForm');
-      form.innerHTML = `
-        <div class="prompt">
-          <span class="ai-icon">&#129302;</span>
-          Did you observe Maya during or after the Tesla visit? Quick feedback helps complete the picture.
-        </div>
-        <div class="quick-options" id="quickOptions">
-          <button class="quick-option" onclick="toggleOption(this)" data-label="Showed excitement">&#127775; Showed excitement</button>
-          <button class="quick-option" onclick="toggleOption(this)" data-label="Talked about it">&#128172; Talked about it</button>
-          <button class="quick-option" onclick="toggleOption(this)" data-label="Made connections">&#128279; Made connections</button>
-          <button class="quick-option" onclick="toggleOption(this)" data-label="Seemed neutral">&#128528; Seemed neutral</button>
-          <button class="quick-option" onclick="toggleOption(this)" data-label="Seemed confused">&#129300; Seemed confused</button>
-        </div>
-        <div class="feedback-note" id="feedbackNoteRow">
-          <input type="text" id="feedbackNoteInput" placeholder="Add a note (optional) &mdash; e.g., 'She mentioned the battery chemistry in class today'">
-          <button class="submit-btn" id="submitFeedbackBtn" onclick="submitFeedback()">Submit Feedback</button>
-        </div>
-        <div class="contributor-note">
-          <span class="icon">&#128101;</span>
-          <span class="text"><strong>Anyone can contribute:</strong> Teachers, counselors, staff, or Maya herself. All perspectives help build the complete picture.</span>
-        </div>
-      `;
     }
 
     document.getElementById('checkin-modal').addEventListener('click', function(e) {
