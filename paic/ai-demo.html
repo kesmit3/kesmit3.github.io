@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purpose Engine AI Demo | Uplift Education</title>
+  
+  <!-- Favicon and Social Sharing -->
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/upliftlogo.png">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/upliftlogo.png">
+  <meta property="og:title" content="Purpose Engine AI Demo | Uplift Education">
+  <meta property="og:description" content="Live AI demonstration of personalized student motivation system">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/upliftlogo.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --navy: #0D1421;
+      --navy-light: #1a2332;
+      --blue-500: #0067b1;
+      --blue-600: #004b85;
+      --purple-500: #8B5CF6;
+      --pink-500: #EC4899;
+      --amber-500: #F59E0B;
+      --green-500: #10B981;
+      --slate-400: #94A3B8;
+      --slate-500: #64748B;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1E293B;
+    }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: var(--navy);
+      color: white;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Header */
+    .header {
+      background: var(--slate-800);
+      border-bottom: 1px solid var(--slate-700);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--blue-500) 0%, var(--blue-600) 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    
+    .header-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    
+    .header-subtitle {
+      font-size: 11px;
+      color: var(--slate-400);
+    }
+    
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.2);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green-500);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .status-text {
+      color: var(--green-500);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    
+    /* Main Layout */
+    .main {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 61px);
+    }
+    
+    /* Student Selector */
+    .student-selector {
+      background: rgba(30, 41, 59, 0.5);
+      border-bottom: 1px solid var(--slate-700);
+      padding: 12px 16px;
+    }
+    
+    .student-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: rgba(51, 65, 85, 0.5);
+      border-radius: 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .student-card:hover {
+      background: rgba(51, 65, 85, 0.8);
+    }
+    
+    .student-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    
+    .student-avatar.blue {
+      background: linear-gradient(135deg, var(--blue-500) 0%, var(--blue-600) 100%);
+    }
+    
+    .student-avatar.amber {
+      background: linear-gradient(135deg, var(--amber-500) 0%, #F97316 100%);
+    }
+    
+    .student-info {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .student-name {
+      font-weight: 600;
+      font-size: 15px;
+    }
+    
+    .student-meta {
+      font-size: 12px;
+      color: var(--slate-400);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .student-points {
+      text-align: right;
+    }
+    
+    .points-number {
+      font-size: 24px;
+      font-weight: 800;
+      color: #5091cd;
+    }
+    
+    .points-label {
+      font-size: 10px;
+      color: var(--slate-500);
+    }
+    
+    .dropdown-arrow {
+      color: var(--slate-400);
+      font-size: 12px;
+    }
+    
+    /* Student List Dropdown */
+    .student-list {
+      display: none;
+      margin-top: 8px;
+      background: var(--slate-800);
+      border-radius: 16px;
+      border: 1px solid var(--slate-700);
+      max-height: 240px;
+      overflow-y: auto;
+    }
+    
+    .student-list.open {
+      display: block;
+    }
+    
+    .student-list-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+      transition: background 0.15s;
+    }
+    
+    .student-list-item:last-child {
+      border-bottom: none;
+    }
+    
+    .student-list-item:hover {
+      background: rgba(51, 65, 85, 0.5);
+    }
+    
+    .student-list-item.selected {
+      background: rgba(0, 103, 177, 0.2);
+    }
+    
+    .student-list-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    
+    .student-list-info {
+      flex: 1;
+    }
+    
+    .student-list-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+    
+    .student-list-meta {
+      font-size: 11px;
+      color: var(--slate-400);
+    }
+    
+    .student-list-points {
+      font-size: 14px;
+      font-weight: 700;
+      color: #5091cd;
+    }
+    
+    /* Quick Stats */
+    .quick-stats {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    
+    .stat-badge {
+      background: rgba(51, 65, 85, 0.5);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 11px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .stat-label {
+      color: var(--slate-400);
+    }
+    
+    .stat-value {
+      font-weight: 700;
+    }
+    
+    .theme-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    
+    /* Mode Tabs */
+    .mode-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 8px 16px;
+      background: rgba(30, 41, 59, 0.3);
+      border-bottom: 1px solid var(--slate-700);
+    }
+    
+    .mode-tab {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: rgba(51, 65, 85, 0.5);
+      color: var(--slate-400);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    
+    .mode-tab:hover {
+      background: rgba(51, 65, 85, 0.8);
+    }
+    
+    .mode-tab.active.transform {
+      background: var(--blue-500);
+      color: white;
+    }
+    
+    .mode-tab.active.futureself {
+      background: var(--purple-500);
+      color: white;
+    }
+    
+    .mode-tab.active.insights {
+      background: var(--amber-500);
+      color: white;
+    }
+    
+    /* Controls Panel */
+    .controls {
+      padding: 12px 16px;
+      background: rgba(30, 41, 59, 0.2);
+      border-bottom: 1px solid var(--slate-700);
+    }
+    
+    .assignment-pills {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    
+    .assignment-pill {
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      border: none;
+      background: rgba(51, 65, 85, 0.5);
+      color: var(--slate-400);
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    
+    .assignment-pill:hover {
+      background: rgba(51, 65, 85, 0.8);
+    }
+    
+    .assignment-pill.selected {
+      background: var(--blue-500);
+      color: white;
+    }
+    
+    .custom-input {
+      width: 100%;
+      margin-top: 8px;
+      padding: 12px;
+      background: rgba(51, 65, 85, 0.5);
+      border: 1px solid var(--slate-600);
+      border-radius: 12px;
+      color: white;
+      font-size: 13px;
+      font-family: inherit;
+      resize: none;
+      height: 60px;
+    }
+    
+    .custom-input::placeholder {
+      color: var(--slate-500);
+    }
+    
+    .custom-input:focus {
+      outline: none;
+      border-color: var(--blue-500);
+    }
+    
+    .transform-btn {
+      width: 100%;
+      margin-top: 10px;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      background: linear-gradient(135deg, var(--blue-500) 0%, var(--blue-600) 100%);
+      color: white;
+      transition: all 0.2s;
+    }
+    
+    .transform-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0, 103, 177, 0.4);
+    }
+    
+    .transform-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .suggestion-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .suggestion-pill {
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      border: none;
+      background: rgba(51, 65, 85, 0.5);
+      color: var(--slate-400);
+      transition: all 0.2s;
+    }
+    
+    .suggestion-pill:hover {
+      background: rgba(51, 65, 85, 0.8);
+      color: white;
+    }
+    
+    /* Chat Area */
+    .chat-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .chat-empty {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--slate-500);
+    }
+    
+    .chat-empty-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+    
+    .chat-empty-text {
+      font-size: 14px;
+    }
+    
+    .message {
+      display: flex;
+      max-width: 85%;
+    }
+    
+    .message.user {
+      align-self: flex-end;
+    }
+    
+    .message.assistant {
+      align-self: flex-start;
+    }
+    
+    .message-bubble {
+      padding: 14px 18px;
+      border-radius: 20px;
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+    
+    .message.user .message-bubble {
+      background: linear-gradient(135deg, var(--blue-500) 0%, var(--blue-600) 100%);
+      border-bottom-right-radius: 6px;
+    }
+    
+    .message.assistant .message-bubble {
+      background: rgba(51, 65, 85, 0.7);
+      border-bottom-left-radius: 6px;
+    }
+    
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      padding: 14px 18px;
+      background: rgba(51, 65, 85, 0.7);
+      border-radius: 20px;
+      border-bottom-left-radius: 6px;
+      align-self: flex-start;
+    }
+    
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--slate-400);
+      border-radius: 50%;
+      animation: bounce 1.4s infinite ease-in-out;
+    }
+    
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    
+    @keyframes bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-4px); }
+    }
+    
+    /* Input Area */
+    .input-area {
+      padding: 12px 16px;
+      border-top: 1px solid var(--slate-700);
+      display: none;
+    }
+    
+    .input-area.visible {
+      display: block;
+    }
+    
+    .input-row {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .chat-input {
+      flex: 1;
+      padding: 14px 18px;
+      background: rgba(51, 65, 85, 0.5);
+      border: 1px solid var(--slate-600);
+      border-radius: 14px;
+      color: white;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    
+    .chat-input::placeholder {
+      color: var(--slate-500);
+    }
+    
+    .chat-input:focus {
+      outline: none;
+      border-color: var(--purple-500);
+    }
+    
+    .send-btn {
+      padding: 14px 24px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      background: linear-gradient(135deg, var(--purple-500) 0%, var(--pink-500) 100%);
+      color: white;
+      transition: all 0.2s;
+    }
+    
+    .send-btn:hover {
+      transform: translateY(-2px);
+    }
+    
+    .send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    /* Footer */
+    .footer {
+      background: rgba(30, 41, 59, 0.5);
+      border-top: 1px solid var(--slate-700);
+      padding: 10px 16px;
+    }
+    
+    .data-sources {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      font-size: 11px;
+      color: var(--slate-500);
+    }
+    
+    .data-source {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .source-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green-500);
+      border-radius: 50%;
+    }
+    
+    /* Hidden by default */
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo-icon">🧠</div>
+      <div>
+        <div class="header-title">Purpose Engine AI</div>
+        <div class="header-subtitle">Live Demo • 10 Students</div>
+      </div>
+    </div>
+    <div class="status-badge">
+      <div class="status-dot"></div>
+      <span class="status-text">Demo Mode</span>
+    </div>
+  </header>
+  
+  <main class="main">
+    <!-- Student Selector -->
+    <div class="student-selector">
+      <div class="student-card" onclick="toggleStudentList()">
+        <div class="student-avatar blue" id="selectedAvatar">MC</div>
+        <div class="student-info">
+          <div class="student-name" id="selectedName">Maya Chen</div>
+          <div class="student-meta" id="selectedMeta">11th • Sustainable Design Director</div>
+        </div>
+        <div class="student-points">
+          <div class="points-number" id="selectedPoints">67</div>
+          <div class="points-label">pts</div>
+        </div>
+        <span class="dropdown-arrow">▼</span>
+      </div>
+      
+      <div class="student-list" id="studentList"></div>
+      
+      <div class="quick-stats" id="quickStats"></div>
+    </div>
+    
+    <!-- Mode Tabs -->
+    <div class="mode-tabs">
+      <button class="mode-tab active transform" data-mode="transform" onclick="setMode('transform')">
+        <span>⚡</span> Transform
+      </button>
+      <button class="mode-tab futureself" data-mode="futureself" onclick="setMode('futureself')">
+        <span>🔮</span> Future Self
+      </button>
+      <button class="mode-tab insights" data-mode="insights" onclick="setMode('insights')">
+        <span>📊</span> Insights
+      </button>
+    </div>
+    
+    <!-- Controls Panel -->
+    <div class="controls" id="controls"></div>
+    
+    <!-- Chat Area -->
+    <div class="chat-area" id="chatArea">
+      <div class="chat-empty" id="chatEmpty">
+        <div>
+          <div class="chat-empty-icon" id="emptyIcon">⚡</div>
+          <div class="chat-empty-text" id="emptyText">Select an assignment and click Transform</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Input Area (Future Self) -->
+    <div class="input-area" id="inputArea">
+      <div class="input-row">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Ask your Future Self anything..." onkeypress="handleKeyPress(event)">
+        <button class="send-btn" onclick="sendFutureSelfMessage()">Send</button>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+      <div class="data-sources">
+        <span class="data-source"><span class="source-dot"></span> PowerSchool</span>
+        <span class="data-source"><span class="source-dot"></span> Schoology</span>
+        <span class="data-source"><span class="source-dot"></span> Schoolinks</span>
+        <span class="data-source"><span class="source-dot"></span> YouScience</span>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // ============================================
+    // STUDENT DATABASE
+    // ============================================
+    const students = [
+      {
+        id: 1, name: "Maya Chen", avatar: "MC", grade: 11, gpa: 3.4, attendance: 93, points: 67,
+        hasAlerts: true, avatarClass: "amber",
+        goal: "Sustainable Design Director",
+        interests: ["Sustainable Architecture", "Environmental Engineering"],
+        purpose: "I want to design buildings that heal the planet.",
+        aptitudes: [{ name: "Spatial Visualization", score: 92 }, { name: "Idea Generation", score: 88 }],
+        themes: [{ name: "Creative Tech", score: 85, color: "#E86B6B" }, { name: "Environment", score: 72, color: "#4CAF50" }],
+        courses: [{ name: "Chemistry", grade: "B+" }, { name: "English III", grade: "A-" }],
+        alerts: ["2 missing assignments"]
+      },
+      {
+        id: 2, name: "Jordan Williams", avatar: "JW", grade: 10, gpa: 3.8, attendance: 97, points: 89,
+        hasAlerts: false, avatarClass: "blue",
+        goal: "Tech Startup Founder",
+        interests: ["Software Development", "AI/Machine Learning", "Entrepreneurship"],
+        purpose: "Build technology that solves real problems and start my own company before 25.",
+        aptitudes: [{ name: "Sequential Reasoning", score: 95 }, { name: "Numerical Reasoning", score: 91 }],
+        themes: [{ name: "Technology", score: 92, color: "#5091cd" }, { name: "Entrepreneurship", score: 86, color: "#FFB74D" }],
+        courses: [{ name: "AP Computer Science", grade: "A" }, { name: "Algebra II", grade: "A-" }],
+        alerts: []
+      },
+      {
+        id: 3, name: "Marcus Rivera", avatar: "MR", grade: 9, gpa: 2.6, attendance: 88, points: 34,
+        hasAlerts: true, avatarClass: "amber",
+        goal: "Grammy-Winning Music Producer",
+        interests: ["Music Production", "Audio Engineering", "Entertainment"],
+        purpose: "I want to produce beats and own my own studio.",
+        aptitudes: [{ name: "Pitch Discrimination", score: 94 }, { name: "Rhythm Memory", score: 91 }],
+        themes: [{ name: "Music & Audio", score: 96, color: "#8B5CF6" }, { name: "Creative", score: 82, color: "#EC4899" }],
+        courses: [{ name: "Algebra I", grade: "D+" }, { name: "English I", grade: "C" }],
+        alerts: ["Attendance concern", "Math declining"]
+      },
+      {
+        id: 4, name: "Sarah Kim", avatar: "SK", grade: 11, gpa: 4.0, attendance: 99, points: 94,
+        hasAlerts: false, avatarClass: "blue",
+        goal: "Pediatric Surgeon",
+        interests: ["Pediatric Medicine", "Medical Research", "Public Health"],
+        purpose: "Become a pediatric surgeon providing healthcare to underserved communities.",
+        aptitudes: [{ name: "Numerical Reasoning", score: 97 }, { name: "Sequential Reasoning", score: 94 }],
+        themes: [{ name: "Healthcare", score: 98, color: "#10B981" }, { name: "Service", score: 86, color: "#EC4899" }],
+        courses: [{ name: "AP Chemistry", grade: "A+" }, { name: "AP Biology", grade: "A" }],
+        alerts: []
+      },
+      {
+        id: 5, name: "Tyler Brooks", avatar: "TB", grade: 11, gpa: 2.4, attendance: 85, points: 28,
+        hasAlerts: true, avatarClass: "amber",
+        goal: "Video Game Designer",
+        interests: ["Video Game Design", "Animation", "3D Art"],
+        purpose: "Maybe make video games or something.",
+        aptitudes: [{ name: "Spatial Visualization", score: 91 }, { name: "Idea Generation", score: 87 }],
+        themes: [{ name: "Gaming", score: 92, color: "#8B5CF6" }, { name: "Visual Arts", score: 88, color: "#EC4899" }],
+        courses: [{ name: "Chemistry", grade: "D" }, { name: "English III", grade: "C-" }],
+        alerts: ["Chronic absenteeism", "Multiple missing assignments"]
+      },
+      {
+        id: 6, name: "Isabella Garcia", avatar: "IG", grade: 12, gpa: 3.7, attendance: 96, points: 88,
+        hasAlerts: false, avatarClass: "blue",
+        goal: "Immigration Attorney",
+        interests: ["Law", "Immigration Policy", "Journalism"],
+        purpose: "Become an immigration lawyer to help families like mine.",
+        aptitudes: [{ name: "Vocabulary", score: 98 }, { name: "Verbal Reasoning", score: 95 }],
+        themes: [{ name: "Justice", score: 96, color: "#8B5CF6" }, { name: "Communication", score: 92, color: "#5091cd" }],
+        courses: [{ name: "AP Spanish Lit", grade: "A+" }, { name: "AP Government", grade: "A-" }],
+        alerts: []
+      },
+      {
+        id: 7, name: "DeShawn Thompson", avatar: "DT", grade: 10, gpa: 3.2, attendance: 94, points: 71,
+        hasAlerts: false, avatarClass: "blue",
+        goal: "EV Shop Owner",
+        interests: ["Automotive Technology", "Electric Vehicles", "Mechanical Engineering"],
+        purpose: "Work on electric vehicles and open my own EV repair shop.",
+        aptitudes: [{ name: "Mechanical Reasoning", score: 96 }, { name: "Spatial Visualization", score: 93 }],
+        themes: [{ name: "Mechanical", score: 95, color: "#F59E0B" }, { name: "Clean Energy", score: 72, color: "#10B981" }],
+        courses: [{ name: "Auto Tech I", grade: "A+" }, { name: "Geometry", grade: "B" }],
+        alerts: []
+      },
+      {
+        id: 8, name: "Aaliyah Johnson", avatar: "AJ", grade: 12, gpa: 3.1, attendance: 91, points: 72,
+        hasAlerts: true, avatarClass: "amber",
+        goal: "Clinical Psychologist",
+        interests: ["Clinical Psychology", "Social Work", "Counseling"],
+        purpose: "Help young people in my community overcome trauma.",
+        aptitudes: [{ name: "Vocabulary", score: 89 }, { name: "Idea Generation", score: 82 }],
+        themes: [{ name: "Helping Others", score: 94, color: "#EC4899" }, { name: "Mental Health", score: 88, color: "#8B5CF6" }],
+        courses: [{ name: "AP Psychology", grade: "A" }, { name: "Statistics", grade: "C+" }],
+        alerts: ["Attendance trending down"]
+      },
+      {
+        id: 9, name: "Kevin Nguyen", avatar: "KN", grade: 12, gpa: 3.8, attendance: 98, points: 91,
+        hasAlerts: false, avatarClass: "blue",
+        goal: "Quantitative Analyst",
+        interests: ["Quantitative Finance", "Data Science", "Algorithmic Trading"],
+        purpose: "Use math and programming to revolutionize financial markets.",
+        aptitudes: [{ name: "Numerical Reasoning", score: 99 }, { name: "Sequential Reasoning", score: 96 }],
+        themes: [{ name: "Quant Analysis", score: 98, color: "#5091cd" }, { name: "Finance", score: 94, color: "#10B981" }],
+        courses: [{ name: "AP Calc BC", grade: "A" }, { name: "AP CS", grade: "A+" }],
+        alerts: []
+      },
+      {
+        id: 10, name: "Brianna Taylor", avatar: "BT", grade: 9, gpa: 3.0, attendance: 91, points: 52,
+        hasAlerts: false, avatarClass: "blue",
+        goal: "Professional Dancer",
+        interests: ["Dance Performance", "Choreography", "Physical Therapy"],
+        purpose: "Perform professionally or help dancers recover from injuries.",
+        aptitudes: [{ name: "Rhythm Memory", score: 95 }, { name: "Spatial Visualization", score: 86 }],
+        themes: [{ name: "Dance", score: 98, color: "#EC4899" }, { name: "Physical", score: 86, color: "#8B5CF6" }],
+        courses: [{ name: "Dance I", grade: "A+" }, { name: "Algebra I", grade: "B-" }],
+        alerts: []
+      }
+    ];
+
+    const assignments = [
+      { id: 1, title: "Stoichiometry", subject: "Chemistry", desc: "Calculate molar ratios for equations 1-15" },
+      { id: 2, title: "Persuasive Essay", subject: "English", desc: "Write a 5-paragraph persuasive essay" },
+      { id: 3, title: "Linear Equations", subject: "Algebra", desc: "Solve systems using substitution" },
+      { id: 4, title: "Physics Lab", subject: "Physics", desc: "Document projectile motion calculations" }
+    ];
+
+    // ============================================
+    // PRE-SCRIPTED DEMO RESPONSES
+    // ============================================
+    const demoResponses = {
+      transform: {
+        1: { // Maya - Stoichiometry
+          1: `**🌱 Eco-Material Design Challenge**
+
+As an aspiring Sustainable Design Director, you've been contacted by a green construction startup that needs your help. They're developing a new plant-based building insulation, but the chemical ratios in their current formula aren't meeting fire safety standards.
+
+Your mission: Calculate the precise molar ratios needed to create a bio-based insulation material that's both eco-friendly AND fire-resistant. The formulation requires balancing calcium silicate compounds with organic binders—if your stoichiometry is off by even 5%, the material fails certification.
+
+**Why This Matters to You:**
+This is EXACTLY what sustainable architects do daily. When you're specifying materials for LEED-certified buildings, you'll need to understand the chemistry behind why certain eco-materials work and others don't. The stoichiometry skills you're building now will help you evaluate supplier claims, catch formula errors, and ultimately design buildings that are both green AND safe. Your future clients will trust you because you understand the science, not just the aesthetics.`,
+        },
+        3: { // Marcus - Linear Equations  
+          3: `**🎵 Studio Business Calculator**
+
+As an aspiring Grammy-winning producer, you're about to make a critical business decision. You're choosing between two recording studio rental options for your first mixtape:
+
+• Studio A: $200 setup fee + $45/hour
+• Studio B: $500 setup fee + $25/hour
+
+You need to figure out: At what point does Studio B become the better deal? How many hours of recording makes the higher setup fee worth it?
+
+But here's the real challenge—you're also negotiating a feature with an artist who charges $800 flat OR $100/hour of studio time. Create equations to model BOTH decisions and find your break-even points.
+
+**Why This Matters to You:**
+Every successful producer runs their studio like a business. Dr. Dre, Metro Boomin, Hit-Boy—they all had to master these calculations before they could focus purely on the music. Understanding linear equations means you'll know exactly when to rent vs. buy equipment, how to price your beats, and when a record deal actually makes financial sense. This isn't school math—this is the math that keeps studios open.`
+        },
+        5: { // Tyler - Stoichiometry
+          1: `**🎮 Game Chemistry: Crafting System Design**
+
+As a future game designer, you've been hired to create a realistic alchemy/crafting system for an open-world RPG. The lead developer wants crafting to feel "scientifically grounded"—not just "combine 3 herbs = potion."
+
+Your task: Design crafting recipes using REAL stoichiometric ratios. For example, if a player combines iron ore (Fe₂O₃) with charcoal (C), what's the exact ratio needed to produce iron ingots? What happens if they use too much or too little carbon?
+
+Create 5 crafting recipes with accurate molar ratios, then design what happens when players get the ratios wrong (failed crafts, unexpected results, rare discoveries).
+
+**Why This Matters to You:**
+Games like Breath of the Wild, Minecraft, and Skyrim all have crafting systems—but the BEST ones feel internally consistent. Understanding real chemistry lets you build systems that players can actually learn and master, not just memorize. Plus, game studios LOVE designers who can bridge art and science. This project could literally go in your portfolio.`
+        }
+      },
+      futureself: {
+        1: { // Maya
+          default: `Hey, younger me. I remember sitting exactly where you are—junior year, wondering if any of this chemistry stuff would ever matter.
+
+I'm writing this from my office at the firm. We just finished a net-zero community center, and last week I had to reject a supplier's insulation material because the fire-retardant ratios were off. I caught it because I actually understood the stoichiometry. That knowledge has saved projects—and potentially lives.
+
+The thing I wish someone had told me: the "boring" foundational stuff IS the creative work. You can't push boundaries in sustainable design if you don't understand the science of materials. Every building I design, I'm doing chemistry. Keep pushing through it. I promise it clicks.`
+        },
+        3: { // Marcus
+          default: `Yo, young Marcus. It's us—from the future. And yeah, we made it. Grammy on the shelf, studio's paid off.
+
+But real talk? I almost didn't get here because I thought math was pointless. Here's what I didn't understand back then: running a studio IS running a business. Every beat you sell, every feature you negotiate, every equipment lease—it's all equations.
+
+I lost $40,000 on a bad record deal in my early twenties because I didn't understand the math behind royalty splits. That setback almost ended my career. The algebra you're avoiding right now? It's literally the difference between getting played and getting paid. Trust me on this one.`
+        },
+        5: { // Tyler
+          default: `Hey Tyler. Yeah, I know—school feels pointless. I remember skipping class to watch game design tutorials, thinking "why do I need chemistry to make games?"
+
+Here's what I learned the hard way: I got my first game dev job at 24, and within a month I was assigned to build a crafting system. Lead designer asked me to make it "feel real." I had to google stoichiometry because I'd slept through it in high school. I was embarrassed.
+
+The devs who get promoted fastest? They're the ones who can bridge disciplines. Artists who understand physics. Programmers who get music theory. And yes, game designers who actually know chemistry. You've got the spatial skills—I can see it in your aptitude scores. Now build the knowledge to match. Future you will thank you.`
+        }
+      },
+      insights: {
+        1: { // Maya
+          celebration: `**🎉 Celebration Opportunities for Maya:**
+
+1. **Chemistry Connection Made**: Maya independently connected stoichiometry concepts to sustainable building materials last week—this shows her Purpose Engine alignment is working. Acknowledge this in class!
+
+2. **Purpose Points Trending Up**: +18% this semester despite recent absences. Her engagement with career-relevant content is strong.
+
+3. **Tesla Visit Impact**: The Gigafactory tour generated genuine excitement. She asked about battery chemistry and material sourcing—perfect entry point for upcoming lessons.
+
+**Recommended Action**: Pull Maya aside and say: "I noticed you made that connection between molar ratios and eco-materials—that's exactly how sustainable architects think. Want to present that angle to the class?"`,
+          warning: `**⚠️ Early Warning Signals for Maya:**
+
+1. **Pattern Break**: 2 absences + 2 missing assignments this week is unusual for her. Historical pattern shows she typically maintains 95%+ completion.
+
+2. **Morning vs. Afternoon Split**: Engagement data shows she's quieter in morning classes, more engaged after lunch. Possible sleep/home situation?
+
+3. **Chemistry Gap**: Despite strong purpose alignment, her procedural chemistry skills lag conceptual understanding. May need scaffolding on calculations.
+
+**Recommended Actions**:
+- Casual check-in: "Hey Maya, noticed you've been out a couple days. Everything okay?"
+- Offer the missing work reframed as the Eco-Material Challenge
+- Consider morning check-in routine to catch disengagement early`
+        },
+        3: { // Marcus
+          celebration: `**🎉 Hidden Strengths to Celebrate - Marcus:**
+
+1. **Elite Auditory Aptitudes**: 94th percentile in pitch discrimination, 91st in rhythm memory. These are RARE cognitive gifts—Marcus should know he has professional-level audio processing abilities.
+
+2. **Biology Engagement**: He's actually maintaining a B- in Biology despite struggles elsewhere. Lab work engages him—hands-on learning is his strength.
+
+3. **Purpose Clarity**: Unlike many 9th graders, Marcus has a specific, achievable dream. Music production is a real career path.
+
+**Recommended Action**: Connect with Marcus about his music. Ask what DAW he uses, what producers he admires. Then bridge: "You know, audio engineering is basically applied physics and math. Want to see how?"`,
+          warning: `**⚠️ Critical Intervention Needed - Marcus:**
+
+1. **Disengagement Spiral**: 3 days since last LMS login. Algebra grade at D+ puts him at risk of retention.
+
+2. **Attendance Pattern**: 88% overall but declining. Often absent Mondays and Fridays—possible weekend factors?
+
+3. **System Mismatch**: His cognitive profile (94th percentile audio, 91st rhythm) doesn't match traditional instruction methods. He's not struggling because he can't learn—he's struggling because we're not teaching to his strengths.
+
+**Urgent Actions**:
+- Frame math through music production lens (studio costs, beat pricing, royalty splits)
+- Consider audio-based learning accommodations
+- Parent contact to understand attendance pattern
+- Connect with music teacher for cross-curricular support`
+        }
+      }
+    };
+
+    // ============================================
+    // STATE
+    // ============================================
+    let selectedStudent = students[0];
+    let currentMode = 'transform';
+    let selectedAssignment = assignments[0];
+    let messages = [];
+    let isLoading = false;
+
+    // ============================================
+    // INITIALIZATION
+    // ============================================
+    function init() {
+      renderStudentList();
+      updateSelectedStudent();
+      renderControls();
+      renderChat();
+    }
+
+    function renderStudentList() {
+      const list = document.getElementById('studentList');
+      list.innerHTML = students.map(s => `
+        <div class="student-list-item ${s.id === selectedStudent.id ? 'selected' : ''}" onclick="selectStudent(${s.id})">
+          <div class="student-list-avatar ${s.hasAlerts ? 'amber' : 'blue'}" style="background: linear-gradient(135deg, ${s.hasAlerts ? '#F59E0B' : '#0067b1'} 0%, ${s.hasAlerts ? '#F97316' : '#004b85'} 100%)">${s.avatar}</div>
+          <div class="student-list-info">
+            <div class="student-list-name">${s.name}</div>
+            <div class="student-list-meta">${s.grade}th • GPA ${s.gpa}</div>
+          </div>
+          <div class="student-list-points">${s.points}</div>
+        </div>
+      `).join('');
+    }
+
+    function updateSelectedStudent() {
+      const s = selectedStudent;
+      document.getElementById('selectedAvatar').textContent = s.avatar;
+      document.getElementById('selectedAvatar').className = `student-avatar ${s.hasAlerts ? 'amber' : 'blue'}`;
+      document.getElementById('selectedAvatar').style.background = `linear-gradient(135deg, ${s.hasAlerts ? '#F59E0B' : '#0067b1'} 0%, ${s.hasAlerts ? '#F97316' : '#004b85'} 100%)`;
+      document.getElementById('selectedName').textContent = s.name;
+      document.getElementById('selectedMeta').textContent = `${s.grade}th • ${s.goal}`;
+      document.getElementById('selectedPoints').textContent = s.points;
+      
+      // Quick stats
+      document.getElementById('quickStats').innerHTML = `
+        <div class="stat-badge"><span class="stat-label">GPA</span> <span class="stat-value">${s.gpa}</span></div>
+        <div class="stat-badge"><span class="stat-label">Attend</span> <span class="stat-value">${s.attendance}%</span></div>
+        ${s.themes.map(t => `
+          <div class="stat-badge">
+            <span class="theme-dot" style="background: ${t.color}"></span>
+            <span>${t.name}</span>
+            <span class="stat-value">${t.score}%</span>
+          </div>
+        `).join('')}
+      `;
+    }
+
+    function toggleStudentList() {
+      document.getElementById('studentList').classList.toggle('open');
+    }
+
+    function selectStudent(id) {
+      selectedStudent = students.find(s => s.id === id);
+      updateSelectedStudent();
+      renderStudentList();
+      toggleStudentList();
+      messages = [];
+      renderChat();
+    }
+
+    function setMode(mode) {
+      currentMode = mode;
+      document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+      document.querySelector(`.mode-tab[data-mode="${mode}"]`).classList.add('active');
+      
+      document.getElementById('inputArea').classList.toggle('visible', mode === 'futureself');
+      
+      const icons = { transform: '⚡', futureself: '🔮', insights: '📊' };
+      const texts = { 
+        transform: 'Select an assignment and click Transform',
+        futureself: 'Ask your Future Self a question',
+        insights: 'Select a query to analyze this student'
+      };
+      document.getElementById('emptyIcon').textContent = icons[mode];
+      document.getElementById('emptyText').textContent = texts[mode];
+      
+      messages = [];
+      renderControls();
+      renderChat();
+    }
+
+    function renderControls() {
+      const controls = document.getElementById('controls');
+      
+      if (currentMode === 'transform') {
+        controls.innerHTML = `
+          <div class="assignment-pills">
+            ${assignments.map(a => `
+              <button class="assignment-pill ${a.id === selectedAssignment.id ? 'selected' : ''}" onclick="selectAssignment(${a.id})">${a.title}</button>
+            `).join('')}
+          </div>
+          <textarea class="custom-input" id="customInput" placeholder="Or paste any assignment here..."></textarea>
+          <button class="transform-btn" id="transformBtn" onclick="handleTransform()">⚡ Transform Assignment</button>
+        `;
+      } else if (currentMode === 'futureself') {
+        controls.innerHTML = `
+          <div class="suggestion-pills">
+            <button class="suggestion-pill" onclick="askFutureSelf('Why do I need to learn this?')">Why do I need this?</button>
+            <button class="suggestion-pill" onclick="askFutureSelf('Did you ever feel like giving up?')">Did you want to give up?</button>
+            <button class="suggestion-pill" onclick="askFutureSelf('What should I focus on this year?')">What should I focus on?</button>
+          </div>
+        `;
+      } else {
+        controls.innerHTML = `
+          <div class="suggestion-pills">
+            <button class="suggestion-pill" onclick="handleInsight('celebration')">🎉 Celebration opportunities?</button>
+            <button class="suggestion-pill" onclick="handleInsight('warning')">⚠️ Warning signs to watch?</button>
+          </div>
+        `;
+      }
+    }
+
+    function selectAssignment(id) {
+      selectedAssignment = assignments.find(a => a.id === id);
+      renderControls();
+    }
+
+    function renderChat() {
+      const chatArea = document.getElementById('chatArea');
+      const empty = document.getElementById('chatEmpty');
+      
+      if (messages.length === 0) {
+        empty.classList.remove('hidden');
+        chatArea.innerHTML = '';
+        chatArea.appendChild(empty);
+        return;
+      }
+      
+      empty.classList.add('hidden');
+      chatArea.innerHTML = messages.map(m => `
+        <div class="message ${m.role}">
+          <div class="message-bubble">${m.content}</div>
+        </div>
+      `).join('');
+      
+      if (isLoading) {
+        chatArea.innerHTML += `
+          <div class="typing-indicator">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+          </div>
+        `;
+      }
+      
+      chatArea.scrollTop = chatArea.scrollHeight;
+    }
+
+    // ============================================
+    // HANDLERS
+    // ============================================
+    function handleTransform() {
+      const custom = document.getElementById('customInput')?.value || '';
+      const assignmentText = custom || `${selectedAssignment.title}: ${selectedAssignment.desc}`;
+      
+      messages = [{ role: 'user', content: `Transform for ${selectedStudent.name}:\n\n"${assignmentText}"` }];
+      isLoading = true;
+      renderChat();
+      
+      setTimeout(() => {
+        isLoading = false;
+        // Get pre-scripted response or generate a reasonable default
+        const studentResponses = demoResponses.transform[selectedStudent.id];
+        let response = studentResponses?.[selectedAssignment.id];
+        
+        if (!response) {
+          response = generateDefaultTransform(selectedStudent, assignmentText);
+        }
+        
+        messages.push({ role: 'assistant', content: response });
+        renderChat();
+      }, 1500);
+    }
+
+    function generateDefaultTransform(student, assignment) {
+      return `**🎯 Purpose-Driven Challenge for ${student.name}**
+
+As an aspiring ${student.goal}, this assignment connects directly to skills you'll use in your career.
+
+**Your Challenge:**
+${assignment}
+
+But here's the twist—approach this through the lens of ${student.interests[0]}. How would a professional in your field tackle this same problem?
+
+**Why This Matters to You:**
+Your aptitude scores show exceptional ${student.aptitudes[0].name} (${student.aptitudes[0].score}%). This assignment builds on that natural strength while preparing you for real-world applications in ${student.interests[0]}.
+
+The skills you're developing here are the same ones that ${student.goal}s use daily. This isn't busywork—it's preparation for the future you're building.`;
+    }
+
+    function askFutureSelf(question) {
+      document.getElementById('chatInput').value = question;
+      sendFutureSelfMessage();
+    }
+
+    function sendFutureSelfMessage() {
+      const input = document.getElementById('chatInput');
+      const question = input.value.trim();
+      if (!question) return;
+      
+      input.value = '';
+      messages.push({ role: 'user', content: question });
+      isLoading = true;
+      renderChat();
+      
+      setTimeout(() => {
+        isLoading = false;
+        const studentResponses = demoResponses.futureself[selectedStudent.id];
+        let response = studentResponses?.default || generateDefaultFutureSelf(selectedStudent, question);
+        
+        messages.push({ role: 'assistant', content: response });
+        renderChat();
+      }, 1800);
+    }
+
+    function generateDefaultFutureSelf(student, question) {
+      return `Hey, younger me. I remember wondering the same thing when I was in ${student.grade}th grade.
+
+Now that I'm a ${student.goal}, I can tell you—everything you're going through is building toward this moment. Your ${student.aptitudes[0].name} skills? I use them every single day.
+
+The struggles feel pointless now, but trust me: every challenge you push through is practice for the bigger ones ahead. And those you'll actually WANT to solve because they'll be about ${student.interests[0]}.
+
+Keep going. I'm proof that you make it.`;
+    }
+
+    function handleInsight(type) {
+      const query = type === 'celebration' ? '🎉 What are the celebration opportunities?' : '⚠️ What warning signs should I watch?';
+      
+      messages = [{ role: 'user', content: query }];
+      isLoading = true;
+      renderChat();
+      
+      setTimeout(() => {
+        isLoading = false;
+        const studentInsights = demoResponses.insights[selectedStudent.id];
+        let response = studentInsights?.[type] || generateDefaultInsight(selectedStudent, type);
+        
+        messages.push({ role: 'assistant', content: response });
+        renderChat();
+      }, 1500);
+    }
+
+    function generateDefaultInsight(student, type) {
+      if (type === 'celebration') {
+        return `**🎉 Celebration Opportunities for ${student.name}:**
+
+1. **Strong Purpose Alignment**: ${student.name}'s interest in ${student.interests[0]} shows clear career direction—rare for a ${student.grade}th grader!
+
+2. **Aptitude Strengths**: ${student.aptitudes[0].score}th percentile in ${student.aptitudes[0].name}. This is a genuine cognitive gift worth acknowledging.
+
+3. **Purpose Points**: Currently at ${student.points} points with positive trajectory.
+
+**Recommended Action**: Acknowledge their career clarity and connect upcoming lessons to ${student.interests[0]} applications.`;
+      } else {
+        return `**⚠️ Areas to Monitor for ${student.name}:**
+
+1. **Attendance**: Currently at ${student.attendance}%${student.attendance < 92 ? ' - below target' : ' - stable'}.
+
+2. **GPA Trajectory**: ${student.gpa}${student.gpa < 3.0 ? ' - may need academic support' : ' - on track'}.
+
+${student.alerts.length > 0 ? `3. **Active Alerts**: ${student.alerts.join(', ')}` : '3. **No Active Alerts**: Continue monitoring engagement patterns.'}
+
+**Recommended Actions**: 
+- ${student.alerts.length > 0 ? 'Address alerts with purpose-connected framing' : 'Maintain current support level'}
+- Connect with ${student.name} about ${student.interests[0]} to strengthen engagement`;
+      }
+    }
+
+    function handleKeyPress(e) {
+      if (e.key === 'Enter') sendFutureSelfMessage();
+    }
+
+    // Initialize on load
+    init();
+  </script>
+</body>
+</html>
