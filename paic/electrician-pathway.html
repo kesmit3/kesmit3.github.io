@@ -877,6 +877,54 @@
         font-size: 22px;
       }
     }
+
+    /* Demo Navigation Styles */
+    .nav__badge {
+      margin-left: 12px;
+      background: var(--yellow);
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .nav__demo-links {
+      display: flex;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .nav__demo-link {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-400);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .nav__demo-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .nav__demo-link.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .nav__demo-links {
+        display: none;
+      }
+      .nav__badge {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -887,28 +935,13 @@
       <div class="nav__divider"></div>
       <span class="nav__product">Purpose Engine</span>
     </a>
-    <button class="nav__toggle" onclick="toggleNav()">☰</button>
-    <div class="nav__links" id="navLinks">
-      <a href="index.html" class="nav__link">
-        <span class="nav__link-icon">🏠</span>
-        <span class="nav__link-text">Home</span>
-      </a>
-      <a href="student-dashboard.html" class="nav__link">
-        <span class="nav__link-icon">👨‍🎓</span>
-        <span class="nav__link-text">Student</span>
-      </a>
-      <a href="career-bridge.html" class="nav__link">
-        <span class="nav__link-icon">🎯</span>
-        <span class="nav__link-text">Career Bridge</span>
-      </a>
-      <a href="future-self.html" class="nav__link">
-        <span class="nav__link-icon">💬</span>
-        <span class="nav__link-text">Future Self</span>
-      </a>
-      <a href="educator-dashboard.html" class="nav__link">
-        <span class="nav__link-icon">👩‍🏫</span>
-        <span class="nav__link-text">Educator</span>
-      </a>
+    <span class="nav__badge">Student Journey</span>
+    <div class="nav__demo-links">
+      <a href="index.html" class="nav__demo-link">Home</a>
+      <a href="demo.html" class="nav__demo-link">Educator Demo</a>
+      <a href="rtcc-demo.html" class="nav__demo-link">RTCC Demo</a>
+      <a href="electrician-pathway.html" class="nav__demo-link active">⚡ Ivan</a>
+      <a href="cyber-pathway.html" class="nav__demo-link">🔐 Marcus</a>
     </div>
   </nav>
 
@@ -1331,13 +1364,13 @@
           but unsure of the steps. Purpose Engine makes the path visible.
         </p>
         <div class="cta-buttons">
-          <a href="future-self.html" class="btn btn--primary">
-            <span>💬</span>
-            <span>Try Future Self Chat</span>
+          <a href="ivan-day.html" class="btn btn--primary">
+            <span>📅</span>
+            <span>See Ivan's Full Day</span>
           </a>
-          <a href="educator-dashboard.html" class="btn btn--ghost">
-            <span>👩‍🏫</span>
-            <span>See Educator View</span>
+          <a href="cyber-pathway.html" class="btn btn--ghost">
+            <span>🔐</span>
+            <span>See Marcus's Pathway</span>
           </a>
         </div>
       </div>
