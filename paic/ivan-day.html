@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Day in Ivan's Life | Purpose Engine</title>
+  
+  <!-- Favicon and Social Sharing -->
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png?v=2">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png">
+  <meta property="og:title" content="A Day in Ivan's Life | Purpose Engine">
+  <meta property="og:description" content="See how Purpose Engine transforms a disconnected school day into a unified path toward Ivan's future.">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #0067b1;
+      --primary-dark: #004b85;
+      --primary-light: #5091cd;
+      --primary-glow: rgba(0, 103, 177, 0.3);
+      --yellow: #ffc425;
+      --orange: #f15d22;
+      --navy: #0D1421;
+      --navy-light: #1a2332;
+      --success: #10B981;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --purple: #8B5CF6;
+      --pink: #EC4899;
+      --gray-50: #F8FAFC;
+      --gray-100: #F1F5F9;
+      --gray-200: #E2E8F0;
+      --gray-300: #CBD5E1;
+      --gray-400: #94A3B8;
+      --gray-500: #64748B;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1E293B;
+      --gray-900: #0F172A;
+      --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --nav-height: 72px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--navy);
+      color: white;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      z-index: 1000;
+      background: rgba(13, 20, 33, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+    }
+
+    .nav__logo-img {
+      height: 44px;
+      width: auto;
+    }
+
+    .nav__divider {
+      width: 1px;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav__product {
+      font-size: 15px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 4px;
+    }
+
+    .nav__link {
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .nav__link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .nav__link--active {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+    }
+
+    .nav__toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      font-size: 24px;
+      color: white;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 120px 40px 80px;
+      background: linear-gradient(180deg, var(--navy) 0%, #0a1018 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 50%, rgba(0, 103, 177, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(255, 196, 37, 0.1) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 196, 37, 0.15);
+      border: 1px solid rgba(255, 196, 37, 0.3);
+      color: var(--yellow);
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--gray-400);
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Timeline Section */
+    .timeline-section {
+      padding: 60px 40px;
+      background: linear-gradient(180deg, #0a1018 0%, var(--navy) 100%);
+    }
+
+    .timeline-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 103, 177, 0.15);
+      border: 1px solid rgba(0, 103, 177, 0.3);
+      color: var(--primary-light);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      color: var(--gray-400);
+      font-size: 16px;
+    }
+
+    /* Day Timeline */
+    .day-timeline {
+      position: relative;
+    }
+
+    .day-timeline::before {
+      content: '';
+      position: absolute;
+      left: 140px;
+      top: 40px;
+      bottom: 40px;
+      width: 3px;
+      background: linear-gradient(180deg, var(--primary) 0%, var(--yellow) 50%, var(--success) 100%);
+      opacity: 0.4;
+      border-radius: 2px;
+    }
+
+    /* Time Block */
+    .time-block {
+      display: grid;
+      grid-template-columns: 120px 40px 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .time-label {
+      text-align: right;
+      padding-top: 16px;
+    }
+
+    .time-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary-light);
+    }
+
+    .time-period {
+      font-size: 11px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .time-dot {
+      display: flex;
+      justify-content: center;
+      padding-top: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .time-dot::before {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+
+    .time-block.highlight .time-dot::before {
+      background: var(--yellow);
+      box-shadow: 0 0 20px rgba(255, 196, 37, 0.4);
+    }
+
+    .time-block.success .time-dot::before {
+      background: var(--success);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+    }
+
+    .time-content {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .time-content:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(0, 103, 177, 0.3);
+      transform: translateX(4px);
+    }
+
+    .time-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .time-title {
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .time-icon {
+      font-size: 24px;
+    }
+
+    .class-badge {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Device Preview (Chromebook) */
+    .device-preview {
+      background: linear-gradient(135deg, #1a2332 0%, #0d1421 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 16px;
+    }
+
+    .device-header {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .device-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .device-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .device-dots span:first-child { background: #EF4444; }
+    .device-dots span:nth-child(2) { background: #F59E0B; }
+    .device-dots span:last-child { background: #10B981; }
+
+    .device-title {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-left: 8px;
+    }
+
+    .device-content {
+      padding: 20px;
+    }
+
+    .purpose-greeting {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--gray-300);
+    }
+
+    .purpose-greeting span {
+      color: var(--yellow);
+    }
+
+    /* Schedule Card */
+    .schedule-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .schedule-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .schedule-icon.art { background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%); }
+    .schedule-icon.code { background: linear-gradient(135deg, #10B981 0%, #059669 100%); }
+    .schedule-icon.math { background: linear-gradient(135deg, #0067b1 0%, #004b85 100%); }
+    .schedule-icon.english { background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); }
+    .schedule-icon.govt { background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); }
+
+    .schedule-info h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .schedule-connection {
+      font-size: 12px;
+      color: var(--gray-400);
+      line-height: 1.5;
+    }
+
+    .schedule-connection strong {
+      color: var(--yellow);
+      font-weight: 600;
+    }
+
+    /* Before/After Split */
+    .split-view {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .split-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .split-card.before {
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      background: rgba(239, 68, 68, 0.05);
+    }
+
+    .split-card.after {
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    .split-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .split-card.before .split-label { color: #EF4444; }
+    .split-card.after .split-label { color: #10B981; }
+
+    .split-text {
+      font-size: 13px;
+      color: var(--gray-300);
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    /* Teacher Context Card */
+    .teacher-context {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(0, 103, 177, 0.1) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .teacher-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .teacher-icon {
+      font-size: 20px;
+    }
+
+    .teacher-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #A78BFA;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .teacher-content {
+      font-size: 13px;
+      color: var(--gray-300);
+      line-height: 1.6;
+    }
+
+    .teacher-content strong {
+      color: var(--yellow);
+    }
+
+    /* Future Self Chat */
+    .chat-preview {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .chat-bubble {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .chat-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .chat-avatar.future {
+      background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%);
+    }
+
+    .chat-avatar.ivan {
+      background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+    }
+
+    .chat-message {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--gray-300);
+      line-height: 1.5;
+      max-width: 85%;
+    }
+
+    .chat-bubble.outgoing {
+      flex-direction: row-reverse;
+    }
+
+    .chat-bubble.outgoing .chat-message {
+      background: rgba(0, 103, 177, 0.2);
+    }
+
+    /* Network Section */
+    .network-section {
+      padding: 60px 40px;
+      background: var(--navy);
+    }
+
+    .network-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .network-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .network-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .network-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(0, 103, 177, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .network-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 16px;
+    }
+
+    .network-card:nth-child(1) .network-icon { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); }
+    .network-card:nth-child(2) .network-icon { background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%); }
+    .network-card:nth-child(3) .network-icon { background: linear-gradient(135deg, var(--success) 0%, #059669 100%); }
+
+    .network-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .network-desc {
+      font-size: 13px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    .network-signal {
+      margin-top: 12px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: var(--success);
+    }
+
+    /* The Difference */
+    .difference-section {
+      padding: 60px 40px;
+      background: linear-gradient(180deg, var(--navy) 0%, #0a1018 100%);
+    }
+
+    .difference-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .difference-box {
+      background: linear-gradient(135deg, rgba(0, 103, 177, 0.1) 0%, rgba(255, 196, 37, 0.1) 100%);
+      border: 1px solid rgba(0, 103, 177, 0.2);
+      border-radius: 24px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .difference-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 32px;
+      margin-top: 32px;
+      align-items: center;
+    }
+
+    .difference-card {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .difference-card.before {
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .difference-card.after {
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .difference-card-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .difference-card.before .difference-card-label { color: #EF4444; }
+    .difference-card.after .difference-card-label { color: #10B981; }
+
+    .difference-card-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .difference-card-text {
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .difference-arrow {
+      font-size: 32px;
+      color: var(--yellow);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 80px 40px;
+      background: linear-gradient(135deg, rgba(0, 103, 177, 0.2) 0%, rgba(255, 196, 37, 0.1) 100%);
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .cta-subtitle {
+      font-size: 18px;
+      color: var(--gray-400);
+      max-width: 600px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      border: none;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn--primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+    }
+
+    .btn--primary:hover {
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .btn--ghost:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav {
+        padding: 0 20px;
+      }
+      
+      .nav__logo-img {
+        height: 36px;
+      }
+      
+      .nav__divider,
+      .nav__product {
+        display: none;
+      }
+      
+      .nav__toggle {
+        display: block;
+      }
+      
+      .nav__links {
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: var(--navy);
+        padding: 16px;
+        gap: 8px;
+        display: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .nav__links.open {
+        display: flex;
+      }
+
+      .hero {
+        padding: 100px 20px 60px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+      }
+
+      .timeline-section,
+      .network-section,
+      .difference-section {
+        padding: 40px 20px;
+      }
+
+      .day-timeline::before {
+        left: 20px;
+      }
+
+      .time-block {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .time-label {
+        text-align: left;
+        padding-top: 0;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .time-dot {
+        display: none;
+      }
+
+      .split-view {
+        grid-template-columns: 1fr;
+      }
+
+      .network-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .difference-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .difference-arrow {
+        transform: rotate(90deg);
+      }
+
+      .cta-section {
+        padding: 60px 20px;
+      }
+
+      .cta-title {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      <img src="https://kesmit3.github.io/paic/upliftlogo.png" alt="Uplift Education" class="nav__logo-img">
+      <div class="nav__divider"></div>
+      <span class="nav__product">Purpose Engine</span>
+    </a>
+    <button class="nav__toggle" onclick="toggleNav()">☰</button>
+    <div class="nav__links" id="navLinks">
+      <a href="index.html" class="nav__link">
+        <span>🏠</span>
+        <span>Home</span>
+      </a>
+      <a href="electrician-pathway.html" class="nav__link">
+        <span>⚡</span>
+        <span>Ivan's Pathway</span>
+      </a>
+      <a href="ivan-day.html" class="nav__link nav__link--active">
+        <span>📅</span>
+        <span>Ivan's Day</span>
+      </a>
+      <a href="student-dashboard.html" class="nav__link">
+        <span>🎯</span>
+        <span>Student</span>
+      </a>
+      <a href="educator-dashboard.html" class="nav__link">
+        <span>👩‍🏫</span>
+        <span>Educator</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="pathway-page">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>📅</span>
+          <span>A Day in the Life</span>
+        </div>
+        <h1>What Ivan Sees <span>Monday Morning</span></h1>
+        <p class="hero-subtitle">
+          Purpose Engine doesn't just react to assignments—it proactively connects Ivan's 
+          entire school day to his goal of becoming an electrician and business owner.
+        </p>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-section">
+      <div class="timeline-container">
+        <div class="section-header">
+          <div class="section-badge">
+            <span>⏰</span>
+            <span>Monday Schedule</span>
+          </div>
+          <h2 class="section-title">Six Classes. One Purpose.</h2>
+          <p class="section-subtitle">Every period connects to Ivan's future—he just couldn't see it before.</p>
+        </div>
+
+        <div class="day-timeline">
+          <!-- 7:15 AM - Morning Check-in -->
+          <div class="time-block highlight">
+            <div class="time-label">
+              <div class="time-value">7:15 AM</div>
+              <div class="time-period">Morning</div>
+            </div>
+            <div class="time-dot"></div>
+            <div class="time-content">
+              <div class="time-header">
+                <div class="time-title">
+                  <span class="time-icon">💻</span>
+                  Chromebook Login
+                </div>
+                <span class="class-badge">Daily Check-in</span>
+              </div>
+              
+              <div class="device-preview">
+                <div class="device-header">
+                  <div class="device-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <span class="device-title">Purpose Engine — Ivan's Dashboard</span>
+                </div>
+                <div class="device-content">
+                  <div class="purpose-greeting">
+                    Good morning, <span>Ivan</span>. Here's your day—through your lens:
+                  </div>
+                  
+                  <div class="schedule-card">
+                    <div class="schedule-icon art">🎨</div>
+                    <div class="schedule-info">
+                      <h4>Art (2nd Period)</h4>
+                      <div class="schedule-connection">Visual literacy. <strong>When you're reading a 200-circuit panel schematic at 6am, this is the skill that keeps you fast.</strong></div>
+                    </div>
+                  </div>
+                  
+                  <div class="schedule-card">
+                    <div class="schedule-icon code">💻</div>
+                    <div class="schedule-info">
+                      <h4>Computer Science (4th Period)</h4>
+                      <div class="schedule-connection">Smart home systems are the <strong>fastest-growing electrical sector</strong>. This is that.</div>
+                    </div>
+                  </div>
+                  
+                  <div class="schedule-card">
+                    <div class="schedule-icon math">📐</div>
+                    <div class="schedule-info">
+                      <h4>Algebra II (6th Period)</h4>
+                      <div class="schedule-connection">Load calculations. Bidding jobs. <strong>The math that wins contracts.</strong></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8:45 AM - Art Class -->
+          <div class="time-block">
+            <div class="time-label">
+              <div class="time-value">8:45 AM</div>
+              <div class="time-period">2nd Period</div>
+            </div>
+            <div class="time-dot"></div>
+            <div class="time-content">
+              <div class="time-header">
+                <div class="time-title">
+                  <span class="time-icon">🎨</span>
+                  Art Class
+                </div>
+                <span class="class-badge">Visual Composition</span>
+              </div>
+              
+              <div class="split-view">
+                <div class="split-card before">
+                  <div class="split-label">Before Purpose Engine</div>
+                  <div class="split-text">"Why am I even here? This has nothing to do with being an electrician. I'll just zone out."</div>
+                </div>
+                <div class="split-card after">
+                  <div class="split-label">With Purpose Engine</div>
+                  <div class="split-text">"Oh—visual hierarchy is how I'll read blueprints faster than other apprentices. And when I own my shop, I'll need a logo and truck design."</div>
+                </div>
+              </div>
+
+              <div class="teacher-context">
+                <div class="teacher-header">
+                  <span class="teacher-icon">👩‍🏫</span>
+                  <span class="teacher-label">What the Teacher Sees</span>
+                </div>
+                <div class="teacher-content">
+                  <strong>Ivan M.</strong> — Goal: Electrician → Business Owner<br>
+                  "Today's lesson connects to: schematic reading, brand identity for future business"
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10:30 AM - Coding Class -->
+          <div class="time-block">
+            <div class="time-label">
+              <div class="time-value">10:30 AM</div>
+              <div class="time-period">4th Period</div>
+            </div>
+            <div class="time-dot"></div>
+            <div class="time-content">
+              <div class="time-header">
+                <div class="time-title">
+                  <span class="time-icon">💻</span>
+                  Computer Science
+                </div>
+                <span class="class-badge">Intro to Programming</span>
+              </div>
+              
+              <div class="split-view">
+                <div class="split-card before">
+                  <div class="split-label">Before Purpose Engine</div>
+                  <div class="split-text">"Coding is for people going into tech. I'm going into trades. This is a waste of my time."</div>
+                </div>
+                <div class="split-card after">
+                  <div class="split-label">With Purpose Engine</div>
+                  <div class="split-text">"PLCs run industrial electrical systems. If I can code, I can take the high-paying automation jobs other electricians can't."</div>
+                </div>
+              </div>
+
+              <p style="margin-top: 16px; font-size: 14px; color: var(--gray-400);">
+                <strong style="color: var(--success);">The moment:</strong> Ivan asks the teacher, "Can this work with home automation systems?"—a question he never would have asked before.
+              </p>
+            </div>
+          </div>
+
+          <!-- 12:00 PM - Lunch -->
+          <div class="time-block highlight">
+            <div class="time-label">
+              <div class="time-value">12:00 PM</div>
+              <div class="time-period">Lunch</div>
+            </div>
+            <div class="time-dot"></div>
+            <div class="time-content">
+              <div class="time-header">
+                <div class="time-title">
+                  <span class="time-icon">💬</span>
+                  Future Self Check-in
+                </div>
+                <span class="class-badge">Quick Chat</span>
+              </div>
+              
+              <p style="font-size: 14px; color: var(--gray-400); margin-bottom: 12px;">
+                Ivan has 5 minutes before meeting friends. He opens a quick chat.
+              </p>
+
+              <div class="chat-preview">
+                <div class="chat-bubble">
+                  <div class="chat-avatar future">👷</div>
+                  <div class="chat-message">Hey Ivan. How's the path feeling today?</div>
+                </div>
+                <div class="chat-bubble outgoing">
+                  <div class="chat-avatar ivan">I</div>
+                  <div class="chat-message">Actually pretty good. I asked a question in coding class about home automation.</div>
+                </div>
+                <div class="chat-bubble">
+                  <div class="chat-avatar future">👷</div>
+                  <div class="chat-message">That's huge. Smart home installs are $150/hour work. You're building skills most apprentices don't have. Keep going.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 1:30 PM - English -->
+          <div class="time-block">
+            <div class="time-label">
+              <div class="time-value">1:30 PM</div>
+              <div class="time-period">5th Period</div>
+            </div>
+            <div class="time-dot"></div>
+            <div class="time-content">
+              <div class="time-header">
+                <div class="time-title">
+                  <span class="time-icon">📝</span>
+                  English
+                </div>
+                <span class="class-badge">Persuasive Writing</span>
+              </div>
+              
+              <div class="split-view">
+                <div class="split-card before">
+                  <div class="split-label">Before Purpose Engine</div>
+                  <div class="split-text">"Essays are pointless. I'm not going to be a writer."</div>
+                </div>
+                <div class="split-card after">
+                  <div class="split-label">With Purpose Engine</div>
+                  <div class="split-text">"Wait—writing estimates that win contracts IS persuasive writing. If I can't explain why I'm worth the money, I lose the job to someone cheaper."</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2:30 PM - Algebra -->
+          <div class="time-block">
+            <div class="time-label">
+              <div class="time-value">2:30 PM</div>
+              <div class="time-period">6th Period</div>
+            </div>
+            <div class="time-dot"></div>
+            <div class="time-content">
+              <div class="time-header">
+                <div class="time-title">
+                  <span class="time-icon">📐</span>
+                  Algebra II
+                </div>
+                <span class="class-badge">Systems of Equations</span>
+              </div>
+              
+              <div class="split-view">
+                <div class="split-card before">
+                  <div class="split-label">Before Purpose Engine</div>
+                  <div class="split-text">"When am I ever going to use this?"</div>
+                </div>
+                <div class="split-card after">
+                  <div class="split-label">With Purpose Engine</div>
+                  <div class="split-text">"Load calculations for a commercial building use exactly this. If I get it wrong, I fail the inspection—or worse, start a fire."</div>
+                </div>
+              </div>
+
+              <div class="teacher-context">
+                <div class="teacher-header">
+                  <span class="teacher-icon">👨‍🏫</span>
+                  <span class="teacher-label">Assignment Reframe Shown</span>
+                </div>
+                <div class="teacher-content">
+                  Today's homework on systems of equations has been connected to electrical load balancing. Ivan sees: <strong>"This is how you'll calculate if a panel can handle 3 HVAC units running simultaneously."</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3:30 PM - End of Day -->
+          <div class="time-block success">
+            <div class="time-label">
+              <div class="time-value">3:30 PM</div>
+              <div class="time-period">End of Day</div>
+            </div>
+            <div class="time-dot"></div>
+            <div class="time-content">
+              <div class="time-header">
+                <div class="time-title">
+                  <span class="time-icon">✅</span>
+                  The Network Activates
+                </div>
+                <span class="class-badge">Behind the Scenes</span>
+              </div>
+              
+              <p style="font-size: 14px; color: var(--gray-400); line-height: 1.7;">
+                Ivan goes home. But Purpose Engine keeps working—surfacing his engagement shift to the people who can help him take the next step.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Network Section -->
+    <section class="network-section">
+      <div class="network-container">
+        <div class="section-header">
+          <div class="section-badge">
+            <span>🔗</span>
+            <span>The Network</span>
+          </div>
+          <h2 class="section-title">While Ivan's at Home</h2>
+          <p class="section-subtitle">Purpose Engine surfaces his progress to the right people—without Ivan having to ask.</p>
+        </div>
+
+        <div class="network-grid">
+          <div class="network-card">
+            <div class="network-icon">👩‍💼</div>
+            <h3 class="network-title">Counselor</h3>
+            <p class="network-desc">Sees Ivan's engagement shift across classes. Flags him for a check-in—but a celebratory one, not a concern.</p>
+            <div class="network-signal">📈 "Ivan showing increased engagement"</div>
+          </div>
+
+          <div class="network-card">
+            <div class="network-icon">🎨</div>
+            <h3 class="network-title">Art Teacher</h3>
+            <p class="network-desc">Validates that Ivan connected today's lesson to schematic reading. The connection becomes part of his Purpose Profile.</p>
+            <div class="network-signal">✓ "Connection validated"</div>
+          </div>
+
+          <div class="network-card">
+            <div class="network-icon">🔌</div>
+            <h3 class="network-title">RTCC Partner</h3>
+            <p class="network-desc">Gets notified: student interested in electrical + business ownership + showing coding aptitude. Perfect for smart home track.</p>
+            <div class="network-signal">🎯 "Ready for outreach"</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Difference -->
+    <section class="difference-section">
+      <div class="difference-container">
+        <div class="difference-box">
+          <div class="section-badge">
+            <span>✨</span>
+            <span>The Transformation</span>
+          </div>
+          <h2 class="section-title">Same Schedule. Different Experience.</h2>
+
+          <div class="difference-grid">
+            <div class="difference-card before">
+              <div class="difference-card-label">Before</div>
+              <div class="difference-card-title">6 Disconnected Classes</div>
+              <div class="difference-card-text">Ivan sits through each period wondering why he's there. Disengaged. Counting down to graduation.</div>
+            </div>
+
+            <div class="difference-arrow">→</div>
+
+            <div class="difference-card after">
+              <div class="difference-card-label">After</div>
+              <div class="difference-card-title">One Day Building His Future</div>
+              <div class="difference-card-text">Every class connects to his goal. Ivan asks questions, engages, and sees himself becoming the electrician he wants to be.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <h2 class="cta-title">This is What Purpose Engine Does</h2>
+      <p class="cta-subtitle">
+        It doesn't change the curriculum. It doesn't add work for teachers. 
+        It just makes the connections visible—so students like Ivan can finally see why school matters.
+      </p>
+      <div class="cta-buttons">
+        <a href="electrician-pathway.html" class="btn btn--primary">
+          <span>⚡</span>
+          <span>See Ivan's Full Pathway</span>
+        </a>
+        <a href="future-self.html" class="btn btn--ghost">
+          <span>💬</span>
+          <span>Try Future Self Chat</span>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    
+    document.addEventListener('click', function(e) {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.querySelector('.nav__toggle');
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>
