@@ -18,172 +18,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="assets/variables.css">
+  
   <style>
-    :root {
-      --primary: #0067b1;
-      --primary-dark: #004b85;
-      --primary-light: #5091cd;
-      --primary-glow: rgba(0, 103, 177, 0.3);
-      --yellow: #ffc425;
-      --orange: #f15d22;
-      --navy: #0D1421;
-      --navy-light: #1a2332;
-      --success: #10B981;
-      --warning: #F59E0B;
-      --danger: #EF4444;
-      --purple: #8B5CF6;
-      --pink: #EC4899;
-      --gray-50: #F8FAFC;
-      --gray-100: #F1F5F9;
-      --gray-200: #E2E8F0;
-      --gray-300: #CBD5E1;
-      --gray-400: #94A3B8;
-      --gray-500: #64748B;
-      --gray-600: #475569;
-      --gray-700: #334155;
-      --gray-800: #1E293B;
-      --gray-900: #0F172A;
-      --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      --nav-height: 72px;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: var(--font-family);
       background: var(--navy);
       color: white;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
     }
 
-    /* Navigation */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: var(--nav-height);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      z-index: 1000;
-      background: rgba(13, 20, 33, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .nav__logo {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      text-decoration: none;
-    }
-
-    .nav__logo-img {
-      height: 44px;
-      width: auto;
-    }
-
-    .nav__divider {
-      width: 1px;
-      height: 28px;
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .nav__product {
-      font-size: 15px;
-      font-weight: 600;
-      color: white;
-    }
-
-    .nav__links {
-      display: flex;
-      gap: 4px;
-    }
-
-    .nav__link {
-      padding: 10px 16px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 500;
-      text-decoration: none;
-      color: rgba(255, 255, 255, 0.7);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-    }
-
-    .nav__link:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-    }
-
-    .nav__link--active {
-      background: var(--primary);
-      color: white;
-      font-weight: 600;
-    }
-
-    .nav__toggle {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-      font-size: 24px;
-      color: white;
-    }
-
-    /* Demo Navigation Styles */
-    .nav__badge {
-      margin-left: 12px;
-      background: var(--yellow);
-      color: var(--navy);
-      font-size: 10px;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .nav__demo-links {
-      display: flex;
-      gap: 8px;
-      margin-left: auto;
-    }
-
-    .nav__demo-link {
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--gray-400);
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .nav__demo-link:hover {
-      background: rgba(255,255,255,0.1);
-      color: white;
-    }
-
-    .nav__demo-link.active {
-      background: var(--primary);
-      color: white;
+    .pathway-page {
+      min-height: 100vh;
+      padding-top: var(--nav-height);
     }
 
     /* Hero Section */
     .hero {
-      padding: 120px 40px 80px;
+      padding: 60px 40px 80px;
       background: linear-gradient(180deg, var(--navy) 0%, #0a1018 100%);
       position: relative;
       overflow: hidden;
@@ -843,42 +694,8 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      .nav {
-        padding: 0 20px;
-      }
-      
-      .nav__logo-img {
-        height: 36px;
-      }
-      
-      .nav__divider,
-      .nav__product {
-        display: none;
-      }
-      
-      .nav__toggle {
-        display: block;
-      }
-      
-      .nav__links {
-        position: absolute;
-        top: var(--nav-height);
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        background: var(--navy);
-        padding: 16px;
-        gap: 8px;
-        display: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-      
-      .nav__links.open {
-        display: flex;
-      }
-
       .hero {
-        padding: 100px 20px 60px;
+        padding: 40px 20px 60px;
       }
 
       .hero h1 {
@@ -945,7 +762,7 @@
 </head>
 <body>
   <!-- Navigation -->
-  <nav class="nav nav--light">
+  <nav class="nav nav--dark">
     <div class="nav__left">
       <a href="index.html" class="nav__logo">
         <img src="https://kesmit3.github.io/paic/upliftlogo.png" class="nav__logo-img" alt="Uplift Education">
@@ -953,35 +770,122 @@
         <span class="nav__product">Purpose Engine</span>
       </a>
       <div class="nav__links">
-        <a href="index.html" class="nav__link">&#127968; <span class="nav__link-text">Home</span></a>
-        <a href="aichallenge.html" class="nav__link">&#129302; <span class="nav__link-text">How We Use AI</span></a>
-        <a href="americandream.html" class="nav__link">&#129517; <span class="nav__link-text">Why This Matters</span></a>
+        <a href="aichallenge.html" class="nav__link">&#127942; <span class="nav__link-text">Challenge</span></a>
       </div>
     </div>
     
     <div class="nav__right">
       <div class="nav__links">
-        <a href="student-dashboard.html" class="nav__link nav__link--active">&#128202; <span class="nav__link-text">Student</span></a>
-        <a href="career-bridge.html" class="nav__link">&#127919; <span class="nav__link-text">Career Bridge</span></a>
-        <a href="future-self.html" class="nav__link">&#128302; <span class="nav__link-text">Future Self</span></a>
-        <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; <span class="nav__link-text">Educator</span></a>
-        <a href="demo.html" class="nav__link">&#9658; <span class="nav__link-text">Demo</span></a>
-        <a href="rtcc-demo.html" class="nav__link">&#128176; <span class="nav__link-text">RTCC</span></a>
+        <div class="nav__dropdown">
+          <button class="nav__dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>Demo</span>
+            <span class="nav__dropdown-arrow">&#9660;</span>
+          </button>
+          
+          <div class="nav__mega-menu">
+            <div class="mega-menu__grid">
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">Scholar Journeys</div>
+                <a href="ivan-day.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--yellow">&#128295;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Ivan</div>
+                    <div class="mega-menu__desc">Electrician pathway</div>
+                  </div>
+                </a>
+                <a href="cyber-pathway.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#128737;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Marcus</div>
+                    <div class="mega-menu__desc">Cybersecurity pathway</div>
+                  </div>
+                </a>
+                <a href="career-bridge.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--green">&#127793;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Maya</div>
+                    <div class="mega-menu__desc">Sustainable design pathway</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">For Educators</div>
+                <a href="educator-dashboard.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Dashboard</div>
+                    <div class="mega-menu__desc">Alerts, praise, insights</div>
+                  </div>
+                </a>
+                <a href="activity-hub.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--orange">&#128640;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Activity Hub</div>
+                    <div class="mega-menu__desc">Clubs, funding, eligibility</div>
+                  </div>
+                </a>
+                
+                <div class="mega-menu__header" style="margin-top: 16px;">For Counselors</div>
+                <a href="rtcc.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#127891;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Road to College &amp; Career</div>
+                    <div class="mega-menu__desc">FAFSA, IBCs, applications</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section mega-menu__section--full">
+                <div class="mega-menu__header">For Students</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                  <a href="student-dashboard.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Dashboard</div>
+                      <div class="mega-menu__desc">Your overview</div>
+                    </div>
+                  </a>
+                  <a href="career-bridge.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--green">&#127919;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Career Bridge</div>
+                      <div class="mega-menu__desc">Connect classwork</div>
+                    </div>
+                  </a>
+                  <a href="future-self.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--yellow">&#128302;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Future Self</div>
+                      <div class="mega-menu__desc">Chat with 32-year-old you</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
       </div>
-      <span class="nav__pill">&#9889; Demo Mode</span>
     </div>
     
-    <button class="nav__toggle" onclick="toggleNav()">&#9776;</button>
-    <div class="nav__links" id="navLinks">
-      <a href="index.html" class="nav__link">&#127968; <span class="nav__link-text">Home</span></a>
-      <a href="aichallenge.html" class="nav__link">&#129302; <span class="nav__link-text">How We Use AI</span></a>
-      <a href="americandream.html" class="nav__link">&#129517; <span class="nav__link-text">Why This Matters</span></a>
-      <a href="student-dashboard.html" class="nav__link nav__link--active">&#128202; <span class="nav__link-text">Student</span></a>
-      <a href="career-bridge.html" class="nav__link">&#127919; <span class="nav__link-text">Career Bridge</span></a>
-      <a href="future-self.html" class="nav__link">&#128302; <span class="nav__link-text">Future Self</span></a>
-      <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; <span class="nav__link-text">Educator</span></a>
-      <a href="demo.html" class="nav__link">&#9658; <span class="nav__link-text">Demo</span></a>
-      <a href="rtcc-demo.html" class="nav__link">&#128176; <span class="nav__link-text">RTCC</span></a>
+    <button class="nav__toggle" onclick="toggleNav()" aria-label="Toggle menu">&#9776;</button>
+    <div id="navLinks">
+      <a href="aichallenge.html" class="nav__link">&#127942; Challenge</a>
+      <div class="mobile-menu__header">Scholar Journeys</div>
+      <a href="ivan-day.html" class="nav__link">&#128295; Ivan (Electrician)</a>
+      <a href="cyber-pathway.html" class="nav__link">&#128737; Marcus (Cybersecurity)</a>
+      <a href="career-bridge.html" class="nav__link">&#127793; Maya (Sustainable Design)</a>
+      <div class="mobile-menu__header">For Educators</div>
+      <a href="educator-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="activity-hub.html" class="nav__link">&#128640; Activity Hub</a>
+      <div class="mobile-menu__header">For Counselors</div>
+      <a href="rtcc.html" class="nav__link">&#127891; Road to College &amp; Career</a>
+      <div class="mobile-menu__header">For Students</div>
+      <a href="student-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="career-bridge.html" class="nav__link">&#127919; Career Bridge</a>
+      <a href="future-self.html" class="nav__link">&#128302; Future Self</a>
     </div>
   </nav>
 
@@ -990,12 +894,12 @@
     <section class="hero">
       <div class="hero-content">
         <div class="hero-badge">
-          <span>📅</span>
+          <span>&#128197;</span>
           <span>A Day in the Life</span>
         </div>
         <h1>What Ivan Sees <span>Monday Morning</span></h1>
         <p class="hero-subtitle">
-          Purpose Engine doesn't just react to assignments—it proactively connects Ivan's 
+          Purpose Engine doesn&rsquo;t just react to assignments&mdash;it proactively connects Ivan&rsquo;s 
           entire school day to his goal of becoming an electrician and business owner.
         </p>
       </div>
@@ -1006,11 +910,11 @@
       <div class="timeline-container">
         <div class="section-header">
           <div class="section-badge">
-            <span>⏰</span>
+            <span>&#9200;</span>
             <span>Monday Schedule</span>
           </div>
           <h2 class="section-title">Six Classes. One Purpose.</h2>
-          <p class="section-subtitle">Every period connects to Ivan's future—he just couldn't see it before.</p>
+          <p class="section-subtitle">Every period connects to Ivan&rsquo;s future&mdash;he just couldn&rsquo;t see it before.</p>
         </div>
 
         <div class="day-timeline">
@@ -1024,7 +928,7 @@
             <div class="time-content">
               <div class="time-header">
                 <div class="time-title">
-                  <span class="time-icon">💻</span>
+                  <span class="time-icon">&#128187;</span>
                   Chromebook Login
                 </div>
                 <span class="class-badge">Daily Check-in</span>
@@ -1037,23 +941,23 @@
                     <span></span>
                     <span></span>
                   </div>
-                  <span class="device-title">Purpose Engine — Ivan's Dashboard</span>
+                  <span class="device-title">Purpose Engine &mdash; Ivan&rsquo;s Dashboard</span>
                 </div>
                 <div class="device-content">
                   <div class="purpose-greeting">
-                    Good morning, <span>Ivan</span>. Here's your day—through your lens:
+                    Good morning, <span>Ivan</span>. Here&rsquo;s your day&mdash;through your lens:
                   </div>
                   
                   <div class="schedule-card">
-                    <div class="schedule-icon art">🎨</div>
+                    <div class="schedule-icon art">&#127912;</div>
                     <div class="schedule-info">
                       <h4>Art (2nd Period)</h4>
-                      <div class="schedule-connection">Visual literacy. <strong>When you're reading a 200-circuit panel schematic at 6am, this is the skill that keeps you fast.</strong></div>
+                      <div class="schedule-connection">Visual literacy. <strong>When you&rsquo;re reading a 200-circuit panel schematic at 6am, this is the skill that keeps you fast.</strong></div>
                     </div>
                   </div>
                   
                   <div class="schedule-card">
-                    <div class="schedule-icon code">💻</div>
+                    <div class="schedule-icon code">&#128187;</div>
                     <div class="schedule-info">
                       <h4>Computer Science (4th Period)</h4>
                       <div class="schedule-connection">Smart home systems are the <strong>fastest-growing electrical sector</strong>. This is that.</div>
@@ -1061,7 +965,7 @@
                   </div>
                   
                   <div class="schedule-card">
-                    <div class="schedule-icon math">📐</div>
+                    <div class="schedule-icon math">&#128209;</div>
                     <div class="schedule-info">
                       <h4>Algebra II (6th Period)</h4>
                       <div class="schedule-connection">Load calculations. Bidding jobs. <strong>The math that wins contracts.</strong></div>
@@ -1082,7 +986,7 @@
             <div class="time-content">
               <div class="time-header">
                 <div class="time-title">
-                  <span class="time-icon">🎨</span>
+                  <span class="time-icon">&#127912;</span>
                   Art Class
                 </div>
                 <span class="class-badge">Visual Composition</span>
@@ -1091,22 +995,22 @@
               <div class="split-view">
                 <div class="split-card before">
                   <div class="split-label">Before Purpose Engine</div>
-                  <div class="split-text">"Why am I even here? This has nothing to do with being an electrician. I'll just zone out."</div>
+                  <div class="split-text">&ldquo;Why am I even here? This has nothing to do with being an electrician. I&rsquo;ll just zone out.&rdquo;</div>
                 </div>
                 <div class="split-card after">
                   <div class="split-label">With Purpose Engine</div>
-                  <div class="split-text">"Oh—visual hierarchy is how I'll read blueprints faster than other apprentices. And when I own my shop, I'll need a logo and truck design."</div>
+                  <div class="split-text">&ldquo;Oh&mdash;visual hierarchy is how I&rsquo;ll read blueprints faster than other apprentices. And when I own my shop, I&rsquo;ll need a logo and truck design.&rdquo;</div>
                 </div>
               </div>
 
               <div class="teacher-context">
                 <div class="teacher-header">
-                  <span class="teacher-icon">👩‍🏫</span>
+                  <span class="teacher-icon">&#128105;&#8205;&#127979;</span>
                   <span class="teacher-label">What the Teacher Sees</span>
                 </div>
                 <div class="teacher-content">
-                  <strong>Ivan M.</strong> — Goal: Electrician → Business Owner<br>
-                  "Today's lesson connects to: schematic reading, brand identity for future business"
+                  <strong>Ivan M.</strong> &mdash; Goal: Electrician &#8594; Business Owner<br>
+                  &ldquo;Today&rsquo;s lesson connects to: schematic reading, brand identity for future business&rdquo;
                 </div>
               </div>
             </div>
@@ -1122,7 +1026,7 @@
             <div class="time-content">
               <div class="time-header">
                 <div class="time-title">
-                  <span class="time-icon">💻</span>
+                  <span class="time-icon">&#128187;</span>
                   Computer Science
                 </div>
                 <span class="class-badge">Intro to Programming</span>
@@ -1131,16 +1035,16 @@
               <div class="split-view">
                 <div class="split-card before">
                   <div class="split-label">Before Purpose Engine</div>
-                  <div class="split-text">"Coding is for people going into tech. I'm going into trades. This is a waste of my time."</div>
+                  <div class="split-text">&ldquo;Coding is for people going into tech. I&rsquo;m going into trades. This is a waste of my time.&rdquo;</div>
                 </div>
                 <div class="split-card after">
                   <div class="split-label">With Purpose Engine</div>
-                  <div class="split-text">"PLCs run industrial electrical systems. If I can code, I can take the high-paying automation jobs other electricians can't."</div>
+                  <div class="split-text">&ldquo;PLCs run industrial electrical systems. If I can code, I can take the high-paying automation jobs other electricians can&rsquo;t.&rdquo;</div>
                 </div>
               </div>
 
               <p style="margin-top: 16px; font-size: 14px; color: var(--gray-400);">
-                <strong style="color: var(--success);">The moment:</strong> Ivan asks the teacher, "Can this work with home automation systems?"—a question he never would have asked before.
+                <strong style="color: var(--success);">The moment:</strong> Ivan asks the teacher, &ldquo;Can this work with home automation systems?&rdquo;&mdash;a question he never would have asked before.
               </p>
             </div>
           </div>
@@ -1155,7 +1059,7 @@
             <div class="time-content">
               <div class="time-header">
                 <div class="time-title">
-                  <span class="time-icon">💬</span>
+                  <span class="time-icon">&#128172;</span>
                   Future Self Check-in
                 </div>
                 <span class="class-badge">Quick Chat</span>
@@ -1167,16 +1071,16 @@
 
               <div class="chat-preview">
                 <div class="chat-bubble">
-                  <div class="chat-avatar future">👷</div>
-                  <div class="chat-message">Hey Ivan. How's the path feeling today?</div>
+                  <div class="chat-avatar future">&#128119;</div>
+                  <div class="chat-message">Hey Ivan. How&rsquo;s the path feeling today?</div>
                 </div>
                 <div class="chat-bubble outgoing">
                   <div class="chat-avatar ivan">I</div>
                   <div class="chat-message">Actually pretty good. I asked a question in coding class about home automation.</div>
                 </div>
                 <div class="chat-bubble">
-                  <div class="chat-avatar future">👷</div>
-                  <div class="chat-message">That's huge. Smart home installs are $150/hour work. You're building skills most apprentices don't have. Keep going.</div>
+                  <div class="chat-avatar future">&#128119;</div>
+                  <div class="chat-message">That&rsquo;s huge. Smart home installs are $150/hour work. You&rsquo;re building skills most apprentices don&rsquo;t have. Keep going.</div>
                 </div>
               </div>
             </div>
@@ -1192,7 +1096,7 @@
             <div class="time-content">
               <div class="time-header">
                 <div class="time-title">
-                  <span class="time-icon">📐</span>
+                  <span class="time-icon">&#128221;</span>
                   English
                 </div>
                 <span class="class-badge">Persuasive Writing</span>
@@ -1201,11 +1105,11 @@
               <div class="split-view">
                 <div class="split-card before">
                   <div class="split-label">Before Purpose Engine</div>
-                  <div class="split-text">"Essays are pointless. I'm not going to be a writer."</div>
+                  <div class="split-text">&ldquo;Essays are pointless. I&rsquo;m not going to be a writer.&rdquo;</div>
                 </div>
                 <div class="split-card after">
                   <div class="split-label">With Purpose Engine</div>
-                  <div class="split-text">"Wait—writing estimates that win contracts IS persuasive writing. If I can't explain why I'm worth the money, I lose the job to someone cheaper."</div>
+                  <div class="split-text">&ldquo;Wait&mdash;writing estimates that win contracts IS persuasive writing. If I can&rsquo;t explain why I&rsquo;m worth the money, I lose the job to someone cheaper.&rdquo;</div>
                 </div>
               </div>
             </div>
@@ -1221,7 +1125,7 @@
             <div class="time-content">
               <div class="time-header">
                 <div class="time-title">
-                  <span class="time-icon">📐</span>
+                  <span class="time-icon">&#128209;</span>
                   Algebra II
                 </div>
                 <span class="class-badge">Systems of Equations</span>
@@ -1230,21 +1134,21 @@
               <div class="split-view">
                 <div class="split-card before">
                   <div class="split-label">Before Purpose Engine</div>
-                  <div class="split-text">"When am I ever going to use this?"</div>
+                  <div class="split-text">&ldquo;When am I ever going to use this?&rdquo;</div>
                 </div>
                 <div class="split-card after">
                   <div class="split-label">With Purpose Engine</div>
-                  <div class="split-text">"Load calculations for a commercial building use exactly this. If I get it wrong, I fail the inspection—or worse, start a fire."</div>
+                  <div class="split-text">&ldquo;Load calculations for a commercial building use exactly this. If I get it wrong, I fail the inspection&mdash;or worse, start a fire.&rdquo;</div>
                 </div>
               </div>
 
               <div class="teacher-context">
                 <div class="teacher-header">
-                  <span class="teacher-icon">👨‍🏫</span>
+                  <span class="teacher-icon">&#128104;&#8205;&#127979;</span>
                   <span class="teacher-label">Assignment Reframe Shown</span>
                 </div>
                 <div class="teacher-content">
-                  Today's homework on systems of equations has been connected to electrical load balancing. Ivan sees: <strong>"This is how you'll calculate if a panel can handle 3 HVAC units running simultaneously."</strong>
+                  Today&rsquo;s homework on systems of equations has been connected to electrical load balancing. Ivan sees: <strong>&ldquo;This is how you&rsquo;ll calculate if a panel can handle 3 HVAC units running simultaneously.&rdquo;</strong>
                 </div>
               </div>
             </div>
@@ -1260,14 +1164,14 @@
             <div class="time-content">
               <div class="time-header">
                 <div class="time-title">
-                  <span class="time-icon">✅</span>
+                  <span class="time-icon">&#10024;</span>
                   The Network Activates
                 </div>
                 <span class="class-badge">Behind the Scenes</span>
               </div>
               
               <p style="font-size: 14px; color: var(--gray-400); line-height: 1.7;">
-                Ivan goes home. But Purpose Engine keeps working—surfacing his engagement shift to the people who can help him take the next step.
+                Ivan goes home. But Purpose Engine keeps working&mdash;surfacing his engagement shift to the people who can help him take the next step.
               </p>
             </div>
           </div>
@@ -1280,33 +1184,33 @@
       <div class="network-container">
         <div class="section-header">
           <div class="section-badge">
-            <span>🔗</span>
+            <span>&#128279;</span>
             <span>The Network</span>
           </div>
-          <h2 class="section-title">While Ivan's at Home</h2>
-          <p class="section-subtitle">Purpose Engine surfaces his progress to the right people—without Ivan having to ask.</p>
+          <h2 class="section-title">While Ivan&rsquo;s at Home</h2>
+          <p class="section-subtitle">Purpose Engine surfaces his progress to the right people&mdash;without Ivan having to ask.</p>
         </div>
 
         <div class="network-grid">
           <div class="network-card">
-            <div class="network-icon">👩‍💼</div>
+            <div class="network-icon">&#128105;&#8205;&#128188;</div>
             <h3 class="network-title">Counselor</h3>
-            <p class="network-desc">Sees Ivan's engagement shift across classes. Flags him for a check-in—but a celebratory one, not a concern.</p>
-            <div class="network-signal">📈 "Ivan showing increased engagement"</div>
+            <p class="network-desc">Sees Ivan&rsquo;s engagement shift across classes. Flags him for a check-in&mdash;but a celebratory one, not a concern.</p>
+            <div class="network-signal">&#128200; &ldquo;Ivan showing increased engagement&rdquo;</div>
           </div>
 
           <div class="network-card">
-            <div class="network-icon">🎨</div>
+            <div class="network-icon">&#127912;</div>
             <h3 class="network-title">Art Teacher</h3>
-            <p class="network-desc">Validates that Ivan connected today's lesson to schematic reading. The connection becomes part of his Purpose Profile.</p>
-            <div class="network-signal">✓ "Connection validated"</div>
+            <p class="network-desc">Validates that Ivan connected today&rsquo;s lesson to schematic reading. The connection becomes part of his Purpose Profile.</p>
+            <div class="network-signal">&#9989; &ldquo;Connection validated&rdquo;</div>
           </div>
 
           <div class="network-card">
-            <div class="network-icon">🏢</div>
+            <div class="network-icon">&#128188;</div>
             <h3 class="network-title">RTCC Partner</h3>
             <p class="network-desc">Gets notified: student interested in electrical + business ownership + showing coding aptitude. Perfect for smart home track.</p>
-            <div class="network-signal">🎯 "Ready for outreach"</div>
+            <div class="network-signal">&#127919; &ldquo;Ready for outreach&rdquo;</div>
           </div>
         </div>
       </div>
@@ -1317,7 +1221,7 @@
       <div class="difference-container">
         <div class="difference-box">
           <div class="section-badge">
-            <span>✨</span>
+            <span>&#10024;</span>
             <span>The Transformation</span>
           </div>
           <h2 class="section-title">Same Schedule. Different Experience.</h2>
@@ -1326,10 +1230,10 @@
             <div class="difference-card before">
               <div class="difference-card-label">Before</div>
               <div class="difference-card-title">6 Disconnected Classes</div>
-              <div class="difference-card-text">Ivan sits through each period wondering why he's there. Disengaged. Counting down to graduation.</div>
+              <div class="difference-card-text">Ivan sits through each period wondering why he&rsquo;s there. Disengaged. Counting down to graduation.</div>
             </div>
 
-            <div class="difference-arrow">→</div>
+            <div class="difference-arrow">&#8594;</div>
 
             <div class="difference-card after">
               <div class="difference-card-label">After</div>
@@ -1345,17 +1249,17 @@
     <section class="cta-section">
       <h2 class="cta-title">This is What Purpose Engine Does</h2>
       <p class="cta-subtitle">
-        It doesn't change the curriculum. It doesn't add work for teachers. 
-        It just makes the connections visible—so students like Ivan can finally see why school matters.
+        It doesn&rsquo;t change the curriculum. It doesn&rsquo;t add work for teachers. 
+        It just makes the connections visible&mdash;so students like Ivan can finally see why school matters.
       </p>
       <div class="cta-buttons">
         <a href="electrician-pathway.html" class="btn btn--primary">
-          <span>⚡</span>
-          <span>See Ivan's Full Pathway</span>
+          <span>&#9889;</span>
+          <span>See Ivan&rsquo;s Full Pathway</span>
         </a>
         <a href="cyber-pathway.html" class="btn btn--ghost">
-          <span>🛡</span>
-          <span>See Marcus's Pathway</span>
+          <span>&#128737;</span>
+          <span>See Marcus&rsquo;s Pathway</span>
         </a>
       </div>
     </section>

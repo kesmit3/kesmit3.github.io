@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presidential AI Challenge | Purpose Engine</title>
+
+  <!-- Favicon and Social Sharing -->
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png?v=2">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png?v=2">
+  <meta property="og:title" content="Presidential AI Challenge | Purpose Engine">
+  <meta property="og:description" content="Track IIIB: AI that restores what school was always meant to be &mdash; personally meaningful.">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="assets/variables.css">
+
+  <style>
+    body { 
+      background: var(--navy); 
+      color: white; 
+    }
+
+    .challenge-page {
+      padding-top: var(--nav-height);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(255, 196, 37, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(0, 103, 177, 0.12) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .challenge-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(0, 103, 177, 0.2) 0%, rgba(255, 196, 37, 0.15) 100%);
+      border: 1px solid rgba(255, 196, 37, 0.4);
+      padding: 10px 20px;
+      border-radius: 24px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .challenge-badge span {
+      color: var(--yellow);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .track-label {
+      background: var(--yellow);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 28px;
+      max-width: 900px;
+      position: relative;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 720px;
+      line-height: 1.65;
+      margin-bottom: 0;
+      position: relative;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 36px;
+      position: relative;
+    }
+
+    .btn-primary {
+      padding: 16px 28px;
+      background: var(--yellow);
+      color: var(--navy);
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(255, 196, 37, 0.35);
+    }
+
+    .btn-secondary {
+      padding: 16px 28px;
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Presidential Alignment Section */
+    .alignment-section {
+      padding: 80px 40px;
+      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-light) 100%);
+    }
+
+    .alignment-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .alignment-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .alignment-header h2 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .alignment-header p {
+      font-size: 18px;
+      color: var(--gray-400);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .priority-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .priority-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 2px solid rgba(16, 185, 129, 0.3);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .priority-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--success) 0%, var(--primary) 100%);
+    }
+
+    .priority-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .priority-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: white;
+    }
+
+    .priority-card p {
+      font-size: 15px;
+      color: var(--gray-400);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .priority-how {
+      background: rgba(0, 103, 177, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .priority-how-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .priority-how p {
+      font-size: 14px;
+      color: var(--gray-300);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .other-priorities {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px 32px;
+    }
+
+    .other-priorities-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .other-priorities-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .other-priority-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+
+    /* Problem Section */
+    .problem-section {
+      padding: 80px 40px;
+      background: var(--navy-light);
+    }
+
+    .problem-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-header h2 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      font-size: 18px;
+      color: var(--gray-400);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .stat-callout {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 4px solid var(--yellow);
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 32px;
+    }
+
+    .stat-callout .big-stat {
+      font-size: 64px;
+      font-weight: 800;
+      color: var(--yellow);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .stat-callout .stat-label {
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .stat-callout .stat-source {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    .insight-box {
+      background: linear-gradient(135deg, rgba(0, 103, 177, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%);
+      border: 1px solid rgba(0, 103, 177, 0.3);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .insight-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .insight-box p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .insight-box strong {
+      color: var(--yellow);
+    }
+
+    /* Five Pillars Section */
+    .pillars-section {
+      padding: 80px 40px;
+      background: var(--navy);
+    }
+
+    .pillars-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    .pillar-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 28px 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .pillar-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .pillar-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin: 0 auto 16px;
+    }
+
+    .pillar-card:nth-child(1) .pillar-icon { background: rgba(0, 103, 177, 0.2); }
+    .pillar-card:nth-child(2) .pillar-icon { background: rgba(139, 92, 246, 0.2); }
+    .pillar-card:nth-child(3) .pillar-icon { background: rgba(245, 158, 11, 0.2); }
+    .pillar-card:nth-child(4) .pillar-icon { background: rgba(16, 185, 129, 0.2); }
+    .pillar-card:nth-child(5) .pillar-icon { background: rgba(236, 72, 153, 0.2); }
+
+    .pillar-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .pillar-card p {
+      font-size: 13px;
+      color: var(--gray-400);
+      line-height: 1.55;
+    }
+
+    /* AI Techniques Section */
+    .techniques-section {
+      padding: 80px 40px;
+      background: var(--navy-light);
+    }
+
+    .techniques-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .techniques-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .technique-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .technique-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+
+    .technique-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .technique-card > p {
+      font-size: 15px;
+      color: var(--gray-400);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .technique-example {
+      background: rgba(0, 103, 177, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .technique-example-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .technique-example p {
+      font-size: 14px;
+      color: var(--gray-300);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Closing / CTA Section */
+    .closing-section {
+      padding: 100px 40px;
+      background: linear-gradient(180deg, var(--navy) 0%, #0a1018 100%);
+      text-align: center;
+    }
+
+    .closing-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .closing-statement {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+
+    .closing-statement .gold {
+      color: var(--yellow);
+    }
+
+    .closing-sub {
+      font-size: 20px;
+      color: var(--gray-400);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px;
+      background: var(--navy-light);
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    footer p {
+      color: var(--gray-500);
+      font-size: 14px;
+    }
+
+    footer a {
+      color: var(--primary-light);
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .pillars-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .pillars-grid .pillar-card:nth-child(4),
+      .pillars-grid .pillar-card:nth-child(5) {
+        grid-column: span 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 40px 24px 60px;
+        min-height: auto;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+      }
+
+      .priority-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pillars-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .techniques-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-callout .big-stat {
+        font-size: 48px;
+      }
+
+      .closing-statement {
+        font-size: 24px;
+      }
+
+      .other-priorities-list {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav nav--dark">
+    <div class="nav__left">
+      <a href="index.html" class="nav__logo">
+        <img src="https://kesmit3.github.io/paic/upliftlogo.png" class="nav__logo-img" alt="Uplift Education">
+        <div class="nav__divider"></div>
+        <span class="nav__product">Purpose Engine</span>
+      </a>
+      <div class="nav__links">
+        <a href="ai-demo.html" class="nav__link nav__link--highlight">&#129302; <span class="nav__link-text">Live AI Demo</span></a>
+        <a href="aichallenge.html" class="nav__link nav__link--active">&#127942; <span class="nav__link-text">Challenge</span></a>
+      </div>
+    </div>
+    
+    <div class="nav__right">
+      <div class="nav__links">
+        <div class="nav__dropdown">
+          <button class="nav__dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>Demo</span>
+            <span class="nav__dropdown-arrow">&#9660;</span>
+          </button>
+          
+          <div class="nav__mega-menu">
+            <div class="mega-menu__grid">
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">Scholar Journeys</div>
+                <a href="ivan-day.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--yellow">&#128295;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Ivan</div>
+                    <div class="mega-menu__desc">Electrician pathway</div>
+                  </div>
+                </a>
+                <a href="cyber-pathway.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#128737;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Marcus</div>
+                    <div class="mega-menu__desc">Cybersecurity pathway</div>
+                  </div>
+                </a>
+                <a href="career-bridge.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--green">&#127793;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Maya</div>
+                    <div class="mega-menu__desc">Sustainable design pathway</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">For Educators</div>
+                <a href="educator-dashboard.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Dashboard</div>
+                    <div class="mega-menu__desc">Alerts, praise, insights</div>
+                  </div>
+                </a>
+                <a href="activity-hub.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--orange">&#128640;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Activity Hub</div>
+                    <div class="mega-menu__desc">Clubs, funding, eligibility</div>
+                  </div>
+                </a>
+                
+                <div class="mega-menu__header" style="margin-top: 16px;">For Counselors</div>
+                <a href="rtcc.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#127891;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Road to College &amp; Career</div>
+                    <div class="mega-menu__desc">FAFSA, IBCs, applications</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section mega-menu__section--full">
+                <div class="mega-menu__header">For Students</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                  <a href="student-dashboard.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Dashboard</div>
+                      <div class="mega-menu__desc">Your overview</div>
+                    </div>
+                  </a>
+                  <a href="career-bridge.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--green">&#127919;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Career Bridge</div>
+                      <div class="mega-menu__desc">Connect classwork</div>
+                    </div>
+                  </a>
+                  <a href="future-self.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--yellow">&#128302;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Future Self</div>
+                      <div class="mega-menu__desc">Chat with 32-year-old you</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <button class="nav__toggle" onclick="toggleNav()" aria-label="Toggle menu">&#9776;</button>
+    <div id="navLinks">
+      <a href="aichallenge.html" class="nav__link nav__link--active">&#127942; Challenge</a>
+      <div class="mobile-menu__header">Scholar Journeys</div>
+      <a href="ivan-day.html" class="nav__link">&#128295; Ivan (Electrician)</a>
+      <a href="cyber-pathway.html" class="nav__link">&#128737; Marcus (Cybersecurity)</a>
+      <a href="career-bridge.html" class="nav__link">&#127793; Maya (Sustainable Design)</a>
+      <div class="mobile-menu__header">For Educators</div>
+      <a href="educator-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="activity-hub.html" class="nav__link">&#128640; Activity Hub</a>
+      <div class="mobile-menu__header">For Counselors</div>
+      <a href="rtcc.html" class="nav__link">&#127891; Road to College &amp; Career</a>
+      <div class="mobile-menu__header">For Students</div>
+      <a href="student-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="career-bridge.html" class="nav__link">&#127919; Career Bridge</a>
+      <a href="future-self.html" class="nav__link">&#128302; Future Self</a>
+    </div>
+  </nav>
+
+  <div class="challenge-page">
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="challenge-badge">
+        <span>&#127942;</span>
+        <span>Presidential AI Challenge</span>
+        <span class="track-label">Track IIIB</span>
+      </div>
+
+      <h1>
+        AI that restores what school<br>was always meant to be:<br>
+        <span class="highlight">personally meaningful.</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        A conceptual instructional prototype that uses AI to address education&rsquo;s most persistent challenge: 
+        the erosion of motivation when academic work feels disconnected from personal purpose.
+      </p>
+
+      <div class="hero-ctas">
+        <a class="btn-primary" href="#alignment">White House Alignment &#8594;</a>
+        <a class="btn-secondary" href="ivan-day.html">See It In Action</a>
+      </div>
+    </section>
+
+    <!-- Presidential Alignment -->
+    <section class="alignment-section" id="alignment">
+      <div class="alignment-container">
+        <div class="alignment-header">
+          <h2>Aligned with White House Priorities</h2>
+          <p>The Purpose Engine directly addresses two of five areas the Administration identified as &ldquo;of particular interest.&rdquo;</p>
+        </div>
+
+        <div class="priority-grid">
+          <div class="priority-card">
+            <div class="priority-badge">&#10003; Direct Match</div>
+            <h3>&#128203; Skills Report Card</h3>
+            <p>&ldquo;Creating a skills report card for students to go alongside their academic transcript.&rdquo;</p>
+            <div class="priority-how">
+              <div class="priority-how-label">How Purpose Engine Delivers</div>
+              <p>The Purpose Profile tracks career-relevant skill development across all coursework&mdash;not replacing grades, but showing how academic work builds toward professional readiness.</p>
+            </div>
+          </div>
+
+          <div class="priority-card">
+            <div class="priority-badge">&#10003; Direct Match</div>
+            <h3>&#128218; Customized Learning Plans</h3>
+            <p>&ldquo;Helping educators develop customized learning plans for students.&rdquo;</p>
+            <div class="priority-how">
+              <div class="priority-how-label">How Purpose Engine Delivers</div>
+              <p>AI reframes assignments through each student&rsquo;s career interests&mdash;same TEKS standards, completely different motivation. Teachers validate; AI personalizes at scale.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="other-priorities">
+          <div class="other-priorities-label">Other White House Priority Areas</div>
+          <div class="other-priorities-list">
+            <span class="other-priority-item">Making communities or schools safer</span>
+            <span class="other-priority-item">Healthier or more economical meal plans</span>
+            <span class="other-priority-item">Healthy peer engagement &amp; safer digital future</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Problem -->
+    <section class="problem-section" id="problem">
+      <div class="problem-container">
+        <div class="section-header">
+          <h2>The Motivation Crisis Is Real</h2>
+          <p>Student motivation isn&rsquo;t failing because students have changed. It&rsquo;s failing because systems can&rsquo;t see them as whole people with futures worth preparing for.</p>
+        </div>
+
+        <div class="stat-callout">
+          <div class="big-stat">&lt;2 in 10</div>
+          <div class="stat-label">
+            students strongly agree that what they&rsquo;re learning feels important, interesting, challenging, or aligned with their natural talents.
+          </div>
+          <div class="stat-source">
+            &mdash; Gallup / Walton Family Foundation, <em>Voices of Gen Z Study</em> (2025)
+          </div>
+        </div>
+
+        <div class="insight-box">
+          <div class="insight-label">&#128161; Our Insight</div>
+          <p>
+            When meaning collapses, effort collapses. The opportunity for AI is not task completion&mdash;it&rsquo;s <strong>relevance</strong>. 
+            AI can help by contextualizing academic work to students&rsquo; interests, strengths, and who they are becoming.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Five Pillars -->
+    <section class="pillars-section" id="pillars">
+      <div class="pillars-container">
+        <div class="section-header">
+          <h2>Five Pillars of Purpose</h2>
+          <p>A comprehensive approach to connecting learning with meaning</p>
+        </div>
+
+        <div class="pillars-grid">
+          <div class="pillar-card">
+            <div class="pillar-icon">&#127919;</div>
+            <h3>Career-Bridge Challenges</h3>
+            <p>AI reframes assignments through each student&rsquo;s career interests&mdash;same learning objectives, completely different motivation.</p>
+          </div>
+          
+          <div class="pillar-card">
+            <div class="pillar-icon">&#128302;</div>
+            <h3>Future Self Mentorship</h3>
+            <p>Students consult an AI persona of their successful future self for guidance when motivation wavers.</p>
+          </div>
+          
+          <div class="pillar-card">
+            <div class="pillar-icon">&#9888;</div>
+            <h3>Early Warning Signals</h3>
+            <p>AI detects disengagement patterns across systems&mdash;surfacing struggles before they become crises.</p>
+          </div>
+          
+          <div class="pillar-card">
+            <div class="pillar-icon">&#127881;</div>
+            <h3>Recognition &amp; Celebration</h3>
+            <p>Breakthrough moments and quiet wins are surfaced for educators to acknowledge&mdash;building momentum.</p>
+          </div>
+          
+          <div class="pillar-card">
+            <div class="pillar-icon">&#128065;</div>
+            <h3>Shared Visibility Layer</h3>
+            <p>Students, educators, and counselors see the same meaningful context&mdash;enabling support that feels personal.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Techniques -->
+    <section class="techniques-section" id="techniques">
+      <div class="techniques-container">
+        <div class="section-header">
+          <h2>How We Use AI</h2>
+          <p>Four techniques, four distinct jobs. Personalization with privacy and fidelity.</p>
+        </div>
+
+        <div class="techniques-grid">
+          <div class="technique-card">
+            <div class="technique-number">1</div>
+            <h3>&#128279; Joint Embedding</h3>
+            <p>Maps different data types (text, interests, assessments) into a shared mathematical space so meaningful relationships can be computed.</p>
+            <div class="technique-example">
+              <div class="technique-example-label">In Practice</div>
+              <p>Reveals that a student&rsquo;s passion for world-building correlates with spatial reasoning used in architecture or engineering.</p>
+            </div>
+          </div>
+
+          <div class="technique-card">
+            <div class="technique-number">2</div>
+            <h3>&#127919; Semantic Alignment</h3>
+            <p>Ensures personalized reframing preserves original learning requirements using similarity scoring against curriculum standards.</p>
+            <div class="technique-example">
+              <div class="technique-example-label">In Practice</div>
+              <p>When an assignment is reframed as a real-world challenge, verifies that required TEKS objectives remain fully covered.</p>
+            </div>
+          </div>
+
+          <div class="technique-card">
+            <div class="technique-number">3</div>
+            <h3>&#128274; Edge-Based Inference</h3>
+            <p>Model inference runs locally on school infrastructure. Data stays within campus. Raw inputs processed and discarded; only insights retained.</p>
+            <div class="technique-example">
+              <div class="technique-example-label">In Practice</div>
+              <p>Pattern detection and profile updates run locally, reducing exposure of sensitive student data. FERPA compliance by design.</p>
+            </div>
+          </div>
+
+          <div class="technique-card">
+            <div class="technique-number">4</div>
+            <h3>&#129504; Cross-Modal Reasoning</h3>
+            <p>Synthesizes context across modalities (text, behavior patterns, engagement signals) so the system responds to the full picture.</p>
+            <div class="technique-example">
+              <div class="technique-example-label">In Practice</div>
+              <p>Detects when grades look fine but engagement is declining&mdash;surfaces the pattern before it becomes a crisis.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing -->
+    <section class="closing-section">
+      <div class="closing-container">
+        <p class="closing-statement">
+          Motivation is not a student problem to be fixed&mdash;<br>
+          it&rsquo;s a <span class="gold">relational outcome to be cultivated.</span>
+        </p>
+        <p class="closing-sub">
+          By weaving assignments, career interests, lived experiences, and emerging patterns into a coherent narrative, 
+          we give students something school has struggled to provide at scale: 
+          <strong>the feeling of being known, seen, and on a path that matters.</strong>
+        </p>
+        <div class="hero-ctas">
+          <a class="btn-primary" href="ivan-day.html">&#128295; See Ivan&rsquo;s Story</a>
+          <a class="btn-secondary" href="educator-dashboard.html">&#128202; View Educator Dashboard</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Purpose Engine &mdash; An <a href="https://www.uplifteducation.org" target="_blank">Uplift Education</a> Initiative
+    </p>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    
+    document.addEventListener('click', function(e) {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.querySelector('.nav__toggle');
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>

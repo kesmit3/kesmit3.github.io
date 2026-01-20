@@ -20,7 +20,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Shared Styles -->
-  <link rel="stylesheet" href="variables.css">
+  <link rel="stylesheet" href="assets/variables.css">
   
   <style>
     body {
@@ -28,10 +28,54 @@
       color: var(--gray-800);
     }
 
+    /* Prototype Banner */
+    .prototype-banner {
+      background: linear-gradient(90deg, var(--navy) 0%, var(--primary-dark) 100%);
+      padding: 8px 20px;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1001;
+    }
+
+    .prototype-banner-content {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: white;
+    }
+
+    .prototype-banner-badge {
+      background: var(--yellow);
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .prototype-banner-text {
+      opacity: 0.9;
+    }
+
+    .prototype-banner-highlight {
+      color: var(--yellow);
+      font-weight: 600;
+    }
+
+    /* Adjust nav position for banner */
+    .nav {
+      top: 32px !important;
+    }
+
     /* Page Layout */
     .future-self-page {
       min-height: 100vh;
-      padding-top: var(--nav-height);
+      padding-top: calc(var(--nav-height) + 32px);
     }
 
     /* Hero Banner */
@@ -681,10 +725,29 @@
         padding: 8px 12px;
         font-size: 12px;
       }
+
+      .prototype-banner {
+        padding: 6px 16px;
+      }
+
+      .prototype-banner-content {
+        font-size: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- Prototype Banner -->
+  <div class="prototype-banner">
+    <div class="prototype-banner-content">
+      <span class="prototype-banner-badge">Track IIIB</span>
+      <span class="prototype-banner-text">Presidential AI Challenge &mdash;</span>
+      <span class="prototype-banner-highlight">Five Pillars: Future Self Mentorship</span>
+    </div>
+  </div>
 
   <!-- Navigation -->
   <nav class="nav nav--light">
@@ -695,7 +758,6 @@
         <span class="nav__product">Purpose Engine</span>
       </a>
       <div class="nav__links">
-        <a href="ai-demo.html" class="nav__link nav__link--highlight">&#129302; <span class="nav__link-text">Live AI Demo</span></a>
         <a href="aichallenge.html" class="nav__link">&#127942; <span class="nav__link-text">Challenge</span></a>
       </div>
     </div>
@@ -820,11 +882,12 @@
     <section class="page-hero">
       <div class="page-hero-content">
         <div class="page-hero-badge">
-          <span>&#128302;</span>
-          <span>Future Self AI</span>
+          <span>&#10024;</span>
+          <span>AI-Powered Mentorship</span>
         </div>
         <h1>Talk to Your <span>Future Self</span></h1>
         <p>What if you could ask your successful 32-year-old self for advice? This AI creates a personalized mentor based on your goals&mdash;helping you see why today&rsquo;s work matters.</p>
+        <p style="margin-top: 12px; font-size: 13px; opacity: 0.7;">&#128302; One of the Five Pillars of the Purpose Engine</p>
       </div>
     </section>
 
@@ -840,8 +903,8 @@
       <!-- Screen 1: Choose Profile -->
       <div class="screen active" id="screen1">
         <div class="demo-banner">
-          <span class="demo-badge">&#10024; INTERACTIVE DEMO</span>
-          <p>This demo uses fictional student personas to show how the Purpose Engine works.<br>Select a character to step into their shoes and talk to their AI-powered Future Self.</p>
+          <span class="demo-badge">&#10024; INTERACTIVE AI DEMO</span>
+          <p>This demonstrates how the Purpose Engine&rsquo;s Future Self Mentorship works.<br>Select a student persona to experience AI-powered motivation coaching.</p>
         </div>
 
         <h1 class="screen-title">Step Into Their Shoes</h1>
