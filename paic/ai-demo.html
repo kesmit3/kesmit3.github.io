@@ -32,6 +32,7 @@
       --yellow: #F59E0B;
       --green: #10B981;
       --cyan: #06B6D4;
+      --red: #EF4444;
       --gray-400: #94A3B8;
       --gray-500: #64748B;
       --gray-600: #475569;
@@ -116,6 +117,70 @@
     
     .back-link:hover {
       color: white;
+    }
+    
+    /* API Key Bar */
+    .api-bar {
+      background: rgba(139, 92, 246, 0.1);
+      border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+      padding: 12px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    
+    .api-bar.connected {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    
+    .api-bar label {
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+    
+    .api-bar input {
+      padding: 8px 12px;
+      background: var(--gray-800);
+      border: 1px solid var(--gray-600);
+      border-radius: 6px;
+      color: white;
+      font-size: 12px;
+      font-family: monospace;
+      width: 280px;
+    }
+    
+    .api-bar input:focus {
+      outline: none;
+      border-color: var(--purple);
+    }
+    
+    .api-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .api-status.disconnected { color: var(--gray-500); }
+    .api-status.connected { color: var(--green); }
+    
+    .api-status .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    
+    .api-status.connected .dot {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
     
     /* Main Container */
@@ -229,13 +294,18 @@
       white-space: nowrap;
     }
     
-    .compute-btn:hover {
+    .compute-btn:hover:not(:disabled) {
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(0, 103, 177, 0.4);
     }
     
-    .compute-btn:active {
-      transform: translateY(0);
+    .compute-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .compute-btn.loading {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
     }
     
     /* Quick Career Buttons */
@@ -456,7 +526,7 @@
       gap: 6px;
       flex-wrap: wrap;
       justify-content: center;
-      max-width: 160px;
+      max-width: 200px;
     }
     
     .skill-tag {
@@ -491,7 +561,7 @@
     }
     
     .reframed-text {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 600;
       line-height: 1.5;
       color: white;
@@ -570,6 +640,67 @@
       flex-shrink: 0;
     }
     
+    /* Loading State */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(13, 20, 33, 0.9);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    .loading-overlay.visible {
+      display: flex;
+    }
+    
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid var(--gray-700);
+      border-top-color: var(--cyan);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .loading-text {
+      font-size: 18px;
+      color: var(--gray-400);
+    }
+    
+    .loading-subtext {
+      font-size: 14px;
+      color: var(--gray-500);
+      max-width: 300px;
+      text-align: center;
+    }
+    
+    /* Error State */
+    .error-message {
+      display: none;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      color: var(--red);
+      font-size: 14px;
+    }
+    
+    .error-message.visible {
+      display: block;
+    }
+    
     /* Footer */
     .footer {
       margin-top: 48px;
@@ -597,7 +728,6 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--green);
     }
     
     .footer-credit {
@@ -612,6 +742,31 @@
     
     .footer-credit a:hover {
       text-decoration: underline;
+    }
+    
+    /* Data note */
+    .data-note {
+      margin-top: 20px;
+      padding: 12px 16px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .data-note span:first-child {
+      font-size: 20px;
+    }
+    
+    .data-note span:last-child {
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+    
+    .data-note strong {
+      color: var(--green);
     }
     
     /* Responsive */
@@ -657,6 +812,15 @@
       .career-pills {
         justify-content: center;
       }
+      
+      .api-bar {
+        flex-direction: column;
+        gap: 8px;
+      }
+      
+      .api-bar input {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -681,6 +845,21 @@
       </a>
     </div>
   </header>
+  
+  <!-- API Status Bar (key hardcoded for demo) -->
+  <div class="api-bar connected" id="apiBar">
+    <div class="api-status connected" id="apiStatus">
+      <span class="dot"></span>
+      <span>Claude AI Connected</span>
+    </div>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">AI is thinking...</div>
+    <div class="loading-subtext">Analyzing career skills and finding connections to today's lesson</div>
+  </div>
 
   <!-- Main Content -->
   <main class="main">
@@ -688,37 +867,40 @@
     <section class="hero">
       <div class="hero-icon">&#127919;</div>
       <h1>Why Does This Matter?</h1>
-      <p>Enter a student&rsquo;s dream career and watch AI connect today&rsquo;s lesson to their future goals&mdash;in real time.</p>
+      <p>Enter ANY career and watch real AI connect today's lesson to that future&mdash;no pre-scripted responses.</p>
     </section>
+
+    <!-- Error Message -->
+    <div class="error-message" id="errorMessage"></div>
 
     <!-- Input Section -->
     <section class="input-section">
       <div class="input-row">
         <div class="input-group">
-          <label for="careerInput">&#127775; Student&rsquo;s Dream Career <span style="font-weight: 400; color: var(--cyan); font-size: 11px;">via Schoolinks</span></label>
-          <input type="text" id="careerInput" placeholder="e.g., Electrician, Cybersecurity Analyst, Architect...">
+          <label for="careerInput">&#127775; Student's Dream Career <span style="font-weight: 400; color: var(--cyan); font-size: 11px;">via Schoolinks</span></label>
+          <input type="text" id="careerInput" placeholder="e.g., Plumber, TikTok Creator, Marine Biologist, anything...">
         </div>
         <div class="input-group" style="max-width: 280px;">
-          <label for="lessonSelect">&#128218; Today&rsquo;s Lesson <span style="font-weight: 400; color: var(--purple); font-size: 11px;">via Schoology</span></label>
+          <label for="lessonSelect">&#128218; Today's Lesson <span style="font-weight: 400; color: var(--purple); font-size: 11px;">via Schoology</span></label>
           <select id="lessonSelect">
-            <option value="chemistry-ratios">Chemistry: Stoichiometry &amp; Ratios</option>
-            <option value="chemistry-periodic">Chemistry: Periodic Table Trends</option>
-            <option value="biology-cells">Biology: Cell Structure &amp; Function</option>
-            <option value="biology-genetics">Biology: Genetics &amp; Heredity</option>
-            <option value="physics-circuits">Physics: Electrical Circuits</option>
-            <option value="physics-motion">Physics: Forces &amp; Motion</option>
-            <option value="algebra-linear">Algebra: Linear Equations</option>
-            <option value="algebra-quadratic">Algebra: Quadratic Functions</option>
-            <option value="geometry-proofs">Geometry: Proofs &amp; Logic</option>
-            <option value="statistics-data">Statistics: Data Analysis</option>
-            <option value="english-persuasive">English: Persuasive Writing</option>
-            <option value="english-research">English: Research &amp; Citations</option>
-            <option value="history-primary">History: Primary Source Analysis</option>
-            <option value="history-economics">History: Economic Systems</option>
-            <option value="cs-algorithms">CS: Algorithms &amp; Logic</option>
+            <option value="Chemistry: Stoichiometry & Ratios">Chemistry: Stoichiometry &amp; Ratios</option>
+            <option value="Chemistry: Periodic Table Trends">Chemistry: Periodic Table Trends</option>
+            <option value="Biology: Cell Structure & Function">Biology: Cell Structure &amp; Function</option>
+            <option value="Biology: Genetics & Heredity">Biology: Genetics &amp; Heredity</option>
+            <option value="Physics: Electrical Circuits">Physics: Electrical Circuits</option>
+            <option value="Physics: Forces & Motion">Physics: Forces &amp; Motion</option>
+            <option value="Algebra: Linear Equations">Algebra: Linear Equations</option>
+            <option value="Algebra: Quadratic Functions">Algebra: Quadratic Functions</option>
+            <option value="Geometry: Proofs & Logic">Geometry: Proofs &amp; Logic</option>
+            <option value="Statistics: Data Analysis">Statistics: Data Analysis</option>
+            <option value="English: Persuasive Writing">English: Persuasive Writing</option>
+            <option value="English: Research & Citations">English: Research &amp; Citations</option>
+            <option value="History: Primary Source Analysis">History: Primary Source Analysis</option>
+            <option value="History: Economic Systems">History: Economic Systems</option>
+            <option value="Computer Science: Algorithms & Logic">CS: Algorithms &amp; Logic</option>
           </select>
         </div>
-        <button class="compute-btn" onclick="runGNN()">
+        <button class="compute-btn" id="computeBtn" onclick="runAI()">
           <span>&#9889;</span>
           <span>Connect the Dots</span>
         </button>
@@ -726,20 +908,21 @@
 
       <!-- Quick Career Pills -->
       <div class="quick-careers">
-        <div class="quick-careers-label">&#128161; Student profiles from Schoolinks:</div>
+        <div class="quick-careers-label">&#128161; Try these careers (or type anything!):</div>
         <div class="career-pills">
-          <button class="career-pill" onclick="setCareer('Master Electrician')">&#128295; Ivan &mdash; Electrician</button>
-          <button class="career-pill" onclick="setCareer('Cybersecurity Analyst')">&#128737; Marcus &mdash; Cybersecurity</button>
-          <button class="career-pill" onclick="setCareer('Sustainable Design Director')">&#127793; Maya &mdash; Sustainable Design</button>
-          <button class="career-pill" onclick="setCareer('Music Producer')">&#127908; DeShawn &mdash; Music Producer</button>
-          <button class="career-pill" onclick="setCareer('Healthcare Professional')">&#129658; Sarah &mdash; Healthcare</button>
+          <button class="career-pill" onclick="setCareer('Plumber')">&#128295; Plumber</button>
+          <button class="career-pill" onclick="setCareer('TikTok Content Creator')">&#128247; TikTok Creator</button>
+          <button class="career-pill" onclick="setCareer('Nurse')">&#129658; Nurse</button>
+          <button class="career-pill" onclick="setCareer('Game Developer')">&#127918; Game Dev</button>
+          <button class="career-pill" onclick="setCareer('Tattoo Artist')">&#127912; Tattoo Artist</button>
+          <button class="career-pill" onclick="setCareer('Real Estate Agent')">&#127968; Real Estate</button>
         </div>
       </div>
       
       <!-- Data Synthesis Note -->
-      <div style="margin-top: 20px; padding: 12px 16px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 10px; display: flex; align-items: center; gap: 12px;">
-        <span style="font-size: 20px;">&#128279;</span>
-        <span style="font-size: 13px; color: var(--gray-400);"><strong style="color: var(--green);">Shared Visibility Layer:</strong> Purpose Engine synthesizes student career goals from Schoolinks with today&rsquo;s lesson objectives from Schoology&mdash;no manual data entry required.</span>
+      <div class="data-note">
+        <span>&#128279;</span>
+        <span><strong>Shared Visibility Layer:</strong> Purpose Engine synthesizes student career goals from Schoolinks with today's lesson objectives from Schoology&mdash;no manual data entry required.</span>
       </div>
     </section>
 
@@ -751,36 +934,35 @@
           <div class="gnn-title">
             <div class="icon">&#128300;</div>
             <div>
-              <h2>Graph Neural Network Mapping</h2>
-              <div class="subtitle">AI-powered relevance propagation</div>
+              <h2>AI-Powered Relevance Mapping</h2>
+              <div class="subtitle">Claude analyzing career-to-lesson connections</div>
             </div>
           </div>
           <div class="alignment-score">
             <div class="number" id="alignmentScore">0%</div>
-            <div class="label">Alignment</div>
+            <div class="label">Relevance</div>
           </div>
         </div>
 
         <!-- Graph Visual -->
         <div class="graph-container">
           <div class="graph-node career">
-            <div class="node-icon">&#127919;</div>
+            <div class="node-icon" id="careerIcon">&#127919;</div>
             <div class="node-label">Career Goal</div>
-            <div class="node-value" id="careerNode">Sustainable Design Director</div>
+            <div class="node-value" id="careerNode">-</div>
           </div>
           
           <div class="graph-edge">
             <div class="edge-skills" id="matchedSkills">
-              <span class="skill-tag">ratios</span>
-              <span class="skill-tag">material science</span>
+              <span class="skill-tag">analyzing...</span>
             </div>
             <div class="edge-line"></div>
           </div>
           
           <div class="graph-node lesson">
             <div class="node-icon">&#128218;</div>
-            <div class="node-label">Today&rsquo;s Lesson</div>
-            <div class="node-value" id="lessonNode">Chemistry Ratios</div>
+            <div class="node-label">Today's Lesson</div>
+            <div class="node-value" id="lessonNode">-</div>
           </div>
         </div>
 
@@ -791,7 +973,7 @@
             <span>AI-Generated Connection</span>
           </div>
           <div class="reframed-text" id="reframedText">
-            For someone aiming to be a <strong>Sustainable Design Director</strong>, today&rsquo;s &ldquo;Chemistry Ratios&rdquo; builds <strong>material ratios</strong> skills needed to create energy-efficient buildings and fight climate change.
+            Loading...
           </div>
         </div>
       </div>
@@ -805,15 +987,7 @@
         <div class="discussion-list" id="discussionList">
           <div class="discussion-item">
             <span class="number">1</span>
-            <span>How might calculating ratios help you in your future career?</span>
-          </div>
-          <div class="discussion-item">
-            <span class="number">2</span>
-            <span>What part of this lesson feels most useful for your future?</span>
-          </div>
-          <div class="discussion-item">
-            <span class="number">3</span>
-            <span>If we reframed tomorrow&rsquo;s lesson the same way, what would you want to see?</span>
+            <span>Loading...</span>
           </div>
         </div>
       </div>
@@ -834,257 +1008,149 @@
 
   <script>
     // ============================================
-    // ENHANCED GNN SIMULATION
-    // Graph Neural Network for Purpose Engine
+    // REAL AI INTEGRATION
+    // Proxied through Cloudflare Worker
     // ============================================
     
-    const gnnGraph = {
-      careers: {
-        "Master Electrician": {
-          keySkills: ["circuits", "ratios", "safety codes", "troubleshooting", "voltage calculations", "ohm's law"],
-          whyMatters: "wiring buildings safely, running your own electrical business, and keeping the lights on for everyone",
-          icon: "&#128295;"
-        },
-        "Cybersecurity Analyst": {
-          keySkills: ["logic", "pattern recognition", "risk assessment", "data analysis", "problem-solving", "encryption"],
-          whyMatters: "protecting critical systems, stopping hackers, and defending the digital infrastructure we all depend on",
-          icon: "&#128737;"
-        },
-        "Sustainable Design Director": {
-          keySkills: ["material ratios", "eco-innovation", "spatial reasoning", "design", "sustainability", "chemistry"],
-          whyMatters: "creating energy-efficient buildings and fighting climate change through smarter architecture",
-          icon: "&#127793;"
-        },
-        "Healthcare Professional": {
-          keySkills: ["biology", "analysis", "data interpretation", "patient care", "chemistry", "ratios"],
-          whyMatters: "diagnosing conditions, calculating medication dosages, and saving lives in hospitals",
-          icon: "&#129658;"
-        },
-        "Engineer": {
-          keySkills: ["physics", "ratios", "design", "innovation", "modeling", "circuits", "math"],
-          whyMatters: "building real-world systems like rockets, bridges, electric vehicles, and the technology of tomorrow",
-          icon: "&#128640;"
-        },
-        "Entrepreneur": {
-          keySkills: ["economics", "risk assessment", "creative problem-solving", "modeling", "data analysis", "persuasion"],
-          whyMatters: "calculating business viability, pitching investors, and turning your ideas into successful companies",
-          icon: "&#128176;"
-        },
-        "Music Producer": {
-          keySkills: ["ratios", "frequency analysis", "technology", "creativity", "audio engineering", "math"],
-          whyMatters: "mixing tracks with perfect sound balance, mastering audio frequencies, and building your own studio",
-          icon: "&#127908;"
-        },
-        "Video Game Designer": {
-          keySkills: ["physics", "logic", "creativity", "math", "problem-solving", "design"],
-          whyMatters: "creating immersive game worlds with realistic physics and engaging gameplay mechanics",
-          icon: "&#127918;"
-        },
-        "Lawyer": {
-          keySkills: ["logic", "persuasion", "analysis", "writing", "research", "problem-solving"],
-          whyMatters: "building compelling arguments, analyzing evidence, and advocating for justice",
-          icon: "&#9878;"
-        },
-        "Data Scientist": {
-          keySkills: ["data analysis", "statistics", "modeling", "math", "problem-solving", "pattern recognition"],
-          whyMatters: "uncovering insights from data that drive billion-dollar business decisions",
-          icon: "&#128202;"
-        }
-      },
-      
-      lessons: {
-        "chemistry-ratios": {
-          name: "Chemistry: Stoichiometry & Ratios",
-          objectives: ["Calculate mixtures and proportions", "Understand material composition", "Balance equations"],
-          tags: ["ratios", "mixtures", "proportions", "material science", "chemistry", "math", "calculations"]
-        },
-        "chemistry-periodic": {
-          name: "Chemistry: Periodic Table Trends",
-          objectives: ["Identify element properties", "Predict chemical behavior", "Understand atomic structure"],
-          tags: ["chemistry", "patterns", "analysis", "properties", "science", "research"]
-        },
-        "biology-cells": {
-          name: "Biology: Cell Structure & Function",
-          objectives: ["Identify cell components", "Understand cellular processes", "Compare cell types"],
-          tags: ["biology", "analysis", "systems", "health", "science", "research", "patient care"]
-        },
-        "biology-genetics": {
-          name: "Biology: Genetics & Heredity",
-          objectives: ["Understand DNA structure", "Predict inheritance patterns", "Analyze genetic data"],
-          tags: ["biology", "data analysis", "patterns", "health", "science", "problem-solving", "research"]
-        },
-        "physics-circuits": {
-          name: "Physics: Electrical Circuits",
-          objectives: ["Understand electrical flow", "Calculate resistance and voltage", "Design simple circuits"],
-          tags: ["circuits", "physics", "voltage calculations", "ohm's law", "electricity", "troubleshooting", "design"]
-        },
-        "physics-motion": {
-          name: "Physics: Forces & Motion",
-          objectives: ["Calculate velocity and acceleration", "Apply Newton's laws", "Analyze real-world motion"],
-          tags: ["physics", "math", "calculations", "modeling", "design", "problem-solving", "engineering"]
-        },
-        "algebra-linear": {
-          name: "Algebra: Linear Equations",
-          objectives: ["Solve systems of equations", "Graph linear relationships", "Model real-world scenarios"],
-          tags: ["math", "modeling", "problem-solving", "logic", "analysis", "calculations", "patterns"]
-        },
-        "algebra-quadratic": {
-          name: "Algebra: Quadratic Functions",
-          objectives: ["Factor quadratic expressions", "Graph parabolas", "Solve optimization problems"],
-          tags: ["math", "modeling", "problem-solving", "design", "optimization", "calculations", "analysis"]
-        },
-        "geometry-proofs": {
-          name: "Geometry: Proofs & Logic",
-          objectives: ["Construct logical arguments", "Apply geometric theorems", "Develop spatial reasoning"],
-          tags: ["logic", "spatial reasoning", "problem-solving", "analysis", "design", "math", "proof"]
-        },
-        "statistics-data": {
-          name: "Statistics: Data Analysis",
-          objectives: ["Interpret datasets", "Create visualizations", "Draw evidence-based conclusions"],
-          tags: ["data analysis", "statistics", "pattern recognition", "math", "problem-solving", "research", "modeling"]
-        },
-        "english-persuasive": {
-          name: "English: Persuasive Writing",
-          objectives: ["Build compelling arguments", "Use evidence effectively", "Structure persuasive essays"],
-          tags: ["persuasion", "writing", "logic", "analysis", "communication", "creativity", "research"]
-        },
-        "english-research": {
-          name: "English: Research & Citations",
-          objectives: ["Evaluate sources", "Synthesize information", "Document research properly"],
-          tags: ["research", "analysis", "writing", "critical thinking", "communication", "problem-solving"]
-        },
-        "history-primary": {
-          name: "History: Primary Source Analysis",
-          objectives: ["Evaluate historical documents", "Identify bias and perspective", "Construct historical arguments"],
-          tags: ["analysis", "research", "critical thinking", "writing", "patterns", "problem-solving"]
-        },
-        "history-economics": {
-          name: "History: Economic Systems",
-          objectives: ["Compare economic models", "Analyze market forces", "Understand global trade"],
-          tags: ["economics", "analysis", "systems", "modeling", "risk assessment", "problem-solving", "patterns"]
-        },
-        "cs-algorithms": {
-          name: "CS: Algorithms & Logic",
-          objectives: ["Design step-by-step solutions", "Analyze algorithm efficiency", "Apply computational thinking"],
-          tags: ["logic", "problem-solving", "design", "analysis", "patterns", "technology", "math", "modeling"]
-        }
-      }
-    };
-
-    function computeWhyItMatters(careerInput, lessonKey) {
-      if (!careerInput.trim()) {
-        return {
-          career: null,
-          lesson: null,
-          reframed: "Enter a dream career to see how today's lesson connects!",
-          alignment: 0,
-          matchedSkills: [],
-          discussionStarters: []
-        };
-      }
-
-      // Fuzzy match career
-      const careerKey = Object.keys(gnnGraph.careers).find(key =>
-        key.toLowerCase().includes(careerInput.toLowerCase()) ||
-        careerInput.toLowerCase().includes(key.split(' ')[0].toLowerCase())
-      ) || "Sustainable Design Director";
-
-      const career = gnnGraph.careers[careerKey];
-      const lesson = gnnGraph.lessons[lessonKey] || gnnGraph.lessons["chemistry-ratios"];
-
-      // GNN "message passing": find skill/tag overlaps
-      const matches = career.keySkills.filter(skill =>
-        lesson.tags.some(tag => 
-          skill.toLowerCase().includes(tag.toLowerCase()) || 
-          tag.toLowerCase().includes(skill.toLowerCase())
-        )
-      );
-
-      // Calculate alignment with minimum floor
-      const rawAlignment = (matches.length / career.keySkills.length) * 100;
-      const alignment = Math.max(45, Math.min(95, Math.round(rawAlignment + (matches.length * 10))));
-
-      // Generate personalized reframing
-      const primarySkill = matches[0] || career.keySkills[0];
-      const reframed = `For someone aiming to be a <strong>${careerKey}</strong>, today's "${lesson.name}" builds <strong>${primarySkill}</strong> skills needed for ${career.whyMatters}.`;
-
-      // Generate dynamic discussion starters
-      const discussionStarters = [
-        `How might ${lesson.tags[0]} help you succeed as a ${careerKey.toLowerCase()}?`,
-        `What part of today's ${lesson.name} lesson feels most connected to your future goals?`,
-        `If you were already a ${careerKey.toLowerCase()}, how would you use what we learned today?`
-      ];
-
-      return {
-        career: careerKey,
-        careerIcon: career.icon,
-        lesson: lesson.name,
-        reframed,
-        alignment,
-        matchedSkills: matches.slice(0, 4),
-        discussionStarters
-      };
-    }
-
-    // ============================================
-    // UI FUNCTIONS
-    // ============================================
+    // Cloudflare Worker URL (replace with your deployed worker)
+    const WORKER_URL = 'https://purpose-engine-api.kesmit3.workers.dev';
     
     function setCareer(career) {
       document.getElementById('careerInput').value = career;
       document.querySelectorAll('.career-pill').forEach(p => p.classList.remove('active'));
-      event.target.classList.add('active');
-      runGNN();
+      if (event && event.target) {
+        event.target.classList.add('active');
+      }
     }
-
-    function runGNN() {
-      const careerInput = document.getElementById('careerInput').value;
-      const lessonKey = document.getElementById('lessonSelect').value;
+    
+    function showLoading(show) {
+      document.getElementById('loadingOverlay').classList.toggle('visible', show);
+      document.getElementById('computeBtn').disabled = show;
+      if (show) {
+        document.getElementById('computeBtn').classList.add('loading');
+        document.getElementById('computeBtn').innerHTML = '<span>&#8987;</span><span>AI Thinking...</span>';
+      } else {
+        document.getElementById('computeBtn').classList.remove('loading');
+        document.getElementById('computeBtn').innerHTML = '<span>&#9889;</span><span>Connect the Dots</span>';
+      }
+    }
+    
+    function showError(message) {
+      const errorEl = document.getElementById('errorMessage');
+      errorEl.textContent = message;
+      errorEl.classList.add('visible');
+      setTimeout(() => errorEl.classList.remove('visible'), 5000);
+    }
+    
+    async function runAI() {
+      const career = document.getElementById('careerInput').value.trim();
+      const lesson = document.getElementById('lessonSelect').value;
       
-      if (!careerInput.trim()) {
-        alert('Please enter a dream career first!');
+      if (!career) {
+        showError('Please enter a dream career first!');
         return;
       }
+      
+      showLoading(true);
+      document.getElementById('errorMessage').classList.remove('visible');
+      
+      try {
+        const response = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 1024,
+            messages: [{
+              role: 'user',
+              content: `You are helping a teacher show a student why today's lesson matters to their future career.
 
-      const result = computeWhyItMatters(careerInput, lessonKey);
-      
-      // Update UI
-      document.getElementById('alignmentScore').textContent = result.alignment + '%';
-      document.getElementById('careerNode').textContent = result.career;
-      document.getElementById('lessonNode').textContent = result.lesson;
-      document.getElementById('reframedText').innerHTML = result.reframed;
-      
-      // Update matched skills
-      const skillsContainer = document.getElementById('matchedSkills');
-      skillsContainer.innerHTML = result.matchedSkills.map(skill => 
-        `<span class="skill-tag">${skill}</span>`
-      ).join('') || '<span class="skill-tag">core skills</span>';
-      
-      // Update discussion starters
-      const discussionList = document.getElementById('discussionList');
-      discussionList.innerHTML = result.discussionStarters.map((q, i) => `
-        <div class="discussion-item">
-          <span class="number">${i + 1}</span>
-          <span>${q}</span>
-        </div>
-      `).join('');
-      
-      // Show results
-      document.getElementById('results').classList.add('visible');
-      
-      // Smooth scroll to results
-      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+CAREER: ${career}
+TODAY'S LESSON: ${lesson}
+
+Respond in this exact JSON format (no markdown, just raw JSON):
+{
+  "relevanceScore": <number 1-100>,
+  "careerIcon": "<single emoji for this career>",
+  "bridgingSkills": ["<skill 1>", "<skill 2>", "<skill 3>"],
+  "connection": "<2-3 sentence explanation of how this lesson directly helps someone pursuing this career. Be specific and practical. Address the student directly using 'you'.>",
+  "discussionQuestions": [
+    "<question 1 for class discussion>",
+    "<question 2 for class discussion>",
+    "<question 3 for class discussion>"
+  ]
+}
+
+Be creative and find genuine connections. Even unusual careers have real links to academic subjects. Make it feel personal and motivating, not generic.`
+            }]
+          })
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error?.message || 'API request failed');
+        }
+        
+        const data = await response.json();
+        const text = data.content[0].text;
+        
+        // Parse JSON response
+        let result;
+        try {
+          // Handle potential markdown code blocks
+          const jsonMatch = text.match(/\{[\s\S]*\}/);
+          result = JSON.parse(jsonMatch ? jsonMatch[0] : text);
+        } catch (e) {
+          console.error('Parse error:', e, 'Raw text:', text);
+          throw new Error('Failed to parse AI response');
+        }
+        
+        // Update UI with results
+        document.getElementById('alignmentScore').textContent = result.relevanceScore + '%';
+        document.getElementById('careerIcon').textContent = result.careerIcon || '🎯';
+        document.getElementById('careerNode').textContent = career;
+        document.getElementById('lessonNode').textContent = lesson;
+        document.getElementById('reframedText').innerHTML = result.connection;
+        
+        // Update skills
+        const skillsHtml = result.bridgingSkills
+          .map(skill => `<span class="skill-tag">${skill}</span>`)
+          .join('');
+        document.getElementById('matchedSkills').innerHTML = skillsHtml;
+        
+        // Update discussion questions
+        const discussionHtml = result.discussionQuestions
+          .map((q, i) => `
+            <div class="discussion-item">
+              <span class="number">${i + 1}</span>
+              <span>${q}</span>
+            </div>
+          `).join('');
+        document.getElementById('discussionList').innerHTML = discussionHtml;
+        
+        // Show results
+        document.getElementById('results').classList.add('visible');
+        document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+      } catch (error) {
+        console.error('AI Error:', error);
+        showError('AI Error: ' + error.message);
+      } finally {
+        showLoading(false);
+      }
     }
-
+    
     // Allow Enter key to trigger
     document.getElementById('careerInput').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') runGNN();
+      if (e.key === 'Enter') runAI();
     });
-
-    // Update lesson node when dropdown changes
+    
+    // Also trigger on lesson change if results are visible
     document.getElementById('lessonSelect').addEventListener('change', function() {
       if (document.getElementById('results').classList.contains('visible')) {
-        runGNN();
+        runAI();
       }
     });
   </script>
