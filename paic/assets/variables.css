@@ -10,12 +10,12 @@
   --primary-dark: #004b85;
   --primary-light: #5091cd;
   --primary-glow: rgba(0, 103, 177, 0.3);
-  
+
   /* Accent Colors - Uplift Official */
   --yellow: #ffc425;
   --orange: #f15d22;
   --brand-gray: #8e8e91;
-  
+
   /* Extended UI Colors */
   --navy: #0D1421;
   --navy-light: #1a2332;
@@ -24,7 +24,7 @@
   --danger: #EF4444;
   --purple: #8B5CF6;
   --pink: #EC4899;
-  
+
   /* Neutrals */
   --gray-50: #F8FAFC;
   --gray-100: #F1F5F9;
@@ -36,14 +36,14 @@
   --gray-700: #334155;
   --gray-800: #1E293B;
   --gray-900: #0F172A;
-  
+
   /* Shadows */
   --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
   --card-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  
+
   /* Typography */
   --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  
+
   /* Spacing */
   --nav-height: 72px;
   --container-max: 1400px;
@@ -54,6 +54,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  text-size-adjust: 100%;
 }
 
 body {
@@ -135,11 +139,28 @@ body {
   gap: 4px;
 }
 
-/* Mobile nav menu - hidden on desktop */
-.nav__mobile {
+/* =========================================================
+   Mobile Menu Stability Layer
+   Purpose: prevent duplicated nav rows on desktop when:
+   - HTML uses #navLinks with class="nav__links" (legacy)
+   - or uses .nav__mobile (preferred)
+   ========================================================= */
+
+/* Hidden by default everywhere */
+.nav__mobile,
+#navLinks {
   display: none;
 }
 
+/* Safety: ALWAYS hide the mobile container on desktop widths,
+   even if it accidentally has desktop styling like .nav__links */
+@media (min-width: 769px) {
+  #navLinks {
+    display: none !important;
+  }
+}
+
+/* Nav link buttons/anchors */
 .nav__link {
   padding: 10px 16px;
   border-radius: 10px;
@@ -432,20 +453,20 @@ body {
   .container {
     padding: 0 32px;
   }
-  
+
   .nav__links {
     gap: 2px;
   }
-  
+
   .nav__link {
     padding: 8px 12px;
     font-size: 12px;
   }
-  
+
   .nav__link-text {
     display: none;
   }
-  
+
   .nav__link-icon {
     font-size: 16px;
     opacity: 1;
@@ -457,33 +478,34 @@ body {
   :root {
     --nav-height: 64px;
   }
-  
+
   .nav {
     padding: 0 20px;
   }
-  
+
   .nav__logo-img {
     height: 36px;
   }
-  
+
   .nav__divider,
   .nav__product {
     display: none;
   }
-  
+
   .nav__toggle {
     display: block;
   }
-  
+
   /* Hide split nav elements on mobile */
   .nav__left > .nav__links,
   .nav__right,
   .nav__pill {
     display: none;
   }
-  
-  /* Mobile dropdown menu */
-  .nav__mobile {
+
+  /* Mobile dropdown menu (supports .nav__mobile and legacy #navLinks) */
+  .nav__mobile,
+  #navLinks {
     display: none;
     position: absolute;
     top: var(--nav-height);
@@ -492,40 +514,44 @@ body {
     flex-direction: column;
     padding: 16px;
     gap: 8px;
+    z-index: 1100;
   }
-  
-  .nav--light .nav__mobile {
+
+  .nav--light .nav__mobile,
+  .nav--light #navLinks {
     background: white;
     border-bottom: 1px solid var(--gray-200);
   }
-  
-  .nav--dark .nav__mobile {
+
+  .nav--dark .nav__mobile,
+  .nav--dark #navLinks {
     background: var(--navy);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
-  .nav__mobile.open {
+
+  .nav__mobile.open,
+  #navLinks.open {
     display: flex;
   }
-  
+
   .nav__link {
     padding: 12px 16px;
     font-size: 14px;
     justify-content: flex-start;
   }
-  
+
   .nav__link-text {
     display: inline;
   }
-  
+
   .container {
     padding: 0 20px;
   }
-  
+
   .page-content {
     padding-top: calc(var(--nav-height) + 24px);
   }
-  
+
   .btn {
     padding: 12px 16px;
     font-size: 13px;
@@ -537,19 +563,19 @@ body {
   .nav {
     padding: 0 16px;
   }
-  
+
   .nav__logo-img {
     height: 32px;
   }
-  
+
   .container {
     padding: 0 16px;
   }
-  
+
   .card__content {
     padding: 16px;
   }
-  
+
   .btn {
     padding: 10px 14px;
     font-size: 12px;
@@ -563,7 +589,7 @@ body {
   .btn {
     display: none;
   }
-  
+
   .page-content {
     padding-top: 0;
   }
