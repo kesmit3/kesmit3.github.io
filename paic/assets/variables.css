@@ -136,7 +136,7 @@ body {
 }
 
 /* Mobile nav menu - hidden on desktop */
-#navLinks {
+.nav__mobile {
   display: none;
 }
 
@@ -483,7 +483,7 @@ body {
   }
   
   /* Mobile dropdown menu */
-  #navLinks {
+  .nav__mobile {
     display: none;
     position: absolute;
     top: var(--nav-height);
@@ -494,17 +494,17 @@ body {
     gap: 8px;
   }
   
-  .nav--light #navLinks {
+  .nav--light .nav__mobile {
     background: white;
     border-bottom: 1px solid var(--gray-200);
   }
   
-  .nav--dark #navLinks {
+  .nav--dark .nav__mobile {
     background: var(--navy);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
   
-  #navLinks.open {
+  .nav__mobile.open {
     display: flex;
   }
   
