@@ -141,7 +141,7 @@
       padding: 8px;
     }
     
-    #navLinks {
+    .nav__mobile {
       display: none;
     }
     
@@ -166,7 +166,7 @@
         margin-left: auto;
       }
       
-      #navLinks {
+      .nav__mobile {
         display: none;
         position: absolute;
         top: 64px;
@@ -179,11 +179,11 @@
         border-bottom: 1px solid rgba(255,255,255,0.1);
       }
       
-      #navLinks.open {
+      .nav__mobile.open {
         display: flex;
       }
       
-      #navLinks .nav__link {
+      .nav__mobile .nav__link {
         padding: 12px 16px;
       }
     }
@@ -1860,7 +1860,7 @@
     </div>
     
     <button class="nav__toggle" onclick="toggleNav()">&#9776;</button>
-    <div class="nav__links" id="navLinks">
+    <div class="nav__mobile" id="navLinks">
       <div class="nav__group-label">Explainer</div>
       <a href="index.html" class="nav__link">&#127968; Home</a>
       <a href="aichallenge.html" class="nav__link">&#129302; How We Use AI</a>
