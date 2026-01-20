@@ -932,41 +932,127 @@
   <nav class="nav nav--dark">
     <div class="nav__left">
       <a href="index.html" class="nav__logo">
-        <img src="https://kesmit3.github.io/paic/upliftlogo.png" alt="Uplift Education" class="nav__logo-img">
+        <img src="https://kesmit3.github.io/paic/upliftlogo.png" class="nav__logo-img" alt="Uplift Education">
         <div class="nav__divider"></div>
         <span class="nav__product">Purpose Engine</span>
       </a>
       <div class="nav__links">
-        <a href="index.html" class="nav__link nav__link--active">&#127968; Home</a>
-        <a href="aichallenge.html" class="nav__link">&#129302; How We Use AI</a>
-        <a href="americandream.html" class="nav__link">&#129517; Why This Matters</a>
+        <a href="aichallenge.html" class="nav__link">&#127942; <span class="nav__link-text">Challenge</span></a>
       </div>
     </div>
     
     <div class="nav__right">
       <div class="nav__links">
-        <a href="student-dashboard.html" class="nav__link">&#128202; Student</a>
-        <a href="career-bridge.html" class="nav__link">&#127919; Career Bridge</a>
-        <a href="future-self.html" class="nav__link">&#128302; Future Self</a>
-        <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; Educator</a>
-        <a href="demo.html" class="nav__link">&#9658; Demo</a>
-        <a href="rtcc-demo.html" class="nav__link">&#128176; RTCC</a>
+        <div class="nav__dropdown">
+          <button class="nav__dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>Demo</span>
+            <span class="nav__dropdown-arrow">&#9660;</span>
+          </button>
+          
+          <div class="nav__mega-menu">
+            <div class="mega-menu__grid">
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">Scholar Journeys</div>
+                <a href="ivan-day.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--yellow">&#128295;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Ivan</div>
+                    <div class="mega-menu__desc">Electrician pathway</div>
+                  </div>
+                </a>
+                <a href="cyber-pathway.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#128737;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Marcus</div>
+                    <div class="mega-menu__desc">Cybersecurity pathway</div>
+                  </div>
+                </a>
+                <a href="career-bridge.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--green">&#127793;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Maya</div>
+                    <div class="mega-menu__desc">Sustainable design pathway</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">For Educators</div>
+                <a href="educator-dashboard.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Dashboard</div>
+                    <div class="mega-menu__desc">Alerts, praise, insights</div>
+                  </div>
+                </a>
+                <a href="activity-hub.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--orange">&#128640;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Activity Hub</div>
+                    <div class="mega-menu__desc">Clubs, funding, eligibility</div>
+                  </div>
+                </a>
+                
+                <div class="mega-menu__header" style="margin-top: 16px;">For Counselors</div>
+                <a href="rtcc.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#127891;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Road to College &amp; Career</div>
+                    <div class="mega-menu__desc">FAFSA, IBCs, applications</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section mega-menu__section--full">
+                <div class="mega-menu__header">For Students</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                  <a href="student-dashboard.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Dashboard</div>
+                      <div class="mega-menu__desc">Your overview</div>
+                    </div>
+                  </a>
+                  <a href="career-bridge.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--green">&#127919;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Career Bridge</div>
+                      <div class="mega-menu__desc">Connect classwork</div>
+                    </div>
+                  </a>
+                  <a href="future-self.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--yellow">&#128302;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Future Self</div>
+                      <div class="mega-menu__desc">Chat with 32-year-old you</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     
-    <button class="nav__toggle" onclick="toggleNav()">&#9776;</button>
-    <div class="nav__links" id="navLinks">
-      <div class="nav__group-label">Explainer</div>
-      <a href="index.html" class="nav__link nav__link--active">&#127968; Home</a>
-      <a href="aichallenge.html" class="nav__link">&#129302; How We Use AI</a>
-      <a href="americandream.html" class="nav__link">&#129517; Why This Matters</a>
-      <div class="nav__group-label" style="margin-top: 12px;">Demo</div>
-      <a href="student-dashboard.html" class="nav__link">&#128202; Student</a>
+    <button class="nav__toggle" onclick="toggleNav()" aria-label="Toggle menu">&#9776;</button>
+    <div id="navLinks">
+      <a href="aichallenge.html" class="nav__link">&#127942; Challenge</a>
+      <div class="mobile-menu__header">Scholar Journeys</div>
+      <a href="ivan-day.html" class="nav__link">&#128295; Ivan (Electrician)</a>
+      <a href="cyber-pathway.html" class="nav__link">&#128737; Marcus (Cybersecurity)</a>
+      <a href="career-bridge.html" class="nav__link">&#127793; Maya (Sustainable Design)</a>
+      <div class="mobile-menu__header">For Educators</div>
+      <a href="educator-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="activity-hub.html" class="nav__link">&#128640; Activity Hub</a>
+      <div class="mobile-menu__header">For Counselors</div>
+      <a href="rtcc.html" class="nav__link">&#127891; Road to College &amp; Career</a>
+      <div class="mobile-menu__header">For Students</div>
+      <a href="student-dashboard.html" class="nav__link">&#128202; Dashboard</a>
       <a href="career-bridge.html" class="nav__link">&#127919; Career Bridge</a>
       <a href="future-self.html" class="nav__link">&#128302; Future Self</a>
-      <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; Educator</a>
-      <a href="demo.html" class="nav__link">&#9658; Demo</a>
-      <a href="rtcc-demo.html" class="nav__link">&#128176; RTCC</a>
     </div>
   </nav>
 
@@ -980,66 +1066,47 @@
       When Work Feels Disconnected
     </h1>
     <p>
-  &ldquo;Fewer than <em>two in 10 students</em> strongly agree that what they are learning in class 
-      feels <b>important, interesting, challenging, or aligned</b> with their natural talents. 
-      This disconnect is especially high among students who do not want to attend college...&rdquo;<br>
-      &mdash; Gallup / Walton Family Foundation, <em>Voices of Gen Z Study</em> (2025)
-      <br><br>
-  <b>Our insight:</b><br>
-  When meaning collapses, effort collapses.<br>
-  The opportunity for AI is not task completion, but relevance.
-  <br><br>
-
-  AI can help bridge this gap not by doing work for students, but by 
-  <em>contextualizing academic work to their interests, strengths, and who they are becoming</em>.
-</p>
+      Purpose Engine uses AI to give every student what the best mentors provide naturally: 
+      <em>context that makes today's assignment matter for tomorrow's goals</em>.
+    </p>
     <div class="hero-ctas">
-      <a href="demo.html" class="btn-primary">
-        &#9658; See It In Action
+      <a href="aichallenge.html" class="btn-primary">
+        &#127942; About the Challenge
       </a>
-      <a href="educator-dashboard.html" class="btn-secondary">
-        Educator Dashboard
-      </a>
-      <a href="student-dashboard.html" class="btn-secondary">
-        Student Dashboard
+      <a href="ivan-day.html" class="btn-secondary">
+        See a Student Journey &#8594;
       </a>
     </div>
     <div class="secondary-links">
       <a href="americandream.html" class="secondary-link">
-        <span>&#129517;</span> Why This Matters
-      </a>
-      <a href="aichallenge.html" class="secondary-link">
-        <span>&#129302;</span> How We Use AI
+        <span>&#129517;</span>
+        <span>Why This Matters</span>
       </a>
     </div>
   </section>
 
-  <!-- Problem/Solution Section -->
+  <!-- Before/After Comparison -->
   <section class="section section--light">
     <div class="section-header">
-      <h2>The Transformation</h2>
-      <p>Same learning objectives. Completely different motivation.</p>
+      <h2>Same Assignment. Different Experience.</h2>
+      <p>Context transforms compliance into engagement</p>
     </div>
     <div class="comparison-grid">
       <div class="comparison-card before">
-        <div class="emoji">&#128528;</div>
-        <h3>Traditional Approach</h3>
-        <p class="quote">
-          "Complete this stoichiometry worksheet for tomorrow. It's on the test."
-        </p>
+        <div class="emoji">&#128553;</div>
+        <h3>Without Context</h3>
+        <p class="quote">"Balance this equation. It's on the test."</p>
         <div class="thought">
-          Student thought: "Why does this matter to me?"
+          <strong>Student thinks:</strong> "Who cares. I'm gonna work with my uncle anyway."
         </div>
       </div>
-      <div class="comparison-arrow">&rarr;</div>
+      <div class="comparison-arrow">&#8594;</div>
       <div class="comparison-card after">
-        <div class="emoji">&#128640;</div>
-        <h3>Purpose Engine</h3>
-        <p class="quote">
-          "As an aspiring sustainable designer, calculate the chemical ratios for eco-friendly building insulation."
-        </p>
+        <div class="emoji">&#128161;</div>
+        <h3>With Purpose Engine</h3>
+        <p class="quote">"Your uncle bids drywall jobs by estimating materials. This equation is how you calculate exactly what you need so you don't overbuy and kill your margins."</p>
         <div class="thought">
-          Student thought: "This is relevant to MY future."
+          <strong>Student thinks:</strong> "Wait, I can actually use this. Let me ask him how close his estimates are."
         </div>
       </div>
     </div>
@@ -1095,7 +1162,7 @@
             and three years of experience. Instead of panic, Purpose Engine gives Ivan 
             a clear path forward&mdash;with AI helping exactly where it matters most.
           </p>
-          <a href="electrician-pathway.html" class="featured-story-link">
+          <a href="ivan-day.html" class="featured-story-link">
             <span>See Ivan's Journey</span>
             <span>&#8594;</span>
           </a>
@@ -1224,7 +1291,7 @@
           </div>
         </div>
         <div class="source-card">
-          <span class="icon">&#9888;&#65039;</span>
+          <span class="icon">&#9888;</span>
           <div class="info">
             <div class="name">Early Warning Signals</div>
             <div class="status">Pattern detection</div>
@@ -1246,8 +1313,8 @@
         <div class="demo-badge">4 Logins</div>
         <h3>Understanding One Student</h3>
         <p>To see the full picture of a single student, educators must log into SIS, LMS, CCMR tools, and more&mdash;each with separate credentials, each showing fragments of the story.</p>
-        <a href="demo.html" class="demo-link">
-          <span>See the Educator View Demo</span>
+        <a href="educator-dashboard.html" class="demo-link">
+          <span>See the Educator Dashboard</span>
           <span>&rarr;</span>
         </a>
       </div>
@@ -1256,8 +1323,8 @@
         <div class="demo-badge">2+ Hours</div>
         <h3>Justifying Program Funding</h3>
         <p>"Which students qualify for CTE funding?" A simple question that requires manually checking each student across multiple systems. Most teachers just don't start the club.</p>
-        <a href="rtcc-demo.html" class="demo-link">
-          <span>See the RTCC Demo</span>
+        <a href="activity-hub.html" class="demo-link">
+          <span>See Activity Hub</span>
           <span>&rarr;</span>
         </a>
       </div>
@@ -1269,8 +1336,8 @@
     <h2>See It In Action</h2>
     <p>Explore how Purpose Engine transforms fragmented data into meaningful context</p>
     <div class="hero-ctas">
-      <a href="demo.html" class="btn-primary">
-        &#128269; See The Problem &rarr;
+      <a href="ivan-day.html" class="btn-primary">
+        &#128295; Ivan's Journey
       </a>
       <a href="educator-dashboard.html" class="btn-secondary">
         Educator Dashboard
