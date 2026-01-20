@@ -205,57 +205,6 @@ body {
   color: white;
 }
 
-/* === Split Nav Layout (Explainer left, Demo right) === */
-.nav__left, .nav__right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.nav__right {
-  margin-left: auto;
-}
-
-.nav__separator {
-  width: 1px;
-  height: 28px;
-  margin: 0 8px;
-}
-
-.nav--light .nav__separator {
-  background: var(--gray-200);
-}
-
-.nav--dark .nav__separator {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.nav__pill {
-  margin-left: 8px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-}
-
-.nav--dark .nav__pill {
-  background: rgba(255, 196, 37, 0.18);
-  border: 1px solid rgba(255, 196, 37, 0.35);
-  color: var(--yellow);
-}
-
-.nav--light .nav__pill {
-  background: rgba(0, 103, 177, 0.08);
-  border: 1px solid rgba(0, 103, 177, 0.18);
-  color: var(--primary);
-}
-
 /* === Shared Button Styles === */
 .btn {
   padding: 12px 20px;
@@ -455,14 +404,6 @@ body {
   
   .nav__toggle {
     display: block;
-  }
-  
-  /* Hide split nav elements on mobile */
-  .nav__left .nav__links,
-  .nav__right .nav__links,
-  .nav__separator,
-  .nav__pill {
-    display: none;
   }
   
   .nav__links {
