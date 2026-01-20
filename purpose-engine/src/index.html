@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purpose Engine | AI in Education</title>
+  
+  <!-- Favicon and Social Sharing -->
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png?v=2">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png">
+  <meta property="og:title" content="Purpose Engine | AI in Education">
+  <meta property="og:description" content="AI-powered student motivation. Contextualizing schoolwork for each student's future.">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="assets/variables.css">
+  
+  <style>
+    /* === Page-specific styles === */
+    body {
+      background: var(--navy);
+      color: white;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(ellipse at 30% 20%, rgba(0, 103, 177, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 196, 37, 0.15);
+      border: 1px solid rgba(255, 196, 37, 0.3);
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .hero-badge span {
+      color: var(--yellow);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      max-width: 900px;
+      position: relative;
+    }
+
+    .hero h1 .highlight {
+      color: var(--yellow);
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--gray-400);
+      max-width: 720px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .hero p em {
+      color: var(--yellow);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      position: relative;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      padding: 16px 28px;
+      background: var(--yellow);
+      color: var(--navy);
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(255, 196, 37, 0.4);
+    }
+
+    .btn-secondary {
+      padding: 16px 28px;
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Secondary Links */
+    .secondary-links {
+      display: flex;
+      gap: 24px;
+      margin-top: 40px;
+      position: relative;
+    }
+
+    .secondary-link {
+      color: var(--gray-400);
+      font-size: 13px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s ease;
+    }
+
+    .secondary-link:hover {
+      color: var(--yellow);
+    }
+
+    /* Sections */
+    .section {
+      padding: 100px 40px;
+    }
+
+    .section--light {
+      background: var(--navy-light);
+    }
+
+    .section--dark {
+      background: var(--navy);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-header h2 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      font-size: 18px;
+      color: var(--gray-400);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Comparison Grid */
+    .comparison-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .comparison-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 32px;
+      width: 320px;
+      text-align: left;
+    }
+
+    .comparison-card.before {
+      border-color: rgba(239, 68, 68, 0.3);
+      background: rgba(239, 68, 68, 0.05);
+    }
+
+    .comparison-card.after {
+      border-color: rgba(0, 103, 177, 0.4);
+      background: rgba(0, 103, 177, 0.08);
+    }
+
+    .comparison-card .emoji {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+
+    .comparison-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .comparison-card.before h3 { color: var(--danger); }
+    .comparison-card.after h3 { color: var(--primary-light); }
+
+    .comparison-card .quote {
+      font-size: 15px;
+      color: var(--gray-400);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .comparison-card .thought {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+
+    .comparison-card.after .thought {
+      background: rgba(0, 103, 177, 0.2);
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .comparison-arrow {
+      font-size: 32px;
+      color: var(--yellow);
+    }
+
+    /* Pillars Grid */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Center the last row when it has fewer items */
+    .pillars-grid.five-pillars {
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    .pillars-grid.five-pillars .pillar-card:nth-child(1),
+    .pillars-grid.five-pillars .pillar-card:nth-child(2),
+    .pillars-grid.five-pillars .pillar-card:nth-child(3) {
+      grid-column: span 2;
+    }
+
+    .pillars-grid.five-pillars .pillar-card:nth-child(4) {
+      grid-column: 2 / span 2;
+    }
+
+    .pillars-grid.five-pillars .pillar-card:nth-child(5) {
+      grid-column: 4 / span 2;
+    }
+
+    .pillar-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 32px;
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+
+    .pillar-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .pillar-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .pillar-card:nth-child(1) .pillar-icon { background: rgba(0, 103, 177, 0.2); }
+    .pillar-card:nth-child(2) .pillar-icon { background: rgba(139, 92, 246, 0.2); }
+    .pillar-card:nth-child(3) .pillar-icon { background: rgba(245, 158, 11, 0.2); }
+    .pillar-card:nth-child(4) .pillar-icon { background: rgba(16, 185, 129, 0.2); }
+    .pillar-card:nth-child(5) .pillar-icon { background: rgba(236, 72, 153, 0.2); }
+
+    .pillar-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: white;
+    }
+
+    .pillar-card p {
+      font-size: 15px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    /* Featured Story Section */
+    .featured-story {
+      padding: 100px 40px;
+      background: linear-gradient(180deg, #0a1018 0%, var(--navy) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-story::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255, 196, 37, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .featured-story-container {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .featured-story-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 196, 37, 0.2);
+      border-radius: 24px;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .featured-story-content {
+      text-align: left;
+    }
+
+    .featured-story-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 196, 37, 0.15);
+      border: 1px solid rgba(255, 196, 37, 0.3);
+      color: var(--yellow);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .featured-story-content h2 {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .featured-story-content h2 span {
+      color: var(--yellow);
+    }
+
+    .featured-story-content p {
+      font-size: 16px;
+      color: var(--gray-400);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .featured-story-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--yellow);
+      color: var(--navy);
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .featured-story-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(255, 196, 37, 0.4);
+    }
+
+    .featured-story-visual {
+      position: relative;
+    }
+
+    .story-preview {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .story-preview-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .story-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .story-avatar-info h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .story-avatar-info span {
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+
+    .story-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .story-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    .story-step-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .story-step-icon.done {
+      background: var(--success);
+    }
+
+    .story-step-icon.ai {
+      background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+    }
+
+    .story-step-icon.pending {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--gray-400);
+    }
+
+    .story-step span {
+      color: var(--gray-300);
+    }
+
+    @media (max-width: 900px) {
+      .featured-story-card {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 32px;
+      }
+
+      .featured-story-content {
+        text-align: center;
+      }
+
+      .featured-story-content h2 {
+        font-size: 26px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .featured-story {
+        padding: 60px 20px;
+      }
+
+      .featured-story-card {
+        padding: 24px;
+      }
+
+      .story-preview {
+        padding: 20px;
+      }
+    }
+
+    /* Stats Section */
+    .stats-section {
+      padding: 80px 40px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    }
+
+    .stats-grid {
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      max-width: 1000px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-item .number {
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--yellow);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-item .label {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 180px;
+    }
+
+    /* Integration Section */
+    .integration-diagram {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .source-column, .output-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .source-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      min-width: 200px;
+    }
+
+    .source-card .icon {
+      font-size: 24px;
+    }
+
+    .source-card .info .name {
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .source-card .info .status {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .source-card .info .status::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--success);
+      border-radius: 50%;
+    }
+
+    .flow-arrows {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      color: var(--yellow);
+      font-size: 20px;
+    }
+
+    .ai-engine {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(0, 103, 177, 0.3);
+    }
+
+    .ai-engine .icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 16px;
+    }
+
+    .ai-engine h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .ai-engine p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 200px;
+      margin: 0 auto;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 100px 40px;
+      background: var(--navy);
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      font-size: 18px;
+      color: var(--gray-400);
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Problem Demo Section */
+    .problem-demo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .problem-demo-card {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.02) 100%);
+      border: 2px solid rgba(239, 68, 68, 0.2);
+      border-radius: 20px;
+      padding: 32px;
+      text-align: left;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .problem-demo-card:hover {
+      border-color: rgba(255, 196, 37, 0.5);
+      transform: translateY(-4px);
+    }
+
+    .problem-demo-card .demo-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+
+    .problem-demo-card .demo-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(239, 68, 68, 0.2);
+      color: #FCA5A5;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 20px;
+    }
+
+    .problem-demo-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: white;
+    }
+
+    .problem-demo-card p {
+      font-size: 15px;
+      color: var(--gray-400);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .demo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--yellow);
+      color: var(--navy);
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .demo-link:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 16px rgba(255, 196, 37, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px;
+      background: var(--navy-light);
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    footer p {
+      color: var(--gray-500);
+      font-size: 14px;
+    }
+
+    footer a {
+      color: var(--primary-light);
+      text-decoration: none;
+    }
+
+    /* === Responsive === */
+    @media (max-width: 1024px) {
+      .pillars-grid,
+      .pillars-grid.five-pillars {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .pillars-grid.five-pillars .pillar-card:nth-child(1),
+      .pillars-grid.five-pillars .pillar-card:nth-child(2),
+      .pillars-grid.five-pillars .pillar-card:nth-child(3),
+      .pillars-grid.five-pillars .pillar-card:nth-child(4),
+      .pillars-grid.five-pillars .pillar-card:nth-child(5) {
+        grid-column: span 1;
+      }
+      
+      .pillars-grid.five-pillars .pillar-card:nth-child(5) {
+        grid-column: 1 / -1;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 100px 24px 60px;
+        min-height: auto;
+      }
+      
+      .hero-badge span {
+        font-size: 12px;
+      }
+      
+      .hero h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+      }
+      
+      .hero p {
+        font-size: 16px;
+        margin-bottom: 28px;
+      }
+      
+      .hero-ctas {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .btn-primary, .btn-secondary {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 24px;
+      }
+
+      .secondary-links {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+      }
+      
+      .section {
+        padding: 60px 24px;
+      }
+      
+      .section-header h2 {
+        font-size: 28px;
+      }
+
+      .problem-demo-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+
+      .problem-demo-card {
+        padding: 24px;
+      }
+      
+      .comparison-grid {
+        flex-direction: column;
+        gap: 24px;
+      }
+      
+      .comparison-card {
+        width: 100%;
+        max-width: 400px;
+        padding: 24px;
+      }
+      
+      .comparison-arrow {
+        transform: rotate(90deg);
+      }
+      
+      .pillars-grid,
+      .pillars-grid.five-pillars {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      
+      .pillars-grid.five-pillars .pillar-card:nth-child(5) {
+        max-width: none;
+      }
+      
+      .stats-grid {
+        flex-direction: column;
+        gap: 40px;
+      }
+      
+      .stat-item .number {
+        font-size: 44px;
+      }
+      
+      .integration-diagram {
+        flex-direction: column;
+      }
+      
+      .flow-arrows {
+        flex-direction: row;
+        gap: 12px;
+      }
+      
+      .source-column, .output-column {
+        width: 100%;
+        max-width: 280px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav nav--dark">
+    <div class="nav__left">
+      <a href="index.html" class="nav__logo">
+        <img src="https://kesmit3.github.io/paic/upliftlogo.png" class="nav__logo-img" alt="Uplift Education">
+        <div class="nav__divider"></div>
+        <span class="nav__product">Purpose Engine</span>
+      </a>
+      <div class="nav__links">
+        <a href="aichallenge.html" class="nav__link">&#127942; <span class="nav__link-text">Challenge</span></a>
+      </div>
+    </div>
+    
+    <div class="nav__right">
+      <div class="nav__links">
+        <div class="nav__dropdown">
+          <button class="nav__dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>Demo</span>
+            <span class="nav__dropdown-arrow">&#9660;</span>
+          </button>
+          
+          <div class="nav__mega-menu">
+            <div class="mega-menu__grid">
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">Scholar Journeys</div>
+                <a href="ivan-day.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--yellow">&#128295;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Ivan</div>
+                    <div class="mega-menu__desc">Electrician pathway</div>
+                  </div>
+                </a>
+                <a href="cyber-pathway.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#128737;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Marcus</div>
+                    <div class="mega-menu__desc">Cybersecurity pathway</div>
+                  </div>
+                </a>
+                <a href="career-bridge.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--green">&#127793;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Maya</div>
+                    <div class="mega-menu__desc">Sustainable design pathway</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">For Educators</div>
+                <a href="educator-dashboard.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Dashboard</div>
+                    <div class="mega-menu__desc">Alerts, praise, insights</div>
+                  </div>
+                </a>
+                <a href="activity-hub.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--orange">&#128640;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Activity Hub</div>
+                    <div class="mega-menu__desc">Clubs, funding, eligibility</div>
+                  </div>
+                </a>
+                
+                <div class="mega-menu__header" style="margin-top: 16px;">For Counselors</div>
+                <a href="rtcc.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#127891;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Road to College &amp; Career</div>
+                    <div class="mega-menu__desc">FAFSA, IBCs, applications</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section mega-menu__section--full">
+                <div class="mega-menu__header">For Students</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                  <a href="student-dashboard.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Dashboard</div>
+                      <div class="mega-menu__desc">Your overview</div>
+                    </div>
+                  </a>
+                  <a href="career-bridge.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--green">&#127919;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Career Bridge</div>
+                      <div class="mega-menu__desc">Connect classwork</div>
+                    </div>
+                  </a>
+                  <a href="future-self.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--yellow">&#128302;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Future Self</div>
+                      <div class="mega-menu__desc">Chat with 32-year-old you</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <button class="nav__toggle" onclick="toggleNav()" aria-label="Toggle menu">&#9776;</button>
+    <div id="navLinks">
+      <a href="aichallenge.html" class="nav__link">&#127942; Challenge</a>
+      <div class="mobile-menu__header">Scholar Journeys</div>
+      <a href="ivan-day.html" class="nav__link">&#128295; Ivan (Electrician)</a>
+      <a href="cyber-pathway.html" class="nav__link">&#128737; Marcus (Cybersecurity)</a>
+      <a href="career-bridge.html" class="nav__link">&#127793; Maya (Sustainable Design)</a>
+      <div class="mobile-menu__header">For Educators</div>
+      <a href="educator-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="activity-hub.html" class="nav__link">&#128640; Activity Hub</a>
+      <div class="mobile-menu__header">For Counselors</div>
+      <a href="rtcc.html" class="nav__link">&#127891; Road to College &amp; Career</a>
+      <div class="mobile-menu__header">For Students</div>
+      <a href="student-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="career-bridge.html" class="nav__link">&#127919; Career Bridge</a>
+      <a href="future-self.html" class="nav__link">&#128302; Future Self</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span>&#127891; AI-Powered Student Motivation</span>
+    </div>
+    <h1>
+      <span class="highlight">Motivation Collapses</span><br>
+      When Work Feels Disconnected
+    </h1>
+    <p>
+      Purpose Engine uses AI to give every student what the best mentors provide naturally: 
+      <em>context that makes today's assignment matter for tomorrow's goals</em>.
+    </p>
+    <div class="hero-ctas">
+      <a href="aichallenge.html" class="btn-primary">
+        &#127942; About the Challenge
+      </a>
+      <a href="ivan-day.html" class="btn-secondary">
+        See a Student Journey &#8594;
+      </a>
+    </div>
+    <div class="secondary-links">
+      <a href="americandream.html" class="secondary-link">
+        <span>&#129517;</span>
+        <span>Why This Matters</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Before/After Comparison -->
+  <section class="section section--light">
+    <div class="section-header">
+      <h2>Same Assignment. Different Experience.</h2>
+      <p>Context transforms compliance into engagement</p>
+    </div>
+    <div class="comparison-grid">
+      <div class="comparison-card before">
+        <div class="emoji">&#128553;</div>
+        <h3>Without Context</h3>
+        <p class="quote">"Balance this equation. It's on the test."</p>
+        <div class="thought">
+          <strong>Student thinks:</strong> "Who cares. I'm gonna work with my uncle anyway."
+        </div>
+      </div>
+      <div class="comparison-arrow">&#8594;</div>
+      <div class="comparison-card after">
+        <div class="emoji">&#128161;</div>
+        <h3>With Purpose Engine</h3>
+        <p class="quote">"Your uncle bids drywall jobs by estimating materials. This equation is how you calculate exactly what you need so you don't overbuy and kill your margins."</p>
+        <div class="thought">
+          <strong>Student thinks:</strong> "Wait, I can actually use this. Let me ask him how close his estimates are."
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Five Pillars of Purpose Section -->
+  <section class="section section--dark">
+    <div class="section-header">
+      <h2>Five Pillars of Purpose</h2>
+      <p>A comprehensive approach to connecting learning with meaning</p>
+    </div>
+    <div class="pillars-grid five-pillars">
+      <div class="pillar-card">
+        <div class="pillar-icon">&#127919;</div>
+        <h3>Career-Bridge Challenges</h3>
+        <p>AI reframes assignments through each student&rsquo;s career interests&mdash;same learning objectives, completely different motivation.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">&#128302;</div>
+        <h3>Future Self Mentorship</h3>
+        <p>Students consult an AI persona of their successful future self for guidance when motivation wavers.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">&#9888;</div>
+        <h3>Early Warning Signals</h3>
+        <p>AI detects disengagement patterns across systems&mdash;surfacing struggles before they become crises.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">&#127881;</div>
+        <h3>Recognition &amp; Celebration</h3>
+        <p>Breakthrough moments and quiet wins are surfaced for educators to acknowledge&mdash;building momentum through recognition.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">&#128065;</div>
+        <h3>Shared Visibility Layer</h3>
+        <p>Students, educators, and counselors see the same meaningful context&mdash;enabling support that feels personal because it is.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Student Story -->
+  <section class="featured-story">
+    <div class="featured-story-container">
+      <div class="featured-story-card">
+        <div class="featured-story-content">
+          <div class="featured-story-badge">
+            <span>&#9889;</span>
+            <span>Real Student Story</span>
+          </div>
+          <h2>From Overwhelmed to <span>On Track</span></h2>
+          <p>
+            Ivan wants to be an electrician. His classmate Michael already has his TDLR card 
+            and three years of experience. Instead of panic, Purpose Engine gives Ivan 
+            a clear path forward&mdash;with AI helping exactly where it matters most.
+          </p>
+          <a href="ivan-day.html" class="featured-story-link">
+            <span>See Ivan's Journey</span>
+            <span>&#8594;</span>
+          </a>
+        </div>
+        <div class="featured-story-visual">
+          <div class="story-preview">
+            <div class="story-preview-header">
+              <div class="story-avatar">&#128100;</div>
+              <div class="story-avatar-info">
+                <h4>Ivan Rodriguez</h4>
+                <span>Senior &#8226; Goal: Electrician</span>
+              </div>
+            </div>
+            <div class="story-steps">
+              <div class="story-step">
+                <div class="story-step-icon done">&#10003;</div>
+                <span>Learn from peer (Michael's TDLR card)</span>
+              </div>
+              <div class="story-step">
+                <div class="story-step-icon ai">&#129300;</div>
+                <span>AI breaks down TDLR requirements</span>
+              </div>
+              <div class="story-step">
+                <div class="story-step-icon ai">&#129300;</div>
+                <span>AI generates employer call list</span>
+              </div>
+              <div class="story-step">
+                <div class="story-step-icon pending">4</div>
+                <span>Take action on clear next steps</span>
+              </div>
+              <div class="story-step">
+                <div class="story-step-icon ai">&#129300;</div>
+                <span>AI-powered progress tracking</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="number">~50%</div>
+        <div class="label">of students are disengaged</div>
+      </div>
+      <div class="stat-item">
+        <div class="number">150+ students per educator</div>
+        <div class="label">far exceeds human working memory without AI-supported context</div>
+      </div>
+      <div class="stat-item">
+        <div class="number">&lt;Minutes = Moments</div>
+        <div class="label">when AI surfaces what matters to teachers, counselors, families, and students</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration Section -->
+  <section class="section section--light">
+    <div class="section-header">
+      <h2>Connects Your Existing Systems</h2>
+      <p>AI synthesizes data from tools you already use</p>
+    </div>
+    <div class="integration-diagram">
+      <div class="source-column">
+        <div class="source-card">
+          <span class="icon">&#128202;</span>
+          <div class="info">
+            <div class="name">SIS</div>
+            <div class="status">Live sync</div>
+          </div>
+        </div>
+        <div class="source-card">
+          <span class="icon">&#128218;</span>
+          <div class="info">
+            <div class="name">LMS</div>
+            <div class="status">Live sync</div>
+          </div>
+        </div>
+        <div class="source-card">
+          <span class="icon">&#127919;</span>
+          <div class="info">
+            <div class="name">CCMR</div>
+            <div class="status">Live sync</div>
+          </div>
+        </div>
+        <div class="source-card">
+          <span class="icon">&#129504;</span>
+          <div class="info">
+            <div class="name">Other Tools</div>
+            <div class="status">Synced</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrows">
+        <span>&rarr;</span>
+        <span>&rarr;</span>
+        <span>&rarr;</span>
+        <span>&rarr;</span>
+      </div>
+      <div class="ai-engine">
+        <div class="icon">&#129504;</div>
+        <h3>Local AI Engine</h3>
+        <p>Runs on-premise. Student data never leaves campus.</p>
+      </div>
+      <div class="flow-arrows">
+        <span>&rarr;</span>
+        <span>&rarr;</span>
+        <span>&rarr;</span>
+      </div>
+      <div class="output-column">
+        <div class="source-card">
+          <span class="icon">&#127919;</span>
+          <div class="info">
+            <div class="name">Career-Bridge Challenges</div>
+            <div class="status">Personalized framing</div>
+          </div>
+        </div>
+        <div class="source-card">
+          <span class="icon">&#128302;</span>
+          <div class="info">
+            <div class="name">Future Self AI</div>
+            <div class="status">Mentorship simulations</div>
+          </div>
+        </div>
+        <div class="source-card">
+          <span class="icon">&#9888;</span>
+          <div class="info">
+            <div class="name">Early Warning Signals</div>
+            <div class="status">Pattern detection</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PROBLEM: Data Silos Section -->
+  <section class="section section--dark" id="problem">
+    <div class="section-header">
+      <h2>The Problem: Data Lives in Silos</h2>
+      <p>Every insight requires logging into multiple systems. Teachers give up. Programs don't happen. Students lose.</p>
+    </div>
+    <div class="problem-demo-grid">
+      <div class="problem-demo-card">
+        <div class="demo-icon">&#128553;</div>
+        <div class="demo-badge">4 Logins</div>
+        <h3>Understanding One Student</h3>
+        <p>To see the full picture of a single student, educators must log into SIS, LMS, CCMR tools, and more&mdash;each with separate credentials, each showing fragments of the story.</p>
+        <a href="educator-dashboard.html" class="demo-link">
+          <span>See the Educator Dashboard</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+      <div class="problem-demo-card">
+        <div class="demo-icon">&#128176;</div>
+        <div class="demo-badge">2+ Hours</div>
+        <h3>Justifying Program Funding</h3>
+        <p>"Which students qualify for CTE funding?" A simple question that requires manually checking each student across multiple systems. Most teachers just don't start the club.</p>
+        <a href="activity-hub.html" class="demo-link">
+          <span>See Activity Hub</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2>See It In Action</h2>
+    <p>Explore how Purpose Engine transforms fragmented data into meaningful context</p>
+    <div class="hero-ctas">
+      <a href="ivan-day.html" class="btn-primary">
+        &#128295; Ivan's Journey
+      </a>
+      <a href="educator-dashboard.html" class="btn-secondary">
+        Educator Dashboard
+      </a>
+      <a href="student-dashboard.html" class="btn-secondary">
+        Student Dashboard
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Purpose Engine &mdash; An <a href="https://www.uplifteducation.org" target="_blank">Uplift Education</a> Initiative
+    </p>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    
+    document.addEventListener('click', function(e) {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.querySelector('.nav__toggle');
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>
