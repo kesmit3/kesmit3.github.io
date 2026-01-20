@@ -5,110 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RTCC Demo | Purpose Engine</title>
   
-  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png?v=2">">
+  <!-- Favicon and Social Sharing -->
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png?v=2">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png">
+  <meta property="og:title" content="RTCC Demo | Purpose Engine">
+  <meta property="og:description" content="See how AI eliminates spreadsheet hell - turning hours of cross-system data hunting into instant answers for CTE funding eligibility.">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <!-- Shared Styles -->
   <link rel="stylesheet" href="assets/variables.css">
+  
   <style>
-    :root {
-      --navy: #0a1628;
-      --navy-light: #1a2332;
-      --yellow: #FFC425;
-      --primary: #0067b1;
-      --primary-dark: #004b85;
-      --primary-light: #5091cd;
-      --success: #10B981;
-      --warning: #F59E0B;
-      --danger: #EF4444;
-      --purple: #8B5CF6;
-      --gray-400: #94A3B8;
-      --gray-500: #64748B;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
+    /* === Page-specific styles === */
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
       background: var(--navy);
-      color: white;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Navigation */
-    .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 64px;
-      background: rgba(10, 22, 40, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      display: flex;
-      align-items: center;
-      padding: 0 32px;
-      z-index: 1000;
-    }
-
-    .nav__logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-
-    .nav__logo img {
-      height: 36px;
-    }
-
-    .nav__divider {
-      width: 1px;
-      height: 24px;
-      background: rgba(255,255,255,0.2);
-    }
-
-    .nav__product {
-      font-weight: 700;
-      font-size: 15px;
-      color: white;
-    }
-
-    .nav__badge {
-      margin-left: 12px;
-      background: var(--purple);
-      color: white;
-      font-size: 10px;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .nav__demo-links {
-      display: flex;
-      gap: 8px;
-      margin-left: auto;
-    }
-
-    .nav__demo-link {
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--gray-400);
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .nav__demo-link:hover {
-      background: rgba(255,255,255,0.1);
-      color: white;
-    }
-
-    .nav__demo-link.active {
-      background: var(--purple);
       color: white;
     }
 
@@ -624,10 +541,6 @@
       .examples-grid {
         grid-template-columns: 1fr;
       }
-
-      .nav__demo-links {
-        display: none;
-      }
     }
 
     @media (max-width: 768px) {
@@ -671,7 +584,7 @@
 </head>
 <body>
   <!-- Navigation -->
-  <nav class="nav nav--light">
+  <nav class="nav nav--dark">
     <div class="nav__left">
       <a href="index.html" class="nav__logo">
         <img src="https://kesmit3.github.io/paic/upliftlogo.png" class="nav__logo-img" alt="Uplift Education">
@@ -679,35 +592,35 @@
         <span class="nav__product">Purpose Engine</span>
       </a>
       <div class="nav__links">
-        <a href="index.html" class="nav__link">&#127968; <span class="nav__link-text">Home</span></a>
-        <a href="aichallenge.html" class="nav__link">&#129302; <span class="nav__link-text">How We Use AI</span></a>
-        <a href="americandream.html" class="nav__link">&#129517; <span class="nav__link-text">Why This Matters</span></a>
+        <a href="index.html" class="nav__link">🏠 <span class="nav__link-text">Home</span></a>
+        <a href="aichallenge.html" class="nav__link">🤖 <span class="nav__link-text">How We Use AI</span></a>
+        <a href="americandream.html" class="nav__link">🧭 <span class="nav__link-text">Why This Matters</span></a>
       </div>
     </div>
     
     <div class="nav__right">
       <div class="nav__links">
-        <a href="student-dashboard.html" class="nav__link">&#128202; <span class="nav__link-text">Student</span></a>
-        <a href="career-bridge.html" class="nav__link">&#127919; <span class="nav__link-text">Career Bridge</span></a>
-        <a href="future-self.html" class="nav__link">&#128302; <span class="nav__link-text">Future Self</span></a>
-        <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; <span class="nav__link-text">Educator</span></a>
-        <a href="demo.html" class="nav__link">&#9658; <span class="nav__link-text">Demo</span></a>
-        <a href="rtcc-demo.html" class="nav__link nav__link--active">&#128176; <span class="nav__link-text">RTCC</span></a>
+        <a href="student-dashboard.html" class="nav__link">📊 <span class="nav__link-text">Student</span></a>
+        <a href="career-bridge.html" class="nav__link">🎯 <span class="nav__link-text">Career Bridge</span></a>
+        <a href="future-self.html" class="nav__link">🔮 <span class="nav__link-text">Future Self</span></a>
+        <a href="educator-dashboard.html" class="nav__link">👩‍🏫 <span class="nav__link-text">Educator</span></a>
+        <a href="demo.html" class="nav__link">▶ <span class="nav__link-text">Demo</span></a>
+        <a href="rtcc-demo.html" class="nav__link nav__link--active">💰 <span class="nav__link-text">RTCC</span></a>
       </div>
-      <span class="nav__pill">&#9889; Demo Mode</span>
+      <span class="nav__pill">⚡ Demo Mode</span>
     </div>
     
-    <button class="nav__toggle" onclick="toggleNav()">&#9776;</button>
+    <button class="nav__toggle" onclick="toggleNav()">☰</button>
     <div class="nav__links" id="navLinks">
-      <a href="index.html" class="nav__link">&#127968; <span class="nav__link-text">Home</span></a>
-      <a href="aichallenge.html" class="nav__link">&#129302; <span class="nav__link-text">How We Use AI</span></a>
-      <a href="americandream.html" class="nav__link">&#129517; <span class="nav__link-text">Why This Matters</span></a>
-      <a href="student-dashboard.html" class="nav__link">&#128202; <span class="nav__link-text">Student</span></a>
-      <a href="career-bridge.html" class="nav__link">&#127919; <span class="nav__link-text">Career Bridge</span></a>
-      <a href="future-self.html" class="nav__link">&#128302; <span class="nav__link-text">Future Self</span></a>
-      <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; <span class="nav__link-text">Educator</span></a>
-      <a href="demo.html" class="nav__link">&#9658; <span class="nav__link-text">Demo</span></a>
-      <a href="rtcc-demo.html" class="nav__link nav__link--active">&#128176; <span class="nav__link-text">RTCC</span></a>
+      <a href="index.html" class="nav__link">🏠 <span class="nav__link-text">Home</span></a>
+      <a href="aichallenge.html" class="nav__link">🤖 <span class="nav__link-text">How We Use AI</span></a>
+      <a href="americandream.html" class="nav__link">🧭 <span class="nav__link-text">Why This Matters</span></a>
+      <a href="student-dashboard.html" class="nav__link">📊 <span class="nav__link-text">Student</span></a>
+      <a href="career-bridge.html" class="nav__link">🎯 <span class="nav__link-text">Career Bridge</span></a>
+      <a href="future-self.html" class="nav__link">🔮 <span class="nav__link-text">Future Self</span></a>
+      <a href="educator-dashboard.html" class="nav__link">👩‍🏫 <span class="nav__link-text">Educator</span></a>
+      <a href="demo.html" class="nav__link">▶ <span class="nav__link-text">Demo</span></a>
+      <a href="rtcc-demo.html" class="nav__link nav__link--active">💰 <span class="nav__link-text">RTCC</span></a>
     </div>
   </nav>
 
@@ -724,7 +637,7 @@
 
     <!-- Scenario -->
     <div class="scenario-card">
-      <div class="scenario-icon">ðŸ¤–</div>
+      <div class="scenario-icon">🤔</div>
       <div class="scenario-content">
         <h2>You Want to Start a Robotics Club</h2>
         <p>
@@ -742,7 +655,7 @@
 
     <!-- The Question -->
     <div class="the-question">
-      <div class="label">â“ The Question You Need Answered</div>
+      <div class="label">⚡ The Question You Need Answered</div>
       <div class="question-text">
         "Which of my 20 interested students are currently enrolled in a CTE pathway that qualifies for state funding?"
       </div>
@@ -753,7 +666,7 @@
       <!-- Hell Panel -->
       <div class="comparison-panel hell">
         <div class="panel-header">
-          <span class="icon">ðŸ˜©</span>
+          <span class="icon">😩</span>
           <h3>Current Process</h3>
         </div>
         
@@ -761,7 +674,7 @@
           <div class="hell-step">
             <span class="step-num">1</span>
             <span>Log into SIS</span>
-            <span class="login-badge">ðŸ” Login #1</span>
+            <span class="login-badge">🔑 Login #1</span>
           </div>
           <div class="hell-step">
             <span class="step-num">2</span>
@@ -778,7 +691,7 @@
           <div class="hell-step">
             <span class="step-num">5</span>
             <span>Open CCMR system in new tab</span>
-            <span class="login-badge">ðŸ” Login #2</span>
+            <span class="login-badge">🔑 Login #2</span>
           </div>
           <div class="hell-step">
             <span class="step-num">6</span>
@@ -808,14 +721,14 @@
       <!-- Solution Panel -->
       <div class="comparison-panel solution">
         <div class="panel-header">
-          <span class="icon">âœ¨</span>
+          <span class="icon">✨</span>
           <h3>With Purpose Engine</h3>
         </div>
         
         <div class="solution-query">
           <div class="query-box">
             <div class="query-label">
-              <span>ðŸ’¬</span> You Ask
+              <span>💬</span> You Ask
             </div>
             <div class="query-text">
               "Which students interested in Robotics Club are on a CTE pathway that qualifies for state funding?"
@@ -824,19 +737,19 @@
 
           <div class="answer-box">
             <div class="answer-label">
-              <span>&#129488;</span> Instant Answer
+              <span>🤔</span> Instant Answer
             </div>
             <div class="answer-content">
               <strong>12 of 20 students</strong> are on qualifying CTE pathways:
               <ul class="pathway-list">
-                <li><strong>8 students</strong> &#8212; Engineering & Technology</li>
-                <li><strong>3 students</strong> &#8212; Advanced Manufacturing</li>
-                <li><strong>1 student</strong> &#8212; Information Technology</li>
+                <li><strong>8 students</strong> — Engineering &amp; Technology</li>
+                <li><strong>3 students</strong> — Advanced Manufacturing</li>
+                <li><strong>1 student</strong> — Information Technology</li>
               </ul>
-              <strong>Funding eligibility: 60%</strong> â†’ $2,520 justified immediately
+              <strong>Funding eligibility: 60%</strong> → $2,520 justified immediately
             </div>
             <div class="export-note">
-              <span>ðŸ“„</span>
+              <span>📄</span>
               <span>Export funding justification report with one click</span>
             </div>
           </div>
@@ -856,17 +769,17 @@
     <!-- Outcomes -->
     <div class="outcome-section">
       <div class="outcome-card bad">
-        <div class="emoji">ðŸš«</div>
+        <div class="emoji">🚫</div>
         <h4>Without This Tool</h4>
         <p>
           "It's easier to just NOT start the club."<br><br>
           Teachers give up. Programs don't happen. Students miss out on robotics, 
-          entrepreneurship, healthcare pathways &#8212; not because funding doesn't exist, 
+          entrepreneurship, healthcare pathways — not because funding doesn't exist, 
           but because <strong>proving eligibility is a nightmare</strong>.
         </p>
       </div>
       <div class="outcome-card good">
-        <div class="emoji">&#128640;</div>
+        <div class="emoji">🚀</div>
         <h4>With Purpose Engine</h4>
         <p>
           The club happens. 20 students build robots. 12 get CTE credit. 
@@ -882,15 +795,15 @@
       <div class="examples-grid">
         <div class="example-item">
           <div class="query">"Which seniors haven't completed their FAFSA and are first-gen college students?"</div>
-          <div class="old-way">â± Old way: 3+ hours across 3 systems</div>
+          <div class="old-way">⏱ Old way: 3+ hours across 3 systems</div>
         </div>
         <div class="example-item">
           <div class="query">"Show me students with declining grades who were previously high-performing"</div>
-          <div class="old-way">â± Old way: Manual grade history review per student</div>
+          <div class="old-way">⏱ Old way: Manual grade history review per student</div>
         </div>
         <div class="example-item">
           <div class="query">"Which students interested in healthcare haven't signed up for the hospital internship?"</div>
-          <div class="old-way">â± Old way: Cross-reference interest surveys with applications</div>
+          <div class="old-way">⏱ Old way: Cross-reference interest surveys with applications</div>
         </div>
       </div>
     </div>
@@ -901,19 +814,26 @@
       <p>It's about removing the barriers that prevent good things from happening.</p>
       <div class="cta-buttons">
         <a href="demo.html" class="cta-btn primary">
-          <span>&#128105;â€ðŸ«</span>
+          <span>👩‍🏫</span>
           <span>See Educator Demo</span>
         </a>
         <a href="educator-dashboard.html" class="cta-btn secondary">
-          <span>&#128202;</span>
+          <span>📊</span>
           <span>Educator Dashboard</span>
         </a>
         <a href="index.html" class="cta-btn secondary">
-          <span>ðŸ </span>
+          <span>🏠</span>
           <span>Back to Home</span>
         </a>
       </div>
     </div>
   </div>
+
+  <script>
+    function toggleNav() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('open');
+    }
+  </script>
 </body>
 </html>
