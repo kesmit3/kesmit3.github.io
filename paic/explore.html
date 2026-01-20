@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Purpose Engine | Try It Yourself</title>
+  
+  <!-- Favicon and Social Sharing -->
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png?v=2">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png">
+  <meta property="og:title" content="Explore Purpose Engine">
+  <meta property="og:description" content="Experience AI-powered student motivation. Choose your path: student journeys, educator tools, or live AI features.">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="assets/variables.css">
+  
+  <style>
+    /* === Page-specific styles === */
+    body {
+      background: var(--navy);
+      color: white;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 140px 40px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 30% 30%, rgba(255, 196, 37, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 70%, rgba(0, 103, 177, 0.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 196, 37, 0.15);
+      border: 1px solid rgba(255, 196, 37, 0.3);
+      color: var(--yellow);
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: var(--yellow);
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--gray-400);
+      line-height: 1.6;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Pathways Section */
+    .pathways-section {
+      padding: 40px 40px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pathway-category {
+      margin-bottom: 48px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .category-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .category-icon.journeys { background: rgba(255, 196, 37, 0.15); }
+    .category-icon.educators { background: rgba(139, 92, 246, 0.15); }
+    .category-icon.students { background: rgba(6, 182, 212, 0.15); }
+    .category-icon.ai { background: rgba(16, 185, 129, 0.15); }
+
+    .category-title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .category-subtitle {
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    /* Pathway Cards Grid */
+    .pathway-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .pathway-grid.two-col {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pathway-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 28px;
+      text-decoration: none;
+      color: white;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pathway-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .pathway-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .pathway-card.yellow::before { background: var(--yellow); }
+    .pathway-card.blue::before { background: var(--primary); }
+    .pathway-card.green::before { background: var(--success); }
+    .pathway-card.purple::before { background: var(--purple); }
+    .pathway-card.orange::before { background: var(--orange); }
+    .pathway-card.cyan::before { background: #06B6D4; }
+
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .pathway-card.yellow .card-icon { background: rgba(255, 196, 37, 0.15); }
+    .pathway-card.blue .card-icon { background: rgba(0, 103, 177, 0.15); }
+    .pathway-card.green .card-icon { background: rgba(16, 185, 129, 0.15); }
+    .pathway-card.purple .card-icon { background: rgba(139, 92, 246, 0.15); }
+    .pathway-card.orange .card-icon { background: rgba(241, 93, 34, 0.15); }
+    .pathway-card.cyan .card-icon { background: rgba(6, 182, 212, 0.15); }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--gray-400);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .card-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--gray-300);
+    }
+
+    .card-tag.live {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+    }
+
+    .card-arrow {
+      position: absolute;
+      bottom: 28px;
+      right: 28px;
+      font-size: 20px;
+      color: var(--gray-500);
+      transition: all 0.2s ease;
+    }
+
+    .pathway-card:hover .card-arrow {
+      color: white;
+      transform: translateX(4px);
+    }
+
+    /* Featured Card (Larger) */
+    .pathway-card.featured {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .pathway-card.featured .card-content {
+      order: 1;
+    }
+
+    .pathway-card.featured .card-visual {
+      order: 2;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 13px;
+    }
+
+    .pathway-card.featured .card-icon {
+      margin-bottom: 16px;
+    }
+
+    .visual-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .visual-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--purple) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .visual-info {
+      flex: 1;
+    }
+
+    .visual-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .visual-meta {
+      font-size: 11px;
+      color: var(--gray-500);
+    }
+
+    .visual-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .visual-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+
+    .step-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .step-icon.done {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--success);
+    }
+
+    .step-icon.ai {
+      background: rgba(139, 92, 246, 0.2);
+      color: #A78BFA;
+    }
+
+    /* Quick Stats Banner */
+    .stats-banner {
+      background: linear-gradient(135deg, rgba(0, 103, 177, 0.15) 0%, rgba(255, 196, 37, 0.1) 100%);
+      border: 1px solid rgba(255, 196, 37, 0.2);
+      border-radius: 20px;
+      padding: 32px 40px;
+      margin-bottom: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--yellow);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 60px 40px 80px;
+      text-align: center;
+      background: linear-gradient(180deg, transparent 0%, rgba(0, 103, 177, 0.1) 100%);
+    }
+
+    .cta-box {
+      max-width: 700px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 48px;
+    }
+
+    .cta-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .cta-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .cta-subtitle {
+      font-size: 16px;
+      color: var(--gray-400);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px;
+      text-align: center;
+      background: var(--navy);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    footer p {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    footer a {
+      color: var(--primary-light);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .pathway-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pathway-card.featured {
+        grid-column: span 2;
+        grid-template-columns: 1fr;
+      }
+
+      .pathway-card.featured .card-visual {
+        order: 1;
+      }
+
+      .pathway-card.featured .card-content {
+        order: 2;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 120px 20px 60px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .pathways-section {
+        padding: 20px 20px 60px;
+      }
+
+      .pathway-grid,
+      .pathway-grid.two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .pathway-card.featured {
+        grid-column: span 1;
+      }
+
+      .stats-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 24px;
+      }
+
+      .cta-box {
+        padding: 32px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav nav--dark">
+    <div class="nav__left">
+      <a href="index.html" class="nav__logo">
+        <img src="https://kesmit3.github.io/paic/upliftlogo.png" class="nav__logo-img" alt="Uplift Education">
+        <div class="nav__divider"></div>
+        <span class="nav__product">Purpose Engine</span>
+      </a>
+      <div class="nav__links">
+        <a href="aichallenge.html" class="nav__link">&#127942; <span class="nav__link-text">Challenge</span></a>
+      </div>
+    </div>
+    
+    <div class="nav__right">
+      <div class="nav__links">
+        <div class="nav__dropdown">
+          <button class="nav__dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>Demo</span>
+            <span class="nav__dropdown-arrow">&#9660;</span>
+          </button>
+          
+          <div class="nav__mega-menu">
+            <div class="mega-menu__grid">
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">Scholar Journeys</div>
+                <a href="ivan-day.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--yellow">&#128295;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Ivan</div>
+                    <div class="mega-menu__desc">Electrician pathway</div>
+                  </div>
+                </a>
+                <a href="cyber-pathway.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#128737;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Marcus</div>
+                    <div class="mega-menu__desc">Cybersecurity pathway</div>
+                  </div>
+                </a>
+                <a href="career-bridge.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--green">&#127793;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Maya</div>
+                    <div class="mega-menu__desc">Sustainable design pathway</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">For Educators</div>
+                <a href="educator-dashboard.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Dashboard</div>
+                    <div class="mega-menu__desc">Alerts, praise, insights</div>
+                  </div>
+                </a>
+                <a href="activity-hub.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--orange">&#128640;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Activity Hub</div>
+                    <div class="mega-menu__desc">Clubs, funding, eligibility</div>
+                  </div>
+                </a>
+                
+                <div class="mega-menu__header" style="margin-top: 16px;">For Counselors</div>
+                <a href="rtcc.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#127891;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Road to College &amp; Career</div>
+                    <div class="mega-menu__desc">FAFSA, IBCs, applications</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section mega-menu__section--full">
+                <div class="mega-menu__header">For Students</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                  <a href="student-dashboard.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Dashboard</div>
+                      <div class="mega-menu__desc">Your overview</div>
+                    </div>
+                  </a>
+                  <a href="career-bridge.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--green">&#127919;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Career Bridge</div>
+                      <div class="mega-menu__desc">Connect classwork</div>
+                    </div>
+                  </a>
+                  <a href="future-self.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--yellow">&#128302;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Future Self</div>
+                      <div class="mega-menu__desc">Chat with 32-year-old you</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <button class="nav__toggle" onclick="toggleNav()" aria-label="Toggle menu">&#9776;</button>
+    <div id="navLinks">
+      <a href="aichallenge.html" class="nav__link">&#127942; Challenge</a>
+      <div class="mobile-menu__header">Scholar Journeys</div>
+      <a href="ivan-day.html" class="nav__link">&#128295; Ivan (Electrician)</a>
+      <a href="cyber-pathway.html" class="nav__link">&#128737; Marcus (Cybersecurity)</a>
+      <a href="career-bridge.html" class="nav__link">&#127793; Maya (Sustainable Design)</a>
+      <div class="mobile-menu__header">For Educators</div>
+      <a href="educator-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="activity-hub.html" class="nav__link">&#128640; Activity Hub</a>
+      <div class="mobile-menu__header">For Counselors</div>
+      <a href="rtcc.html" class="nav__link">&#127891; Road to College &amp; Career</a>
+      <div class="mobile-menu__header">For Students</div>
+      <a href="student-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="career-bridge.html" class="nav__link">&#127919; Career Bridge</a>
+      <a href="future-self.html" class="nav__link">&#128302; Future Self</a>
+    </div>
+  </nav>
+
+  <div class="page-content">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>&#127916;</span>
+          <span>Interactive Prototype</span>
+        </div>
+        <h1>Experience <span>Purpose Engine</span></h1>
+        <p class="hero-subtitle">
+          Choose your path through our AI-powered student motivation platform. 
+          See how we connect academic work to personal purpose&mdash;from the student, teacher, and counselor perspectives.
+        </p>
+      </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="pathways-section">
+      <div class="stats-banner">
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Student Journeys</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Dashboard Views</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">2</div>
+          <div class="stat-label">Live AI Features</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Pillars of Purpose</div>
+        </div>
+      </div>
+
+      <!-- Student Journeys -->
+      <div class="pathway-category">
+        <div class="category-header">
+          <div class="category-icon journeys">&#127891;</div>
+          <div>
+            <div class="category-title">Student Journeys</div>
+            <div class="category-subtitle">Follow real students as Purpose Engine transforms their experience</div>
+          </div>
+        </div>
+
+        <div class="pathway-grid">
+          <a href="ivan-day.html" class="pathway-card yellow featured">
+            <div class="card-content">
+              <div class="card-icon">&#128295;</div>
+              <div class="card-title">Ivan&rsquo;s Day</div>
+              <div class="card-desc">
+                A senior who wants to be an electrician discovers his classmate already has a TDLR card. 
+                Watch Purpose Engine turn panic into a clear action plan&mdash;with AI helping exactly where it matters.
+              </div>
+              <div class="card-tag">&#9889; Recommended Start</div>
+            </div>
+            <div class="card-visual">
+              <div class="visual-header">
+                <div class="visual-avatar">&#128100;</div>
+                <div class="visual-info">
+                  <div class="visual-name">Ivan Rodriguez</div>
+                  <div class="visual-meta">Senior &bull; Goal: Electrician</div>
+                </div>
+              </div>
+              <div class="visual-steps">
+                <div class="visual-step">
+                  <span class="step-icon done">&#10003;</span>
+                  <span>Learn from peer (Michael&rsquo;s TDLR card)</span>
+                </div>
+                <div class="visual-step">
+                  <span class="step-icon ai">&#129302;</span>
+                  <span>AI breaks down requirements</span>
+                </div>
+                <div class="visual-step">
+                  <span class="step-icon ai">&#129302;</span>
+                  <span>AI generates employer call list</span>
+                </div>
+              </div>
+            </div>
+            <span class="card-arrow">&#8594;</span>
+          </a>
+
+          <a href="cyber-pathway.html" class="pathway-card blue">
+            <div class="card-icon">&#128737;</div>
+            <div class="card-title">Marcus&rsquo;s Pathway</div>
+            <div class="card-desc">
+              A junior asks &ldquo;why do I need math?&rdquo; Purpose Engine connects ACT prep to his cybersecurity dreams and Carnegie Mellon goals.
+            </div>
+            <div class="card-tag">&#127919; Advanced Track</div>
+            <span class="card-arrow">&#8594;</span>
+          </a>
+
+          <a href="career-bridge.html" class="pathway-card green">
+            <div class="card-icon">&#127793;</div>
+            <div class="card-title">Maya&rsquo;s Challenge</div>
+            <div class="card-desc">
+              Watch a chemistry assignment transform into an &ldquo;Eco-Material Design Challenge&rdquo;&mdash;same TEKS, completely different motivation.
+            </div>
+            <div class="card-tag">&#127919; Career-Bridge Demo</div>
+            <span class="card-arrow">&#8594;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- For Educators & Counselors -->
+      <div class="pathway-category">
+        <div class="category-header">
+          <div class="category-icon educators">&#128105;&#8205;&#127979;</div>
+          <div>
+            <div class="category-title">For Educators &amp; Counselors</div>
+            <div class="category-subtitle">See how Purpose Engine surfaces insights without adding workload</div>
+          </div>
+        </div>
+
+        <div class="pathway-grid">
+          <a href="educator-dashboard.html" class="pathway-card purple">
+            <div class="card-icon">&#128202;</div>
+            <div class="card-title">Educator Dashboard</div>
+            <div class="card-desc">
+              One screen shows what used to require 4 logins. See alerts, celebration moments, and student context&mdash;all unified.
+            </div>
+            <div class="card-tag">&#128065; Unified View</div>
+            <span class="card-arrow">&#8594;</span>
+          </a>
+
+          <a href="activity-hub.html" class="pathway-card orange">
+            <div class="card-icon">&#128640;</div>
+            <div class="card-title">Activity Hub</div>
+            <div class="card-desc">
+              Start a club, find eligible students, generate funding justification&mdash;all in minutes instead of hours.
+            </div>
+            <div class="card-tag">&#128176; Funding Ready</div>
+            <span class="card-arrow">&#8594;</span>
+          </a>
+
+          <a href="rtcc.html" class="pathway-card blue">
+            <div class="card-icon">&#127891;</div>
+            <div class="card-title">Road to College &amp; Career</div>
+            <div class="card-desc">
+              Counselor view for tracking FAFSA completion, IBC certifications, and college applications across your caseload.
+            </div>
+            <div class="card-tag">&#128203; CCMR Tracking</div>
+            <span class="card-arrow">&#8594;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- For Students -->
+      <div class="pathway-category">
+        <div class="category-header">
+          <div class="category-icon students">&#129489;&#8205;&#127891;</div>
+          <div>
+            <div class="category-title">For Students</div>
+            <div class="category-subtitle">Experience what students see&mdash;including live AI features</div>
+          </div>
+        </div>
+
+        <div class="pathway-grid">
+          <a href="student-dashboard.html" class="pathway-card cyan">
+            <div class="card-icon">&#128202;</div>
+            <div class="card-title">Student Dashboard</div>
+            <div class="card-desc">
+              Your Purpose Profile, upcoming milestones, and personalized recommendations&mdash;all in one place.
+            </div>
+            <div class="card-tag">&#127919; Your Journey</div>
+            <span class="card-arrow">&#8594;</span>
+          </a>
+
+          <a href="future-self.html" class="pathway-card green">
+            <div class="card-icon">&#128302;</div>
+            <div class="card-title">Future Self Chat</div>
+            <div class="card-desc">
+              Talk to your successful 32-year-old self. Get guidance, motivation, and perspective when you need it most.
+            </div>
+            <div class="card-tag live">&#9889; Live AI</div>
+            <span class="card-arrow">&#8594;</span>
+          </a>
+
+          <a href="career-bridge.html" class="pathway-card yellow">
+            <div class="card-icon">&#127919;</div>
+            <div class="card-title">Career-Bridge Challenges</div>
+            <div class="card-desc">
+              See your assignments reframed through your career interests&mdash;same learning objectives, personal relevance.
+            </div>
+            <div class="card-tag live">&#9889; Live AI</div>
+            <span class="card-arrow">&#8594;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="cta-box">
+        <div class="cta-icon">&#127942;</div>
+        <div class="cta-title">Built for the Presidential AI Challenge</div>
+        <p class="cta-subtitle">
+          Purpose Engine addresses Track IIIB&rsquo;s call for AI that creates &ldquo;customized learning plans&rdquo; 
+          and &ldquo;skills report cards&rdquo;&mdash;directly aligned with White House education priorities.
+        </p>
+        <div class="cta-buttons">
+          <a href="aichallenge.html" class="btn btn--yellow">
+            <span>&#128196;</span>
+            <span>Challenge Alignment</span>
+          </a>
+          <a href="americandream.html" class="btn btn--ghost">
+            <span>&#129517;</span>
+            <span>Why This Matters</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Purpose Engine &mdash; An <a href="https://www.uplifteducation.org" target="_blank">Uplift Education</a> Initiative
+    </p>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    
+    document.addEventListener('click', function(e) {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.querySelector('.nav__toggle');
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>
