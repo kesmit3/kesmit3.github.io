@@ -17,20 +17,65 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/variables.css">
+  
   <!-- Shared Styles -->
   <link rel="stylesheet" href="assets/variables.css">
+  
   <style>
     body {
       background: var(--gray-100);
       color: var(--gray-800);
     }
 
+    /* Prototype Banner */
+    .prototype-banner {
+      background: linear-gradient(90deg, var(--navy) 0%, var(--primary-dark) 100%);
+      padding: 8px 20px;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1001;
+    }
+
+    .prototype-banner-content {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: white;
+    }
+
+    .prototype-banner-badge {
+      background: var(--yellow);
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .prototype-banner-text {
+      opacity: 0.9;
+    }
+
+    .prototype-banner-highlight {
+      color: var(--yellow);
+      font-weight: 600;
+    }
+
+    /* Adjust nav position for banner */
+    .nav {
+      top: 32px !important;
+    }
+
     .dashboard {
       max-width: 1200px;
       margin: 0 auto;
       padding: 32px 40px;
-      padding-top: calc(var(--nav-height) + 32px);
+      padding-top: calc(var(--nav-height) + 64px);
     }
 
     /* Header */
@@ -183,6 +228,37 @@
       font-size: 11px;
       font-weight: 600;
       color: var(--success);
+    }
+
+    /* AI Badge */
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(236, 72, 153, 0.1) 100%);
+      color: var(--purple);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* White House Priority Badge */
+    .priority-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: var(--success);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
     }
 
     /* Purpose Themes */
@@ -374,6 +450,9 @@
       font-weight: 700;
       margin-bottom: 12px;
       position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .future-self-card p {
@@ -451,33 +530,37 @@
     }
 
     .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: white;
       border: 1px solid var(--gray-200);
       border-radius: 10px;
       padding: 12px 16px;
-      color: var(--navy);
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 600;
+      color: var(--navy);
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
       transition: all 0.2s ease;
       text-decoration: none;
     }
 
     .action-btn:hover {
-      background: var(--gray-50);
-      transform: translateY(-2px);
+      border-color: var(--primary);
+      color: var(--primary);
     }
 
     .action-btn.primary {
-      background: linear-gradient(135deg, var(--yellow) 0%, #FFB300 100%);
-      border: none;
-      color: var(--navy);
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
     }
 
-    /* Log Experience Modal */
+    .action-btn.primary:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Modal Styles */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -500,20 +583,20 @@
       background: white;
       border-radius: 20px;
       padding: 32px;
-      max-width: 540px;
+      max-width: 500px;
       width: 100%;
+      position: relative;
       max-height: 90vh;
       overflow-y: auto;
-      position: relative;
     }
 
     .modal-close {
       position: absolute;
       top: 16px;
-      right: 20px;
+      right: 16px;
       background: none;
       border: none;
-      font-size: 28px;
+      font-size: 24px;
       color: var(--gray-400);
       cursor: pointer;
     }
@@ -521,40 +604,39 @@
     .modal-textarea {
       width: 100%;
       min-height: 100px;
-      padding: 16px;
       border: 1px solid var(--gray-200);
       border-radius: 12px;
-      font-family: inherit;
+      padding: 16px;
       font-size: 14px;
+      font-family: inherit;
       resize: vertical;
       margin-bottom: 16px;
-      box-sizing: border-box;
-    }
-
-    .modal-textarea:focus {
-      outline: none;
-      border-color: var(--primary);
     }
 
     .modal-submit {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      width: 100%;
+      background: var(--primary);
       color: white;
       border: none;
       border-radius: 10px;
-      padding: 14px 24px;
+      padding: 14px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
-      width: 100%;
     }
 
+    /* AI Response */
     .ai-response {
-      margin-top: 24px;
-      padding-top: 24px;
+      margin-top: 20px;
+      padding-top: 20px;
       border-top: 1px solid var(--gray-100);
     }
 
     .ai-response-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
       font-weight: 600;
       color: var(--navy);
       margin-bottom: 16px;
@@ -563,20 +645,20 @@
     .ai-insight {
       display: flex;
       gap: 12px;
-      padding: 16px;
+      padding: 14px;
       background: var(--gray-50);
       border-radius: 12px;
       margin-bottom: 12px;
     }
 
     .insight-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 16px;
       flex-shrink: 0;
     }
 
@@ -585,72 +667,53 @@
     }
 
     .insight-content strong {
+      display: block;
+      font-size: 13px;
       color: var(--navy);
-      font-size: 14px;
+      margin-bottom: 4px;
     }
 
     .insight-content p {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--gray-500);
-      margin: 4px 0 10px 0;
+      margin-bottom: 8px;
+      line-height: 1.5;
     }
 
     .insight-action {
-      background: white;
-      border: 1px solid var(--primary);
-      color: var(--primary);
+      background: var(--primary);
+      color: white;
+      border: none;
       border-radius: 6px;
       padding: 6px 12px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       cursor: pointer;
     }
 
     .insight-action.added {
       background: var(--success);
-      border-color: var(--success);
-      color: white;
     }
 
-    /* Mobile Responsive */
-    @media (max-width: 1024px) {
-      .dashboard {
-        padding: 24px 32px;
-        padding-top: calc(var(--nav-height) + 24px);
+    /* Responsive */
+    @media (max-width: 900px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 768px) {
       .dashboard {
-        padding: 20px;
-        padding-top: calc(var(--nav-height) + 20px);
+        padding: 24px 20px;
+        padding-top: calc(var(--nav-height) + 56px);
       }
 
       .dashboard-header {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
       }
 
       .points-badge {
-        align-self: flex-start;
-      }
-
-      .dashboard-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .student-name {
-        font-size: 26px;
-      }
-
-      .alert-banner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
-
-      .alert-btn {
-        width: 100%;
         text-align: center;
       }
 
@@ -658,40 +721,14 @@
         grid-template-columns: 1fr;
       }
 
-      .actions-grid {
+      .alert-banner {
         flex-direction: column;
+        align-items: stretch;
+        text-align: center;
       }
 
-      .action-btn {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .modal-content {
-        padding: 24px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .dashboard {
-        padding: 16px;
-        padding-top: calc(var(--nav-height) + 16px);
-      }
-
-      .card {
-        padding: 20px;
-      }
-
-      .student-name {
-        font-size: 22px;
-      }
-
-      .points-badge {
-        padding: 16px 20px;
-      }
-
-      .points-number {
-        font-size: 28px;
+      .alert-icon {
+        margin: 0 auto;
       }
 
       .theme-item {
@@ -707,10 +744,30 @@
       .theme-name {
         font-size: 14px;
       }
+
+      .prototype-banner {
+        padding: 6px 16px;
+      }
+
+      .prototype-banner-content {
+        font-size: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Prototype Banner -->
+  <div class="prototype-banner">
+    <div class="prototype-banner-content">
+      <span class="prototype-banner-badge">Track IIIB</span>
+      <span class="prototype-banner-text">Presidential AI Challenge Prototype &mdash;</span>
+      <span class="prototype-banner-highlight">Skills Report Card</span>
+      <span class="prototype-banner-text">for Students</span>
+    </div>
+  </div>
+
   <!-- Navigation -->
   <nav class="nav nav--light">
     <div class="nav__left">
@@ -720,35 +777,123 @@
         <span class="nav__product">Purpose Engine</span>
       </a>
       <div class="nav__links">
-        <a href="index.html" class="nav__link">&#127968; <span class="nav__link-text">Home</span></a>
-        <a href="aichallenge.html" class="nav__link">&#129302; <span class="nav__link-text">How We Use AI</span></a>
-        <a href="americandream.html" class="nav__link">&#129517; <span class="nav__link-text">Why This Matters</span></a>
+        <a href="aichallenge.html" class="nav__link">&#127942; <span class="nav__link-text">Challenge</span></a>
       </div>
     </div>
     
     <div class="nav__right">
       <div class="nav__links">
-        <a href="student-dashboard.html" class="nav__link nav__link--active">&#128202; <span class="nav__link-text">Student</span></a>
-        <a href="career-bridge.html" class="nav__link">&#127919; <span class="nav__link-text">Career Bridge</span></a>
-        <a href="future-self.html" class="nav__link">&#128302; <span class="nav__link-text">Future Self</span></a>
-        <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; <span class="nav__link-text">Educator</span></a>
-        <a href="demo.html" class="nav__link">&#9658; <span class="nav__link-text">Demo</span></a>
-        <a href="rtcc-demo.html" class="nav__link">&#128176; <span class="nav__link-text">RTCC</span></a>
+        <div class="nav__dropdown">
+          <button class="nav__dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>Demo</span>
+            <span class="nav__dropdown-arrow">&#9660;</span>
+          </button>
+          
+          <div class="nav__mega-menu">
+            <div class="mega-menu__grid">
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">Scholar Journeys</div>
+                <a href="ivan-day.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--yellow">&#128295;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Ivan</div>
+                    <div class="mega-menu__desc">Electrician pathway</div>
+                  </div>
+                </a>
+                <a href="cyber-pathway.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#128737;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Marcus</div>
+                    <div class="mega-menu__desc">Cybersecurity pathway</div>
+                  </div>
+                </a>
+                <a href="career-bridge.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--green">&#127793;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Maya</div>
+                    <div class="mega-menu__desc">Sustainable design pathway</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">For Educators</div>
+                <a href="educator-dashboard.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Dashboard</div>
+                    <div class="mega-menu__desc">Alerts, praise, insights</div>
+                  </div>
+                </a>
+                <a href="activity-hub.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--orange">&#128640;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Activity Hub</div>
+                    <div class="mega-menu__desc">Clubs, funding, eligibility</div>
+                  </div>
+                </a>
+                
+                <div class="mega-menu__header" style="margin-top: 16px;">For Counselors</div>
+                <a href="rtcc.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#127891;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Road to College &amp; Career</div>
+                    <div class="mega-menu__desc">FAFSA, IBCs, applications</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section mega-menu__section--full">
+                <div class="mega-menu__header">For Students</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                  <a href="student-dashboard.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Dashboard</div>
+                      <div class="mega-menu__desc">Your overview</div>
+                    </div>
+                  </a>
+                  <a href="career-bridge.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--green">&#127919;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Career Bridge</div>
+                      <div class="mega-menu__desc">Connect classwork</div>
+                    </div>
+                  </a>
+                  <a href="future-self.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--yellow">&#128302;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Future Self</div>
+                      <div class="mega-menu__desc">Chat with 32-year-old you</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
       </div>
       <span class="nav__pill">&#9889; Demo Mode</span>
     </div>
     
-    <button class="nav__toggle" onclick="toggleNav()">&#9776;</button>
-    <div class="nav__links" id="navLinks">
-      <a href="index.html" class="nav__link">&#127968; <span class="nav__link-text">Home</span></a>
-      <a href="aichallenge.html" class="nav__link">&#129302; <span class="nav__link-text">How We Use AI</span></a>
-      <a href="americandream.html" class="nav__link">&#129517; <span class="nav__link-text">Why This Matters</span></a>
-      <a href="student-dashboard.html" class="nav__link nav__link--active">&#128202; <span class="nav__link-text">Student</span></a>
-      <a href="career-bridge.html" class="nav__link">&#127919; <span class="nav__link-text">Career Bridge</span></a>
-      <a href="future-self.html" class="nav__link">&#128302; <span class="nav__link-text">Future Self</span></a>
-      <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; <span class="nav__link-text">Educator</span></a>
-      <a href="demo.html" class="nav__link">&#9658; <span class="nav__link-text">Demo</span></a>
-      <a href="rtcc-demo.html" class="nav__link">&#128176; <span class="nav__link-text">RTCC</span></a>
+    <button class="nav__toggle" onclick="toggleNav()" aria-label="Toggle menu">&#9776;</button>
+    <div id="navLinks">
+      <a href="aichallenge.html" class="nav__link">&#127942; Challenge</a>
+      <div class="mobile-menu__header">Scholar Journeys</div>
+      <a href="ivan-day.html" class="nav__link">&#128295; Ivan (Electrician)</a>
+      <a href="cyber-pathway.html" class="nav__link">&#128737; Marcus (Cybersecurity)</a>
+      <a href="career-bridge.html" class="nav__link">&#127793; Maya (Sustainable Design)</a>
+      <div class="mobile-menu__header">For Educators</div>
+      <a href="educator-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="activity-hub.html" class="nav__link">&#128640; Activity Hub</a>
+      <div class="mobile-menu__header">For Counselors</div>
+      <a href="rtcc.html" class="nav__link">&#127891; Road to College &amp; Career</a>
+      <div class="mobile-menu__header">For Students</div>
+      <a href="student-dashboard.html" class="nav__link nav__link--active">&#128202; Dashboard</a>
+      <a href="career-bridge.html" class="nav__link">&#127919; Career Bridge</a>
+      <a href="future-self.html" class="nav__link">&#128302; Future Self</a>
     </div>
   </nav>
 
@@ -780,13 +925,21 @@
     <div class="dashboard-grid">
       <!-- Left Column -->
       <div class="dashboard-column">
-        <!-- Purpose Card -->
+        <!-- Skills Report Card (Purpose Card) -->
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">Your Purpose Card</h2>
-            <div class="card-badge">
-              <span>&#127919;</span>
-              <span>from Schoolinks</span>
+            <div>
+              <h2 class="card-title">Your Skills Report Card</h2>
+              <div style="margin-top: 6px;">
+                <span class="priority-badge">&#10003; White House Priority</span>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div class="ai-badge">&#10024; AI-Powered</div>
+              <div class="card-badge" style="margin-top: 6px;">
+                <span>&#127919;</span>
+                <span>from Schoolinks</span>
+              </div>
             </div>
           </div>
           
@@ -848,7 +1001,10 @@
 
         <!-- Recent Wins -->
         <div class="card">
-          <h2 class="card-title" style="margin-bottom: 16px;">Recent Wins &#127881;</h2>
+          <div class="card-header" style="margin-bottom: 16px;">
+            <h2 class="card-title">Recent Wins &#127881;</h2>
+            <span class="ai-badge">&#10024; AI Detected</span>
+          </div>
           
           <div class="win-item">
             <div class="win-points">+3</div>
@@ -880,7 +1036,10 @@
       <div class="dashboard-column">
         <!-- Future Self Access -->
         <div class="future-self-card">
-          <h2>Talk to Your Future Self</h2>
+          <h2>
+            Talk to Your Future Self
+            <span class="ai-badge" style="background: rgba(255,255,255,0.2); color: white;">&#10024; AI</span>
+          </h2>
           <p>Get advice from the successful version of you, 10 years from now&mdash;a Sustainable Design Director.</p>
           <a href="future-self.html" class="future-self-btn">
             <span>Start Conversation</span>
@@ -892,6 +1051,7 @@
         <div class="card">
           <div class="card-header" style="margin-bottom: 8px;">
             <h2 class="card-title">Your Journey</h2>
+            <span class="ai-badge">&#10024; AI Tracked</span>
           </div>
           <p style="font-size: 13px; color: var(--gray-500); margin-bottom: 16px;">Purpose Points earned each year&mdash;tracking how you connect learning to your goals</p>
           <div class="journey-chart">
@@ -960,8 +1120,8 @@
   <div class="modal-overlay" id="logModal" onclick="closeLogModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeLogModal()">&times;</button>
-      <h2 style="margin-bottom: 8px; color: var(--navy);">What's on your mind?</h2>
-      <p style="font-size: 13px; color: var(--gray-500); margin-bottom: 16px;">Share what's happening &mdash; I'll help connect it to your goals.</p>
+      <h2 style="margin-bottom: 8px; color: var(--navy);">What&rsquo;s on your mind?</h2>
+      <p style="font-size: 13px; color: var(--gray-500); margin-bottom: 16px;">Share what&rsquo;s happening &mdash; I&rsquo;ll help connect it to your goals.</p>
       
       <textarea id="experienceInput" class="modal-textarea" placeholder="Example: I babysat my little brother last night, have soccer after school, and heard about the tech expo..."></textarea>
       
@@ -969,13 +1129,13 @@
       
       <div id="aiResponse" class="ai-response" style="display: none;">
         <div class="ai-response-header">
-          <span>&#10024;</span> Here's what I noticed:
+          <span>&#10024;</span> Here&rsquo;s what I noticed:
         </div>
         <div class="ai-insight">
           <div class="insight-icon" style="background: rgba(232, 107, 107, 0.15);">&#128118;</div>
           <div class="insight-content">
             <strong>Babysitting &rarr; Leadership &amp; Responsibility</strong>
-            <p>This shows reliability and care &mdash; great for your resume under "Experience." Want me to add it?</p>
+            <p>This shows reliability and care &mdash; great for your resume under &ldquo;Experience.&rdquo; Want me to add it?</p>
             <button class="insight-action">+ Add to Resume</button>
           </div>
         </div>
@@ -983,7 +1143,7 @@
           <div class="insight-icon" style="background: rgba(76, 175, 80, 0.15);">&#9917;</div>
           <div class="insight-content">
             <strong>Soccer &rarr; Teamwork &amp; Discipline</strong>
-            <p>Athletics builds collaboration skills. I'll log this to your activity profile.</p>
+            <p>Athletics builds collaboration skills. I&rsquo;ll log this to your activity profile.</p>
             <button class="insight-action added">&#10003; Logged to Profile</button>
           </div>
         </div>
@@ -991,7 +1151,7 @@
           <div class="insight-icon" style="background: rgba(0, 103, 177, 0.15);">&#128300;</div>
           <div class="insight-content">
             <strong>Tech Expo &rarr; March 15th in Schoolinks</strong>
-            <p>This aligns with your Creative Technology interest! I've flagged you as interested and notified Ms. Rodriguez.</p>
+            <p>This aligns with your Creative Technology interest! I&rsquo;ve flagged you as interested and notified Ms. Rodriguez.</p>
             <button class="insight-action">&#128197; Add to Calendar</button>
           </div>
         </div>
@@ -1027,7 +1187,7 @@
 
     function processExperience() {
       document.getElementById('aiResponse').style.display = 'block';
-      document.getElementById('submitBtn').textContent = '&#10003; Processed';
+      document.getElementById('submitBtn').innerHTML = '&#10003; Processed';
     }
   </script>
 </body>

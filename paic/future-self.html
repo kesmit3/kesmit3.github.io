@@ -6,7 +6,7 @@
   <title>Future Self | Purpose Engine Demo</title>
   
   <!-- Favicon and Social Sharing -->
-  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png">
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png?v=2">
   <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png">
   <meta property="og:title" content="Future Self | Purpose Engine">
   <meta property="og:description" content="Talk to your AI-powered Future Self. See how your schoolwork connects to your dreams.">
@@ -17,76 +17,84 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Shared Styles -->
-  <link rel="stylesheet" href="assets/variables.css">
+  <link rel="stylesheet" href="variables.css">
+  
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
     body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      background: var(--gray-50);
+      color: var(--gray-800);
+    }
+
+    /* Page Layout */
+    .future-self-page {
       min-height: 100vh;
-      color: #1e293b;
+      padding-top: var(--nav-height);
     }
 
-    /* Header */
-    .header {
-      background: white;
-      padding: 16px 32px;
-      display: flex;
+    /* Hero Banner */
+    .page-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #0a1018 100%);
+      padding: 48px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(ellipse at 30% 50%, rgba(0, 103, 177, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .page-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .page-hero-badge {
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #e2e8f0;
+      gap: 8px;
+      background: rgba(255, 196, 37, 0.15);
+      border: 1px solid rgba(255, 196, 37, 0.3);
+      color: var(--yellow);
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
     }
 
-    .logo-img { height: 40px; }
-
-    .logo-divider {
-      width: 1px;
-      height: 24px;
-      background: #e2e8f0;
-      margin: 0 4px;
+    .page-hero h1 {
+      font-size: 36px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 12px;
+      line-height: 1.2;
     }
 
-    .logo-product {
-      font-weight: 600;
-      color: #1B5A90;
+    .page-hero h1 span {
+      background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-hero p {
       font-size: 16px;
-    }
-
-    .header-subtitle {
-      color: #64748b;
-      font-size: 14px;
-    }
-
-    .header-nav {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .home-link {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: #1B5A90;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 8px 14px;
-      border-radius: 8px;
-      transition: all 0.2s ease;
-    }
-
-    .home-link:hover { background: #f1f5f9; }
-
-    .logo-link {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
+      color: var(--gray-400);
+      line-height: 1.6;
     }
 
     /* Step Indicator */
@@ -94,30 +102,33 @@
       display: flex;
       justify-content: center;
       gap: 8px;
-      padding: 24px;
+      padding: 32px 24px;
+      background: var(--gray-50);
     }
 
     .step-dot {
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: #cbd5e1;
+      background: var(--gray-300);
       transition: all 0.3s ease;
     }
 
     .step-dot.active {
-      background: #1B5A90;
+      background: var(--primary);
       width: 32px;
       border-radius: 5px;
     }
 
-    .step-dot.done { background: #F7B618; }
+    .step-dot.done { 
+      background: var(--yellow); 
+    }
 
     /* Screens Container */
     .screens {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 0 24px 48px;
+      padding: 0 24px 64px;
     }
 
     .screen {
@@ -134,30 +145,30 @@
 
     /* Demo Banner */
     .demo-banner {
-      background: linear-gradient(135deg, #FEF9E7 0%, #FCF3CF 100%);
-      border: 1px solid #F7B618;
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 24px;
+      background: linear-gradient(135deg, rgba(255, 196, 37, 0.1) 0%, rgba(255, 196, 37, 0.05) 100%);
+      border: 1px solid rgba(255, 196, 37, 0.3);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
       text-align: center;
     }
 
     .demo-badge {
       display: inline-block;
-      background: linear-gradient(135deg, #1B5A90 0%, #14456e 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: white;
       font-size: 11px;
       font-weight: 700;
-      padding: 4px 12px;
+      padding: 6px 14px;
       border-radius: 20px;
       letter-spacing: 0.5px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .demo-banner p {
       font-size: 14px;
-      color: #92600e;
-      line-height: 1.5;
+      color: var(--gray-600);
+      line-height: 1.6;
       margin: 0;
     }
 
@@ -165,68 +176,69 @@
       text-align: center;
       margin-bottom: 8px;
       font-size: 28px;
-      font-weight: 700;
-      color: #0f172a;
+      font-weight: 800;
+      color: var(--navy);
     }
 
     .screen-subtitle {
       text-align: center;
-      color: #64748b;
+      color: var(--gray-500);
       margin-bottom: 32px;
       font-size: 16px;
     }
 
+    /* Profile Grid */
     .profiles-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 16px;
     }
 
     .profile-card {
       background: white;
       border-radius: 16px;
-      padding: 20px;
+      padding: 24px 20px;
       text-align: center;
       cursor: pointer;
       border: 2px solid transparent;
       transition: all 0.2s ease;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      box-shadow: var(--card-shadow);
     }
 
     .profile-card:hover {
-      border-color: #1B5A90;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(27,90,144,0.12);
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: var(--card-shadow-lg);
     }
 
     .profile-card.selected {
-      border-color: #1B5A90;
-      background: linear-gradient(135deg, rgba(27,90,144,0.04) 0%, rgba(27,90,144,0.08) 100%);
+      border-color: var(--primary);
+      background: linear-gradient(135deg, rgba(0, 103, 177, 0.04) 0%, rgba(0, 103, 177, 0.08) 100%);
     }
 
     .profile-avatar {
       width: 64px;
       height: 64px;
       border-radius: 50%;
-      margin: 0 auto 12px;
+      margin: 0 auto 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 700;
       color: white;
     }
 
     .profile-name {
-      font-weight: 600;
+      font-weight: 700;
       font-size: 15px;
       margin-bottom: 4px;
-      color: #0f172a;
+      color: var(--navy);
     }
 
     .profile-meta {
       font-size: 12px;
-      color: #64748b;
+      color: var(--gray-500);
     }
 
     /* Screen 2: Set Your Goal */
@@ -236,7 +248,7 @@
       padding: 48px;
       max-width: 560px;
       margin: 0 auto;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      box-shadow: var(--card-shadow-lg);
     }
 
     .selected-profile {
@@ -244,7 +256,7 @@
       align-items: center;
       gap: 16px;
       padding: 16px;
-      background: #f8fafc;
+      background: var(--gray-50);
       border-radius: 12px;
       margin-bottom: 32px;
     }
@@ -257,29 +269,34 @@
     }
 
     .selected-profile .info { flex: 1; }
-    .selected-profile .name { font-weight: 600; font-size: 16px; }
-    .selected-profile .meta { font-size: 13px; color: #64748b; }
+    .selected-profile .name { font-weight: 700; font-size: 16px; color: var(--navy); }
+    .selected-profile .meta { font-size: 13px; color: var(--gray-500); }
 
     .change-btn {
       font-size: 13px;
-      color: #1B5A90;
+      color: var(--primary);
       background: none;
       border: none;
       cursor: pointer;
-      font-weight: 500;
+      font-weight: 600;
+      font-family: inherit;
+    }
+
+    .change-btn:hover {
+      text-decoration: underline;
     }
 
     .goal-prompt {
       font-size: 20px;
-      font-weight: 600;
-      color: #0f172a;
+      font-weight: 700;
+      color: var(--navy);
       margin-bottom: 16px;
     }
 
     .goal-input {
       width: 100%;
       padding: 16px 20px;
-      border: 2px solid #e2e8f0;
+      border: 2px solid var(--gray-200);
       border-radius: 12px;
       font-size: 16px;
       font-family: inherit;
@@ -289,7 +306,7 @@
 
     .goal-input:focus {
       outline: none;
-      border-color: #1B5A90;
+      border-color: var(--primary);
     }
 
     .goal-suggestions {
@@ -301,18 +318,20 @@
 
     .suggestion-chip {
       padding: 8px 14px;
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
       border-radius: 20px;
       font-size: 13px;
-      color: #475569;
+      color: var(--gray-600);
       cursor: pointer;
       transition: all 0.15s ease;
+      font-family: inherit;
     }
 
     .suggestion-chip:hover {
-      background: #e2e8f0;
-      border-color: #cbd5e1;
+      background: var(--gray-200);
+      border-color: var(--primary);
+      color: var(--primary);
     }
 
     /* Screen 3: Conversation */
@@ -320,17 +339,17 @@
       background: white;
       border-radius: 24px;
       overflow: hidden;
-      max-width: 640px;
+      max-width: 700px;
       margin: 0 auto;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      box-shadow: var(--card-shadow-lg);
       display: flex;
       flex-direction: column;
-      height: 600px;
+      height: 650px;
     }
 
     .chat-header {
-      padding: 20px 24px;
-      background: linear-gradient(135deg, #1B5A90 0%, #14456e 100%);
+      padding: 24px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: white;
       display: flex;
       align-items: center;
@@ -357,19 +376,25 @@
       font-size: 16px;
     }
 
-    .future-info .name { font-weight: 600; font-size: 17px; }
-    .future-info .role { font-size: 13px; opacity: 0.85; }
+    .future-info .name { font-weight: 700; font-size: 18px; }
+    .future-info .role { font-size: 14px; opacity: 0.9; }
 
     .back-btn {
       margin-left: auto;
       background: rgba(255,255,255,0.15);
       border: none;
       color: white;
-      padding: 8px 14px;
-      border-radius: 8px;
+      padding: 10px 16px;
+      border-radius: 10px;
       font-size: 13px;
       cursor: pointer;
-      font-weight: 500;
+      font-weight: 600;
+      font-family: inherit;
+      transition: background 0.2s ease;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.25);
     }
 
     .chat-messages {
@@ -379,7 +404,7 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
-      background: #fafbfc;
+      background: var(--gray-50);
     }
 
     .message {
@@ -404,21 +429,21 @@
 
     .message.future .message-bubble {
       background: white;
-      color: #1e293b;
-      border: 1px solid #e2e8f0;
+      color: var(--gray-800);
+      border: 1px solid var(--gray-200);
       border-bottom-left-radius: 4px;
     }
 
     .message.student .message-bubble {
-      background: linear-gradient(135deg, #1B5A90 0%, #2563eb 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: white;
       border-bottom-right-radius: 4px;
     }
 
     .message-time {
       font-size: 11px;
-      color: #94a3b8;
-      margin-top: 4px;
+      color: var(--gray-400);
+      margin-top: 6px;
       padding: 0 4px;
     }
 
@@ -432,7 +457,7 @@
     .typing-dots span {
       width: 8px;
       height: 8px;
-      background: #94a3b8;
+      background: var(--gray-400);
       border-radius: 50%;
       animation: bounce 1.4s infinite ease-in-out;
     }
@@ -447,26 +472,26 @@
     }
 
     .chat-input-area {
-      padding: 16px 20px;
+      padding: 20px 24px;
       background: white;
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid var(--gray-200);
     }
 
     .quick-prompts {
       display: flex;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       overflow-x: auto;
       padding-bottom: 4px;
     }
 
     .quick-prompt {
-      padding: 8px 14px;
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
+      padding: 10px 16px;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      border-radius: 20px;
       font-size: 13px;
-      color: #475569;
+      color: var(--gray-600);
       cursor: pointer;
       white-space: nowrap;
       transition: all 0.15s ease;
@@ -474,9 +499,9 @@
     }
 
     .quick-prompt:hover {
-      background: #e2e8f0;
-      border-color: #1B5A90;
-      color: #1B5A90;
+      background: var(--gray-200);
+      border-color: var(--primary);
+      color: var(--primary);
     }
 
     .quick-prompt:disabled {
@@ -488,8 +513,8 @@
 
     .chat-input {
       flex: 1;
-      padding: 14px 18px;
-      border: 2px solid #e2e8f0;
+      padding: 14px 20px;
+      border: 2px solid var(--gray-200);
       border-radius: 24px;
       font-size: 15px;
       font-family: inherit;
@@ -498,26 +523,30 @@
 
     .chat-input:focus {
       outline: none;
-      border-color: #1B5A90;
+      border-color: var(--primary);
     }
 
-    .chat-input:disabled { background: #f8fafc; }
+    .chat-input:disabled { background: var(--gray-50); }
 
     .send-btn {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, #1B5A90 0%, #14456e 100%);
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       border: none;
       border-radius: 50%;
       color: white;
       font-size: 18px;
       cursor: pointer;
-      transition: transform 0.15s ease;
+      transition: all 0.15s ease;
     }
 
-    .send-btn:hover { transform: scale(1.05); }
+    .send-btn:hover { 
+      transform: scale(1.05); 
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
     .send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
+    /* Buttons */
     .btn {
       padding: 14px 28px;
       border-radius: 12px;
@@ -530,13 +559,13 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #1B5A90 0%, #14456e 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: white;
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(27,90,144,0.3);
+      box-shadow: 0 4px 16px var(--primary-glow);
     }
 
     .btn-primary:disabled {
@@ -547,8 +576,12 @@
 
     .btn-secondary {
       background: white;
-      color: #475569;
-      border: 1px solid #e2e8f0;
+      color: var(--gray-600);
+      border: 1px solid var(--gray-200);
+    }
+
+    .btn-secondary:hover {
+      background: var(--gray-50);
     }
 
     .btn-row {
@@ -558,13 +591,96 @@
       margin-top: 32px;
     }
 
-    @media (max-width: 640px) {
-      .header { padding: 12px 16px; }
-      .profiles-grid { grid-template-columns: repeat(2, 1fr); }
-      .goal-container { padding: 32px 24px; }
-      .chat-container { height: calc(100vh - 180px); border-radius: 16px; }
-      .screen-title { font-size: 24px; }
-      .screens { padding: 0 16px 32px; }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 32px;
+      background: var(--gray-100);
+      border-top: 1px solid var(--gray-200);
+    }
+
+    footer p {
+      color: var(--gray-500);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-hero {
+        padding: 32px 20px;
+      }
+
+      .page-hero h1 {
+        font-size: 28px;
+      }
+
+      .profiles-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+      }
+
+      .goal-container { 
+        padding: 32px 24px; 
+      }
+
+      .chat-container { 
+        height: calc(100vh - 200px); 
+        border-radius: 16px; 
+      }
+
+      .screen-title { 
+        font-size: 24px; 
+      }
+
+      .screens { 
+        padding: 0 16px 32px; 
+      }
+
+      .steps {
+        padding: 24px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profiles-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .profile-card {
+        padding: 16px 12px;
+      }
+
+      .profile-avatar {
+        width: 48px;
+        height: 48px;
+        font-size: 18px;
+      }
+
+      .chat-header {
+        padding: 16px;
+      }
+
+      .chat-input-area {
+        padding: 16px;
+      }
+
+      .quick-prompts {
+        gap: 6px;
+      }
+
+      .quick-prompt {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
     }
   </style>
 </head>
@@ -574,192 +690,296 @@
   <nav class="nav nav--light">
     <div class="nav__left">
       <a href="index.html" class="nav__logo">
-        <img src="https://kesmit3.github.io/paic/upliftlogo.png" alt="Uplift Education" class="nav__logo-img">
+        <img src="https://kesmit3.github.io/paic/upliftlogo.png" class="nav__logo-img" alt="Uplift Education">
         <div class="nav__divider"></div>
         <span class="nav__product">Purpose Engine</span>
       </a>
       <div class="nav__links">
-        <a href="index.html" class="nav__link">&#127968; Home</a>
-        <a href="aichallenge.html" class="nav__link">&#129302; How We Use AI</a>
-        <a href="americandream.html" class="nav__link">&#129517; Why This Matters</a>
+        <a href="aichallenge.html" class="nav__link">&#127942; <span class="nav__link-text">Challenge</span></a>
       </div>
     </div>
     
     <div class="nav__right">
       <div class="nav__links">
-        <a href="student-dashboard.html" class="nav__link">&#128202; Student</a>
-        <a href="career-bridge.html" class="nav__link">&#127919; Career Bridge</a>
-        <a href="future-self.html" class="nav__link nav__link--active">&#128302; Future Self</a>
-        <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; Educator</a>
-        <a href="demo.html" class="nav__link">&#9658; Demo</a>
-        <a href="rtcc-demo.html" class="nav__link">&#128176; RTCC</a>
+        <div class="nav__dropdown">
+          <button class="nav__dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>Demo</span>
+            <span class="nav__dropdown-arrow">&#9660;</span>
+          </button>
+          
+          <div class="nav__mega-menu">
+            <div class="mega-menu__grid">
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">Scholar Journeys</div>
+                <a href="ivan-day.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--yellow">&#128295;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Ivan</div>
+                    <div class="mega-menu__desc">Electrician pathway</div>
+                  </div>
+                </a>
+                <a href="cyber-pathway.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#128737;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Marcus</div>
+                    <div class="mega-menu__desc">Cybersecurity pathway</div>
+                  </div>
+                </a>
+                <a href="career-bridge.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--green">&#127793;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Maya</div>
+                    <div class="mega-menu__desc">Sustainable design pathway</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">For Educators</div>
+                <a href="educator-dashboard.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Dashboard</div>
+                    <div class="mega-menu__desc">Alerts, praise, insights</div>
+                  </div>
+                </a>
+                <a href="activity-hub.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--orange">&#128640;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Activity Hub</div>
+                    <div class="mega-menu__desc">Clubs, funding, eligibility</div>
+                  </div>
+                </a>
+                
+                <div class="mega-menu__header" style="margin-top: 16px;">For Counselors</div>
+                <a href="rtcc.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#127891;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Road to College &amp; Career</div>
+                    <div class="mega-menu__desc">FAFSA, IBCs, applications</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section mega-menu__section--full">
+                <div class="mega-menu__header">For Students</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                  <a href="student-dashboard.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Dashboard</div>
+                      <div class="mega-menu__desc">Your overview</div>
+                    </div>
+                  </a>
+                  <a href="career-bridge.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--green">&#127919;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Career Bridge</div>
+                      <div class="mega-menu__desc">Connect classwork</div>
+                    </div>
+                  </a>
+                  <a href="future-self.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--yellow">&#128302;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Future Self</div>
+                      <div class="mega-menu__desc">Chat with 32-year-old you</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
       </div>
-      <span class="nav__pill">&#9889; Demo Mode</span>
     </div>
     
-    <button class="nav__toggle" onclick="toggleNav()">&#9776;</button>
-    <div class="nav__mobile" id="navLinks">
-      <div class="nav__group-label">Explainer</div>
-      <a href="index.html" class="nav__link">&#127968; Home</a>
-      <a href="aichallenge.html" class="nav__link">&#129302; How We Use AI</a>
-      <a href="americandream.html" class="nav__link">&#129517; Why This Matters</a>
-      <div class="nav__group-label" style="margin-top: 12px;">Demo</div>
-      <a href="student-dashboard.html" class="nav__link">&#128202; Student</a>
+    <button class="nav__toggle" onclick="toggleNav()" aria-label="Toggle menu">&#9776;</button>
+    <div id="navLinks">
+      <a href="aichallenge.html" class="nav__link">&#127942; Challenge</a>
+      <div class="mobile-menu__header">Scholar Journeys</div>
+      <a href="ivan-day.html" class="nav__link">&#128295; Ivan (Electrician)</a>
+      <a href="cyber-pathway.html" class="nav__link">&#128737; Marcus (Cybersecurity)</a>
+      <a href="career-bridge.html" class="nav__link">&#127793; Maya (Sustainable Design)</a>
+      <div class="mobile-menu__header">For Educators</div>
+      <a href="educator-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="activity-hub.html" class="nav__link">&#128640; Activity Hub</a>
+      <div class="mobile-menu__header">For Counselors</div>
+      <a href="rtcc.html" class="nav__link">&#127891; Road to College &amp; Career</a>
+      <div class="mobile-menu__header">For Students</div>
+      <a href="student-dashboard.html" class="nav__link">&#128202; Dashboard</a>
       <a href="career-bridge.html" class="nav__link">&#127919; Career Bridge</a>
       <a href="future-self.html" class="nav__link nav__link--active">&#128302; Future Self</a>
-      <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; Educator</a>
-      <a href="demo.html" class="nav__link">&#9658; Demo</a>
-      <a href="rtcc-demo.html" class="nav__link">&#128176; RTCC</a>
     </div>
   </nav>
 
-  <!-- Step Indicator -->
-  <div class="steps">
-    <div class="step-dot active" id="dot1"></div>
-    <div class="step-dot" id="dot2"></div>
-    <div class="step-dot" id="dot3"></div>
+  <div class="future-self-page">
+    <!-- Hero Banner -->
+    <section class="page-hero">
+      <div class="page-hero-content">
+        <div class="page-hero-badge">
+          <span>&#128302;</span>
+          <span>Future Self AI</span>
+        </div>
+        <h1>Talk to Your <span>Future Self</span></h1>
+        <p>What if you could ask your successful 32-year-old self for advice? This AI creates a personalized mentor based on your goals&mdash;helping you see why today&rsquo;s work matters.</p>
+      </div>
+    </section>
+
+    <!-- Step Indicator -->
+    <div class="steps">
+      <div class="step-dot active" id="dot1"></div>
+      <div class="step-dot" id="dot2"></div>
+      <div class="step-dot" id="dot3"></div>
+    </div>
+
+    <div class="screens">
+
+      <!-- Screen 1: Choose Profile -->
+      <div class="screen active" id="screen1">
+        <div class="demo-banner">
+          <span class="demo-badge">&#10024; INTERACTIVE DEMO</span>
+          <p>This demo uses fictional student personas to show how the Purpose Engine works.<br>Select a character to step into their shoes and talk to their AI-powered Future Self.</p>
+        </div>
+
+        <h1 class="screen-title">Step Into Their Shoes</h1>
+        <p class="screen-subtitle">Choose a fictional student persona to experience the Future Self AI</p>
+
+        <div class="profiles-grid">
+          <div class="profile-card" onclick="selectProfile(this, 'Maya Chen', '11th Grade &bull; Eco-architecture', '#0067b1', 'MC')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #0067b1, #004b85)">MC</div>
+            <div class="profile-name">Maya Chen</div>
+            <div class="profile-meta">11th Grade &bull; Eco-architecture</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Jordan Williams', '12th Grade &bull; Tech startups', '#8b5cf6', 'JW')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9)">JW</div>
+            <div class="profile-name">Jordan Williams</div>
+            <div class="profile-meta">12th Grade &bull; Tech startups</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Marcus Rivera', '9th Grade &bull; Music production', '#f59e0b', 'MR')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706)">MR</div>
+            <div class="profile-name">Marcus Rivera</div>
+            <div class="profile-meta">9th Grade &bull; Music production</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Sarah Kim', '11th Grade &bull; Pediatric surgery', '#10b981', 'SK')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #10b981, #059669)">SK</div>
+            <div class="profile-name">Sarah Kim</div>
+            <div class="profile-meta">11th Grade &bull; Pediatric surgery</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Tyler Brooks', '10th Grade &bull; Game design', '#64748b', 'TB')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #64748b, #475569)">TB</div>
+            <div class="profile-name">Tyler Brooks</div>
+            <div class="profile-meta">10th Grade &bull; Game design</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Aisha Patel', '12th Grade &bull; Data science', '#ec4899', 'AP')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #ec4899, #db2777)">AP</div>
+            <div class="profile-name">Aisha Patel</div>
+            <div class="profile-meta">12th Grade &bull; Data science</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Ethan O\'Brien', '11th Grade &bull; Construction mgmt', '#0891b2', 'EO')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #0891b2, #0e7490)">EO</div>
+            <div class="profile-name">Ethan O'Brien</div>
+            <div class="profile-meta">11th Grade &bull; Construction</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Priya Sharma', '10th Grade &bull; Veterinary medicine', '#84cc16', 'PS')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #84cc16, #65a30d)">PS</div>
+            <div class="profile-name">Priya Sharma</div>
+            <div class="profile-meta">10th Grade &bull; Veterinary</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Chris Taylor', '9th Grade &bull; App development', '#f43f5e', 'CT')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #f43f5e, #e11d48)">CT</div>
+            <div class="profile-name">Chris Taylor</div>
+            <div class="profile-meta">9th Grade &bull; App development</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Nina Rodriguez', '12th Grade &bull; Professional dance', '#a855f7', 'NR')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #a855f7, #9333ea)">NR</div>
+            <div class="profile-name">Nina Rodriguez</div>
+            <div class="profile-meta">12th Grade &bull; Dance</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Marcus Day', '11th Grade &bull; Electrician apprenticeship', '#f59e0b', 'MD')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706)">MD</div>
+            <div class="profile-name">Marcus Day</div>
+            <div class="profile-meta">11th Grade &bull; Electrician</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Ivan Rodriguez', '12th Grade &bull; Cybersecurity (SOC)', '#10b981', 'IR')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #10b981, #059669)">IR</div>
+            <div class="profile-name">Ivan Rodriguez</div>
+            <div class="profile-meta">12th Grade &bull; Cybersecurity</div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" id="nextBtn1" disabled onclick="goToScreen(2)">Continue &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Screen 2: Set Your Goal -->
+      <div class="screen" id="screen2">
+        <div class="goal-container">
+          <div class="selected-profile">
+            <div class="profile-avatar" id="selectedAvatar" style="background: linear-gradient(135deg, #0067b1, #004b85)">MC</div>
+            <div class="info">
+              <div class="name" id="selectedName">Maya Chen</div>
+              <div class="meta" id="selectedMeta">11th Grade &bull; Eco-architecture</div>
+            </div>
+            <button class="change-btn" onclick="goToScreen(1)">Change</button>
+          </div>
+
+          <div class="goal-prompt">As this student, what&rsquo;s your dream?</div>
+          <input type="text" class="goal-input" id="goalInput" placeholder="e.g., A sustainable architect who designs eco-friendly buildings" oninput="checkGoal()">
+
+          <div class="goal-suggestions">
+            <span class="suggestion-chip" onclick="setGoal('A sustainable architect who designs eco-friendly buildings')">&#127959; Architect</span>
+            <span class="suggestion-chip" onclick="setGoal('A Grammy-winning music producer')">&#127925; Producer</span>
+            <span class="suggestion-chip" onclick="setGoal('A pediatric surgeon who helps sick children')">&#129657; Doctor</span>
+            <span class="suggestion-chip" onclick="setGoal('A video game designer at a major studio')">&#127918; Game Dev</span>
+            <span class="suggestion-chip" onclick="setGoal('A tech startup founder')">&#128640; Founder</span>
+            <span class="suggestion-chip" onclick="setGoal('A data scientist fighting for social justice')">&#128202; Data Scientist</span>
+          </div>
+
+          <div class="btn-row" style="margin-top: 16px;">
+            <button class="btn btn-secondary" onclick="goToScreen(1)">&larr; Back</button>
+            <button class="btn btn-primary" id="nextBtn2" disabled onclick="startChat()">Meet Your Future Self &rarr;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen 3: Conversation -->
+      <div class="screen" id="screen3">
+        <div class="chat-container">
+          <div class="chat-header">
+            <div class="future-avatar">&#128100;</div>
+            <div class="future-info">
+              <div class="name" id="futureName">Maya Chen, age 32</div>
+              <div class="role" id="futureRole">Sustainable Design Director</div>
+            </div>
+            <button class="back-btn" onclick="goToScreen(2)">&#9998; Edit Goal</button>
+          </div>
+
+          <div class="chat-messages" id="chatMessages"></div>
+
+          <div class="chat-input-area">
+            <div class="quick-prompts" id="quickPrompts">
+              <button class="quick-prompt" onclick="sendMessage('chemistry')">Why do I need chemistry?</button>
+              <button class="quick-prompt" onclick="sendMessage('giveup')">Did you ever want to give up?</button>
+              <button class="quick-prompt" onclick="sendMessage('focus')">What should I focus on?</button>
+            </div>
+            <div class="input-row">
+              <input type="text" class="chat-input" id="chatInput" placeholder="Ask your Future Self anything..." onkeypress="handleKeyPress(event)">
+              <button class="send-btn" id="sendBtn" onclick="sendCustomMessage()">&rarr;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="screens">
-
-    <!-- Screen 1: Choose Profile -->
-    <div class="screen active" id="screen1">
-      <div class="demo-banner">
-        <span class="demo-badge">&#10024; INTERACTIVE DEMO</span>
-        <p>This demo uses fictional student personas to show how the Purpose Engine works.<br>Select a character to step into their shoes and talk to their AI-powered Future Self.</p>
-      </div>
-
-      <h1 class="screen-title">Step Into Their Shoes</h1>
-      <p class="screen-subtitle">Choose a fictional student persona to experience the Future Self AI</p>
-
-      <div class="profiles-grid">
-        <div class="profile-card" onclick="selectProfile(this, 'Maya Chen', '11th Grade &bull; Eco-architecture', '#1B5A90', 'MC')">
-          <div class="profile-avatar" style="background: linear-gradient(135deg, #1B5A90, #14456e)">MC</div>
-          <div class="profile-name">Maya Chen</div>
-          <div class="profile-meta">11th Grade &bull; Eco-architecture</div>
-        </div>
-        <div class="profile-card" onclick="selectProfile(this, 'Jordan Williams', '12th Grade &bull; Tech startups', '#8b5cf6', 'JW')">
-          <div class="profile-avatar" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9)">JW</div>
-          <div class="profile-name">Jordan Williams</div>
-          <div class="profile-meta">12th Grade &bull; Tech startups</div>
-        </div>
-        <div class="profile-card" onclick="selectProfile(this, 'Marcus Rivera', '9th Grade &bull; Music production', '#f59e0b', 'MR')">
-          <div class="profile-avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706)">MR</div>
-          <div class="profile-name">Marcus Rivera</div>
-          <div class="profile-meta">9th Grade &bull; Music production</div>
-        </div>
-        <div class="profile-card" onclick="selectProfile(this, 'Sarah Kim', '11th Grade &bull; Pediatric surgery', '#10b981', 'SK')">
-          <div class="profile-avatar" style="background: linear-gradient(135deg, #10b981, #059669)">SK</div>
-          <div class="profile-name">Sarah Kim</div>
-          <div class="profile-meta">11th Grade &bull; Pediatric surgery</div>
-        </div>
-        <div class="profile-card" onclick="selectProfile(this, 'Tyler Brooks', '10th Grade &bull; Game design', '#64748b', 'TB')">
-          <div class="profile-avatar" style="background: linear-gradient(135deg, #64748b, #475569)">TB</div>
-          <div class="profile-name">Tyler Brooks</div>
-          <div class="profile-meta">10th Grade &bull; Game design</div>
-        </div>
-        <div class="profile-card" onclick="selectProfile(this, 'Aisha Patel', '12th Grade &bull; Data science', '#ec4899', 'AP')">
-          <div class="profile-avatar" style="background: linear-gradient(135deg, #ec4899, #db2777)">AP</div>
-          <div class="profile-name">Aisha Patel</div>
-          <div class="profile-meta">12th Grade &bull; Data science</div>
-        </div>
-        <div class="profile-card" onclick="selectProfile(this, 'Ethan O\'Brien', '11th Grade &bull; Construction mgmt', '#0891b2', 'EO')">
-          <div class="profile-avatar" style="background: linear-gradient(135deg, #0891b2, #0e7490)">EO</div>
-          <div class="profile-name">Ethan O'Brien</div>
-          <div class="profile-meta">11th Grade &bull; Construction</div>
-        </div>
-        <div class="profile-card" onclick="selectProfile(this, 'Priya Sharma', '10th Grade &bull; Veterinary medicine', '#84cc16', 'PS')">
-          <div class="profile-avatar" style="background: linear-gradient(135deg, #84cc16, #65a30d)">PS</div>
-          <div class="profile-name">Priya Sharma</div>
-          <div class="profile-meta">10th Grade &bull; Veterinary</div>
-        </div>
-        <div class="profile-card" onclick="selectProfile(this, 'Chris Taylor', '9th Grade &bull; App development', '#f43f5e', 'CT')">
-          <div class="profile-avatar" style="background: linear-gradient(135deg, #f43f5e, #e11d48)">CT</div>
-          <div class="profile-name">Chris Taylor</div>
-          <div class="profile-meta">9th Grade &bull; App development</div>
-        </div>
-        <div class="profile-card" onclick="selectProfile(this, 'Nina Rodriguez', '12th Grade &bull; Professional dance', '#a855f7', 'NR')">
-          <div class="profile-avatar" style="background: linear-gradient(135deg, #a855f7, #9333ea)">NR</div>
-          <div class="profile-name">Nina Rodriguez</div>
-          <div class="profile-meta">12th Grade &bull; Dance</div>
-        </div>
-        <div class="profile-card" onclick="selectProfile(this, 'Marcus Day', '11th Grade &bull; Electrician apprenticeship', '#f59e0b', 'MD')">
-          <div class="profile-avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706)">MD</div>
-          <div class="profile-name">Marcus Day</div>
-          <div class="profile-meta">11th Grade &bull; Electrician</div>
-        </div>
-        <div class="profile-card" onclick="selectProfile(this, 'Ivan Rodriguez', '12th Grade &bull; Cybersecurity (SOC)', '#10b981', 'IR')">
-          <div class="profile-avatar" style="background: linear-gradient(135deg, #10b981, #059669)">IR</div>
-          <div class="profile-name">Ivan Rodriguez</div>
-          <div class="profile-meta">12th Grade &bull; Cybersecurity</div>
-        </div>
-      </div>
-
-      <div class="btn-row">
-        <button class="btn btn-primary" id="nextBtn1" disabled onclick="goToScreen(2)">Continue &rarr;</button>
-      </div>
-    </div>
-
-    <!-- Screen 2: Set Your Goal -->
-    <div class="screen" id="screen2">
-      <div class="goal-container">
-        <div class="selected-profile">
-          <div class="profile-avatar" id="selectedAvatar" style="background: linear-gradient(135deg, #1B5A90, #14456e)">MC</div>
-          <div class="info">
-            <div class="name" id="selectedName">Maya Chen</div>
-            <div class="meta" id="selectedMeta">11th Grade &bull; Eco-architecture</div>
-          </div>
-          <button class="change-btn" onclick="goToScreen(1)">Change</button>
-        </div>
-
-        <div class="goal-prompt">As this student, what's your dream?</div>
-        <input type="text" class="goal-input" id="goalInput" placeholder="e.g., A sustainable architect who designs eco-friendly buildings" oninput="checkGoal()">
-
-        <div class="goal-suggestions">
-          <span class="suggestion-chip" onclick="setGoal('A sustainable architect who designs eco-friendly buildings')">&#127959; Architect</span>
-          <span class="suggestion-chip" onclick="setGoal('A Grammy-winning music producer')">&#127925; Producer</span>
-          <span class="suggestion-chip" onclick="setGoal('A pediatric surgeon who helps sick children')">&#129657; Doctor</span>
-          <span class="suggestion-chip" onclick="setGoal('A video game designer at a major studio')">&#127918; Game Dev</span>
-          <span class="suggestion-chip" onclick="setGoal('A tech startup founder')">&#128640; Founder</span>
-          <span class="suggestion-chip" onclick="setGoal('A data scientist fighting for social justice')">&#128202; Data Scientist</span>
-        </div>
-
-        <div class="btn-row" style="margin-top: 16px;">
-          <button class="btn btn-secondary" onclick="goToScreen(1)">&larr; Back</button>
-          <button class="btn btn-primary" id="nextBtn2" disabled onclick="startChat()">Meet Your Future Self &rarr;</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Screen 3: Conversation -->
-    <div class="screen" id="screen3">
-      <div class="chat-container">
-        <div class="chat-header">
-          <div class="future-avatar">&#128100;</div>
-          <div class="future-info">
-            <div class="name" id="futureName">Maya Chen, age 32</div>
-            <div class="role" id="futureRole">Sustainable Design Director</div>
-          </div>
-          <button class="back-btn" onclick="goToScreen(2)">&#9998; Edit Goal</button>
-        </div>
-
-        <div class="chat-messages" id="chatMessages"></div>
-
-        <div class="chat-input-area">
-          <div class="quick-prompts" id="quickPrompts">
-            <button class="quick-prompt" onclick="sendMessage('chemistry')">Why do I need chemistry?</button>
-            <button class="quick-prompt" onclick="sendMessage('giveup')">Did you ever want to give up?</button>
-            <button class="quick-prompt" onclick="sendMessage('focus')">What should I focus on?</button>
-          </div>
-          <div class="input-row">
-            <input type="text" class="chat-input" id="chatInput" placeholder="Ask your Future Self anything..." onkeypress="handleKeyPress(event)">
-            <button class="send-btn" id="sendBtn" onclick="sendCustomMessage()">&rarr;</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
+  <!-- Footer -->
+  <footer>
+    <p>Purpose Engine &mdash; An <a href="https://www.uplifteducation.org" target="_blank">Uplift Education</a> Initiative</p>
+  </footer>
 
   <script>
     // =====================
@@ -778,74 +998,74 @@
         chemistry: `Oh man, chemistry! I know it feels pointless right now. But here's the thing--last month I had to reject a supplier's insulation materials because the chemical composition wasn't right for our LEED certification.\n\nStoichiometry? I use it to calculate material ratios for sustainable concrete mixes. The periodic table? I need to understand which elements off-gas toxins and which are safe for indoor air quality.\n\nThat stuff you're memorizing now literally helps me build healthier buildings.`,
         giveup: `Honestly? Junior year was rough. I remember getting a C on a physics test and thinking "maybe architecture isn't for me."\n\nBut here's what I wish someone had told me: that C didn't define my career. What mattered was that I kept showing up, kept asking questions, and found ways to connect what I was learning to what I actually cared about.\n\nThe doubt doesn't fully go away--I still have imposter syndrome sometimes. But you learn to push through it.`,
         focus: `If I could go back, I'd tell myself: take that environmental science elective, even if your friends aren't in it. Join the robotics club--the CAD skills transfer directly to architectural design.\n\nBut honestly? The biggest thing is to stay curious. When a subject feels boring, ask yourself "how might this connect to sustainable design?" You'd be surprised how often the answer is "more than you think."`,
-        default: `That's a great question. You know, when I was your age, I didn't have all the answers either. What I've learned is that every experience--even the confusing ones--builds toward something.\n\nThe key is staying curious and connected to why you're doing this. For me, it was always about creating spaces that help both people and the planet. Keep that "why" close, and the "how" starts to make more sense.`
+        default: `That's a great question. The path from high school to where I am now wasn't always clear, but every step taught me something valuable. Keep pushing, stay curious, and don't be afraid to ask for help when you need it.`
       },
       'Jordan Williams': {
-        greeting: `Hey Jordan--it's you. The future you. I'm 32, and yeah, we actually did it. I'm running a tech company that's helping small businesses automate their operations.\n\nI remember being in 12th grade, sketching app ideas in the back of English class, wondering if college was even the right path. Turns out, the answer was complicated--but we figured it out.\n\nWhat's going on?`,
-        chemistry: `Real talk? I thought chemistry was a waste of time too. But here's something wild--when we were developing our supply chain software, I had to understand chemical storage regulations for our warehouse clients.\n\nTurns out, knowing why certain materials can't be stored together (redox reactions, anyone?) helped us build better safety features. Our compliance module became one of our biggest selling points.\n\nYou never know which "random" knowledge will become your competitive advantage.`,
-        giveup: `Senior year, I pitched my first app idea at a school competition and came in last place. Last. Place. I went home and seriously considered just getting a "normal" job.\n\nBut then I realized--that failure taught me more than winning would have. I learned what questions investors actually ask, why my pitch fell flat, and how to handle rejection.\n\nStartup life is basically a series of small failures leading to occasional wins. That competition was just early practice.`,
-        focus: `Honestly? Learn to code, but also learn to communicate. Half of being a founder is explaining complex ideas simply--to investors, to customers, to your team.\n\nThat English class I was doodling in? Turns out persuasive writing is basically the same skill as writing pitch decks. And that group project you hate? It's practice for managing a team.\n\nAlso: build something. Anything. A simple app, a website, whatever. Shipping something real teaches you more than any class.`,
-        default: `You know what I've learned? The path from here to where I am wasn't a straight line. There were detours, pivots, and plenty of "what am I even doing?" moments.\n\nBut every step--even the ones that felt like mistakes--taught me something. Trust the process, stay hungry, and remember that every successful founder started exactly where you are now.`
+        greeting: `Hey Jordan--it's you from the future. I'm 32 and I just closed a Series B round for my third startup. We're building AI tools that help small businesses compete with the big guys.\n\nI remember sitting in econ class thinking "when will I ever use this?" Turns out, every single day.\n\nWhat do you want to know?`,
+        chemistry: `Real talk? I don't use chemistry directly. But here's what it taught me: how to break down complex problems into smaller pieces, run experiments, and learn from failures.\n\nThat scientific method thinking? I use it every single day when we're testing new product features or figuring out why users aren't converting.\n\nPlus, one of my co-founders is a chemical engineer. I can at least follow the conversation when she explains why our manufacturing process works.`,
+        giveup: `All the time. After my first startup failed, I spent three months wondering if I should just get a "normal" job.\n\nWhat got me through was remembering why I started in the first place. Not for the money or the glory--but because I genuinely wanted to solve a problem I cared about.\n\nThe failures hurt. But they also taught me more than any success ever could.`,
+        focus: `Learn to code. Seriously. Even if you're not going to be an engineer, understanding how software works gives you superpowers as a founder.\n\nAnd start building things NOW. They don't have to be good. My first "startup" was a tutoring marketplace for my high school--it made maybe $200 total. But I learned more from that than any class.`,
+        default: `The entrepreneurship journey is wild, honestly. Some days you feel like you're conquering the world, others you wonder what you're even doing. But if you're passionate about building things and solving problems, there's nothing else like it.`
       },
       'Marcus Rivera': {
-        greeting: `Yo Marcus--it's you, bro. Future you. I'm 32 now, and I'm sitting in my own studio right now, the same studio where we just finished mixing a track that's gonna drop next month.\n\nI remember being in 9th grade, making beats on that cracked software, wondering if music could actually be a career. Spoiler: it can. But the journey had some surprises.\n\nWhat's up?`,
-        chemistry: `Okay, this is gonna sound crazy, but chemistry actually connects to music production. Sound is waves, right? And audio engineering is basically physics and math.\n\nBut here's the real connection: chemistry taught me to think systematically. When I'm EQing a mix, I'm balancing elements just like balancing an equation. When I'm layering sounds, I'm thinking about how frequencies interact--constructive and destructive interference.\n\nPlus, understanding acoustics (which is physics and chemistry) helped me design my studio. So yeah, pay attention.`,
-        giveup: `Freshman year of college, I almost switched to business because everyone said music wasn't "practical." I was one form away from changing my major.\n\nThen I got an internship at a small studio--unpaid, just getting coffee and watching. But I learned more in three months there than in a year of classes. That experience reminded me why I started.\n\nThere will always be people telling you to be "realistic." Sometimes they're right. But sometimes they're just scared. Learn to tell the difference.`,
-        focus: `Learn your DAW inside and out. Like, really learn it--keyboard shortcuts, signal flow, everything. Speed matters when inspiration hits.\n\nBut also? Learn an instrument. I know producers who only work with samples, and they're limited. When I learned piano basics, my compositions got way more interesting.\n\nAnd network. Go to shows, talk to other musicians, collaborate even if it's just for fun. This industry is all about relationships.`,
-        default: `Music taught me something important: there's no single path to success. Some producers went to Berklee, some are self-taught on YouTube. What matters is putting in the hours and staying true to your sound.\n\nKeep making beats. Keep learning. And remember--every artist you admire was once exactly where you are, wondering if they had what it takes.`
+        greeting: `Yo Marcus--it's you, age 32. I just got back from the Grammys. Didn't win this year, but honestly? Just being there was surreal.\n\nI run my own production studio now. Last month we worked on tracks for two platinum artists. Not bad for a kid who started making beats in his bedroom, right?\n\nWhat's up?`,
+        chemistry: `Okay so this might sound crazy, but audio engineering is basically applied physics and chemistry.\n\nSound waves, frequencies, how different materials absorb or reflect sound--that's all science. When I'm treating a room acoustically or figuring out why a recording sounds muddy, I'm using principles from physics class.\n\nPlus, chemistry helps me understand how different electronic components work. Some producers just twist knobs randomly--I actually know why certain circuits create certain sounds.`,
+        giveup: `Man, when I was 19 I sent my beats to probably 200 artists. Got maybe 3 responses. All rejections.\n\nI almost gave up and went to business school like my parents wanted. But I made a deal with myself: I'd give it one more year and really commit.\n\nThat year, I finally got my first placement. It was a small artist, barely paid anything. But it proved I could do this. Sometimes you just need that one small win to keep going.`,
+        focus: `Learn everything you can about the technical side. Yeah, having "an ear" matters, but the producers who last are the ones who understand the engineering.\n\nAnd build relationships. This industry runs on who you know. Be genuine, be helpful, and don't burn bridges. The intern you're nice to today might be the A&R director in five years.`,
+        default: `Music's a tough industry, but if you love it, there's nothing else like it. Keep creating, keep learning, and stay true to your sound. The right opportunities will come.`
       },
       'Sarah Kim': {
-        greeting: `Hey Sarah--it's you. The future you. I'm 32, and I'm currently a pediatric surgeon at Children's Medical Center. Just finished a long shift, but talking to you feels important.\n\nI remember being in 11th grade, stressing about AP Bio and wondering if I was smart enough for med school. The answer is yes--but it wasn't about being the smartest. It was about being the most persistent.\n\nWhat's on your mind?`,
-        chemistry: `Chemistry is literally the foundation of medicine. Every drug interaction, every metabolic pathway, every diagnostic test--it all comes back to chemistry.\n\nLast week, I had to quickly calculate medication dosages for a tiny patient. One decimal point off could be dangerous. That's stoichiometry with actual stakes.\n\nOrganic chemistry will be brutal in college--everyone says so. But when you're learning how anesthetics work at the molecular level, suddenly those reaction mechanisms click. Push through it.`,
-        giveup: `Third year of med school, I failed my first clinical rotation evaluation. Failed. I went home and cried for two days straight.\n\nBut my mentor told me something I'll never forget: "The doctors who've never failed are the ones I worry about. Failure teaches humility, and humility keeps patients safe."\n\nI repeated that rotation, worked twice as hard, and it ended up being my strongest area. Sometimes your biggest setback becomes your biggest strength.`,
-        focus: `Volunteer at a hospital or clinic if you can. Not just for your resume--but to make sure this is really what you want. Medicine is a long road, and you need to love it to survive it.\n\nAlso: don't neglect your mental health. I wish I'd learned better coping skills earlier. The students who burn out aren't the ones who study less--they're the ones who never learned to rest.\n\nAnd take that anatomy elective if it's offered. Seriously. You'll thank me later.`,
-        default: `You know what nobody tells you about being a doctor? It's not just about being smart. It's about being present, being kind, and being able to function when you're exhausted.\n\nThe academics matter, but so does learning to take care of yourself. The best doctors I know are the ones who stayed human through all the training. Don't lose that.`
+        greeting: `Hey Sarah--it's you. Dr. Kim now, I guess. I'm 32, finishing my pediatric surgery fellowship at Children's Hospital.\n\nI still remember being in high school, dissecting that frog in biology and thinking "is this really what medicine is like?" It's so much more.\n\nWhat do you want to know?`,
+        chemistry: `Oh, chemistry is EVERYWHERE in medicine. Pharmacology is basically applied chemistry--understanding how drugs interact with receptors, why certain medications can't be taken together, how the body metabolizes different compounds.\n\nIn surgery, we think about tissue chemistry, how anesthetics work, why certain suture materials are better for different tissues. That organic chemistry class you're dreading? I use those concepts regularly.\n\nThe good news: it gets more interesting when you can see the real-world applications.`,
+        giveup: `Third year of med school. I failed a clinical rotation--had to repeat it. I seriously considered dropping out.\n\nMy attending told me something that stuck with me: "The doctors who never struggle aren't the best ones. The best ones are the ones who struggle and figure out how to grow."\n\nThat failure taught me humility and how to ask for help. Now I'm a better doctor because of it.`,
+        focus: `Get comfortable with long-term delayed gratification. Medical training is LONG. If you can find meaning in the journey--not just the destination--you'll be happier.\n\nAlso, start building good study habits now. The volume of information in med school is overwhelming if you don't have systems. And shadow doctors when you can--make sure you actually like the day-to-day reality of medicine, not just the idea of it.`,
+        default: `Medicine is demanding, but helping kids get better? There's nothing else like it. The path is long, but if this is really what you want, every sacrifice will feel worth it.`
       },
       'Tyler Brooks': {
-        greeting: `Hey Tyler--it's you. Future you. I'm 32, and I'm a lead game designer at a studio you've definitely heard of. Can't say which one--NDA--but trust me, it's cool.\n\nI remember being in 10th grade, playing games when I should've been doing homework, dreaming about making my own someday. Well, we did it. And the path here was wild.\n\nWhat's up?`,
-        chemistry: `Okay, real talk--I don't use chemistry directly. But here's what I do use: the problem-solving mindset. Chemistry taught me to break down complex systems into smaller parts, test hypotheses, and iterate.\n\nThat's literally game design. Why isn't this level fun? Let's break it down. What variables can we change? Test it, get feedback, iterate.\n\nAlso, physics matters a lot for game engines. Understanding how forces, mass, and acceleration work helps when you're tuning how a character jumps or how a car handles.`,
-        giveup: `Senior year of college, I applied to 47 game studios. Forty-seven. Got rejected by all of them. I was working at a coffee shop, wondering if I'd wasted four years.\n\nThen I made a small indie game in my spare time. Nothing fancy, just a puzzle platformer. Put it on itch.io. A recruiter played it, liked my level design, and reached out.\n\nThe portfolio project I made for fun got me the job that 47 applications couldn't.`,
-        focus: `Make games. Now. Don't wait until you "know enough." Download Unity or Godot--they're free--and make something. It'll be terrible, and that's perfect.\n\nAlso, play games critically. When something feels fun, ask yourself why. When something's frustrating, analyze what went wrong. Train yourself to see the design behind the experience.\n\nAnd math. I know, I know. But linear algebra and trigonometry show up everywhere in game dev. Don't skip it.`,
-        default: `Here's what I wish I'd known: the game industry isn't just about playing games. It's about solving problems, collaborating with artists and programmers, and handling feedback without taking it personally.\n\nThe soft skills matter as much as the technical ones. Be someone people want to work with, and doors will open.`
+        greeting: `Hey Tyler--it's future you! I'm 32, and I'm a Lead Game Designer at a major studio. Last year we shipped a game that hit 10 million players.\n\nI remember sitting in algebra thinking "when will I ever use this?" Plot twist: game math is basically ALL algebra.\n\nWhat's on your mind?`,
+        chemistry: `Okay so here's the thing--chemistry itself doesn't come up much in game design. But the LAB work does.\n\nGame design is basically running experiments. You make a hypothesis ("players will find this mechanic fun"), you test it, you analyze results, you iterate. That's the scientific method.\n\nAlso, if you ever want to work on realistic games--physics simulations, how fire spreads, how materials break--chemistry and physics become super relevant.`,
+        giveup: `When I was 21, I got rejected from like 50 game studios. Zero callbacks.\n\nI almost gave up and went into regular software engineering. But instead, I spent a year making my own small games, documenting everything, building a portfolio.\n\nThat portfolio is what finally got me an interview. Sometimes the traditional path doesn't work, and you have to create your own opportunities.`,
+        focus: `Start making games NOW. Don't wait until you "know enough"--you learn by doing. Game jams are amazing for this.\n\nAlso, don't just play games--analyze them. Why is this fun? Why did I stop playing that other game? That critical thinking is what separates designers from players.`,
+        default: `Game development is challenging but incredibly rewarding. Keep making stuff, keep learning, and remember--every great designer started with terrible first projects.`
       },
       'Aisha Patel': {
-        greeting: `Hey Aisha--it's you. The future you. I'm 32, working as a data scientist at a nonprofit that uses analytics to fight housing discrimination.\n\nI remember being in 12th grade, torn between my love for math and my passion for social justice, thinking I had to choose one. Turns out, I didn't.\n\nWhat's going on?`,
-        chemistry: `So chemistry specifically? Not my daily driver. But here's the thing--science is science. The scientific method, hypothesis testing, controlling variables--that's the foundation of data science too.\n\nPlus, environmental justice work often involves understanding chemical pollutants and their health impacts. When I analyzed lead contamination data in low-income neighborhoods, knowing some chemistry helped me communicate with the toxicologists on our team.\n\nNo knowledge is ever wasted if you stay curious about connections.`,
-        giveup: `Sophomore year of college, I was struggling in a machine learning class while watching my friends in easier majors have social lives. I seriously considered switching to something "less intense."\n\nThen I went to a conference and saw a presentation on using AI to predict which communities would be affected by climate change. The presenter was a woman of color, like me, using data to protect vulnerable populations.\n\nI walked out of that talk knowing exactly why I was pushing through. Find your "why"--it makes the hard parts bearable.`,
-        focus: `Learn Python and SQL. Seriously, start now--there are free resources everywhere. The sooner you're comfortable with code, the more powerful your analysis can be.\n\nBut also: take ethics seriously. Data can be used to help or harm. I've seen well-meaning algorithms perpetuate bias because no one asked the right questions. Be the person who asks those questions.\n\nAnd statistics. I know it's not glamorous, but understanding p-values and confidence intervals is the difference between good data science and bad.`,
-        default: `What I've learned is that data is just a tool. What matters is what you use it for. The same techniques that help corporations target ads can also help communities get resources they need.\n\nStay connected to your values. Let them guide what problems you choose to solve. The world needs more data scientists who care about justice.`
+        greeting: `Hey Aisha--it's you at 32. I'm a Senior Data Scientist at a nonprofit that uses data to fight educational inequality.\n\nRemember wondering if all that math would ever be useful? Turns out it's literally my whole job now.\n\nWhat do you want to talk about?`,
+        chemistry: `Data science is really about understanding how things interact and change--which is also what chemistry is about.\n\nWhen I'm building predictive models, I'm thinking about variables and how they relate, just like chemical equations. And the statistical thinking? That's the same whether you're analyzing molecules or millions of data points.\n\nPlus, some of the most impactful data science is in healthcare and environmental science--where chemistry is directly relevant.`,
+        giveup: `My first data science job, I felt completely lost. Everyone seemed smarter than me. I cried in the bathroom more than once.\n\nBut I kept asking questions, kept learning, and slowly realized--everyone feels like an imposter at first. The people who succeed aren't the ones who know everything. They're the ones who aren't afraid to say "I don't know, but I'll figure it out."`,
+        focus: `Learn Python and statistics well. Those are your foundations. But also--learn to communicate findings to non-technical people. The best insights are useless if you can't explain them.\n\nAnd find something you care about beyond the math. Data science is a tool--what matters is what you use it FOR.`,
+        default: `Data science is powerful, especially when you use it for good. Keep developing your skills, but never lose sight of why the work matters. Impact over everything.`
       },
       "Ethan O'Brien": {
-        greeting: `Hey Ethan--it's you. The future you. I'm 32, managing sustainable construction projects that are actually changing how we build communities.\n\nI remember being in 11th grade, working summers with dad on job sites, wondering if there was a way to do construction differently--better for workers, better for the environment. There is.\n\nWhat's on your mind?`,
-        chemistry: `Dude, chemistry is everywhere in construction. Concrete? That's a chemical reaction. Paint and coatings? Chemistry. Sustainable materials? You need to understand their chemical properties.\n\nLast month, I had to evaluate a new eco-friendly concrete mix. Understanding how the pozzolanic reaction works helped me ask the right questions about durability and curing time.\n\nPlus, job site safety involves knowing which materials are hazardous and why. That's pure chemistry. It's not abstract--it's keeping your crew safe.`,
-        giveup: `After high school, I went straight to work instead of college. Figured I'd learn on the job, save money. For a few years, that worked.\n\nBut I hit a ceiling. I wanted to manage projects, implement green building practices, but I didn't have the credentials. So at 25, I went back to school while working full-time. Hardest three years of my life.\n\nPoint is: there's no single right path. But education--formal or not--matters if you want to lead, not just follow.`,
-        focus: `Get comfortable with math and physics. Structural engineering, load calculations, material estimates--it's all numbers.\n\nBut also learn to read blueprints and understand building codes. That's the language of construction. The sooner you're fluent, the faster you'll advance.\n\nAnd respect the trades. I've seen college kids come in thinking they know everything and get humbled fast. Learn from the experienced workers. Their practical knowledge is irreplaceable.`,
-        default: `Construction gets stereotyped as "just manual labor," but modern sustainable building is incredibly technical. We're using drones for site surveys, BIM software for design, and advanced materials that didn't exist ten years ago.\n\nThere's never been a better time to get into this field if you want to build things that actually last--and that don't destroy the planet in the process.`
+        greeting: `Hey Ethan--it's you at 32. I'm running my own sustainable construction company now. We specialize in net-zero commercial buildings.\n\nRemember thinking shop class was more useful than calculus? Turns out you need both.\n\nWhat's up?`,
+        chemistry: `In construction, chemistry is everywhere--even if you don't see it. Why does concrete cure the way it does? Chemistry. Why do certain paints work better in humidity? Chemistry. Why do some insulation materials off-gas toxic fumes? Chemistry.\n\nUnderstanding these things makes you a better project manager. You're not just following rules--you understand WHY the rules exist. That's what separates good builders from great ones.`,
+        giveup: `When the housing market crashed in '08, I was just starting out. Had to take whatever work I could find--mostly demolition.\n\nI almost went back to school for something "safer." But I stuck with it, used the slow times to get more certifications, and was ready when the market recovered. Sometimes survival IS success.`,
+        focus: `Get as many certifications as you can--OSHA, LEED, project management. They open doors.\n\nBut also, learn the business side. Most construction companies fail not because they can't build--but because they can't manage money. Take accounting and business classes seriously.`,
+        default: `Construction is one of the most satisfying careers out there--you literally build the world around you. Keep learning both the technical and business sides, and you'll go far.`
       },
       'Priya Sharma': {
-        greeting: `Hey Priya--it's you. The future you. I'm 32, a veterinarian specializing in exotic animals at a zoo. Yesterday I treated a red panda, so yeah, the dream came true.\n\nI remember being in 10th grade, volunteering at the animal shelter, worrying that vet school was too competitive. It is competitive. But we made it.\n\nWhat's going on?`,
-        chemistry: `Chemistry is half of veterinary medicine! Pharmacology--how drugs work in different species--is all chemistry. Did you know that some medications safe for dogs are toxic to cats because their livers process chemicals differently?\n\nI calculate drug dosages based on body weight and metabolic rates constantly. And understanding biochemistry helps me interpret blood panels and diagnose diseases.\n\nWhen you're learning about pH, enzymes, and organic compounds--that's literally what's happening inside every animal you'll ever treat.`,
-        giveup: `Junior year of undergrad, I didn't get into any vet schools on my first round of applications. None. I had to take a gap year, gain more clinical hours, and reapply.\n\nThat gap year felt like failure at the time. But I worked at an emergency animal hospital and learned more practical skills than any class taught me. When I finally got into vet school, I was better prepared than classmates who'd gone straight through.\n\nRejection isn't the end. Sometimes it's redirection.`,
-        focus: `Volunteer everywhere you can--shelters, farms, wildlife rehab, exotic animal clinics. Variety shows admissions committees you're serious, and it helps you figure out what you actually like.\n\nAlso, don't neglect the science prerequisites. I know they're hard, but vet school assumes you know biology, chemistry, and physics cold. Better to struggle now than in professional school.\n\nAnd learn to handle stress. This career involves a lot of emotional labor. Start building those coping skills early.`,
-        default: `Being a vet isn't like the cute animal videos online. There's loss, there's stress, and there are really hard decisions. But there's also this incredible feeling when you help an animal that can't speak for itself.\n\nIf you love animals and you're willing to put in the work, this career is deeply meaningful. Just go in with realistic expectations.`
+        greeting: `Hey Priya--it's you at 32! I'm a veterinarian now, running my own clinic that focuses on exotic animals and wildlife rehabilitation.\n\nI remember being in 10th grade, dreaming about helping animals. That dream came true--with a lot of work in between.\n\nWhat's on your mind?`,
+        chemistry: `Veterinary medicine is SO dependent on chemistry. Every medication I prescribe, I need to understand how it's metabolized, what it interacts with, why certain doses work for certain sized animals.\n\nOrganic chemistry? That's pharmacology. Biochemistry? That's understanding nutrition and disease. Even the anesthesia I use requires understanding gas properties and chemical reactions.\n\nThe chemistry you're learning now is literally the foundation of everything I do.`,
+        giveup: `Vet school was brutal. Second year, I failed my first exam ever. I seriously considered switching to a less intense field.\n\nBut I talked to a mentor who reminded me why I started--because I genuinely wanted to help animals. The tests were just obstacles, not the destination. Reframing it that way helped me push through.`,
+        focus: `Volunteer at vet clinics, shelters, anywhere you can get hands-on animal experience. Schools love seeing that commitment.\n\nAnd don't neglect the "boring" sciences. I know organic chemistry seems useless, but it's a gatekeeper class. Master it now, and vet school will be so much easier.`,
+        default: `Being a vet is everything I hoped for and more. It's hard, yes--but helping animals and their families is incredibly rewarding. Keep that goal in sight.`
       },
       'Chris Taylor': {
-        greeting: `Hey Chris--it's you. The future you. I'm 32, and my app has over 2 million users. We just closed our Series B funding, which means I'm now technically a "tech executive." Wild, right?\n\nI remember being in 9th grade, teaching myself to code from YouTube tutorials, hoping it would lead somewhere. It led here.\n\nWhat's up?`,
-        chemistry: `Honestly? I don't use chemistry much directly. But here's the thing--school isn't just about direct application. It's about learning how to learn.\n\nChemistry taught me to follow procedures precisely, to understand that small errors have big consequences, and to think systematically about cause and effect. That's debugging in a nutshell.\n\nPlus, some of the best apps solve science problems. Health tech, environmental monitoring, lab management--if you understand chemistry, you can build tools for people who use it every day.`,
-        giveup: `Sophomore year, I launched my first app. A fitness tracker. I was so proud of it. It got twelve downloads. Twelve. And seven of those were family members.\n\nI almost stopped coding after that. But instead, I asked myself: why didn't it work? The UI was confusing, the onboarding was bad, and honestly, the market was saturated.\n\nSo I built something different. Something that solved a problem I personally had. That one did better. Fail fast, learn faster.`,
-        focus: `Code every day. Even just 30 minutes. Consistency beats intensity for building skills.\n\nLearn to design, not just develop. The best apps solve real problems elegantly. Take a UI/UX course, study apps you love, understand why they feel good to use.\n\nAnd build your network. Join coding clubs, go to hackathons, find a mentor. This industry is collaborative, not solitary.`,
-        default: `The best advice I ever got: build something people actually want. Not something that sounds cool, not something technically impressive, but something that solves a real problem for real people.\n\nTalk to potential users before you write a single line of code. The app that made me successful wasn't my most technically complex--it was the one that addressed a genuine need.`
+        greeting: `Hey Chris--it's future you! I'm 32 and I'm the CTO of a health tech startup. Our app helps people manage chronic conditions, and we've helped millions of users.\n\nCrazy to think it all started with that first HTML page I made in 9th grade.\n\nWhat do you want to know?`,
+        chemistry: `Okay, so I don't use chemistry directly in coding. But here's what it taught me: systematic thinking and debugging.\n\nIn chemistry, if an experiment doesn't work, you analyze what went wrong step by step. Same with code. That methodical troubleshooting is the same skill.\n\nPlus, our app involves health data--understanding basic biochemistry helps me communicate with our medical advisors.`,
+        giveup: `My first startup failed spectacularly when I was 24. Lost everything, had to move back home.\n\nI questioned if I was cut out for this. But I realized--I didn't fail because I was bad at tech. I failed because I didn't understand the business side. So I learned that too. Second startup: successful exit.`,
+        focus: `Build things. All the time. It doesn't matter if they're good--you learn by shipping.\n\nAnd learn to work with people who aren't like you. The best products come from diverse teams. If you only talk to other coders, you'll miss huge opportunities.`,
+        default: `Tech is amazing because you can build things that help millions of people. Keep coding, keep learning, and remember--the best apps solve real problems for real people.`
       },
       'Nina Rodriguez': {
-        greeting: `Hey Nina--it's you. The future you. I'm 32, and last night I performed on Broadway. Not in the chorus--a principal role. We did it, girl.\n\nI remember being in 12th grade, stretching in the dance studio before school, hoping this passion could somehow become a life. It can. It did.\n\nWhat's on your mind?`,
-        chemistry: `Okay, I'm not gonna lie--I don't use chemistry equations. But here's what I do use: discipline. Learning something hard, even when you don't see the point, builds the mental stamina you need for this career.\n\nPlus, understanding how your body works helps prevent injuries. Muscles, energy systems, nutrition--it's all science. The dancers with the longest careers are the ones who treat their bodies intelligently, not just intensely.\n\nAnd honestly? Being able to hold a conversation about non-dance topics makes you more interesting at auditions.`,
-        giveup: `After college, I moved to New York with $800 and a lot of hope. For two years, I went to auditions and got rejected. Over and over. I worked as a server, took classes, and questioned everything.\n\nThe breakthrough came when I least expected it. A choreographer I'd worked with once remembered me and called me in for a workshop. That workshop led to a regional tour, which led to Broadway.\n\nThis industry runs on relationships and persistence. You need both.`,
-        focus: `Train in multiple styles. Ballet is foundation, but contemporary, jazz, hip-hop--versatility gets you hired. Broadway wants dancers who can do everything.\n\nTake care of your body. Stretch, cross-train, rest. I've seen so many talented dancers burn out from injuries they could have prevented.\n\nAnd take acting classes. Seriously. The dancers who get principal roles are the ones who can act. You're telling stories with your body--you need to understand character and emotion.`,
-        default: `Dance is brutal and beautiful. There's constant rejection, physical pain, and financial uncertainty. But there's also this feeling when you're performing--when the music and the movement and the audience all sync up--that's unlike anything else.\n\nIf you can imagine doing anything else and being happy, do that instead. But if dance is the only thing that makes you feel alive? Then fight for it. We did.`
+        greeting: `Hey Nina--it's you at 32! I'm a professional dancer and choreographer now. Just finished a run on Broadway and I'm about to start work on a movie.\n\nI remember being told dance "isn't a real career." Look at us now.\n\nWhat's on your mind?`,
+        chemistry: `You might think chemistry has nothing to do with dance, but hear me out--understanding your body is chemistry.\n\nNutrition, how muscles work, why certain injuries happen, how to recover properly--that's all biochemistry. Professional dancers who last are the ones who understand their bodies as systems, not just instruments.\n\nPlus, I've worked with stage technicians who use chemistry for special effects, lighting, even fog machines.`,
+        giveup: `When I was 23, I injured my knee badly. Doctors said I might not dance professionally again.\n\nThose were the darkest months of my life. But I used that time to learn choreography, to understand the business side of dance, to become valuable in new ways.\n\nWhen I recovered, I was better than before--not just as a dancer, but as an artist who could do more than just perform.`,
+        focus: `Cross-train. Dance is physical, and injuries end careers. Pilates, yoga, strength training--they'll extend your career by decades.\n\nAnd learn the business side. Most dancers only think about performing, but the ones with long careers understand contracts, marketing, and how to create their own opportunities.`,
+        default: `Dance is a tough career, but it's possible. The key is versatility--be a great dancer, but also be someone who can choreograph, teach, direct. The more skills you have, the longer you can stay in this world you love.`
       },
       'Marcus Day': {
-        greeting: `Hey Marcus--it's you. The future you. I'm 32, and I just got my master electrician license last year. Now I run my own electrical contracting business with three employees. We specialize in solar installations and EV charger setups.\n\nI remember being in 11th grade, already doing that apprenticeship after school, wondering if skipping the traditional college route was the right call. It was.\n\nWhat's on your mind?`,
-        chemistry: `Brother, electrical work IS applied chemistry and physics. Ohm's Law? That's your bread and butter. Understanding how electrons flow, how resistance works, how different materials conduct--that's literally what keeps you and your customers safe.\n\nAnd with solar and battery systems now? You need to understand electrochemistry. How lithium-ion batteries charge and discharge, why certain connections corrode, how temperature affects resistance.\n\nThe guys who treat this as "just pulling wire" stay helpers forever. The ones who understand the science become masters.`,
+        greeting: `Hey Marcus--it's you. The future you. I'm 32, and I run my own electrical contracting business now. Just landed a contract for a whole new subdivision--fifteen homes.\n\nI remember sitting in class wondering if I was making the right choice going into trades. No regrets.\n\nWhat's on your mind?`,
+        chemistry: `Here's what nobody tells you about electrical work--it's basically applied physics and chemistry.\n\nWhy do certain materials conduct better than others? Why does electricity flow the way it does? Why do we use copper instead of aluminum in certain applications? That's all chemistry.\n\nI had to learn that stuff properly when I studied for my journeyman exam. The kids who paid attention in chemistry had a real advantage.`,
         giveup: `Second year of my apprenticeship, I failed my journeyman exam. First time. I was embarrassed--some of the guys at work found out and gave me grief about it.\n\nBut my mentor, this old-timer named Ray, told me something I never forgot: "The exam isn't testing if you're smart. It's testing if you studied. Go study."\n\nSo I did. Studied every night for two months. Passed with a 94 the second time. That failure taught me that preparation matters more than natural talent.`,
         focus: `Get as many hours as you can in different areas--residential, commercial, industrial. Each one teaches you something different. Don't just stick with what's comfortable.\n\nLearn the code book inside and out. Not just to pass the exam, but because understanding WHY the codes exist makes you a better electrician. Every rule is written because someone got hurt.\n\nAnd start thinking about business now. Take a night class in accounting or business management. The technical skills get you hired, but business skills let you build something of your own.`,
         default: `People look down on trades, but let me tell you--I make more than most of my friends who went to four-year colleges, I have zero student debt, and I own my own business at 32.\n\nPlus, electricians can't be outsourced. You can't install a panel from overseas. With solar, EVs, and smart homes taking off, demand for skilled electricians is only going up.\n\nYou picked a solid path. Stay with it.`
