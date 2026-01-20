@@ -206,32 +206,45 @@ body {
 }
 
 /* === Split Nav Layout (Explainer left, Demo right) === */
-.nav__left, .nav__right {
+.nav__left,
+.nav__right {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.nav__left {
+  flex-shrink: 0;
 }
 
 .nav__right {
   margin-left: auto;
 }
 
-.nav__separator {
-  width: 1px;
-  height: 28px;
-  margin: 0 8px;
+.nav__left > .nav__links,
+.nav__right > .nav__links {
+  display: flex;
+  gap: 2px;
 }
 
-.nav--light .nav__separator {
-  background: var(--gray-200);
+.nav__group-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 16px 4px;
 }
 
-.nav--dark .nav__separator {
-  background: rgba(255, 255, 255, 0.2);
+.nav--light .nav__group-label {
+  color: var(--gray-400);
+}
+
+.nav--dark .nav__group-label {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .nav__pill {
-  margin-left: 8px;
+  margin-left: 12px;
   padding: 6px 12px;
   border-radius: 999px;
   font-size: 10px;
@@ -458,9 +471,8 @@ body {
   }
   
   /* Hide split nav elements on mobile */
-  .nav__left .nav__links,
-  .nav__right .nav__links,
-  .nav__separator,
+  .nav__left > .nav__links,
+  .nav__right,
   .nav__pill {
     display: none;
   }
