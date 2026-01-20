@@ -135,6 +135,11 @@ body {
   gap: 4px;
 }
 
+/* Mobile nav menu - hidden on desktop */
+#navLinks {
+  display: none;
+}
+
 .nav__link {
   padding: 10px 16px;
   border-radius: 10px;
@@ -477,7 +482,9 @@ body {
     display: none;
   }
   
-  .nav__links {
+  /* Mobile dropdown menu */
+  #navLinks {
+    display: none;
     position: absolute;
     top: var(--nav-height);
     left: 0;
@@ -485,20 +492,19 @@ body {
     flex-direction: column;
     padding: 16px;
     gap: 8px;
-    display: none;
   }
   
-  .nav--light .nav__links {
+  .nav--light #navLinks {
     background: white;
     border-bottom: 1px solid var(--gray-200);
   }
   
-  .nav--dark .nav__links {
+  .nav--dark #navLinks {
     background: var(--navy);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
   
-  .nav__links.open {
+  #navLinks.open {
     display: flex;
   }
   
