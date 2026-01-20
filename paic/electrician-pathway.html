@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ivan's Pathway | Purpose Engine</title>
+  
+  <!-- Favicon and Social Sharing -->
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png?v=2">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png">
+  <meta property="og:title" content="Ivan's Pathway | Purpose Engine">
+  <meta property="og:description" content="From overwhelmed to on-track: How AI helps students navigate their career pathway.">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/variables.css">
+  
+  <style>
+    body {
+      background: var(--navy);
+      color: white;
+    }
+
+    .pathway-page {
+      min-height: 100vh;
+      padding-top: var(--nav-height);
+    }
+
+    /* Hero Section - Ivan's Story */
+    .hero {
+      padding: 60px 40px 80px;
+      background: linear-gradient(180deg, var(--navy) 0%, #0a1018 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 50%, rgba(0, 103, 177, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(255, 196, 37, 0.1) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 196, 37, 0.15);
+      border: 1px solid rgba(255, 196, 37, 0.3);
+      color: var(--yellow);
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--gray-400);
+      line-height: 1.6;
+      max-width: 700px;
+    }
+
+    /* Story Cards Section */
+    .story-section {
+      padding: 0 40px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .story-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 28px;
+      position: relative;
+    }
+
+    .story-card.ivan {
+      border-color: rgba(239, 68, 68, 0.3);
+      background: rgba(239, 68, 68, 0.05);
+    }
+
+    .story-card.michael {
+      border-color: rgba(16, 185, 129, 0.3);
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    .story-card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .ivan .avatar {
+      background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+    }
+
+    .michael .avatar {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    }
+
+    .story-name {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .story-grade {
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+
+    .story-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .stat-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--gray-300);
+    }
+
+    .stat-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .ivan .stat-icon {
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    .michael .stat-icon {
+      background: rgba(16, 185, 129, 0.2);
+    }
+
+    .vs-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .vs-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gray-400);
+    }
+
+    .vs-text {
+      font-size: 11px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Mindset Box */
+    .mindset-box {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 48px;
+    }
+
+    .mindset-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .mindset-icon {
+      font-size: 24px;
+    }
+
+    .mindset-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #EF4444;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .mindset-text {
+      font-size: 18px;
+      font-style: italic;
+      color: var(--gray-300);
+      line-height: 1.6;
+    }
+
+    /* Reframe Section */
+    .reframe-section {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .reframe-arrow {
+      font-size: 32px;
+      color: var(--primary);
+      margin-bottom: 16px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    .reframe-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .reframe-title span {
+      color: var(--primary-light);
+    }
+
+    .reframe-subtitle {
+      color: var(--gray-400);
+      font-size: 16px;
+    }
+
+    /* Pathway Steps */
+    .pathway-section {
+      padding: 60px 40px;
+      background: linear-gradient(180deg, #0a1018 0%, var(--navy) 100%);
+    }
+
+    .pathway-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 103, 177, 0.15);
+      border: 1px solid rgba(0, 103, 177, 0.3);
+      color: var(--primary-light);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      color: var(--gray-400);
+      font-size: 16px;
+    }
+
+    /* Step Cards */
+    .steps-timeline {
+      position: relative;
+    }
+
+    .steps-timeline::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 40px;
+      bottom: 40px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--primary) 0%, var(--yellow) 100%);
+      opacity: 0.3;
+    }
+
+    .step-card {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .step-number {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      box-shadow: 0 4px 20px rgba(0, 103, 177, 0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-content {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .step-content:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(0, 103, 177, 0.3);
+      transform: translateX(4px);
+    }
+
+    .step-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .step-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: #A78BFA;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .step-desc {
+      color: var(--gray-400);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .step-details {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--gray-300);
+      margin-bottom: 8px;
+    }
+
+    .detail-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-icon {
+      color: var(--success);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* AI Assist Callout */
+    .ai-callout {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .ai-callout-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .ai-callout-icon {
+      font-size: 16px;
+    }
+
+    .ai-callout-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #A78BFA;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .ai-callout-text {
+      font-size: 13px;
+      color: var(--gray-300);
+      line-height: 1.6;
+    }
+
+    /* Standards Connection */
+    .standards-section {
+      padding: 60px 40px;
+      background: var(--navy);
+    }
+
+    .standards-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .standards-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(0, 103, 177, 0.08) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .standards-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .standards-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .standards-title {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .standards-subtitle {
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .standards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .standard-item {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .standard-emoji {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .standard-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .standard-desc {
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+
+    /* Follow-up Section */
+    .followup-section {
+      padding: 60px 40px;
+      background: linear-gradient(180deg, var(--navy) 0%, #0a1018 100%);
+    }
+
+    .followup-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .followup-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .followup-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .followup-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .followup-info h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .followup-info p {
+      color: var(--gray-400);
+      font-size: 14px;
+    }
+
+    .followup-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .followup-item {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .followup-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .followup-value {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .followup-value.success {
+      color: var(--success);
+    }
+
+    .followup-value.pending {
+      color: var(--yellow);
+    }
+
+    .progress-section {
+      background: rgba(0, 103, 177, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .progress-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .progress-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .progress-percent {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary-light);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+      border-radius: 4px;
+      width: 40%;
+      transition: width 0.5s ease;
+    }
+
+    .progress-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .progress-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .progress-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .progress-check.done {
+      background: var(--success);
+    }
+
+    .progress-check.pending {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--gray-400);
+    }
+
+    .progress-item.completed {
+      color: var(--gray-300);
+    }
+
+    .progress-item.pending {
+      color: var(--gray-500);
+    }
+
+    /* AI Scale Callout */
+    .scale-callout {
+      margin-top: 24px;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .scale-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .scale-icon {
+      font-size: 20px;
+    }
+
+    .scale-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #A78BFA;
+    }
+
+    .scale-text {
+      font-size: 14px;
+      color: var(--gray-300);
+      line-height: 1.6;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 60px 40px 80px;
+      background: #0a1018;
+      text-align: center;
+    }
+
+    .cta-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .cta-subtitle {
+      color: var(--gray-400);
+      font-size: 16px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 1024px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .vs-badge {
+        flex-direction: row;
+        padding: 12px 0;
+      }
+
+      .standards-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 40px 20px 60px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+      }
+
+      .story-section,
+      .pathway-section,
+      .standards-section,
+      .followup-section,
+      .cta-section {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .step-card {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .step-number {
+        width: 48px;
+        height: 48px;
+        font-size: 18px;
+      }
+
+      .steps-timeline::before {
+        display: none;
+      }
+
+      .followup-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .followup-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 26px;
+      }
+
+      .story-card {
+        padding: 20px;
+      }
+
+      .step-content {
+        padding: 20px;
+      }
+
+      .standards-box {
+        padding: 24px;
+      }
+
+      .followup-card {
+        padding: 24px;
+      }
+
+      .cta-title {
+        font-size: 22px;
+      }
+    }
+
+    /* Demo Navigation Styles */
+    .nav__badge {
+      margin-left: 12px;
+      background: var(--yellow);
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .nav__demo-links {
+      display: flex;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .nav__demo-link {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-400);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .nav__demo-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .nav__demo-link.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .nav__demo-links {
+        display: none;
+      }
+      .nav__badge {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav nav--light">
+    <div class="nav__left">
+      <a href="index.html" class="nav__logo">
+        <img src="https://kesmit3.github.io/paic/upliftlogo.png" class="nav__logo-img" alt="Uplift Education">
+        <div class="nav__divider"></div>
+        <span class="nav__product">Purpose Engine</span>
+      </a>
+      <div class="nav__links">
+        <a href="index.html" class="nav__link">&#127968; <span class="nav__link-text">Home</span></a>
+        <a href="aichallenge.html" class="nav__link">&#129302; <span class="nav__link-text">How We Use AI</span></a>
+        <a href="americandream.html" class="nav__link">&#129517; <span class="nav__link-text">Why This Matters</span></a>
+      </div>
+    </div>
+    
+    <div class="nav__right">
+      <div class="nav__links">
+        <a href="student-dashboard.html" class="nav__link nav__link--active">&#128202; <span class="nav__link-text">Student</span></a>
+        <a href="career-bridge.html" class="nav__link">&#127919; <span class="nav__link-text">Career Bridge</span></a>
+        <a href="future-self.html" class="nav__link">&#128302; <span class="nav__link-text">Future Self</span></a>
+        <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; <span class="nav__link-text">Educator</span></a>
+        <a href="explore.htmlass="nav__link">&#9658; <span class="nav__link-text">Demo</span></a>
+        <a href="rtcc-demo.html" class="nav__link">&#128176; <span class="nav__link-text">RTCC</span></a>
+      </div>
+      <span class="nav__pill">&#9889; Demo Mode</span>
+    </div>
+    
+    <button class="nav__toggle" onclick="toggleNav()">&#9776;</button>
+    <div class="nav__links" id="navLinks">
+      <a href="index.html" class="nav__link">&#127968; <span class="nav__link-text">Home</span></a>
+      <a href="aichallenge.html" class="nav__link">&#129302; <span class="nav__link-text">How We Use AI</span></a>
+      <a href="americandream.html" class="nav__link">&#129517; <span class="nav__link-text">Why This Matters</span></a>
+      <a href="student-dashboard.html" class="nav__link nav__link--active">&#128202; <span class="nav__link-text">Student</span></a>
+      <a href="career-bridge.html" class="nav__link">&#127919; <span class="nav__link-text">Career Bridge</span></a>
+      <a href="future-self.html" class="nav__link">&#128302; <span class="nav__link-text">Future Self</span></a>
+      <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; <span class="nav__link-text">Educator</span></a>
+      <a href="explore.html" class="nav__link">&#9658; <span class="nav__link-text">Demo</span></a>
+      <a href="rtcc-demo.html" class="nav__link">&#128176; <span class="nav__link-text">RTCC</span></a>
+    </div>
+  </nav>
+
+  <div class="pathway-page">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>&#9889;</span>
+          <span>Real Student Story</span>
+        </div>
+        <h1>From Overwhelmed to <span>On Track</span></h1>
+        <p class="hero-subtitle">
+          Ivan wants to be an electrician. He heard it's great money. But as a senior with no experience, 
+          he's feeling behind. Here's how Purpose Engine helps him find his path&#8212;without the panic.
+        </p>
+      </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+      <div class="comparison-grid">
+        <!-- Ivan's Card -->
+        <div class="story-card ivan">
+          <div class="story-card-header">
+            <div class="avatar">&#128100;</div>
+            <div>
+              <div class="story-name">Ivan</div>
+              <div class="story-grade">Senior &#8226; Spring Semester</div>
+            </div>
+          </div>
+          <div class="story-stats">
+            <div class="stat-row">
+              <div class="stat-icon">&#128203;</div>
+              <span>No TDLR registration yet</span>
+            </div>
+            <div class="stat-row">
+              <div class="stat-icon">&#9201;</div>
+              <span>0 logged apprentice hours</span>
+            </div>
+            <div class="stat-row">
+              <div class="stat-icon">&#128295;</div>
+              <span>No industry connections</span>
+            </div>
+            <div class="stat-row">
+              <div class="stat-icon">&#128560;</div>
+              <span>Feeling overwhelmed</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- VS Badge -->
+        <div class="vs-badge">
+          <div class="vs-circle">VS</div>
+          <div class="vs-text">Comparison Trap</div>
+        </div>
+
+        <!-- Michael's Card -->
+        <div class="story-card michael">
+          <div class="story-card-header">
+            <div class="avatar">&#128100;</div>
+            <div>
+              <div class="story-name">Michael</div>
+              <div class="story-grade">Senior &#8226; Same Class</div>
+            </div>
+          </div>
+          <div class="story-stats">
+            <div class="stat-row">
+              <div class="stat-icon">&#10003;</div>
+              <span>Has TDLR Apprentice Card</span>
+            </div>
+            <div class="stat-row">
+              <div class="stat-icon">&#10003;</div>
+              <span>3 years helping his dad</span>
+            </div>
+            <div class="stat-row">
+              <div class="stat-icon">&#10003;</div>
+              <span>Family business connections</span>
+            </div>
+            <div class="stat-row">
+              <div class="stat-icon">&#10003;</div>
+              <span>Confident about his path</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ivan's Mindset -->
+      <div class="mindset-box">
+        <div class="mindset-header">
+          <span class="mindset-icon">&#128173;</span>
+          <span class="mindset-label">Ivan's Current Mindset</span>
+        </div>
+        <p class="mindset-text">
+          "Michael already has his card and years of experience. Meanwhile, I'm getting 
+          advice from ten different directions&#8212;college, apprenticeship, community college, 
+          straight to work. But nobody's helped me figure out what makes sense for MY goals. 
+          I feel like I'm choosing blind."
+        </p>
+      </div>
+
+      <!-- Reframe -->
+      <div class="reframe-section">
+        <div class="reframe-arrow">&darr;</div>
+        <h2 class="reframe-title">But here's the truth: <span>Ivan isn't behind.</span></h2>
+        <p class="reframe-subtitle">He's not choosing between college OR a trade&#8212;he's building a career that might use both. 
+                                    He just needs someone to show him how the pieces fit together.
+        </p>
+      </div>
+    </section>
+
+    <!-- Pathway Steps -->
+    <section class="pathway-section">
+      <div class="pathway-container">
+        <div class="section-header">
+          <div class="section-badge">
+            <span>&#128506;</span>
+            <span>Ivan's Pathway</span>
+          </div>
+          <h2 class="section-title">From "What do I do?" to "I've got this."</h2>
+          <p class="section-subtitle">Every step Ivan needs, with AI support exactly where it helps most.</p>
+        </div>
+
+        <div class="steps-timeline">
+          <!-- Step 1 -->
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-header">
+                <h3 class="step-title">Learn from a Peer</h3>
+              </div>
+              <p class="step-desc">
+                Ivan sits down with Michael who shows him his TDLR Electrical Apprentice card. 
+                Suddenly it's real&#8212;not some abstract goal, but a physical card his classmate already has.
+              </p>
+              <div class="step-details">
+                <div class="detail-item">
+                  <span class="detail-icon">&#10003;</span>
+                  <span>Michael explains the registration process</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">&#10003;</span>
+                  <span>Ivan sees what the card looks like</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">&#10003;</span>
+                  <span>The goal becomes tangible and achievable</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-header">
+                <h3 class="step-title">Research the Requirements</h3>
+                <span class="ai-badge">&#129302; AI Assists</span>
+              </div>
+              <p class="step-desc">
+                Ivan uses Google to find the official Texas TDLR website, then asks AI to help him 
+                understand the requirements and break them into clear steps.
+              </p>
+              <div class="step-details">
+                <div class="detail-item">
+                  <span class="detail-icon">&#10003;</span>
+                  <span>TDLR.texas.gov &rarr; Electrician licensing page</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">&#10003;</span>
+                  <span>Apprentice registration: $20 fee, no experience required</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">&#10003;</span>
+                  <span>Need 8,000 hours under licensed electrician to become Journeyman</span>
+                </div>
+              </div>
+              <div class="ai-callout">
+                <div class="ai-callout-header">
+                  <span class="ai-callout-icon">&#10024;</span>
+                  <span class="ai-callout-label">Where AI Helps</span>
+                </div>
+                <p class="ai-callout-text">
+                  AI translates bureaucratic language into simple steps, calculates timeline 
+                  ("8,000 hours = ~4 years full-time"), and answers Ivan's specific questions instantly.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-header">
+                <h3 class="step-title">Find Work Opportunities</h3>
+                <span class="ai-badge">&#129302; AI Assists</span>
+              </div>
+              <p class="step-desc">
+                The biggest question: where can Ivan get hours while still finishing his diploma? 
+                AI helps him build a list of realistic options in his area.
+              </p>
+              <div class="step-details">
+                <div class="detail-item">
+                  <span class="detail-icon">&#10003;</span>
+                  <span>Local electrical contractors hiring apprentices</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">&#10003;</span>
+                  <span>Part-time weekend positions that work with school</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">&#10003;</span>
+                  <span>Union apprenticeship programs (IBEW Local 20)</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">&#10003;</span>
+                  <span>Summer intensive opportunities</span>
+                </div>
+              </div>
+              <div class="ai-callout">
+                <div class="ai-callout-header">
+                  <span class="ai-callout-icon">&#10024;</span>
+                  <span class="ai-callout-label">Where AI Helps</span>
+                </div>
+                <p class="ai-callout-text">
+                  AI generates a customized list of places to call, helps Ivan write a script for 
+                  cold-calling, and even drafts a simple resume highlighting his reliability and eagerness to learn.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <div class="step-header">
+                <h3 class="step-title">Take Action</h3>
+              </div>
+              <p class="step-desc">
+                Ivan now has a clear to-do list. The overwhelm is replaced with momentum.
+              </p>
+              <div class="step-details">
+                <div class="detail-item">
+                  <span class="detail-icon">&#9744;</span>
+                  <span>Register for TDLR Apprentice Card ($20)</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">&#9744;</span>
+                  <span>Call 5 electrical companies this week</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">&#9744;</span>
+                  <span>Apply to IBEW apprenticeship program</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">&#9744;</span>
+                  <span>Ask Michael's dad about shadowing opportunities</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="step-card">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <div class="step-header">
+                <h3 class="step-title">Stay on Track</h3>
+                <span class="ai-badge">&#129302; AI Assists</span>
+              </div>
+              <p class="step-desc">
+                Purpose Engine checks in with Ivan, tracks his progress, and alerts his counselor 
+                if he needs support&#8212;without requiring anyone to hunt him down during a free period.
+              </p>
+              <div class="ai-callout">
+                <div class="ai-callout-header">
+                  <span class="ai-callout-icon">&#10024;</span>
+                  <span class="ai-callout-label">Where AI Helps</span>
+                </div>
+                <p class="ai-callout-text">
+                  Weekly check-ins via the student dashboard. Progress visible to counselors. 
+                  Automatic reminders for deadlines. Celebration when milestones hit.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Standards Connection -->
+    <section class="standards-section">
+      <div class="standards-container">
+        <div class="standards-box">
+          <div class="standards-header">
+            <div class="standards-icon">&#127891;</div>
+            <div>
+              <h3 class="standards-title">Connected to School Standards</h3>
+              <p class="standards-subtitle">Ivan's electrician goal doesn't compete with school&#8212;it motivates it.</p>
+            </div>
+          </div>
+          <div class="standards-grid">
+            <div class="standard-item">
+              <div class="standard-emoji">&#128221;</div>
+              <div class="standard-name">Graduate with Diploma</div>
+              <div class="standard-desc">Required for most apprenticeship programs</div>
+            </div>
+            <div class="standard-item">
+              <div class="standard-emoji">&#128218;</div>
+              <div class="standard-name">Do Your Best in School</div>
+              <div class="standard-desc">Math skills directly apply to electrical calculations</div>
+            </div>
+            <div class="standard-item">
+              <div class="standard-emoji">&#9989;</div>
+              <div class="standard-name">Excellent Attendance</div>
+              <div class="standard-desc">Shows employers you're reliable and committed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Follow-up Section -->
+    <section class="followup-section">
+      <div class="followup-container">
+        <div class="section-header">
+          <div class="section-badge">
+            <span>&#128202;</span>
+            <span>Counselor View</span>
+          </div>
+          <h2 class="section-title">Follow-Up That Scales</h2>
+          <p class="section-subtitle">No more hunting students down. See progress at a glance.</p>
+        </div>
+
+        <div class="followup-card">
+          <div class="followup-header">
+            <div class="followup-avatar">&#128100;</div>
+            <div class="followup-info">
+              <h3>Ivan Rodriguez</h3>
+              <p>Senior &#8226; Career Goal: Electrician &#8226; Last active: Today</p>
+            </div>
+          </div>
+
+          <div class="followup-grid">
+            <div class="followup-item">
+              <div class="followup-label">TDLR Registration</div>
+              <div class="followup-value success">&#10003; Completed Jan 15</div>
+            </div>
+            <div class="followup-item">
+              <div class="followup-label">Companies Contacted</div>
+              <div class="followup-value">3 of 5</div>
+            </div>
+            <div class="followup-item">
+              <div class="followup-label">IBEW Application</div>
+              <div class="followup-value pending">&#9203; In Progress</div>
+            </div>
+            <div class="followup-item">
+              <div class="followup-label">Attendance This Month</div>
+              <div class="followup-value success">98%</div>
+            </div>
+          </div>
+
+          <div class="progress-section">
+            <div class="progress-header">
+              <span class="progress-title">Pathway Progress</span>
+              <span class="progress-percent">40%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill"></div>
+            </div>
+            <div class="progress-items">
+              <div class="progress-item completed">
+                <div class="progress-check done">&#10003;</div>
+                <span>Learned about TDLR requirements</span>
+              </div>
+              <div class="progress-item completed">
+                <div class="progress-check done">&#10003;</div>
+                <span>Registered as Electrical Apprentice</span>
+              </div>
+              <div class="progress-item pending">
+                <div class="progress-check pending">3</div>
+                <span>Contact employers on list</span>
+              </div>
+              <div class="progress-item pending">
+                <div class="progress-check pending">4</div>
+                <span>Secure part-time position or shadowing</span>
+              </div>
+              <div class="progress-item pending">
+                <div class="progress-check pending">5</div>
+                <span>Log first apprentice hours</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="scale-callout">
+            <div class="scale-header">
+              <span class="scale-icon">&#128640;</span>
+              <span class="scale-title">This is How AI Helps Counselors Scale</span>
+            </div>
+            <p class="scale-text">
+              Instead of tracking down Ivan during a free period, his counselor sees this dashboard 
+              for every student with an active career pathway. AI flags students who are stuck, 
+              celebrates wins, and keeps momentum going&#8212;so counselors can focus their 1-on-1 time 
+              where it matters most.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-content">
+        <h2 class="cta-title">Every Student Deserves a Clear Path</h2>
+        <p class="cta-subtitle">
+          Ivan isn't an exception. There are students like him in every classroom&#8212;motivated by a goal, 
+          but unsure of the steps. Purpose Engine makes the path visible.
+        </p>
+        <div class="cta-buttons">
+          <a href="ivan-day.html" class="btn btn--primary">
+            <span>&#128204;</span>
+            <span>See Ivan's Full Day</span>
+          </a>
+          <a href="cyber-pathway.html" class="btn btn--ghost">
+            <span>&#128274;</span>
+            <span>See Marcus's Pathway</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    
+    document.addEventListener('click', function(e) {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.querySelector('.nav__toggle');
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove('open');
+      }
+    });
+
+    // Animate progress bar on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const progressFill = entry.target.querySelector('.progress-fill');
+          if (progressFill) {
+            progressFill.style.width = '40%';
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const progressSection = document.querySelector('.progress-section');
+    if (progressSection) {
+      observer.observe(progressSection);
+    }
+  </script>
+</body>
+</html>

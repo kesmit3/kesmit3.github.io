@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marcus's Pathway | Purpose Engine</title>
+  
+  <!-- Favicon and Social Sharing -->
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png?v=2">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png">
+  <meta property="og:title" content="Marcus's Pathway | Purpose Engine">
+  <meta property="og:description" content="From math reluctance to Carnegie Mellon dreams: How Purpose Engine designs advanced tracks and safely connects students to opportunities.">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="assets/variables.css">
+  
+  <style>
+    /* === Page-specific styles === */
+    body {
+      background: var(--navy);
+      color: white;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 120px 40px 80px;
+      background: linear-gradient(180deg, var(--navy) 0%, #0a1018 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 50%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      color: #06B6D4;
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #06B6D4 0%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--gray-400);
+      line-height: 1.6;
+      max-width: 700px;
+    }
+
+    /* Story Section */
+    .story-section {
+      padding: 0 40px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Profile Card */
+    .profile-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 48px;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .profile-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #06B6D4 0%, var(--purple) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+
+    .profile-info h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .profile-meta {
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .stat-value.highlight { color: #06B6D4; }
+    .stat-value.warning { color: var(--warning); }
+    .stat-value.success { color: var(--success); }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* The Stuck Point */
+    .stuck-section {
+      margin-bottom: 48px;
+    }
+
+    .stuck-box {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .stuck-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stuck-icon {
+      font-size: 24px;
+    }
+
+    .stuck-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #EF4444;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .stuck-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .stuck-text {
+      font-size: 16px;
+      font-style: italic;
+      color: var(--gray-300);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .stuck-details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .stuck-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .stuck-detail-icon {
+      color: #EF4444;
+      flex-shrink: 0;
+    }
+
+    /* Reframe */
+    .reframe-section {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .reframe-arrow {
+      font-size: 32px;
+      color: #06B6D4;
+      margin-bottom: 16px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    .reframe-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .reframe-title span {
+      color: #06B6D4;
+    }
+
+    .reframe-subtitle {
+      color: var(--gray-400);
+      font-size: 16px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Discovery Section */
+    .discovery-section {
+      padding: 60px 40px;
+      background: linear-gradient(180deg, #0a1018 0%, var(--navy) 100%);
+    }
+
+    .discovery-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      color: #06B6D4;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--gray-400);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Spark Card */
+    .spark-card {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    .spark-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .spark-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: rgba(6, 182, 212, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .spark-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .spark-subtitle {
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+
+    .spark-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .spark-item {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .spark-item-label {
+      font-size: 11px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .spark-item-value {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .spark-item-value.cyan { color: #06B6D4; }
+
+    /* Pathway Timeline */
+    .pathway-section {
+      padding: 60px 40px;
+      background: var(--navy);
+    }
+
+    .pathway-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .pathway-steps {
+      position: relative;
+      padding-left: 40px;
+    }
+
+    .pathway-steps::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, #06B6D4 0%, var(--purple) 100%);
+    }
+
+    .pathway-step {
+      position: relative;
+      margin-bottom: 32px;
+    }
+
+    .pathway-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .pathway-marker {
+      position: absolute;
+      left: -40px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #06B6D4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .pathway-marker.completed {
+      background: var(--success);
+    }
+
+    .pathway-marker.ai {
+      background: var(--purple);
+    }
+
+    .pathway-content {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .pathway-content h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .pathway-content p {
+      font-size: 14px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    .pathway-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(139, 92, 246, 0.2);
+      color: #A78BFA;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-top: 12px;
+    }
+
+    /* Role Model Section */
+    .rolemodel-section {
+      padding: 60px 40px;
+      background: linear-gradient(180deg, var(--navy) 0%, #0a1018 100%);
+    }
+
+    .rolemodel-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .rolemodel-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 20px;
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .rolemodel-visual {
+      text-align: center;
+    }
+
+    .rolemodel-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--purple) 0%, #EC4899 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+      margin: 0 auto 16px;
+    }
+
+    .rolemodel-name {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .rolemodel-title {
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+
+    .rolemodel-content h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #A78BFA;
+    }
+
+    .rolemodel-quote {
+      font-size: 16px;
+      color: var(--gray-300);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 20px;
+      padding-left: 20px;
+      border-left: 3px solid var(--purple);
+    }
+
+    .rolemodel-insight {
+      background: rgba(139, 92, 246, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 14px;
+      color: var(--gray-300);
+    }
+
+    .rolemodel-insight strong {
+      color: #A78BFA;
+    }
+
+    /* Safety Section */
+    .safety-section {
+      padding: 80px 40px;
+      background: linear-gradient(180deg, #0a1018 0%, var(--navy) 100%);
+    }
+
+    .safety-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .safety-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .safety-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--success);
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .safety-title {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .safety-subtitle {
+      font-size: 18px;
+      color: var(--gray-400);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .safety-tiers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .safety-tier {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 20px;
+      padding: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .safety-tier.tier-1 { border-color: rgba(16, 185, 129, 0.3); }
+    .safety-tier.tier-2 { border-color: rgba(245, 158, 11, 0.3); }
+    .safety-tier.tier-3 { border-color: rgba(239, 68, 68, 0.3); }
+
+    .tier-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .tier-icon {
+      font-size: 28px;
+    }
+
+    .tier-name {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .tier-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tier-1 .tier-label { color: var(--success); }
+    .tier-2 .tier-label { color: var(--warning); }
+    .tier-3 .tier-label { color: var(--danger); }
+
+    .tier-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .tier-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .tier-item-icon {
+      flex-shrink: 0;
+    }
+
+    .tier-1 .tier-item-icon { color: var(--success); }
+    .tier-2 .tier-item-icon { color: var(--warning); }
+    .tier-3 .tier-item-icon { color: var(--danger); }
+
+    /* Network Section */
+    .network-section {
+      padding: 60px 40px;
+      background: var(--navy);
+    }
+
+    .network-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .network-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 28px;
+    }
+
+    .network-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .network-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #06B6D4 0%, var(--purple) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .network-info h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .network-meta {
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+
+    .network-status {
+      margin-left: auto;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--success);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .network-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .network-item {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .network-item-label {
+      font-size: 11px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .network-item-value {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .network-item-value.success { color: var(--success); }
+    .network-item-value.highlight { color: #06B6D4; }
+
+    .network-alerts {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .network-alert {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .alert-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .alert-icon.counselor { background: rgba(0, 103, 177, 0.2); }
+    .alert-icon.parent { background: rgba(139, 92, 246, 0.2); }
+    .alert-icon.funding { background: rgba(255, 196, 37, 0.2); }
+
+    .alert-content {
+      flex: 1;
+    }
+
+    .alert-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .alert-desc {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .alert-time {
+      font-size: 11px;
+      color: var(--gray-600);
+    }
+
+    /* The Shift */
+    .shift-section {
+      padding: 60px 40px;
+      background: linear-gradient(180deg, var(--navy) 0%, #0a1018 100%);
+    }
+
+    .shift-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .shift-box {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      border-radius: 24px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .shift-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 32px;
+      margin-top: 32px;
+      align-items: center;
+    }
+
+    .shift-card {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .shift-card.before {
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .shift-card.after {
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .shift-card-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .shift-card.before .shift-card-label { color: #EF4444; }
+    .shift-card.after .shift-card-label { color: #10B981; }
+
+    .shift-card-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .shift-card-text {
+      font-size: 14px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    .shift-arrow {
+      font-size: 32px;
+      color: #06B6D4;
+    }
+
+    /* National Importance Section */
+    .national-section {
+      padding: 80px 40px;
+      background: linear-gradient(180deg, #0a1018 0%, var(--navy) 50%, #0a1018 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .national-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 30% 20%, rgba(239, 68, 68, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .national-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .national-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .national-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #EF4444;
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .national-title {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .national-title span {
+      background: linear-gradient(135deg, #EF4444 0%, #06B6D4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .national-subtitle {
+      font-size: 18px;
+      color: var(--gray-400);
+      max-width: 750px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .national-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .national-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 28px;
+      transition: all 0.3s ease;
+    }
+
+    .national-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(6, 182, 212, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .national-card-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+
+    .national-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: white;
+    }
+
+    .national-card-text {
+      font-size: 14px;
+      color: var(--gray-400);
+      line-height: 1.7;
+    }
+
+    .national-callout {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 20px;
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .national-callout-icon {
+      font-size: 48px;
+      flex-shrink: 0;
+    }
+
+    .national-callout-content {
+      flex: 1;
+    }
+
+    .national-callout-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #06B6D4;
+    }
+
+    .national-callout-text {
+      font-size: 15px;
+      color: var(--gray-300);
+      line-height: 1.7;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 80px 40px;
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%);
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .cta-subtitle {
+      font-size: 18px;
+      color: var(--gray-400);
+      max-width: 650px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px;
+      text-align: center;
+      background: var(--navy);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    footer p {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    footer a {
+      color: var(--primary-light);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 100px 20px 60px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .profile-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stuck-details {
+        grid-template-columns: 1fr;
+      }
+
+      .spark-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rolemodel-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .safety-tiers {
+        grid-template-columns: 1fr;
+      }
+
+      .network-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .shift-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .shift-arrow {
+        transform: rotate(90deg);
+      }
+
+      .national-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .national-callout {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .national-title {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav nav--dark">
+    <div class="nav__left">
+      <a href="index.html" class="nav__logo">
+        <img src="https://kesmit3.github.io/paic/upliftlogo.png" class="nav__logo-img" alt="Uplift Education">
+        <div class="nav__divider"></div>
+        <span class="nav__product">Purpose Engine</span>
+      </a>
+      <div class="nav__links">
+        <a href="aichallenge.html" class="nav__link">&#127942; <span class="nav__link-text">Challenge</span></a>
+      </div>
+    </div>
+    
+    <div class="nav__right">
+      <div class="nav__links">
+        <div class="nav__dropdown">
+          <button class="nav__dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>Demo</span>
+            <span class="nav__dropdown-arrow">&#9660;</span>
+          </button>
+          
+          <div class="nav__mega-menu">
+            <div class="mega-menu__grid">
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">Scholar Journeys</div>
+                <a href="ivan-day.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--yellow">&#128295;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Ivan</div>
+                    <div class="mega-menu__desc">Electrician pathway</div>
+                  </div>
+                </a>
+                <a href="cyber-pathway.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#128737;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Marcus</div>
+                    <div class="mega-menu__desc">Cybersecurity pathway</div>
+                  </div>
+                </a>
+                <a href="career-bridge.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--green">&#127793;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Maya</div>
+                    <div class="mega-menu__desc">Sustainable design pathway</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">For Educators</div>
+                <a href="educator-dashboard.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Dashboard</div>
+                    <div class="mega-menu__desc">Alerts, praise, insights</div>
+                  </div>
+                </a>
+                <a href="activity-hub.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--orange">&#128640;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Activity Hub</div>
+                    <div class="mega-menu__desc">Clubs, funding, eligibility</div>
+                  </div>
+                </a>
+                
+                <div class="mega-menu__header" style="margin-top: 16px;">For Counselors</div>
+                <a href="rtcc.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#127891;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Road to College &amp; Career</div>
+                    <div class="mega-menu__desc">FAFSA, IBCs, applications</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section mega-menu__section--full">
+                <div class="mega-menu__header">For Students</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                  <a href="student-dashboard.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Dashboard</div>
+                      <div class="mega-menu__desc">Your overview</div>
+                    </div>
+                  </a>
+                  <a href="career-bridge.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--green">&#127919;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Career Bridge</div>
+                      <div class="mega-menu__desc">Connect classwork</div>
+                    </div>
+                  </a>
+                  <a href="future-self.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--yellow">&#128302;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Future Self</div>
+                      <div class="mega-menu__desc">Chat with 32-year-old you</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <button class="nav__toggle" onclick="toggleNav()" aria-label="Toggle menu">&#9776;</button>
+    <div id="navLinks">
+      <a href="aichallenge.html" class="nav__link">&#127942; Challenge</a>
+      <div class="mobile-menu__header">Scholar Journeys</div>
+      <a href="ivan-day.html" class="nav__link">&#128295; Ivan (Electrician)</a>
+      <a href="cyber-pathway.html" class="nav__link nav__link--active">&#128737; Marcus (Cybersecurity)</a>
+      <a href="career-bridge.html" class="nav__link">&#127793; Maya (Sustainable Design)</a>
+      <div class="mobile-menu__header">For Educators</div>
+      <a href="educator-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="activity-hub.html" class="nav__link">&#128640; Activity Hub</a>
+      <div class="mobile-menu__header">For Counselors</div>
+      <a href="rtcc.html" class="nav__link">&#127891; Road to College &amp; Career</a>
+      <div class="mobile-menu__header">For Students</div>
+      <a href="student-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="career-bridge.html" class="nav__link">&#127919; Career Bridge</a>
+      <a href="future-self.html" class="nav__link">&#128302; Future Self</a>
+    </div>
+  </nav>
+
+  <div class="page-content">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>&#128737;</span>
+          <span>Advanced Track Design</span>
+        </div>
+        <h1>From &ldquo;Why do I need math?&rdquo; to <span>Carnegie Mellon Dreams</span></h1>
+        <p class="hero-subtitle">
+          Purpose Engine doesn&rsquo;t just help struggling students. It designs advanced pathways 
+          for high achievers who are stuck in a different way&mdash;brilliant but disconnected 
+          from what they&rsquo;re building toward.
+        </p>
+      </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+      <!-- Profile Card -->
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar">&#128104;&#8205;&#128187;</div>
+          <div class="profile-info">
+            <h2>Marcus Thompson</h2>
+            <p class="profile-meta">Junior &bull; Summit Preparatory &bull; STEM Track</p>
+          </div>
+        </div>
+        <div class="profile-stats">
+          <div class="stat-card">
+            <div class="stat-value highlight">3.7</div>
+            <div class="stat-label">GPA</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value warning">24</div>
+            <div class="stat-label">ACT Score</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">AP CS</div>
+            <div class="stat-label">Current</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value success">&#128737;</div>
+            <div class="stat-label">Interest</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Stuck Point -->
+      <div class="stuck-section">
+        <div class="stuck-box">
+          <div class="stuck-header">
+            <span class="stuck-icon">&#128565;</span>
+            <span class="stuck-label">The Hidden Struggle</span>
+          </div>
+          <h3 class="stuck-title">Marcus is &ldquo;doing fine&rdquo;&mdash;but he&rsquo;s actually stuck</h3>
+          <p class="stuck-text">
+            &ldquo;I want to do cybersecurity, but I don&rsquo;t know where to start. My ACT math 
+            is holding me back, and I can&rsquo;t even explain why I should care about half my 
+            classes. Carnegie Mellon feels impossible.&rdquo;
+          </p>
+          <div class="stuck-details">
+            <div class="stuck-detail">
+              <span class="stuck-detail-icon">&#10005;</span>
+              <span>No clear pathway from &ldquo;interested in cyber&rdquo; to actual career</span>
+            </div>
+            <div class="stuck-detail">
+              <span class="stuck-detail-icon">&#10005;</span>
+              <span>Math feels abstract&mdash;doesn&rsquo;t connect to his goals</span>
+            </div>
+            <div class="stuck-detail">
+              <span class="stuck-detail-icon">&#10005;</span>
+              <span>No role models who look like him in the field</span>
+            </div>
+            <div class="stuck-detail">
+              <span class="stuck-detail-icon">&#10005;</span>
+              <span>Doesn&rsquo;t know what colleges actually want</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reframe -->
+      <div class="reframe-section">
+        <div class="reframe-arrow">&#8595;</div>
+        <h2 class="reframe-title">Purpose Engine <span>Activates</span></h2>
+        <p class="reframe-subtitle">
+          AI synthesizes Marcus&rsquo;s interests, academics, and goals&mdash;then designs a personalized 
+          pathway that connects today&rsquo;s work to tomorrow&rsquo;s dreams.
+        </p>
+      </div>
+    </section>
+
+    <!-- Discovery Section -->
+    <section class="discovery-section">
+      <div class="discovery-container">
+        <div class="section-header">
+          <div class="section-badge">
+            <span>&#128161;</span>
+            <span>The Discovery</span>
+          </div>
+          <h2 class="section-title">Cybersecurity Isn&rsquo;t Just Coding</h2>
+          <p class="section-subtitle">Purpose Engine reveals the full landscape of what Marcus is building toward.</p>
+        </div>
+
+        <!-- Spark Card -->
+        <div class="spark-card">
+          <div class="spark-header">
+            <div class="spark-icon">&#128274;</div>
+            <div>
+              <div class="spark-title">Chief Information Security Officer (CISO)</div>
+              <div class="spark-subtitle">The role that protects everything digital</div>
+            </div>
+          </div>
+          <div class="spark-grid">
+            <div class="spark-item">
+              <div class="spark-item-label">Median Salary</div>
+              <div class="spark-item-value cyan">$240,000</div>
+            </div>
+            <div class="spark-item">
+              <div class="spark-item-label">Growth Rate</div>
+              <div class="spark-item-value cyan">35% by 2032</div>
+            </div>
+            <div class="spark-item">
+              <div class="spark-item-label">Why Math Matters</div>
+              <div class="spark-item-value">Cryptography protects data</div>
+            </div>
+            <div class="spark-item">
+              <div class="spark-item-label">Entry Point</div>
+              <div class="spark-item-value">Harvard CS50 (Free)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pathway Section -->
+    <section class="pathway-section">
+      <div class="pathway-container">
+        <div class="section-header">
+          <div class="section-badge">
+            <span>&#128205;</span>
+            <span>The Pathway</span>
+          </div>
+          <h2 class="section-title">From Here to Carnegie Mellon</h2>
+          <p class="section-subtitle">A clear sequence of steps, with AI assistance at every stage.</p>
+        </div>
+
+        <div class="pathway-steps">
+          <div class="pathway-step">
+            <div class="pathway-marker completed">&#10003;</div>
+            <div class="pathway-content">
+              <h3>Enroll in Harvard CS50 (Free)</h3>
+              <p>World-class intro to computer science. Completely free. Already pre-vetted by Purpose Engine.</p>
+              <div class="pathway-tag">
+                <span>&#129302;</span>
+                <span>AI Recommended</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pathway-step">
+            <div class="pathway-marker ai">&#129302;</div>
+            <div class="pathway-content">
+              <h3>Reframe ACT Math as Cryptography</h3>
+              <p>Purpose Engine connects each math concept to real cybersecurity applications. &ldquo;This is how encryption works.&rdquo;</p>
+              <div class="pathway-tag">
+                <span>&#127919;</span>
+                <span>Career-Bridge Challenge</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pathway-step">
+            <div class="pathway-marker">3</div>
+            <div class="pathway-content">
+              <h3>Connect with CISO Role Model</h3>
+              <p>Purpose Engine surfaces career spotlights from security executives who share Marcus&rsquo;s background.</p>
+            </div>
+          </div>
+
+          <div class="pathway-step">
+            <div class="pathway-marker">4</div>
+            <div class="pathway-content">
+              <h3>Build Portfolio for College Apps</h3>
+              <p>CS50 certificate + documented projects + clear career narrative = compelling application story.</p>
+            </div>
+          </div>
+
+          <div class="pathway-step">
+            <div class="pathway-marker">5</div>
+            <div class="pathway-content">
+              <h3>Carnegie Mellon Application</h3>
+              <p>With context, credentials, and clarity about &ldquo;why cybersecurity,&rdquo; Marcus stands out.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Role Model Section -->
+    <section class="rolemodel-section">
+      <div class="rolemodel-container">
+        <div class="section-header">
+          <div class="section-badge">
+            <span>&#128100;</span>
+            <span>Representation Matters</span>
+          </div>
+          <h2 class="section-title">Role Models Who Look Like Him</h2>
+          <p class="section-subtitle">Purpose Engine surfaces inspiration from professionals who share Marcus&rsquo;s background.</p>
+        </div>
+
+        <div class="rolemodel-card">
+          <div class="rolemodel-visual">
+            <div class="rolemodel-avatar">&#128104;&#8205;&#128188;</div>
+            <div class="rolemodel-name">Chris Hughes</div>
+            <div class="rolemodel-title">CISO, Major Tech Company</div>
+          </div>
+          <div class="rolemodel-content">
+            <h3>&ldquo;I didn&rsquo;t know anyone in tech growing up.&rdquo;</h3>
+            <p class="rolemodel-quote">
+              &ldquo;I thought cybersecurity was for people who already knew everything about computers. 
+              Turns out, the best security professionals are curious problem-solvers who never stop learning. 
+              That was me. That could be you.&rdquo;
+            </p>
+            <div class="rolemodel-insight">
+              <strong>Purpose Engine Insight:</strong> Marcus connected with this profile because Chris 
+              also started without a tech background and emphasized that math skills were what set him apart 
+              in cryptography roles.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Safety Section -->
+    <section class="safety-section">
+      <div class="safety-container">
+        <div class="safety-card">
+          <div class="safety-header">
+            <div class="safety-badge">
+              <span>&#128737;&#65039;</span>
+              <span>Student Safety</span>
+            </div>
+            <h2 class="safety-title">Connecting Students to Opportunities&mdash;Safely</h2>
+            <p class="safety-subtitle">
+              Purpose Engine opens doors to the outside world while maintaining strict guardrails 
+              to protect students from harm.
+            </p>
+          </div>
+
+          <div class="safety-tiers">
+            <!-- Tier 1 -->
+            <div class="safety-tier tier-1">
+              <div class="tier-header">
+                <div class="tier-icon">&#10003;</div>
+                <div>
+                  <div class="tier-name">Pre-Vetted Resources</div>
+                  <div class="tier-label">Auto-Approved</div>
+                </div>
+              </div>
+              <div class="tier-items">
+                <div class="tier-item">
+                  <span class="tier-item-icon">&#10003;</span>
+                  <span>Harvard CS50, Khan Academy, Coursera for Campus</span>
+                </div>
+                <div class="tier-item">
+                  <span class="tier-item-icon">&#10003;</span>
+                  <span>District-approved career exploration platforms</span>
+                </div>
+                <div class="tier-item">
+                  <span class="tier-item-icon">&#10003;</span>
+                  <span>RTCC partner content and programs</span>
+                </div>
+                <div class="tier-item">
+                  <span class="tier-item-icon">&#10003;</span>
+                  <span>Students can access immediately</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tier 2 -->
+            <div class="safety-tier tier-2">
+              <div class="tier-header">
+                <div class="tier-icon">&#128101;</div>
+                <div>
+                  <div class="tier-name">AI-Suggested Resources</div>
+                  <div class="tier-label">Human-Approved</div>
+                </div>
+              </div>
+              <div class="tier-items">
+                <div class="tier-item">
+                  <span class="tier-item-icon">&#9679;</span>
+                  <span>New courses flagged by Purpose Engine</span>
+                </div>
+                <div class="tier-item">
+                  <span class="tier-item-icon">&#9679;</span>
+                  <span>Counselor reviews before surfacing to student</span>
+                </div>
+                <div class="tier-item">
+                  <span class="tier-item-icon">&#9679;</span>
+                  <span>Parent notification for external engagement</span>
+                </div>
+                <div class="tier-item">
+                  <span class="tier-item-icon">&#9679;</span>
+                  <span>Added to approved list once validated</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tier 3 -->
+            <div class="safety-tier tier-3">
+              <div class="tier-header">
+                <div class="tier-icon">&#128113;</div>
+                <div>
+                  <div class="tier-name">Role Model Connections</div>
+                  <div class="tier-label">Mediated Only</div>
+                </div>
+              </div>
+              <div class="tier-items">
+                <div class="tier-item">
+                  <span class="tier-item-icon">&#128683;</span>
+                  <span>No direct contact between adults and minors</span>
+                </div>
+                <div class="tier-item">
+                  <span class="tier-item-icon">&#10003;</span>
+                  <span>LinkedIn profiles viewable (no DMs)</span>
+                </div>
+                <div class="tier-item">
+                  <span class="tier-item-icon">&#10003;</span>
+                  <span>&ldquo;Career Spotlight&rdquo; videos instead of live contact</span>
+                </div>
+                <div class="tier-item">
+                  <span class="tier-item-icon">&#10003;</span>
+                  <span>Guest speakers via official school channels only</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Network Section -->
+    <section class="network-section">
+      <div class="network-container">
+        <div class="section-header">
+          <div class="section-badge">
+            <span>&#128279;</span>
+            <span>The Network Activates</span>
+          </div>
+          <h2 class="section-title">Everyone Sees His Progress</h2>
+          <p class="section-subtitle">Purpose Engine surfaces Marcus&rsquo;s momentum to the people who can help him take the next step.</p>
+        </div>
+
+        <div class="network-card">
+          <div class="network-header">
+            <div class="network-avatar">&#128104;&#8205;&#128187;</div>
+            <div class="network-info">
+              <h3>Marcus Thompson</h3>
+              <p class="network-meta">Junior &bull; Cybersecurity Track &bull; Active in CS50</p>
+            </div>
+            <div class="network-status">&#128293; High Engagement</div>
+          </div>
+
+          <div class="network-grid">
+            <div class="network-item">
+              <div class="network-item-label">CS50 Progress</div>
+              <div class="network-item-value success">60% Complete (3 weeks)</div>
+            </div>
+            <div class="network-item">
+              <div class="network-item-label">Target School</div>
+              <div class="network-item-value highlight">Carnegie Mellon</div>
+            </div>
+            <div class="network-item">
+              <div class="network-item-label">Career Goal</div>
+              <div class="network-item-value">CISO / Security Executive</div>
+            </div>
+            <div class="network-item">
+              <div class="network-item-label">Next Step</div>
+              <div class="network-item-value">Certificate funding</div>
+            </div>
+          </div>
+
+          <div class="network-alerts">
+            <div class="network-alert">
+              <div class="alert-icon counselor">&#128105;&#8205;&#128188;</div>
+              <div class="alert-content">
+                <div class="alert-title">Counselor notified</div>
+                <div class="alert-desc">&ldquo;Marcus showing exceptional engagement with CS50. Schedule follow-up to discuss certificate funding and ACT strategy.&rdquo;</div>
+              </div>
+              <div class="alert-time">2 days ago</div>
+            </div>
+            <div class="network-alert">
+              <div class="alert-icon parent">&#128104;&#8205;&#128105;&#8205;&#128102;</div>
+              <div class="alert-content">
+                <div class="alert-title">Parent notified</div>
+                <div class="alert-desc">&ldquo;Marcus is enrolled in Harvard CS50 (free, pre-vetted). He&rsquo;s 60% complete and highly engaged.&rdquo;</div>
+              </div>
+              <div class="alert-time">1 week ago</div>
+            </div>
+            <div class="network-alert">
+              <div class="alert-icon funding">&#128176;</div>
+              <div class="alert-content">
+                <div class="alert-title">Funding flag raised</div>
+                <div class="alert-desc">&ldquo;Student on track to complete CS50. Certificate fee: $149. Recommend district scholarship or partner sponsorship.&rdquo;</div>
+              </div>
+              <div class="alert-time">Today</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Shift -->
+    <section class="shift-section">
+      <div class="shift-container">
+        <div class="shift-box">
+          <div class="section-badge">
+            <span>&#10024;</span>
+            <span>The Transformation</span>
+          </div>
+          <h2 class="section-title">Same Student. New Trajectory.</h2>
+
+          <div class="shift-grid">
+            <div class="shift-card before">
+              <div class="shift-card-label">Before</div>
+              <div class="shift-card-title">&ldquo;Why do I need math?&rdquo;</div>
+              <div class="shift-card-text">Disconnected from his goals. ACT pressure without context. Curious about coding but no entry point. No role models to follow.</div>
+            </div>
+
+            <div class="shift-arrow">&#8594;</div>
+
+            <div class="shift-card after">
+              <div class="shift-card-label">After (3 Weeks)</div>
+              <div class="shift-card-title">&ldquo;I know exactly what I&rsquo;m building toward.&rdquo;</div>
+              <div class="shift-card-text">60% through Harvard CS50. Found a CISO role model. Math now has context&mdash;cryptography protects people. ACT prep has urgency.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- National Importance Section -->
+    <section class="national-section">
+      <div class="national-container">
+        <div class="national-header">
+          <div class="national-badge">
+            <span>&#128737;&#65039;</span>
+            <span>Why This Matters</span>
+          </div>
+          <h2 class="national-title">America Needs <span>AI-Aware Cyber Patriots</span></h2>
+          <p class="national-subtitle">
+            The next generation of cyber defenders won&rsquo;t just write code&mdash;they&rsquo;ll command AI systems in real-time to protect our nation&rsquo;s critical infrastructure. Students like Marcus aren&rsquo;t just building careers; they&rsquo;re building America&rsquo;s digital frontline.
+          </p>
+        </div>
+
+        <div class="national-grid">
+          <div class="national-card">
+            <div class="national-card-icon">&#127919;</div>
+            <div class="national-card-title">AI-Enhanced Threat Detection</div>
+            <div class="national-card-text">
+              Modern cyber attacks use AI to evolve faster than humans can respond. We need defenders who can leverage AI to identify, predict, and neutralize threats in milliseconds&mdash;not minutes.
+            </div>
+          </div>
+
+          <div class="national-card">
+            <div class="national-card-icon">&#127963;&#65039;</div>
+            <div class="national-card-title">Critical Infrastructure Protection</div>
+            <div class="national-card-text">
+              Power grids, water systems, financial networks, and hospitals depend on cyber professionals who understand how AI can both attack and defend these vital systems.
+            </div>
+          </div>
+
+          <div class="national-card">
+            <div class="national-card-icon">&#127760;</div>
+            <div class="national-card-title">Global Cyber Dominance</div>
+            <div class="national-card-text">
+              Nation-states are racing to build AI-powered cyber capabilities. American students trained today in AI + cybersecurity will define whether we lead or follow in tomorrow&rsquo;s digital battlespace.
+            </div>
+          </div>
+        </div>
+
+        <div class="national-callout">
+          <div class="national-callout-icon">&#128640;</div>
+          <div class="national-callout-content">
+            <div class="national-callout-title">From Classroom to Command Center</div>
+            <div class="national-callout-text">
+              When Marcus learns to think like a CISO, he&rsquo;s not just preparing for a job&mdash;he&rsquo;s developing the strategic mindset America needs to secure everything from small businesses to national defense systems. Purpose Engine doesn&rsquo;t just find students careers; it builds the talent pipeline our nation&rsquo;s security depends on.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <h2 class="cta-title">Purpose Engine Designs Advanced Tracks Too</h2>
+      <p class="cta-subtitle">
+        It&rsquo;s not just for students considering trades. High achievers like Marcus get stuck too&mdash;
+        they just get stuck on different things. Purpose Engine finds the bridge, surfaces opportunities 
+        safely, and keeps the network informed.
+      </p>
+      <div class="cta-buttons">
+        <a href="electrician-pathway.html" class="btn btn--primary">
+          <span>&#9889;</span>
+          <span>See Ivan&rsquo;s Trade Pathway</span>
+        </a>
+        <a href="explore.html" class="btn btn--ghost">
+          <span>&#128105;&#8205;&#127979;</span>
+          <span>Educator Demo</span>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Purpose Engine &mdash; An <a href="https://www.uplifteducation.org" target="_blank">Uplift Education</a> Initiative
+    </p>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    
+    document.addEventListener('click', function(e) {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.querySelector('.nav__toggle');
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>

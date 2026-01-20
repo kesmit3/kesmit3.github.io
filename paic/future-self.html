@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Future Self | Purpose Engine Demo</title>
+  
+  <!-- Favicon and Social Sharing -->
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png?v=2">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png">
+  <meta property="og:title" content="Future Self | Purpose Engine">
+  <meta property="og:description" content="Talk to your AI-powered Future Self. See how your schoolwork connects to your dreams.">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="assets/variables.css">
+  
+  <style>
+    body {
+      background: var(--gray-50);
+      color: var(--gray-800);
+    }
+
+    /* Prototype Banner */
+    .prototype-banner {
+      background: linear-gradient(90deg, var(--navy) 0%, var(--primary-dark) 100%);
+      padding: 8px 20px;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1001;
+    }
+
+    .prototype-banner-content {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: white;
+    }
+
+    .prototype-banner-badge {
+      background: var(--yellow);
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .prototype-banner-text {
+      opacity: 0.9;
+    }
+
+    .prototype-banner-highlight {
+      color: var(--yellow);
+      font-weight: 600;
+    }
+
+    /* Adjust nav position for banner */
+    .nav {
+      top: 32px !important;
+    }
+
+    /* Page Layout */
+    .future-self-page {
+      min-height: 100vh;
+      padding-top: calc(var(--nav-height) + 32px);
+    }
+
+    /* Hero Banner */
+    .page-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #0a1018 100%);
+      padding: 48px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(ellipse at 30% 50%, rgba(0, 103, 177, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .page-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .page-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 196, 37, 0.15);
+      border: 1px solid rgba(255, 196, 37, 0.3);
+      color: var(--yellow);
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+
+    .page-hero h1 {
+      font-size: 36px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .page-hero h1 span {
+      background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-hero p {
+      font-size: 16px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    /* Step Indicator */
+    .steps {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 32px 24px;
+      background: var(--gray-50);
+    }
+
+    .step-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gray-300);
+      transition: all 0.3s ease;
+    }
+
+    .step-dot.active {
+      background: var(--primary);
+      width: 32px;
+      border-radius: 5px;
+    }
+
+    .step-dot.done { 
+      background: var(--yellow); 
+    }
+
+    /* Screens Container */
+    .screens {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+
+    .screen {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .screen.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Demo Banner */
+    .demo-banner {
+      background: linear-gradient(135deg, rgba(255, 196, 37, 0.1) 0%, rgba(255, 196, 37, 0.05) 100%);
+      border: 1px solid rgba(255, 196, 37, 0.3);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .demo-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    .demo-banner p {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .screen-title {
+      text-align: center;
+      margin-bottom: 8px;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .screen-subtitle {
+      text-align: center;
+      color: var(--gray-500);
+      margin-bottom: 32px;
+      font-size: 16px;
+    }
+
+    /* Profile Grid */
+    .profiles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .profile-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+      box-shadow: var(--card-shadow);
+    }
+
+    .profile-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: var(--card-shadow-lg);
+    }
+
+    .profile-card.selected {
+      border-color: var(--primary);
+      background: linear-gradient(135deg, rgba(0, 103, 177, 0.04) 0%, rgba(0, 103, 177, 0.08) 100%);
+    }
+
+    .profile-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .profile-name {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 4px;
+      color: var(--navy);
+    }
+
+    .profile-meta {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    /* Screen 2: Set Your Goal */
+    .goal-container {
+      background: white;
+      border-radius: 24px;
+      padding: 48px;
+      max-width: 560px;
+      margin: 0 auto;
+      box-shadow: var(--card-shadow-lg);
+    }
+
+    .selected-profile {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: var(--gray-50);
+      border-radius: 12px;
+      margin-bottom: 32px;
+    }
+
+    .selected-profile .profile-avatar {
+      width: 56px;
+      height: 56px;
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .selected-profile .info { flex: 1; }
+    .selected-profile .name { font-weight: 700; font-size: 16px; color: var(--navy); }
+    .selected-profile .meta { font-size: 13px; color: var(--gray-500); }
+
+    .change-btn {
+      font-size: 13px;
+      color: var(--primary);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: inherit;
+    }
+
+    .change-btn:hover {
+      text-decoration: underline;
+    }
+
+    .goal-prompt {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .goal-input {
+      width: 100%;
+      padding: 16px 20px;
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: border-color 0.2s ease;
+      margin-bottom: 16px;
+    }
+
+    .goal-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .goal-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .suggestion-chip {
+      padding: 8px 14px;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      border-radius: 20px;
+      font-size: 13px;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .suggestion-chip:hover {
+      background: var(--gray-200);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Screen 3: Conversation */
+    .chat-container {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      max-width: 700px;
+      margin: 0 auto;
+      box-shadow: var(--card-shadow-lg);
+      display: flex;
+      flex-direction: column;
+      height: 650px;
+    }
+
+    .chat-header {
+      padding: 24px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .future-avatar {
+      width: 56px;
+      height: 56px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      position: relative;
+    }
+
+    .future-avatar::after {
+      content: '\2728';
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      font-size: 16px;
+    }
+
+    .future-info .name { font-weight: 700; font-size: 18px; }
+    .future-info .role { font-size: 14px; opacity: 0.9; }
+
+    .back-btn {
+      margin-left: auto;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: inherit;
+      transition: background 0.2s ease;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: var(--gray-50);
+    }
+
+    .message {
+      max-width: 85%;
+      animation: messageIn 0.3s ease;
+    }
+
+    @keyframes messageIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message.future { align-self: flex-start; }
+    .message.student { align-self: flex-end; }
+
+    .message-bubble {
+      padding: 14px 18px;
+      border-radius: 18px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .message.future .message-bubble {
+      background: white;
+      color: var(--gray-800);
+      border: 1px solid var(--gray-200);
+      border-bottom-left-radius: 4px;
+    }
+
+    .message.student .message-bubble {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message-time {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-top: 6px;
+      padding: 0 4px;
+    }
+
+    .message.student .message-time { text-align: right; }
+
+    .typing-dots {
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .typing-dots span {
+      width: 8px;
+      height: 8px;
+      background: var(--gray-400);
+      border-radius: 50%;
+      animation: bounce 1.4s infinite ease-in-out;
+    }
+
+    .typing-dots span:nth-child(1) { animation-delay: 0s; }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-6px); }
+    }
+
+    .chat-input-area {
+      padding: 20px 24px;
+      background: white;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .quick-prompts {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .quick-prompt {
+      padding: 10px 16px;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      border-radius: 20px;
+      font-size: 13px;
+      color: var(--gray-600);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .quick-prompt:hover {
+      background: var(--gray-200);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .quick-prompt:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .input-row { display: flex; gap: 12px; }
+
+    .chat-input {
+      flex: 1;
+      padding: 14px 20px;
+      border: 2px solid var(--gray-200);
+      border-radius: 24px;
+      font-size: 15px;
+      font-family: inherit;
+      transition: border-color 0.2s ease;
+    }
+
+    .chat-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .chat-input:disabled { background: var(--gray-50); }
+
+    .send-btn {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .send-btn:hover { 
+      transform: scale(1.05); 
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+    .send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* Buttons */
+    .btn {
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px var(--primary-glow);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--gray-600);
+      border: 1px solid var(--gray-200);
+    }
+
+    .btn-secondary:hover {
+      background: var(--gray-50);
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 32px;
+      background: var(--gray-100);
+      border-top: 1px solid var(--gray-200);
+    }
+
+    footer p {
+      color: var(--gray-500);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-hero {
+        padding: 32px 20px;
+      }
+
+      .page-hero h1 {
+        font-size: 28px;
+      }
+
+      .profiles-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+      }
+
+      .goal-container { 
+        padding: 32px 24px; 
+      }
+
+      .chat-container { 
+        height: calc(100vh - 200px); 
+        border-radius: 16px; 
+      }
+
+      .screen-title { 
+        font-size: 24px; 
+      }
+
+      .screens { 
+        padding: 0 16px 32px; 
+      }
+
+      .steps {
+        padding: 24px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profiles-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .profile-card {
+        padding: 16px 12px;
+      }
+
+      .profile-avatar {
+        width: 48px;
+        height: 48px;
+        font-size: 18px;
+      }
+
+      .chat-header {
+        padding: 16px;
+      }
+
+      .chat-input-area {
+        padding: 16px;
+      }
+
+      .quick-prompts {
+        gap: 6px;
+      }
+
+      .quick-prompt {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      .prototype-banner {
+        padding: 6px 16px;
+      }
+
+      .prototype-banner-content {
+        font-size: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Prototype Banner -->
+  <div class="prototype-banner">
+    <div class="prototype-banner-content">
+      <span class="prototype-banner-badge">Track IIIB</span>
+      <span class="prototype-banner-text">Presidential AI Challenge &mdash;</span>
+      <span class="prototype-banner-highlight">Five Pillars: Future Self Mentorship</span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav nav--light">
+    <div class="nav__left">
+      <a href="index.html" class="nav__logo">
+        <img src="https://kesmit3.github.io/paic/upliftlogo.png" class="nav__logo-img" alt="Uplift Education">
+        <div class="nav__divider"></div>
+        <span class="nav__product">Purpose Engine</span>
+      </a>
+      <div class="nav__links">
+        <a href="aichallenge.html" class="nav__link">&#127942; <span class="nav__link-text">Challenge</span></a>
+      </div>
+    </div>
+    
+    <div class="nav__right">
+      <div class="nav__links">
+        <div class="nav__dropdown">
+          <button class="nav__dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>Demo</span>
+            <span class="nav__dropdown-arrow">&#9660;</span>
+          </button>
+          
+          <div class="nav__mega-menu">
+            <div class="mega-menu__grid">
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">Scholar Journeys</div>
+                <a href="ivan-day.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--yellow">&#128295;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Ivan</div>
+                    <div class="mega-menu__desc">Electrician pathway</div>
+                  </div>
+                </a>
+                <a href="cyber-pathway.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#128737;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Marcus</div>
+                    <div class="mega-menu__desc">Cybersecurity pathway</div>
+                  </div>
+                </a>
+                <a href="career-bridge.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--green">&#127793;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Maya</div>
+                    <div class="mega-menu__desc">Sustainable design pathway</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">For Educators</div>
+                <a href="educator-dashboard.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Dashboard</div>
+                    <div class="mega-menu__desc">Alerts, praise, insights</div>
+                  </div>
+                </a>
+                <a href="activity-hub.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--orange">&#128640;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Activity Hub</div>
+                    <div class="mega-menu__desc">Clubs, funding, eligibility</div>
+                  </div>
+                </a>
+                
+                <div class="mega-menu__header" style="margin-top: 16px;">For Counselors</div>
+                <a href="rtcc.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#127891;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Road to College &amp; Career</div>
+                    <div class="mega-menu__desc">FAFSA, IBCs, applications</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section mega-menu__section--full">
+                <div class="mega-menu__header">For Students</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                  <a href="student-dashboard.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Dashboard</div>
+                      <div class="mega-menu__desc">Your overview</div>
+                    </div>
+                  </a>
+                  <a href="career-bridge.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--green">&#127919;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Career Bridge</div>
+                      <div class="mega-menu__desc">Connect classwork</div>
+                    </div>
+                  </a>
+                  <a href="future-self.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--yellow">&#128302;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Future Self</div>
+                      <div class="mega-menu__desc">Chat with 32-year-old you</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <button class="nav__toggle" onclick="toggleNav()" aria-label="Toggle menu">&#9776;</button>
+    <div id="navLinks">
+      <a href="aichallenge.html" class="nav__link">&#127942; Challenge</a>
+      <div class="mobile-menu__header">Scholar Journeys</div>
+      <a href="ivan-day.html" class="nav__link">&#128295; Ivan (Electrician)</a>
+      <a href="cyber-pathway.html" class="nav__link">&#128737; Marcus (Cybersecurity)</a>
+      <a href="career-bridge.html" class="nav__link">&#127793; Maya (Sustainable Design)</a>
+      <div class="mobile-menu__header">For Educators</div>
+      <a href="educator-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="activity-hub.html" class="nav__link">&#128640; Activity Hub</a>
+      <div class="mobile-menu__header">For Counselors</div>
+      <a href="rtcc.html" class="nav__link">&#127891; Road to College &amp; Career</a>
+      <div class="mobile-menu__header">For Students</div>
+      <a href="student-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="career-bridge.html" class="nav__link">&#127919; Career Bridge</a>
+      <a href="future-self.html" class="nav__link nav__link--active">&#128302; Future Self</a>
+    </div>
+  </nav>
+
+  <div class="future-self-page">
+    <!-- Hero Banner -->
+    <section class="page-hero">
+      <div class="page-hero-content">
+        <div class="page-hero-badge">
+          <span>&#10024;</span>
+          <span>AI-Powered Mentorship</span>
+        </div>
+        <h1>Talk to Your <span>Future Self</span></h1>
+        <p>What if you could ask your successful 32-year-old self for advice? This AI creates a personalized mentor based on your goals&mdash;helping you see why today&rsquo;s work matters.</p>
+        <p style="margin-top: 12px; font-size: 13px; opacity: 0.7;">&#128302; One of the Five Pillars of the Purpose Engine</p>
+      </div>
+    </section>
+
+    <!-- Step Indicator -->
+    <div class="steps">
+      <div class="step-dot active" id="dot1"></div>
+      <div class="step-dot" id="dot2"></div>
+      <div class="step-dot" id="dot3"></div>
+    </div>
+
+    <div class="screens">
+
+      <!-- Screen 1: Choose Profile -->
+      <div class="screen active" id="screen1">
+        <div class="demo-banner">
+          <span class="demo-badge">&#10024; INTERACTIVE AI DEMO</span>
+          <p>This demonstrates how the Purpose Engine&rsquo;s Future Self Mentorship works.<br>Select a student persona to experience AI-powered motivation coaching.</p>
+        </div>
+
+        <h1 class="screen-title">Step Into Their Shoes</h1>
+        <p class="screen-subtitle">Choose a fictional student persona to experience the Future Self AI</p>
+
+        <div class="profiles-grid">
+          <div class="profile-card" onclick="selectProfile(this, 'Maya Chen', '11th Grade &bull; Eco-architecture', '#0067b1', 'MC')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #0067b1, #004b85)">MC</div>
+            <div class="profile-name">Maya Chen</div>
+            <div class="profile-meta">11th Grade &bull; Eco-architecture</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Jordan Williams', '12th Grade &bull; Tech startups', '#8b5cf6', 'JW')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9)">JW</div>
+            <div class="profile-name">Jordan Williams</div>
+            <div class="profile-meta">12th Grade &bull; Tech startups</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Marcus Rivera', '9th Grade &bull; Music production', '#f59e0b', 'MR')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706)">MR</div>
+            <div class="profile-name">Marcus Rivera</div>
+            <div class="profile-meta">9th Grade &bull; Music production</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Sarah Kim', '11th Grade &bull; Pediatric surgery', '#10b981', 'SK')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #10b981, #059669)">SK</div>
+            <div class="profile-name">Sarah Kim</div>
+            <div class="profile-meta">11th Grade &bull; Pediatric surgery</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Tyler Brooks', '10th Grade &bull; Game design', '#64748b', 'TB')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #64748b, #475569)">TB</div>
+            <div class="profile-name">Tyler Brooks</div>
+            <div class="profile-meta">10th Grade &bull; Game design</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Aisha Patel', '12th Grade &bull; Data science', '#ec4899', 'AP')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #ec4899, #db2777)">AP</div>
+            <div class="profile-name">Aisha Patel</div>
+            <div class="profile-meta">12th Grade &bull; Data science</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Ethan O\'Brien', '11th Grade &bull; Construction mgmt', '#0891b2', 'EO')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #0891b2, #0e7490)">EO</div>
+            <div class="profile-name">Ethan O'Brien</div>
+            <div class="profile-meta">11th Grade &bull; Construction</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Priya Sharma', '10th Grade &bull; Veterinary medicine', '#84cc16', 'PS')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #84cc16, #65a30d)">PS</div>
+            <div class="profile-name">Priya Sharma</div>
+            <div class="profile-meta">10th Grade &bull; Veterinary</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Chris Taylor', '9th Grade &bull; App development', '#f43f5e', 'CT')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #f43f5e, #e11d48)">CT</div>
+            <div class="profile-name">Chris Taylor</div>
+            <div class="profile-meta">9th Grade &bull; App development</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Nina Rodriguez', '12th Grade &bull; Professional dance', '#a855f7', 'NR')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #a855f7, #9333ea)">NR</div>
+            <div class="profile-name">Nina Rodriguez</div>
+            <div class="profile-meta">12th Grade &bull; Dance</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Marcus Day', '11th Grade &bull; Electrician apprenticeship', '#f59e0b', 'MD')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706)">MD</div>
+            <div class="profile-name">Marcus Day</div>
+            <div class="profile-meta">11th Grade &bull; Electrician</div>
+          </div>
+          <div class="profile-card" onclick="selectProfile(this, 'Ivan Rodriguez', '12th Grade &bull; Cybersecurity (SOC)', '#10b981', 'IR')">
+            <div class="profile-avatar" style="background: linear-gradient(135deg, #10b981, #059669)">IR</div>
+            <div class="profile-name">Ivan Rodriguez</div>
+            <div class="profile-meta">12th Grade &bull; Cybersecurity</div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" id="nextBtn1" disabled onclick="goToScreen(2)">Continue &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Screen 2: Set Your Goal -->
+      <div class="screen" id="screen2">
+        <div class="goal-container">
+          <div class="selected-profile">
+            <div class="profile-avatar" id="selectedAvatar" style="background: linear-gradient(135deg, #0067b1, #004b85)">MC</div>
+            <div class="info">
+              <div class="name" id="selectedName">Maya Chen</div>
+              <div class="meta" id="selectedMeta">11th Grade &bull; Eco-architecture</div>
+            </div>
+            <button class="change-btn" onclick="goToScreen(1)">Change</button>
+          </div>
+
+          <div class="goal-prompt">As this student, what&rsquo;s your dream?</div>
+          <input type="text" class="goal-input" id="goalInput" placeholder="e.g., A sustainable architect who designs eco-friendly buildings" oninput="checkGoal()">
+
+          <div class="goal-suggestions">
+            <span class="suggestion-chip" onclick="setGoal('A sustainable architect who designs eco-friendly buildings')">&#127959; Architect</span>
+            <span class="suggestion-chip" onclick="setGoal('A Grammy-winning music producer')">&#127925; Producer</span>
+            <span class="suggestion-chip" onclick="setGoal('A pediatric surgeon who helps sick children')">&#129657; Doctor</span>
+            <span class="suggestion-chip" onclick="setGoal('A video game designer at a major studio')">&#127918; Game Dev</span>
+            <span class="suggestion-chip" onclick="setGoal('A tech startup founder')">&#128640; Founder</span>
+            <span class="suggestion-chip" onclick="setGoal('A data scientist fighting for social justice')">&#128202; Data Scientist</span>
+          </div>
+
+          <div class="btn-row" style="margin-top: 16px;">
+            <button class="btn btn-secondary" onclick="goToScreen(1)">&larr; Back</button>
+            <button class="btn btn-primary" id="nextBtn2" disabled onclick="startChat()">Meet Your Future Self &rarr;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen 3: Conversation -->
+      <div class="screen" id="screen3">
+        <div class="chat-container">
+          <div class="chat-header">
+            <div class="future-avatar">&#128100;</div>
+            <div class="future-info">
+              <div class="name" id="futureName">Maya Chen, age 32</div>
+              <div class="role" id="futureRole">Sustainable Design Director</div>
+            </div>
+            <button class="back-btn" onclick="goToScreen(2)">&#9998; Edit Goal</button>
+          </div>
+
+          <div class="chat-messages" id="chatMessages"></div>
+
+          <div class="chat-input-area">
+            <div class="quick-prompts" id="quickPrompts">
+              <button class="quick-prompt" onclick="sendMessage('chemistry')">Why do I need chemistry?</button>
+              <button class="quick-prompt" onclick="sendMessage('giveup')">Did you ever want to give up?</button>
+              <button class="quick-prompt" onclick="sendMessage('focus')">What should I focus on?</button>
+            </div>
+            <div class="input-row">
+              <input type="text" class="chat-input" id="chatInput" placeholder="Ask your Future Self anything..." onkeypress="handleKeyPress(event)">
+              <button class="send-btn" id="sendBtn" onclick="sendCustomMessage()">&rarr;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Purpose Engine &mdash; An <a href="https://www.uplifteducation.org" target="_blank">Uplift Education</a> Initiative</p>
+  </footer>
+
+  <script>
+    // =====================
+    // STATE
+    // =====================
+    let selectedProfile = null;
+    let selectedGoal = '';
+    let isLoading = false;
+
+    // =====================
+    // PRE-GENERATED RESPONSES FOR EACH PERSONA
+    // =====================
+    const responses = {
+      'Maya Chen': {
+        greeting: `Hey Maya--it's you. The future you. I'm 32 now, working as a Sustainable Design Director at a firm that's reshaping how cities think about green buildings.\n\nI remember being in 11th grade, sitting in chemistry class, wondering if any of this would ever matter. Spoiler: it really did--in ways I never expected.\n\nWhat's on your mind?`,
+        chemistry: `Oh man, chemistry! I know it feels pointless right now. But here's the thing--last month I had to reject a supplier's insulation materials because the chemical composition wasn't right for our LEED certification.\n\nStoichiometry? I use it to calculate material ratios for sustainable concrete mixes. The periodic table? I need to understand which elements off-gas toxins and which are safe for indoor air quality.\n\nThat stuff you're memorizing now literally helps me build healthier buildings.`,
+        giveup: `Honestly? Junior year was rough. I remember getting a C on a physics test and thinking "maybe architecture isn't for me."\n\nBut here's what I wish someone had told me: that C didn't define my career. What mattered was that I kept showing up, kept asking questions, and found ways to connect what I was learning to what I actually cared about.\n\nThe doubt doesn't fully go away--I still have imposter syndrome sometimes. But you learn to push through it.`,
+        focus: `If I could go back, I'd tell myself: take that environmental science elective, even if your friends aren't in it. Join the robotics club--the CAD skills transfer directly to architectural design.\n\nBut honestly? The biggest thing is to stay curious. When a subject feels boring, ask yourself "how might this connect to sustainable design?" You'd be surprised how often the answer is "more than you think."`,
+        default: `That's a great question. The path from high school to where I am now wasn't always clear, but every step taught me something valuable. Keep pushing, stay curious, and don't be afraid to ask for help when you need it.`
+      },
+      'Jordan Williams': {
+        greeting: `Hey Jordan--it's you from the future. I'm 32 and I just closed a Series B round for my third startup. We're building AI tools that help small businesses compete with the big guys.\n\nI remember sitting in econ class thinking "when will I ever use this?" Turns out, every single day.\n\nWhat do you want to know?`,
+        chemistry: `Real talk? I don't use chemistry directly. But here's what it taught me: how to break down complex problems into smaller pieces, run experiments, and learn from failures.\n\nThat scientific method thinking? I use it every single day when we're testing new product features or figuring out why users aren't converting.\n\nPlus, one of my co-founders is a chemical engineer. I can at least follow the conversation when she explains why our manufacturing process works.`,
+        giveup: `All the time. After my first startup failed, I spent three months wondering if I should just get a "normal" job.\n\nWhat got me through was remembering why I started in the first place. Not for the money or the glory--but because I genuinely wanted to solve a problem I cared about.\n\nThe failures hurt. But they also taught me more than any success ever could.`,
+        focus: `Learn to code. Seriously. Even if you're not going to be an engineer, understanding how software works gives you superpowers as a founder.\n\nAnd start building things NOW. They don't have to be good. My first "startup" was a tutoring marketplace for my high school--it made maybe $200 total. But I learned more from that than any class.`,
+        default: `The entrepreneurship journey is wild, honestly. Some days you feel like you're conquering the world, others you wonder what you're even doing. But if you're passionate about building things and solving problems, there's nothing else like it.`
+      },
+      'Marcus Rivera': {
+        greeting: `Yo Marcus--it's you, age 32. I just got back from the Grammys. Didn't win this year, but honestly? Just being there was surreal.\n\nI run my own production studio now. Last month we worked on tracks for two platinum artists. Not bad for a kid who started making beats in his bedroom, right?\n\nWhat's up?`,
+        chemistry: `Okay so this might sound crazy, but audio engineering is basically applied physics and chemistry.\n\nSound waves, frequencies, how different materials absorb or reflect sound--that's all science. When I'm treating a room acoustically or figuring out why a recording sounds muddy, I'm using principles from physics class.\n\nPlus, chemistry helps me understand how different electronic components work. Some producers just twist knobs randomly--I actually know why certain circuits create certain sounds.`,
+        giveup: `Man, when I was 19 I sent my beats to probably 200 artists. Got maybe 3 responses. All rejections.\n\nI almost gave up and went to business school like my parents wanted. But I made a deal with myself: I'd give it one more year and really commit.\n\nThat year, I finally got my first placement. It was a small artist, barely paid anything. But it proved I could do this. Sometimes you just need that one small win to keep going.`,
+        focus: `Learn everything you can about the technical side. Yeah, having "an ear" matters, but the producers who last are the ones who understand the engineering.\n\nAnd build relationships. This industry runs on who you know. Be genuine, be helpful, and don't burn bridges. The intern you're nice to today might be the A&R director in five years.`,
+        default: `Music's a tough industry, but if you love it, there's nothing else like it. Keep creating, keep learning, and stay true to your sound. The right opportunities will come.`
+      },
+      'Sarah Kim': {
+        greeting: `Hey Sarah--it's you. Dr. Kim now, I guess. I'm 32, finishing my pediatric surgery fellowship at Children's Hospital.\n\nI still remember being in high school, dissecting that frog in biology and thinking "is this really what medicine is like?" It's so much more.\n\nWhat do you want to know?`,
+        chemistry: `Oh, chemistry is EVERYWHERE in medicine. Pharmacology is basically applied chemistry--understanding how drugs interact with receptors, why certain medications can't be taken together, how the body metabolizes different compounds.\n\nIn surgery, we think about tissue chemistry, how anesthetics work, why certain suture materials are better for different tissues. That organic chemistry class you're dreading? I use those concepts regularly.\n\nThe good news: it gets more interesting when you can see the real-world applications.`,
+        giveup: `Third year of med school. I failed a clinical rotation--had to repeat it. I seriously considered dropping out.\n\nMy attending told me something that stuck with me: "The doctors who never struggle aren't the best ones. The best ones are the ones who struggle and figure out how to grow."\n\nThat failure taught me humility and how to ask for help. Now I'm a better doctor because of it.`,
+        focus: `Get comfortable with long-term delayed gratification. Medical training is LONG. If you can find meaning in the journey--not just the destination--you'll be happier.\n\nAlso, start building good study habits now. The volume of information in med school is overwhelming if you don't have systems. And shadow doctors when you can--make sure you actually like the day-to-day reality of medicine, not just the idea of it.`,
+        default: `Medicine is demanding, but helping kids get better? There's nothing else like it. The path is long, but if this is really what you want, every sacrifice will feel worth it.`
+      },
+      'Tyler Brooks': {
+        greeting: `Hey Tyler--it's future you! I'm 32, and I'm a Lead Game Designer at a major studio. Last year we shipped a game that hit 10 million players.\n\nI remember sitting in algebra thinking "when will I ever use this?" Plot twist: game math is basically ALL algebra.\n\nWhat's on your mind?`,
+        chemistry: `Okay so here's the thing--chemistry itself doesn't come up much in game design. But the LAB work does.\n\nGame design is basically running experiments. You make a hypothesis ("players will find this mechanic fun"), you test it, you analyze results, you iterate. That's the scientific method.\n\nAlso, if you ever want to work on realistic games--physics simulations, how fire spreads, how materials break--chemistry and physics become super relevant.`,
+        giveup: `When I was 21, I got rejected from like 50 game studios. Zero callbacks.\n\nI almost gave up and went into regular software engineering. But instead, I spent a year making my own small games, documenting everything, building a portfolio.\n\nThat portfolio is what finally got me an interview. Sometimes the traditional path doesn't work, and you have to create your own opportunities.`,
+        focus: `Start making games NOW. Don't wait until you "know enough"--you learn by doing. Game jams are amazing for this.\n\nAlso, don't just play games--analyze them. Why is this fun? Why did I stop playing that other game? That critical thinking is what separates designers from players.`,
+        default: `Game development is challenging but incredibly rewarding. Keep making stuff, keep learning, and remember--every great designer started with terrible first projects.`
+      },
+      'Aisha Patel': {
+        greeting: `Hey Aisha--it's you at 32. I'm a Senior Data Scientist at a nonprofit that uses data to fight educational inequality.\n\nRemember wondering if all that math would ever be useful? Turns out it's literally my whole job now.\n\nWhat do you want to talk about?`,
+        chemistry: `Data science is really about understanding how things interact and change--which is also what chemistry is about.\n\nWhen I'm building predictive models, I'm thinking about variables and how they relate, just like chemical equations. And the statistical thinking? That's the same whether you're analyzing molecules or millions of data points.\n\nPlus, some of the most impactful data science is in healthcare and environmental science--where chemistry is directly relevant.`,
+        giveup: `My first data science job, I felt completely lost. Everyone seemed smarter than me. I cried in the bathroom more than once.\n\nBut I kept asking questions, kept learning, and slowly realized--everyone feels like an imposter at first. The people who succeed aren't the ones who know everything. They're the ones who aren't afraid to say "I don't know, but I'll figure it out."`,
+        focus: `Learn Python and statistics well. Those are your foundations. But also--learn to communicate findings to non-technical people. The best insights are useless if you can't explain them.\n\nAnd find something you care about beyond the math. Data science is a tool--what matters is what you use it FOR.`,
+        default: `Data science is powerful, especially when you use it for good. Keep developing your skills, but never lose sight of why the work matters. Impact over everything.`
+      },
+      "Ethan O'Brien": {
+        greeting: `Hey Ethan--it's you at 32. I'm running my own sustainable construction company now. We specialize in net-zero commercial buildings.\n\nRemember thinking shop class was more useful than calculus? Turns out you need both.\n\nWhat's up?`,
+        chemistry: `In construction, chemistry is everywhere--even if you don't see it. Why does concrete cure the way it does? Chemistry. Why do certain paints work better in humidity? Chemistry. Why do some insulation materials off-gas toxic fumes? Chemistry.\n\nUnderstanding these things makes you a better project manager. You're not just following rules--you understand WHY the rules exist. That's what separates good builders from great ones.`,
+        giveup: `When the housing market crashed in '08, I was just starting out. Had to take whatever work I could find--mostly demolition.\n\nI almost went back to school for something "safer." But I stuck with it, used the slow times to get more certifications, and was ready when the market recovered. Sometimes survival IS success.`,
+        focus: `Get as many certifications as you can--OSHA, LEED, project management. They open doors.\n\nBut also, learn the business side. Most construction companies fail not because they can't build--but because they can't manage money. Take accounting and business classes seriously.`,
+        default: `Construction is one of the most satisfying careers out there--you literally build the world around you. Keep learning both the technical and business sides, and you'll go far.`
+      },
+      'Priya Sharma': {
+        greeting: `Hey Priya--it's you at 32! I'm a veterinarian now, running my own clinic that focuses on exotic animals and wildlife rehabilitation.\n\nI remember being in 10th grade, dreaming about helping animals. That dream came true--with a lot of work in between.\n\nWhat's on your mind?`,
+        chemistry: `Veterinary medicine is SO dependent on chemistry. Every medication I prescribe, I need to understand how it's metabolized, what it interacts with, why certain doses work for certain sized animals.\n\nOrganic chemistry? That's pharmacology. Biochemistry? That's understanding nutrition and disease. Even the anesthesia I use requires understanding gas properties and chemical reactions.\n\nThe chemistry you're learning now is literally the foundation of everything I do.`,
+        giveup: `Vet school was brutal. Second year, I failed my first exam ever. I seriously considered switching to a less intense field.\n\nBut I talked to a mentor who reminded me why I started--because I genuinely wanted to help animals. The tests were just obstacles, not the destination. Reframing it that way helped me push through.`,
+        focus: `Volunteer at vet clinics, shelters, anywhere you can get hands-on animal experience. Schools love seeing that commitment.\n\nAnd don't neglect the "boring" sciences. I know organic chemistry seems useless, but it's a gatekeeper class. Master it now, and vet school will be so much easier.`,
+        default: `Being a vet is everything I hoped for and more. It's hard, yes--but helping animals and their families is incredibly rewarding. Keep that goal in sight.`
+      },
+      'Chris Taylor': {
+        greeting: `Hey Chris--it's future you! I'm 32 and I'm the CTO of a health tech startup. Our app helps people manage chronic conditions, and we've helped millions of users.\n\nCrazy to think it all started with that first HTML page I made in 9th grade.\n\nWhat do you want to know?`,
+        chemistry: `Okay, so I don't use chemistry directly in coding. But here's what it taught me: systematic thinking and debugging.\n\nIn chemistry, if an experiment doesn't work, you analyze what went wrong step by step. Same with code. That methodical troubleshooting is the same skill.\n\nPlus, our app involves health data--understanding basic biochemistry helps me communicate with our medical advisors.`,
+        giveup: `My first startup failed spectacularly when I was 24. Lost everything, had to move back home.\n\nI questioned if I was cut out for this. But I realized--I didn't fail because I was bad at tech. I failed because I didn't understand the business side. So I learned that too. Second startup: successful exit.`,
+        focus: `Build things. All the time. It doesn't matter if they're good--you learn by shipping.\n\nAnd learn to work with people who aren't like you. The best products come from diverse teams. If you only talk to other coders, you'll miss huge opportunities.`,
+        default: `Tech is amazing because you can build things that help millions of people. Keep coding, keep learning, and remember--the best apps solve real problems for real people.`
+      },
+      'Nina Rodriguez': {
+        greeting: `Hey Nina--it's you at 32! I'm a professional dancer and choreographer now. Just finished a run on Broadway and I'm about to start work on a movie.\n\nI remember being told dance "isn't a real career." Look at us now.\n\nWhat's on your mind?`,
+        chemistry: `You might think chemistry has nothing to do with dance, but hear me out--understanding your body is chemistry.\n\nNutrition, how muscles work, why certain injuries happen, how to recover properly--that's all biochemistry. Professional dancers who last are the ones who understand their bodies as systems, not just instruments.\n\nPlus, I've worked with stage technicians who use chemistry for special effects, lighting, even fog machines.`,
+        giveup: `When I was 23, I injured my knee badly. Doctors said I might not dance professionally again.\n\nThose were the darkest months of my life. But I used that time to learn choreography, to understand the business side of dance, to become valuable in new ways.\n\nWhen I recovered, I was better than before--not just as a dancer, but as an artist who could do more than just perform.`,
+        focus: `Cross-train. Dance is physical, and injuries end careers. Pilates, yoga, strength training--they'll extend your career by decades.\n\nAnd learn the business side. Most dancers only think about performing, but the ones with long careers understand contracts, marketing, and how to create their own opportunities.`,
+        default: `Dance is a tough career, but it's possible. The key is versatility--be a great dancer, but also be someone who can choreograph, teach, direct. The more skills you have, the longer you can stay in this world you love.`
+      },
+      'Marcus Day': {
+        greeting: `Hey Marcus--it's you. The future you. I'm 32, and I run my own electrical contracting business now. Just landed a contract for a whole new subdivision--fifteen homes.\n\nI remember sitting in class wondering if I was making the right choice going into trades. No regrets.\n\nWhat's on your mind?`,
+        chemistry: `Here's what nobody tells you about electrical work--it's basically applied physics and chemistry.\n\nWhy do certain materials conduct better than others? Why does electricity flow the way it does? Why do we use copper instead of aluminum in certain applications? That's all chemistry.\n\nI had to learn that stuff properly when I studied for my journeyman exam. The kids who paid attention in chemistry had a real advantage.`,
+        giveup: `Second year of my apprenticeship, I failed my journeyman exam. First time. I was embarrassed--some of the guys at work found out and gave me grief about it.\n\nBut my mentor, this old-timer named Ray, told me something I never forgot: "The exam isn't testing if you're smart. It's testing if you studied. Go study."\n\nSo I did. Studied every night for two months. Passed with a 94 the second time. That failure taught me that preparation matters more than natural talent.`,
+        focus: `Get as many hours as you can in different areas--residential, commercial, industrial. Each one teaches you something different. Don't just stick with what's comfortable.\n\nLearn the code book inside and out. Not just to pass the exam, but because understanding WHY the codes exist makes you a better electrician. Every rule is written because someone got hurt.\n\nAnd start thinking about business now. Take a night class in accounting or business management. The technical skills get you hired, but business skills let you build something of your own.`,
+        default: `People look down on trades, but let me tell you--I make more than most of my friends who went to four-year colleges, I have zero student debt, and I own my own business at 32.\n\nPlus, electricians can't be outsourced. You can't install a panel from overseas. With solar, EVs, and smart homes taking off, demand for skilled electricians is only going up.\n\nYou picked a solid path. Stay with it.`
+      },
+      'Ivan Rodriguez': {
+        greeting: `Hey Ivan--it's you. The future you. I'm 32, and I'm a Senior Security Analyst at a Fortune 500 company's Security Operations Center. Last week, I helped stop a ransomware attack that would have cost the company millions.\n\nI remember being in 12th grade, staying up late reading about hackers and watching Mr. Robot, wondering if I could actually do this for a living. You can. We did.\n\nWhat's going on?`,
+        chemistry: `Okay, I won't lie--I don't use chemistry directly in my day-to-day work. But here's the thing: cybersecurity is about understanding systems. How things connect, how they can fail, how small changes cascade into big problems.\n\nThat systematic thinking? Chemistry teaches it. Balancing equations, understanding reactions, predicting outcomes--that's the same mental model you use when analyzing network traffic or tracing an attack vector.\n\nPlus, some of the most interesting security work is in industrial control systems--power plants, water treatment, manufacturing. Those environments? Chemistry everywhere.`,
+        giveup: `After I got my Security+ certification, I applied to probably 50 SOC analyst positions. Got rejected from all of them. "Not enough experience." How do you get experience if no one will hire you?\n\nI almost gave up and went into regular IT support. But instead, I built a home lab, did capture-the-flag competitions, contributed to open-source security tools, and documented everything on a blog.\n\nSix months later, a hiring manager found my blog, liked what she saw, and gave me a chance. That "wasted" time building my skills was actually the best investment I made.`,
+        focus: `Get your certifications--Security+, then work toward CySA+ or CEH. They're not everything, but they get you past HR filters.\n\nBuild a home lab. Set up virtual machines, practice with security tools, break things and fix them. Hands-on experience matters more than theory.\n\nAnd network. Join local security meetups, participate in online communities, go to conferences if you can. This field is all about who you know and what you can demonstrate.`,
+        default: `Cybersecurity is one of the few fields where there are literally more jobs than qualified people. The Bureau of Labor Statistics says demand is growing 35% over the next decade.\n\nBut here's what they don't tell you: it's not just about hacking. Most of the job is reading logs, following procedures, and communicating with non-technical people about technical problems.\n\nIf you can combine technical skills with clear communication, you'll go far. That combination is rarer than you'd think.`
+      }
+    };
+
+    // =====================
+    // PROFILE SELECTION
+    // =====================
+    function selectProfile(el, name, meta, color, initials) {
+      document.querySelectorAll('.profile-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedProfile = { name, meta, color, initials };
+      document.getElementById('nextBtn1').disabled = false;
+      
+      document.getElementById('selectedName').textContent = name;
+      document.getElementById('selectedMeta').textContent = meta;
+      document.getElementById('selectedAvatar').textContent = initials;
+      document.getElementById('selectedAvatar').style.background = `linear-gradient(135deg, ${color}, ${color}dd)`;
+      
+      const goalMap = {
+        'Maya Chen': 'A sustainable architect who designs eco-friendly buildings',
+        'Jordan Williams': 'A tech startup founder who builds companies that matter',
+        'Marcus Rivera': 'A Grammy-winning music producer with my own studio',
+        'Sarah Kim': 'A pediatric surgeon who helps sick children',
+        'Tyler Brooks': 'A video game designer at a major studio',
+        'Aisha Patel': 'A data scientist fighting for social justice',
+        "Ethan O'Brien": 'A construction manager who builds sustainable communities',
+        'Priya Sharma': 'A veterinarian who helps animals and their families',
+        'Chris Taylor': 'An app developer with a startup that helps millions',
+        'Nina Rodriguez': 'A professional dancer performing on Broadway',
+        'Marcus Day': 'A journeyman electrician who runs my own electrical business and keeps people safe',
+        'Ivan Rodriguez': 'A cybersecurity analyst working in a Security Operations Center (SOC) protecting organizations from attacks'
+      };
+      
+      if (goalMap[name]) {
+        document.getElementById('goalInput').value = goalMap[name];
+        selectedGoal = goalMap[name];
+        checkGoal();
+      }
+    }
+
+    function setGoal(goal) {
+      document.getElementById('goalInput').value = goal;
+      selectedGoal = goal;
+      checkGoal();
+    }
+
+    function checkGoal() {
+      const goal = document.getElementById('goalInput').value;
+      document.getElementById('nextBtn2').disabled = goal.length < 5;
+      selectedGoal = goal;
+    }
+
+    // =====================
+    // NAVIGATION
+    // =====================
+    function goToScreen(num) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen' + num).classList.add('active');
+      
+      document.querySelectorAll('.step-dot').forEach((d, i) => {
+        d.classList.remove('active', 'done');
+        if (i + 1 < num) d.classList.add('done');
+        if (i + 1 === num) d.classList.add('active');
+      });
+    }
+
+    // =====================
+    // CHAT
+    // =====================
+    function startChat() {
+      goToScreen(3);
+      
+      document.getElementById('futureName').textContent = `${selectedProfile.name}, age 32`;
+      document.getElementById('futureRole').textContent = selectedGoal;
+      document.getElementById('chatMessages').innerHTML = '';
+      
+      setLoading(true);
+      addTypingIndicator();
+      
+      setTimeout(() => {
+        removeTypingIndicator();
+        const personaResponses = responses[selectedProfile.name] || responses['Maya Chen'];
+        addMessage('future', personaResponses.greeting);
+        setLoading(false);
+      }, 1500);
+    }
+
+    function addMessage(role, content) {
+      const messages = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = `message ${role}`;
+      div.innerHTML = `
+        <div class="message-bubble">${content.replace(/\n/g, '<br>')}</div>
+        <div class="message-time">${role === 'future' ? 'Your Future Self' : 'You'} &bull; Just now</div>
+      `;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function addTypingIndicator() {
+      const messages = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = 'message future';
+      div.id = 'typing';
+      div.innerHTML = `<div class="message-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+      const typing = document.getElementById('typing');
+      if (typing) typing.remove();
+    }
+
+    function setLoading(loading) {
+      isLoading = loading;
+      document.getElementById('chatInput').disabled = loading;
+      document.getElementById('sendBtn').disabled = loading;
+      document.querySelectorAll('.quick-prompt').forEach(btn => btn.disabled = loading);
+    }
+
+    function getResponse(messageType) {
+      const personaResponses = responses[selectedProfile.name] || responses['Maya Chen'];
+      if (messageType === 'chemistry') return personaResponses.chemistry;
+      if (messageType === 'giveup') return personaResponses.giveup;
+      if (messageType === 'focus') return personaResponses.focus;
+      return personaResponses.default;
+    }
+
+    function sendMessage(messageType) {
+      if (isLoading) return;
+      
+      const displayTexts = {
+        'chemistry': 'Why do I even need to learn chemistry?',
+        'giveup': 'Did you ever feel like giving up in high school?',
+        'focus': 'What should I focus on this year to reach my goals?'
+      };
+      
+      addMessage('student', displayTexts[messageType] || messageType);
+      
+      setLoading(true);
+      addTypingIndicator();
+      
+      setTimeout(() => {
+        removeTypingIndicator();
+        addMessage('future', getResponse(messageType));
+        setLoading(false);
+      }, 1200 + Math.random() * 800);
+    }
+
+    function sendCustomMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text || isLoading) return;
+      
+      addMessage('student', text);
+      input.value = '';
+      
+      setLoading(true);
+      addTypingIndicator();
+      
+      setTimeout(() => {
+        removeTypingIndicator();
+        const personaResponses = responses[selectedProfile.name] || responses['Maya Chen'];
+        addMessage('future', personaResponses.default);
+        setLoading(false);
+      }, 1500);
+    }
+
+    function handleKeyPress(e) {
+      if (e.key === 'Enter' && !isLoading) {
+        sendCustomMessage();
+      }
+    }
+
+    // Navigation toggle for mobile
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    document.addEventListener('click', function(e) {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.querySelector('.nav__toggle');
+      if (nav && toggle && !nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove('open');
+      }
+    });
+  </script>
+
+</body>
+</html>

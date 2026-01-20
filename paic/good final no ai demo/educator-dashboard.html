@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educator Dashboard | Purpose Engine</title>
+  
+  <!-- Favicon and Social Sharing -->
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png?v=2">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png">
+  <meta property="og:title" content="Educator Dashboard | Purpose Engine">
+  <meta property="og:description" content="AI-powered insights that unify fragmented student data into actionable context. See what used to require 4 logins in one view.">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="assets/variables.css">
+  
+  <style>
+    /* === Page-specific styles === */
+    body {
+      background: var(--gray-100);
+      color: var(--gray-800);
+    }
+
+    /* Main Container */
+    .dashboard {
+      padding-top: var(--nav-height);
+      min-height: 100vh;
+    }
+
+    .dashboard-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px 40px 60px;
+    }
+
+    /* Unified Context Banner */
+    .context-banner {
+      background: linear-gradient(135deg, rgba(0, 103, 177, 0.08) 0%, rgba(139, 92, 246, 0.06) 100%);
+      border: 1px solid rgba(0, 103, 177, 0.15);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .context-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .context-content {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .context-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .context-desc {
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+
+    .context-sources {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .source-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: white;
+      border: 1px solid var(--gray-200);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-600);
+    }
+
+    .source-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .source-badge .dot.sis { background: #1976D2; }
+    .source-badge .dot.lms { background: #7B1FA2; }
+    .source-badge .dot.ccmr { background: #00897B; }
+
+    .context-time {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      padding: 8px 14px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .context-time .value {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--success);
+    }
+
+    .context-time .label {
+      font-size: 10px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Dashboard Header */
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .dashboard-header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+    }
+
+    .dashboard-header .subtitle {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      border: none;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn.secondary {
+      background: white;
+      border: 1px solid var(--gray-200);
+      color: var(--navy);
+    }
+
+    .btn.secondary:hover {
+      background: var(--gray-50);
+      box-shadow: var(--card-shadow);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+    }
+
+    .btn.primary:hover {
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    /* Class Roster Card */
+    .roster-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .roster-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--gray-100);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .roster-header h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .roster-filters {
+      display: flex;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--gray-200);
+      background: white;
+      color: var(--gray-500);
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      background: var(--gray-50);
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .filter-btn.warning-filter.active {
+      background: var(--warning);
+      border-color: var(--warning);
+    }
+
+    .filter-btn.celebration-filter.active {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    .roster-list {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .roster-row {
+      display: flex;
+      align-items: center;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--gray-50);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .roster-row:hover {
+      background: var(--gray-50);
+    }
+
+    .roster-row.selected {
+      background: rgba(0, 103, 177, 0.06);
+      border-left: 3px solid var(--primary);
+    }
+
+    .roster-row.has-alert {
+      background: linear-gradient(90deg, rgba(245, 158, 11, 0.06) 0%, transparent 50%);
+    }
+
+    .roster-row.has-celebration {
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.06) 0%, transparent 50%);
+    }
+
+    .roster-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: white;
+      margin-right: 14px;
+      flex-shrink: 0;
+    }
+
+    .roster-avatar.default { background: var(--gray-300); color: var(--gray-600); }
+    .roster-avatar.alert { background: linear-gradient(135deg, var(--warning) 0%, #F97316 100%); }
+    .roster-avatar.celebration { background: linear-gradient(135deg, var(--success) 0%, #34D399 100%); }
+
+    .roster-info {
+      flex: 1;
+    }
+
+    .roster-info .name {
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 14px;
+    }
+
+    .roster-info .goal {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    .roster-badges {
+      display: flex;
+      gap: 6px;
+      margin-right: 16px;
+    }
+
+    .mini-badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .mini-badge.alert { background: rgba(245, 158, 11, 0.15); }
+    .mini-badge.celebration { background: rgba(16, 185, 129, 0.15); }
+    .mini-badge.event { background: rgba(139, 92, 246, 0.15); }
+
+    .roster-skills {
+      display: flex;
+      gap: 4px;
+      margin-right: 16px;
+    }
+
+    .skill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gray-300);
+    }
+
+    .skill-dot.filled { background: var(--primary); }
+
+    /* Student Detail Panel */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    .detail-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--gray-100);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-header h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-header .icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .card-header .ai-badge {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(236, 72, 153, 0.1) 100%);
+      color: var(--purple);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .card-content {
+      padding: 18px 22px;
+    }
+
+    /* Profile Section */
+    .student-hero {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--gray-100);
+      margin-bottom: 18px;
+    }
+
+    .student-hero .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .student-hero .info h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .student-hero .info .meta {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    .goal-section {
+      background: linear-gradient(135deg, rgba(0, 103, 177, 0.06) 0%, rgba(0, 103, 177, 0.02) 100%);
+      border: 1px solid rgba(0, 103, 177, 0.15);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .goal-section .label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .goal-section .goal-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.5;
+    }
+
+    /* Skills Report Card */
+    .skills-report {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .skill-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .skill-row .skill-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .skill-row .skill-info {
+      flex: 1;
+    }
+
+    .skill-row .skill-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .skill-row .skill-evidence {
+      font-size: 11px;
+      color: var(--gray-500);
+    }
+
+    .skill-dots {
+      display: flex;
+      gap: 4px;
+    }
+
+    .skill-dots .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gray-200);
+    }
+
+    .skill-dots .dot.filled {
+      background: var(--primary);
+    }
+
+    /* AI Transparency Box */
+    .ai-transparency {
+      background: rgba(139, 92, 246, 0.06);
+      border: 1px solid rgba(139, 92, 246, 0.15);
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 16px;
+    }
+
+    .ai-transparency .header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .ai-transparency .header .icon {
+      font-size: 14px;
+    }
+
+    .ai-transparency .header .title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--purple);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .ai-transparency .content {
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    .ai-transparency .data-sources {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ai-transparency .data-tag {
+      background: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--gray-600);
+    }
+
+    /* Insight Items */
+    .insight-item {
+      display: flex;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray-50);
+    }
+
+    .insight-item:last-child {
+      border-bottom: none;
+    }
+
+    .insight-item .icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .insight-item.celebration .icon-box { background: rgba(16, 185, 129, 0.1); }
+    .insight-item.support .icon-box { background: rgba(245, 158, 11, 0.1); }
+
+    .insight-item .content {
+      flex: 1;
+    }
+
+    .insight-item .text {
+      font-size: 13px;
+      color: var(--navy);
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .insight-item .meta {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-top: 4px;
+    }
+
+    .insight-item .source {
+      color: var(--primary);
+    }
+
+    .insight-action {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      align-self: flex-start;
+    }
+
+    .insight-action.celebrate {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+    }
+
+    .insight-action.address {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--warning);
+    }
+
+    .insight-action:hover {
+      transform: scale(1.05);
+    }
+
+    /* Career Bridge Preview */
+    .challenge-preview {
+      background: var(--gray-50);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .challenge-preview .challenge-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .challenge-preview .subject-badge {
+      background: var(--primary);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .challenge-preview .arrow {
+      color: var(--gray-400);
+      font-size: 12px;
+    }
+
+    .challenge-preview .career-badge {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .challenge-preview .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .challenge-preview .before,
+    .challenge-preview .after {
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .challenge-preview .before {
+      background: rgba(239, 68, 68, 0.06);
+      border: 1px solid rgba(239, 68, 68, 0.15);
+    }
+
+    .challenge-preview .after {
+      background: rgba(16, 185, 129, 0.06);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+    }
+
+    .challenge-preview .label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .challenge-preview .before .label { color: var(--danger); }
+    .challenge-preview .after .label { color: var(--success); }
+
+    .challenge-preview .title {
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .challenge-preview .desc {
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    .challenge-preview .teks-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: white;
+      border: 1px solid var(--gray-200);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      color: var(--gray-600);
+      margin-top: 10px;
+    }
+
+    .challenge-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .challenge-actions .btn {
+      padding: 8px 14px;
+      font-size: 12px;
+    }
+
+    /* RTCC Section */
+    .rtcc-section {
+      background: var(--gray-50);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-top: 16px;
+    }
+
+    .rtcc-section .header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .rtcc-section .badge {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .rtcc-section .title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .rtcc-item {
+      display: flex;
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .rtcc-item .label {
+      color: var(--gray-400);
+      width: 90px;
+      flex-shrink: 0;
+    }
+
+    .rtcc-item .value {
+      color: var(--gray-700);
+      font-weight: 500;
+    }
+
+    /* Events Section */
+    .events-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      margin-top: 24px;
+      overflow: hidden;
+    }
+
+    .event-item {
+      background: var(--gray-50);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .event-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .event-item.needs-feedback {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(236, 72, 153, 0.04) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.15);
+    }
+
+    .event-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .event-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .event-icon.visit { background: rgba(139, 92, 246, 0.15); }
+    .event-icon.cte { background: rgba(0, 103, 177, 0.15); }
+
+    .event-info {
+      flex: 1;
+    }
+
+    .event-info .title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .event-info .meta {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    .event-status {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .event-status.needs-input {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
+      color: white;
+    }
+
+    .event-status.complete {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+    }
+
+    /* Quick Feedback Form */
+    .quick-feedback {
+      background: white;
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .quick-feedback .prompt {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--gray-700);
+      margin-bottom: 14px;
+    }
+
+    .quick-feedback .ai-icon {
+      font-size: 18px;
+    }
+
+    .quick-options {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .quick-option {
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .quick-option:hover {
+      background: var(--gray-200);
+    }
+
+    .quick-option.selected {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .feedback-note {
+      display: flex;
+      gap: 10px;
+    }
+
+    .feedback-note input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: inherit;
+    }
+
+    .feedback-note input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .feedback-note .submit-btn {
+      padding: 10px 18px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .feedback-note .submit-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .contributor-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--gray-100);
+    }
+
+    .contributor-note .icon {
+      font-size: 16px;
+    }
+
+    .contributor-note .text {
+      font-size: 12px;
+      color: var(--gray-600);
+    }
+
+    .contributor-note strong {
+      color: var(--success);
+    }
+
+    /* Feedback Items */
+    .feedback-gestalt {
+      background: white;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .gestalt-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .gestalt-header .title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-600);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .gestalt-header .count {
+      background: var(--gray-200);
+      color: var(--gray-600);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .feedback-items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .feedback-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      background: var(--gray-50);
+      border-radius: 10px;
+    }
+
+    .feedback-item .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .feedback-item .avatar.teacher { background: rgba(0, 103, 177, 0.15); }
+    .feedback-item .avatar.counselor { background: rgba(139, 92, 246, 0.15); }
+    .feedback-item .avatar.student { background: rgba(236, 72, 153, 0.15); }
+
+    .feedback-item .content {
+      flex: 1;
+    }
+
+    .feedback-item .author {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .feedback-item .role {
+      color: var(--gray-400);
+      font-weight: 400;
+    }
+
+    .feedback-item .text {
+      font-size: 13px;
+      color: var(--gray-700);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    .sentiment-tags {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .sentiment-tag {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .sentiment-tag.positive { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+    .sentiment-tag.growth { background: rgba(139, 92, 246, 0.1); color: var(--purple); }
+    .sentiment-tag.interest { background: rgba(255, 111, 0, 0.1); color: var(--orange); }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 24px;
+      padding: 32px;
+      width: 520px;
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .modal .subtitle {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-bottom: 24px;
+    }
+
+    .modal-section {
+      background: var(--gray-50);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .modal-section .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    .modal-section.context {
+      background: rgba(0, 103, 177, 0.06);
+    }
+
+    .modal-section.context .section-label {
+      color: var(--primary);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .modal-btn {
+      flex: 1;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .modal-btn.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .modal-btn.secondary {
+      background: var(--gray-100);
+      color: var(--gray-600);
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px;
+      text-align: center;
+      background: white;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    footer p {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .detail-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-container {
+        padding: 20px;
+      }
+
+      .context-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .context-sources {
+        justify-content: center;
+      }
+
+      .dashboard-header {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .header-actions {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .roster-filters {
+        display: none;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .challenge-preview .before-after {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav nav--light">
+    <div class="nav__left">
+      <a href="index.html" class="nav__logo">
+        <img src="https://kesmit3.github.io/paic/upliftlogo.png" class="nav__logo-img" alt="Uplift Education">
+        <div class="nav__divider"></div>
+        <span class="nav__product">Purpose Engine</span>
+      </a>
+      <div class="nav__links">
+        <a href="aichallenge.html" class="nav__link">&#127942; <span class="nav__link-text">Challenge</span></a>
+      </div>
+    </div>
+    
+    <div class="nav__right">
+      <div class="nav__links">
+        <div class="nav__dropdown">
+          <button class="nav__dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>Demo</span>
+            <span class="nav__dropdown-arrow">&#9660;</span>
+          </button>
+          
+          <div class="nav__mega-menu">
+            <div class="mega-menu__grid">
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">Scholar Journeys</div>
+                <a href="ivan-day.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--yellow">&#128295;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Ivan</div>
+                    <div class="mega-menu__desc">Electrician pathway</div>
+                  </div>
+                </a>
+                <a href="cyber-pathway.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#128737;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Marcus</div>
+                    <div class="mega-menu__desc">Cybersecurity pathway</div>
+                  </div>
+                </a>
+                <a href="career-bridge.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--green">&#127793;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Maya</div>
+                    <div class="mega-menu__desc">Sustainable design pathway</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">For Educators</div>
+                <a href="educator-dashboard.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Dashboard</div>
+                    <div class="mega-menu__desc">Alerts, praise, insights</div>
+                  </div>
+                </a>
+                <a href="activity-hub.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--orange">&#128640;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Activity Hub</div>
+                    <div class="mega-menu__desc">Clubs, funding, eligibility</div>
+                  </div>
+                </a>
+                
+                <div class="mega-menu__header" style="margin-top: 16px;">For Counselors</div>
+                <a href="rtcc.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#127891;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Road to College &amp; Career</div>
+                    <div class="mega-menu__desc">FAFSA, IBCs, applications</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section mega-menu__section--full">
+                <div class="mega-menu__header">For Students</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                  <a href="student-dashboard.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Dashboard</div>
+                      <div class="mega-menu__desc">Your overview</div>
+                    </div>
+                  </a>
+                  <a href="career-bridge.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--green">&#127919;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Career Bridge</div>
+                      <div class="mega-menu__desc">Connect classwork</div>
+                    </div>
+                  </a>
+                  <a href="future-self.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--yellow">&#128302;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Future Self</div>
+                      <div class="mega-menu__desc">Chat with 32-year-old you</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <button class="nav__toggle" onclick="toggleNav()" aria-label="Toggle menu">&#9776;</button>
+    <div id="navLinks">
+      <a href="aichallenge.html" class="nav__link">&#127942; Challenge</a>
+      <div class="mobile-menu__header">Scholar Journeys</div>
+      <a href="ivan-day.html" class="nav__link">&#128295; Ivan (Electrician)</a>
+      <a href="cyber-pathway.html" class="nav__link">&#128737; Marcus (Cybersecurity)</a>
+      <a href="career-bridge.html" class="nav__link">&#127793; Maya (Sustainable Design)</a>
+      <div class="mobile-menu__header">For Educators</div>
+      <a href="educator-dashboard.html" class="nav__link nav__link--active">&#128202; Dashboard</a>
+      <a href="activity-hub.html" class="nav__link">&#128640; Activity Hub</a>
+      <div class="mobile-menu__header">For Counselors</div>
+      <a href="rtcc.html" class="nav__link">&#127891; Road to College &amp; Career</a>
+      <div class="mobile-menu__header">For Students</div>
+      <a href="student-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="career-bridge.html" class="nav__link">&#127919; Career Bridge</a>
+      <a href="future-self.html" class="nav__link">&#128302; Future Self</a>
+    </div>
+  </nav>
+
+  <div class="dashboard">
+    <div class="dashboard-container">
+      <!-- Unified Context Banner -->
+      <div class="context-banner">
+        <div class="context-icon">&#128279;</div>
+        <div class="context-content">
+          <div class="context-title">Unified Student Context</div>
+          <div class="context-desc">Data from 3 systems synthesized into one view. No more switching between logins.</div>
+        </div>
+        <div class="context-sources">
+          <div class="source-badge">
+            <span class="dot sis"></span>
+            <span>PowerSchool</span>
+          </div>
+          <div class="source-badge">
+            <span class="dot lms"></span>
+            <span>Schoology</span>
+          </div>
+          <div class="source-badge">
+            <span class="dot ccmr"></span>
+            <span>Schoolinks</span>
+          </div>
+        </div>
+        <div class="context-time">
+          <div class="value">&lt;3 sec</div>
+          <div class="label">vs ~15 min manual</div>
+        </div>
+      </div>
+
+      <!-- Dashboard Header -->
+      <div class="dashboard-header">
+        <div>
+          <h1>Chemistry &mdash; Period 3</h1>
+          <div class="subtitle">Mrs. Rodriguez &bull; 24 students &bull; 3 insights pending</div>
+        </div>
+        <div class="header-actions">
+          <a href="career-bridge.html" class="btn secondary">&#9889; Transform Assignment</a>
+          <button class="btn primary">&#128202; Class Analytics</button>
+        </div>
+      </div>
+
+      <!-- Class Roster -->
+      <div class="roster-card">
+        <div class="roster-header">
+          <h2>Student Roster</h2>
+          <div class="roster-filters">
+            <button class="filter-btn active">All Students</button>
+            <button class="filter-btn warning-filter">&#9888; Needs Support (2)</button>
+            <button class="filter-btn celebration-filter">&#127881; Celebrate (3)</button>
+            <button class="filter-btn">&#128197; Recent Events</button>
+          </div>
+        </div>
+        <div class="roster-list">
+          <div class="roster-row has-alert selected" onclick="selectStudent('maya')">
+            <div class="roster-avatar alert">MC</div>
+            <div class="roster-info">
+              <div class="name">Maya Chen</div>
+              <div class="goal">&#127919; Sustainable Design Director</div>
+            </div>
+            <div class="roster-badges">
+              <div class="mini-badge alert" title="Needs support">&#9888;</div>
+              <div class="mini-badge event" title="Recent event">&#128197;</div>
+            </div>
+            <div class="roster-skills" title="Skills: 4/5">
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot"></span>
+            </div>
+          </div>
+          <div class="roster-row has-celebration" onclick="selectStudent('jordan')">
+            <div class="roster-avatar celebration">JW</div>
+            <div class="roster-info">
+              <div class="name">Jordan Williams</div>
+              <div class="goal">&#127919; Tech Startup Founder</div>
+            </div>
+            <div class="roster-badges">
+              <div class="mini-badge celebration" title="Celebration">&#127881;</div>
+            </div>
+            <div class="roster-skills" title="Skills: 3/5">
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot"></span>
+              <span class="skill-dot"></span>
+            </div>
+          </div>
+          <div class="roster-row" onclick="selectStudent('alex')">
+            <div class="roster-avatar default">AR</div>
+            <div class="roster-info">
+              <div class="name">Alex Rivera</div>
+              <div class="goal">&#127919; Pediatric Surgeon</div>
+            </div>
+            <div class="roster-badges"></div>
+            <div class="roster-skills" title="Skills: 5/5">
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot filled"></span>
+            </div>
+          </div>
+          <div class="roster-row has-celebration" onclick="selectStudent('sam')">
+            <div class="roster-avatar celebration">ST</div>
+            <div class="roster-info">
+              <div class="name">Sam Thompson</div>
+              <div class="goal">&#127919; Robotics Engineer</div>
+            </div>
+            <div class="roster-badges">
+              <div class="mini-badge celebration" title="Celebration">&#127881;</div>
+            </div>
+            <div class="roster-skills" title="Skills: 2/5">
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot"></span>
+              <span class="skill-dot"></span>
+              <span class="skill-dot"></span>
+            </div>
+          </div>
+          <div class="roster-row" onclick="selectStudent('taylor')">
+            <div class="roster-avatar default">TK</div>
+            <div class="roster-info">
+              <div class="name">Taylor Kim</div>
+              <div class="goal">&#127919; Marine Biologist</div>
+            </div>
+            <div class="roster-badges">
+              <div class="mini-badge event" title="Recent event">&#128197;</div>
+            </div>
+            <div class="roster-skills" title="Skills: 4/5">
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot filled"></span>
+              <span class="skill-dot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Student Detail Panel -->
+      <div class="detail-grid">
+        <!-- Profile Card -->
+        <div class="detail-card">
+          <div class="card-content">
+            <div class="student-hero">
+              <div class="avatar">MC</div>
+              <div class="info">
+                <h2>Maya Chen</h2>
+                <div class="meta">11th Grade &bull; Summit Prep</div>
+              </div>
+            </div>
+
+            <div class="goal-section">
+              <div class="label">&#127919; Career Goal</div>
+              <div class="goal-text">&ldquo;I want to become a Sustainable Design Director who creates buildings that heal the planet.&rdquo;</div>
+            </div>
+
+            <!-- Skills Report Card -->
+            <div class="skills-report">
+              <div class="skill-row">
+                <div class="skill-icon" style="background: rgba(0, 103, 177, 0.12);">&#128300;</div>
+                <div class="skill-info">
+                  <div class="skill-name">Data Analysis</div>
+                  <div class="skill-evidence">4 labs, 1 project &bull; via Schoology</div>
+                </div>
+                <div class="skill-dots">
+                  <span class="dot filled"></span>
+                  <span class="dot filled"></span>
+                  <span class="dot filled"></span>
+                  <span class="dot filled"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+              <div class="skill-row">
+                <div class="skill-icon" style="background: rgba(16, 185, 129, 0.12);">&#127793;</div>
+                <div class="skill-info">
+                  <div class="skill-name">Sustainability Science</div>
+                  <div class="skill-evidence">Tesla visit + coursework &bull; via Schoolinks</div>
+                </div>
+                <div class="skill-dots">
+                  <span class="dot filled"></span>
+                  <span class="dot filled"></span>
+                  <span class="dot filled"></span>
+                  <span class="dot filled"></span>
+                  <span class="dot filled"></span>
+                </div>
+              </div>
+              <div class="skill-row">
+                <div class="skill-icon" style="background: rgba(139, 92, 246, 0.12);">&#128221;</div>
+                <div class="skill-info">
+                  <div class="skill-name">Technical Writing</div>
+                  <div class="skill-evidence">2 lab reports &bull; via Schoology</div>
+                </div>
+                <div class="skill-dots">
+                  <span class="dot filled"></span>
+                  <span class="dot filled"></span>
+                  <span class="dot filled"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- RTCC Section -->
+            <div class="rtcc-section">
+              <div class="header">
+                <span class="badge">RTCC</span>
+                <span class="title">Counselor Notes</span>
+              </div>
+              <div class="rtcc-item">
+                <span class="label">Counselor:</span>
+                <span class="value">Ms. Patterson</span>
+              </div>
+              <div class="rtcc-item">
+                <span class="label">Pathway:</span>
+                <span class="value">Architecture &rarr; Green Building</span>
+              </div>
+              <div class="rtcc-item">
+                <span class="label">College List:</span>
+                <span class="value">UT Austin, Texas A&amp;M, Rice</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alerts & Celebrations -->
+        <div class="detail-card">
+          <div class="card-header">
+            <h3>
+              <span class="icon" style="background: rgba(245, 158, 11, 0.12);">&#9888;</span>
+              Needs Attention
+            </h3>
+            <span class="ai-badge">&#129302; AI Detected</span>
+          </div>
+          <div class="card-content">
+            <div class="insight-item support">
+              <div class="icon-box">&#128337;</div>
+              <div class="content">
+                <div class="text">2 missing assignments + 2 absences this week</div>
+                <div class="meta">Jan 15 &bull; <span class="source">PowerSchool + Schoology</span></div>
+              </div>
+              <button class="insight-action address" onclick="showCheckInModal()">Check In</button>
+            </div>
+
+            <!-- AI Transparency -->
+            <div class="ai-transparency">
+              <div class="header">
+                <span class="icon">&#129302;</span>
+                <span class="title">How AI Knows This</span>
+              </div>
+              <div class="content">
+                AI detected unusual pattern: Maya&rsquo;s engagement dropped 30% compared to her 4-week average. Combined with attendance data, this triggered a check-in recommendation.
+              </div>
+              <div class="data-sources">
+                <span class="data-tag">Attendance: PowerSchool</span>
+                <span class="data-tag">Engagement: Schoology</span>
+                <span class="data-tag">Baseline: 4-week history</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-header" style="border-top: 1px solid var(--gray-100);">
+            <h3>
+              <span class="icon" style="background: rgba(16, 185, 129, 0.12);">&#127881;</span>
+              Celebrate
+            </h3>
+          </div>
+          <div class="card-content">
+            <div class="insight-item celebration">
+              <div class="icon-box">&#10024;</div>
+              <div class="content">
+                <div class="text">Connected chemistry concepts to sustainable building materials without prompting</div>
+                <div class="meta">Jan 15 &bull; <span class="source">AI Observed</span></div>
+              </div>
+              <button class="insight-action celebrate">Celebrate</button>
+            </div>
+            <div class="insight-item celebration">
+              <div class="icon-box">&#127942;</div>
+              <div class="content">
+                <div class="text">Completed Digital Communications CTE module&mdash;earned video production certification</div>
+                <div class="meta">Jan 8 &bull; <span class="source">via Schoolinks</span></div>
+              </div>
+              <button class="insight-action celebrate">Celebrate</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Career-Bridge Preview -->
+        <div class="detail-card">
+          <div class="card-header">
+            <h3>
+              <span class="icon" style="background: rgba(0, 103, 177, 0.12);">&#127919;</span>
+              Career-Bridge Challenges
+            </h3>
+            <span class="ai-badge">&#129302; Personalized</span>
+          </div>
+          <div class="card-content">
+            <div class="challenge-preview">
+              <div class="challenge-header">
+                <span class="subject-badge">Chemistry</span>
+                <span class="arrow">&rarr;</span>
+                <span class="career-badge">Sustainable Design</span>
+              </div>
+              <div class="before-after">
+                <div class="before">
+                  <div class="label">Standard Assignment</div>
+                  <div class="title">Stoichiometry Lab #7</div>
+                  <div class="desc">Calculate molar ratios for chemical equations. Problems 1&ndash;15.</div>
+                </div>
+                <div class="after">
+                  <div class="label">For Maya</div>
+                  <div class="title">Eco-Material Design Challenge</div>
+                  <div class="desc">Calculate molar ratios for plant-based insulation that passed fire safety tests.</div>
+                </div>
+              </div>
+              <div class="teks-badge">
+                <span>&#10003;</span>
+                <span>Same TEKS: C.8.D, C.8.E, C.8.F</span>
+              </div>
+              <div class="challenge-actions">
+                <button class="btn secondary">Preview Full Challenge</button>
+                <button class="btn primary">Approve for Maya</button>
+              </div>
+            </div>
+
+            <div class="challenge-preview">
+              <div class="challenge-header">
+                <span class="subject-badge">Chemistry</span>
+                <span class="arrow">&rarr;</span>
+                <span class="career-badge">Sustainable Design</span>
+              </div>
+              <div class="before-after">
+                <div class="before">
+                  <div class="label">Standard Assignment</div>
+                  <div class="title">Gas Laws Worksheet</div>
+                  <div class="desc">Apply ideal gas law to solve pressure/volume problems.</div>
+                </div>
+                <div class="after">
+                  <div class="label">For Maya</div>
+                  <div class="title">HVAC Efficiency Analysis</div>
+                  <div class="desc">Calculate optimal air pressure for a net-zero building&rsquo;s ventilation system.</div>
+                </div>
+              </div>
+              <div class="teks-badge">
+                <span>&#10003;</span>
+                <span>Same TEKS: C.9.A, C.9.B</span>
+              </div>
+              <div class="challenge-actions">
+                <button class="btn secondary">Preview Full Challenge</button>
+                <button class="btn primary">Approve for Maya</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Events & Feedback Section -->
+      <div class="events-card">
+        <div class="card-header">
+          <h3>
+            <span class="icon" style="background: rgba(139, 92, 246, 0.12);">&#128197;</span>
+            Recent Events &amp; Feedback
+          </h3>
+          <span class="ai-badge">&#128101; Crowd-Sourced Insights</span>
+        </div>
+        <div class="card-content">
+          <!-- Event needing feedback -->
+          <div class="event-item needs-feedback">
+            <div class="event-header">
+              <div class="event-icon visit">&#128663;</div>
+              <div class="event-info">
+                <div class="title">Tesla Gigafactory Field Trip</div>
+                <div class="meta">Jan 12, 2025 &bull; via Schoolinks</div>
+              </div>
+              <span class="event-status needs-input" id="eventStatus">&#9998; 2 of 4 collected</span>
+            </div>
+
+            <div class="feedback-gestalt">
+              <div class="gestalt-header">
+                <span class="title">Observations So Far</span>
+                <span class="count" id="feedbackCount">2 of 4 expected</span>
+              </div>
+              <div class="feedback-items" id="feedbackItems">
+                <div class="feedback-item">
+                  <div class="avatar counselor">&#128105;&#8205;&#128188;</div>
+                  <div class="content">
+                    <div class="author">Ms. Patterson <span class="role">&bull; Counselor</span></div>
+                    <div class="text">&ldquo;Maya was completely engaged during the battery manufacturing tour. Asked 3 questions about material sourcing.&rdquo;</div>
+                    <div class="sentiment-tags">
+                      <span class="sentiment-tag positive">Engaged</span>
+                      <span class="sentiment-tag interest">Career Connection</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="feedback-item">
+                  <div class="avatar student">&#128105;&#8205;&#127891;</div>
+                  <div class="content">
+                    <div class="author">Maya Chen <span class="role">&bull; Self-Reflection</span></div>
+                    <div class="text">&ldquo;I didn&rsquo;t know batteries could be made from recycled materials. This changes what I thought about sustainable tech.&rdquo;</div>
+                    <div class="sentiment-tags">
+                      <span class="sentiment-tag growth">Perspective Shift</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="quick-feedback" id="quickFeedbackForm">
+              <div class="prompt">
+                <span class="ai-icon">&#129302;</span>
+                Did you observe Maya during or after the Tesla visit? Quick feedback helps complete the picture.
+              </div>
+              <div class="quick-options" id="quickOptions">
+                <button class="quick-option" onclick="toggleOption(this)" data-label="Showed excitement">&#127775; Showed excitement</button>
+                <button class="quick-option" onclick="toggleOption(this)" data-label="Talked about it">&#128172; Talked about it</button>
+                <button class="quick-option" onclick="toggleOption(this)" data-label="Made connections">&#128279; Made connections</button>
+                <button class="quick-option" onclick="toggleOption(this)" data-label="Seemed neutral">&#128528; Seemed neutral</button>
+                <button class="quick-option" onclick="toggleOption(this)" data-label="Seemed confused">&#129300; Seemed confused</button>
+              </div>
+              <div class="feedback-note">
+                <input type="text" id="feedbackNoteInput" placeholder="Add a note (optional)&mdash;e.g., 'She mentioned the battery chemistry in class today'">
+                <button class="submit-btn" onclick="submitFeedback()">Submit</button>
+              </div>
+              <div class="contributor-note">
+                <span class="icon">&#128101;</span>
+                <span class="text"><strong>Anyone can contribute:</strong> Teachers, counselors, staff, or Maya herself.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Completed event -->
+          <div class="event-item">
+            <div class="event-header">
+              <div class="event-icon cte">&#127891;</div>
+              <div class="event-info">
+                <div class="title">Digital Communications CTE Module&mdash;Completed</div>
+                <div class="meta">Jan 8, 2025 &bull; via Schoolinks</div>
+              </div>
+              <span class="event-status complete">&#10003; Complete</span>
+            </div>
+            <div class="sentiment-tags">
+              <span class="sentiment-tag positive">+5 Purpose Points</span>
+              <span class="sentiment-tag growth">New Skill: Video Production</span>
+              <span class="sentiment-tag interest">Applied to EcoTrack project</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Check-In Modal -->
+  <div class="modal-overlay" id="checkin-modal">
+    <div class="modal" onclick="event.stopPropagation()">
+      <h2>Quick Check-In: Maya Chen</h2>
+      <div class="subtitle">AI detected unusual patterns&mdash;2 absences + 2 missing assignments this week</div>
+      
+      <div class="modal-section">
+        <div class="section-label">Suggested Conversation Starters</div>
+        <div style="font-size: 14px; color: var(--navy); line-height: 1.8;">
+          &bull; &ldquo;Hey Maya, I noticed you&rsquo;ve been out a couple days. Everything okay?&rdquo;<br>
+          &bull; &ldquo;The Tesla trip sounded amazing&mdash;want to tell me what stood out?&rdquo;<br>
+          &bull; &ldquo;I see the chemistry assignment is still pending. How can I help?&rdquo;
+        </div>
+      </div>
+
+      <div class="modal-section context">
+        <div class="section-label">&#128161; Context from Her Goal</div>
+        <div style="font-size: 13px; color: var(--gray-700); line-height: 1.6;">
+          Maya wants to be a <strong>Sustainable Design Director</strong>. The missing chemistry assignment could be reframed as &ldquo;calculating material ratios for eco-friendly insulation&rdquo;&mdash;directly relevant to her interests.
+        </div>
+      </div>
+
+      <div class="ai-transparency" style="margin-top: 0;">
+        <div class="header">
+          <span class="icon">&#129302;</span>
+          <span class="title">Data Sources for This Alert</span>
+        </div>
+        <div class="data-sources">
+          <span class="data-tag">Attendance: PowerSchool</span>
+          <span class="data-tag">Missing Work: Schoology</span>
+          <span class="data-tag">Career Goal: Schoolinks</span>
+          <span class="data-tag">Engagement: 4-week baseline</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="modal-btn secondary" onclick="closeModal()">Later</button>
+        <button class="modal-btn primary" onclick="closeModal()">Mark as Checked In</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Purpose Engine&mdash;An <a href="https://www.uplifteducation.org" target="_blank">Uplift Education</a> Initiative
+    </p>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    
+    document.addEventListener('click', function(e) {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.querySelector('.nav__toggle');
+      if (nav && toggle && !nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove('open');
+      }
+    });
+
+    function selectStudent(id) {
+      document.querySelectorAll('.roster-row').forEach(r => r.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+    }
+
+    function toggleOption(btn) {
+      btn.classList.toggle('selected');
+    }
+
+    function showCheckInModal() {
+      document.getElementById('checkin-modal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+    }
+
+    function submitFeedback() {
+      const selectedOptions = [];
+      document.querySelectorAll('#quickOptions .quick-option.selected').forEach(btn => {
+        selectedOptions.push(btn.getAttribute('data-label'));
+      });
+      
+      const noteText = document.getElementById('feedbackNoteInput').value.trim();
+      
+      if (selectedOptions.length === 0 && !noteText) {
+        alert('Please select at least one observation or add a note.');
+        return;
+      }
+      
+      let feedbackText = '';
+      if (selectedOptions.length > 0) {
+        feedbackText = 'Observed: ' + selectedOptions.join(', ') + '.';
+      }
+      if (noteText) {
+        feedbackText += (feedbackText ? ' ' : '') + '"' + noteText + '"';
+      }
+      
+      const newFeedback = document.createElement('div');
+      newFeedback.className = 'feedback-item';
+      newFeedback.style.animation = 'fadeIn 0.4s ease';
+      newFeedback.innerHTML = `
+        <div class="avatar teacher">&#128104;&#8205;&#127979;</div>
+        <div class="content">
+          <div class="author">Mrs. Rodriguez <span class="role">&bull; Chemistry Teacher</span></div>
+          <div class="text">${feedbackText}</div>
+          <div class="sentiment-tags">
+            ${selectedOptions.includes('Showed excitement') || selectedOptions.includes('Made connections') ? '<span class="sentiment-tag positive">Engaged</span>' : ''}
+            ${selectedOptions.includes('Talked about it') ? '<span class="sentiment-tag interest">Verbal Processing</span>' : ''}
+            ${noteText ? '<span class="sentiment-tag growth">Teacher Note</span>' : ''}
+          </div>
+        </div>
+      `;
+      
+      document.getElementById('feedbackItems').appendChild(newFeedback);
+      document.getElementById('feedbackCount').textContent = '3 of 4 expected';
+      
+      const form = document.getElementById('quickFeedbackForm');
+      form.innerHTML = `
+        <div style="text-align: center; padding: 24px 0;">
+          <div style="font-size: 48px; margin-bottom: 12px;">&#10004;</div>
+          <div style="font-size: 18px; font-weight: 600; color: var(--success); margin-bottom: 8px;">Feedback Submitted!</div>
+          <div style="font-size: 14px; color: var(--gray-500); margin-bottom: 16px;">Your observation has been added to Maya's record.</div>
+          <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+            ${selectedOptions.map(opt => `<span style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;">${opt}</span>`).join('')}
+          </div>
+          ${noteText ? `<div style="margin-top: 12px; font-style: italic; color: var(--gray-600); font-size: 13px;">"${noteText}"</div>` : ''}
+          <button onclick="resetFeedbackForm()" style="margin-top: 20px; padding: 10px 20px; background: var(--gray-100); border: none; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--gray-600); cursor: pointer;">Add Another Observation</button>
+        </div>
+      `;
+      
+      const statusEl = document.getElementById('eventStatus');
+      statusEl.className = 'event-status complete';
+      statusEl.innerHTML = '&#10003; 3 of 4 collected';
+    }
+    
+    function resetFeedbackForm() {
+      const form = document.getElementById('quickFeedbackForm');
+      form.innerHTML = `
+        <div class="prompt">
+          <span class="ai-icon">&#129302;</span>
+          Did you observe Maya during or after the Tesla visit? Quick feedback helps complete the picture.
+        </div>
+        <div class="quick-options" id="quickOptions">
+          <button class="quick-option" onclick="toggleOption(this)" data-label="Showed excitement">&#127775; Showed excitement</button>
+          <button class="quick-option" onclick="toggleOption(this)" data-label="Talked about it">&#128172; Talked about it</button>
+          <button class="quick-option" onclick="toggleOption(this)" data-label="Made connections">&#128279; Made connections</button>
+          <button class="quick-option" onclick="toggleOption(this)" data-label="Seemed neutral">&#128528; Seemed neutral</button>
+          <button class="quick-option" onclick="toggleOption(this)" data-label="Seemed confused">&#129300; Seemed confused</button>
+        </div>
+        <div class="feedback-note">
+          <input type="text" id="feedbackNoteInput" placeholder="Add a note (optional)&mdash;e.g., 'She mentioned the battery chemistry in class today'">
+          <button class="submit-btn" onclick="submitFeedback()">Submit</button>
+        </div>
+        <div class="contributor-note">
+          <span class="icon">&#128101;</span>
+          <span class="text"><strong>Anyone can contribute:</strong> Teachers, counselors, staff, or Maya herself.</span>
+        </div>
+      `;
+    }
+
+    document.getElementById('checkin-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>

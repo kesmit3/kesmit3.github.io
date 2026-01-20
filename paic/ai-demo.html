@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Demo | Purpose Engine</title>
+  
+  <!-- Favicon and Social Sharing -->
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png?v=2">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png">
+  <meta property="og:title" content="AI Demo | Purpose Engine">
+  <meta property="og:description" content="AI-powered classroom demo that connects today's lesson to student career dreams in real-time.">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --navy: #0D1421;
+      --navy-light: #1a2332;
+      --primary: #0067b1;
+      --primary-dark: #004b85;
+      --purple: #8B5CF6;
+      --pink: #EC4899;
+      --yellow: #F59E0B;
+      --green: #10B981;
+      --cyan: #06B6D4;
+      --red: #EF4444;
+      --gray-400: #94A3B8;
+      --gray-500: #64748B;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1E293B;
+    }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      color: white;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Header */
+    .header {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--gray-700);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+    }
+    
+    .logo img {
+      height: 32px;
+    }
+    
+    .logo-divider {
+      width: 1px;
+      height: 24px;
+      background: var(--gray-600);
+    }
+    
+    .logo-text {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    
+    .header-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .back-link {
+      color: var(--gray-400);
+      text-decoration: none;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    
+    .back-link:hover {
+      color: white;
+    }
+    
+    /* API Key Bar */
+    .api-bar {
+      background: rgba(139, 92, 246, 0.1);
+      border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+      padding: 12px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    
+    .api-bar.connected {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    
+    .api-bar label {
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+    
+    .api-bar input {
+      padding: 8px 12px;
+      background: var(--gray-800);
+      border: 1px solid var(--gray-600);
+      border-radius: 6px;
+      color: white;
+      font-size: 12px;
+      font-family: monospace;
+      width: 280px;
+    }
+    
+    .api-bar input:focus {
+      outline: none;
+      border-color: var(--purple);
+    }
+    
+    .api-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .api-status.disconnected { color: var(--gray-500); }
+    .api-status.connected { color: var(--green); }
+    
+    .api-status .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    
+    .api-status.connected .dot {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    /* Main Container */
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 32px;
+    }
+    
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .hero-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+    }
+    
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, white 0%, var(--gray-400) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero p {
+      font-size: 20px;
+      color: var(--gray-400);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Input Section */
+    .input-section {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid var(--gray-700);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+    
+    .input-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+    }
+    
+    .input-group {
+      flex: 1;
+    }
+    
+    .input-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-400);
+      margin-bottom: 8px;
+    }
+    
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      padding: 16px 20px;
+      background: var(--gray-800);
+      border: 2px solid var(--gray-700);
+      border-radius: 12px;
+      color: white;
+      font-size: 18px;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    
+    .input-group input:focus,
+    .input-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(0, 103, 177, 0.2);
+    }
+    
+    .input-group input::placeholder {
+      color: var(--gray-500);
+    }
+    
+    .input-group select {
+      cursor: pointer;
+    }
+    
+    .input-group select option {
+      background: var(--gray-800);
+    }
+    
+    .compute-btn {
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    
+    .compute-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 103, 177, 0.4);
+    }
+    
+    .compute-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .compute-btn.loading {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
+    }
+    
+    /* Quick Career Buttons */
+    .quick-careers {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--gray-700);
+    }
+    
+    .quick-careers-label {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .career-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .career-pill {
+      padding: 10px 18px;
+      background: rgba(51, 65, 85, 0.5);
+      border: 1px solid var(--gray-700);
+      border-radius: 24px;
+      color: var(--gray-400);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .career-pill:hover {
+      background: rgba(51, 65, 85, 0.8);
+      border-color: var(--gray-600);
+      color: white;
+    }
+    
+    .career-pill.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+    
+    /* Results Section */
+    .results {
+      display: none;
+    }
+    
+    .results.visible {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* GNN Visualization */
+    .gnn-viz {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid var(--gray-700);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .gnn-viz::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    
+    .gnn-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      position: relative;
+    }
+    
+    .gnn-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .gnn-title .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    
+    .gnn-title h2 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    
+    .gnn-title .subtitle {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+    
+    .alignment-score {
+      text-align: center;
+      padding: 16px 24px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 16px;
+    }
+    
+    .alignment-score .number {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--green);
+      line-height: 1;
+    }
+    
+    .alignment-score .label {
+      font-size: 11px;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Graph Visual */
+    .graph-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin: 32px 0;
+      position: relative;
+    }
+    
+    .graph-node {
+      padding: 16px 24px;
+      border-radius: 16px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .graph-node.career {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
+      min-width: 200px;
+    }
+    
+    .graph-node.lesson {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--cyan) 100%);
+      min-width: 200px;
+    }
+    
+    .graph-node .node-icon {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+    
+    .graph-node .node-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.8;
+      margin-bottom: 4px;
+    }
+    
+    .graph-node .node-value {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    
+    .graph-edge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .edge-line {
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--purple), var(--cyan));
+      border-radius: 2px;
+      position: relative;
+    }
+    
+    .edge-line::after {
+      content: '';
+      position: absolute;
+      right: -8px;
+      top: -4px;
+      border: 6px solid transparent;
+      border-left-color: var(--cyan);
+    }
+    
+    .edge-skills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 200px;
+    }
+    
+    .skill-tag {
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--green);
+    }
+    
+    /* Reframed Output */
+    .reframed-section {
+      background: var(--gray-800);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 24px;
+      position: relative;
+    }
+    
+    .reframed-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .reframed-text {
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: white;
+    }
+    
+    .reframed-text strong {
+      color: var(--cyan);
+    }
+    
+    /* Discussion Starters */
+    .discussion-section {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid var(--gray-700);
+      border-radius: 24px;
+      padding: 32px;
+    }
+    
+    .discussion-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .discussion-header .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(245, 158, 11, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    
+    .discussion-header h3 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    .discussion-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .discussion-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 20px;
+      background: var(--gray-800);
+      border-radius: 12px;
+      font-size: 16px;
+      line-height: 1.5;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    
+    .discussion-item:hover {
+      background: var(--gray-700);
+      transform: translateX(4px);
+    }
+    
+    .discussion-item .number {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--yellow);
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    
+    /* Loading State */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(13, 20, 33, 0.9);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    .loading-overlay.visible {
+      display: flex;
+    }
+    
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid var(--gray-700);
+      border-top-color: var(--cyan);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .loading-text {
+      font-size: 18px;
+      color: var(--gray-400);
+    }
+    
+    .loading-subtext {
+      font-size: 14px;
+      color: var(--gray-500);
+      max-width: 300px;
+      text-align: center;
+    }
+    
+    /* Error State */
+    .error-message {
+      display: none;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      color: var(--red);
+      font-size: 14px;
+    }
+    
+    .error-message.visible {
+      display: block;
+    }
+    
+    /* Footer */
+    .footer {
+      margin-top: 48px;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid var(--gray-700);
+    }
+    
+    .footer-sources {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+    
+    .footer-source {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+    
+    .footer-source .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    
+    .footer-credit {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+    
+    .footer-credit a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    .footer-credit a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Data note */
+    .data-note {
+      margin-top: 20px;
+      padding: 12px 16px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .data-note span:first-child {
+      font-size: 20px;
+    }
+    
+    .data-note span:last-child {
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+    
+    .data-note strong {
+      color: var(--green);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .main {
+        padding: 24px 16px;
+      }
+      
+      .hero h1 {
+        font-size: 32px;
+      }
+      
+      .hero p {
+        font-size: 16px;
+      }
+      
+      .input-row {
+        flex-direction: column;
+      }
+      
+      .graph-container {
+        flex-direction: column;
+      }
+      
+      .edge-line {
+        width: 4px;
+        height: 60px;
+      }
+      
+      .edge-line::after {
+        right: -4px;
+        top: auto;
+        bottom: -8px;
+        border: 6px solid transparent;
+        border-top-color: var(--cyan);
+        border-left-color: transparent;
+      }
+      
+      .reframed-text {
+        font-size: 18px;
+      }
+      
+      .career-pills {
+        justify-content: center;
+      }
+      
+      .api-bar {
+        flex-direction: column;
+        gap: 8px;
+      }
+      
+      .api-bar input {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <a href="index.html" class="logo">
+        <img src="https://kesmit3.github.io/paic/upliftlogo.png" alt="Uplift Education">
+        <div class="logo-divider"></div>
+        <span class="logo-text">Purpose Engine</span>
+      </a>
+      <div class="header-badge">
+        <span>&#129302;</span>
+        <span>Live AI Demo</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <a href="educator-dashboard.html" class="back-link">
+        <span>&larr;</span>
+        <span>Back to Dashboard</span>
+      </a>
+    </div>
+  </header>
+  
+  <!-- API Status Bar (key hardcoded for demo) -->
+  <div class="api-bar connected" id="apiBar">
+    <div class="api-status connected" id="apiStatus">
+      <span class="dot"></span>
+      <span>Claude AI Connected</span>
+    </div>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">AI is thinking...</div>
+    <div class="loading-subtext">Analyzing career skills and finding connections to today's lesson</div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-icon">&#127919;</div>
+      <h1>Why Does This Matter?</h1>
+      <p>Enter ANY career and watch real AI connect today's lesson to that future&mdash;no pre-scripted responses.</p>
+    </section>
+
+    <!-- Error Message -->
+    <div class="error-message" id="errorMessage"></div>
+
+    <!-- Input Section -->
+    <section class="input-section">
+      <div class="input-row">
+        <div class="input-group">
+          <label for="careerInput">&#127775; Student's Dream Career <span style="font-weight: 400; color: var(--cyan); font-size: 11px;">via Schoolinks</span></label>
+          <input type="text" id="careerInput" placeholder="e.g., Plumber, TikTok Creator, Marine Biologist, anything...">
+        </div>
+        <div class="input-group" style="max-width: 280px;">
+          <label for="lessonSelect">&#128218; Today's Lesson <span style="font-weight: 400; color: var(--purple); font-size: 11px;">via Schoology</span></label>
+          <select id="lessonSelect">
+            <option value="Chemistry: Stoichiometry & Ratios">Chemistry: Stoichiometry &amp; Ratios</option>
+            <option value="Chemistry: Periodic Table Trends">Chemistry: Periodic Table Trends</option>
+            <option value="Biology: Cell Structure & Function">Biology: Cell Structure &amp; Function</option>
+            <option value="Biology: Genetics & Heredity">Biology: Genetics &amp; Heredity</option>
+            <option value="Physics: Electrical Circuits">Physics: Electrical Circuits</option>
+            <option value="Physics: Forces & Motion">Physics: Forces &amp; Motion</option>
+            <option value="Algebra: Linear Equations">Algebra: Linear Equations</option>
+            <option value="Algebra: Quadratic Functions">Algebra: Quadratic Functions</option>
+            <option value="Geometry: Proofs & Logic">Geometry: Proofs &amp; Logic</option>
+            <option value="Statistics: Data Analysis">Statistics: Data Analysis</option>
+            <option value="English: Persuasive Writing">English: Persuasive Writing</option>
+            <option value="English: Research & Citations">English: Research &amp; Citations</option>
+            <option value="History: Primary Source Analysis">History: Primary Source Analysis</option>
+            <option value="History: Economic Systems">History: Economic Systems</option>
+            <option value="Computer Science: Algorithms & Logic">CS: Algorithms &amp; Logic</option>
+          </select>
+        </div>
+        <button class="compute-btn" id="computeBtn" onclick="runAI()">
+          <span>&#9889;</span>
+          <span>Connect the Dots</span>
+        </button>
+      </div>
+
+      <!-- Quick Career Pills -->
+      <div class="quick-careers">
+        <div class="quick-careers-label">&#128161; Try these careers (or type anything!):</div>
+        <div class="career-pills">
+          <button class="career-pill" onclick="setCareer('Plumber')">&#128295; Plumber</button>
+          <button class="career-pill" onclick="setCareer('TikTok Content Creator')">&#128247; TikTok Creator</button>
+          <button class="career-pill" onclick="setCareer('Nurse')">&#129658; Nurse</button>
+          <button class="career-pill" onclick="setCareer('Game Developer')">&#127918; Game Dev</button>
+          <button class="career-pill" onclick="setCareer('Tattoo Artist')">&#127912; Tattoo Artist</button>
+          <button class="career-pill" onclick="setCareer('Real Estate Agent')">&#127968; Real Estate</button>
+        </div>
+      </div>
+      
+      <!-- Data Synthesis Note -->
+      <div class="data-note">
+        <span>&#128279;</span>
+        <span><strong>Shared Visibility Layer:</strong> Purpose Engine synthesizes student career goals from Schoolinks with today's lesson objectives from Schoology&mdash;no manual data entry required.</span>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results" id="results">
+      <!-- GNN Visualization -->
+      <div class="gnn-viz">
+        <div class="gnn-header">
+          <div class="gnn-title">
+            <div class="icon">&#128300;</div>
+            <div>
+              <h2>AI-Powered Relevance Mapping</h2>
+              <div class="subtitle">Claude analyzing career-to-lesson connections</div>
+            </div>
+          </div>
+          <div class="alignment-score">
+            <div class="number" id="alignmentScore">0%</div>
+            <div class="label">Relevance</div>
+          </div>
+        </div>
+
+        <!-- Graph Visual -->
+        <div class="graph-container">
+          <div class="graph-node career">
+            <div class="node-icon" id="careerIcon">&#127919;</div>
+            <div class="node-label">Career Goal</div>
+            <div class="node-value" id="careerNode">-</div>
+          </div>
+          
+          <div class="graph-edge">
+            <div class="edge-skills" id="matchedSkills">
+              <span class="skill-tag">analyzing...</span>
+            </div>
+            <div class="edge-line"></div>
+          </div>
+          
+          <div class="graph-node lesson">
+            <div class="node-icon">&#128218;</div>
+            <div class="node-label">Today's Lesson</div>
+            <div class="node-value" id="lessonNode">-</div>
+          </div>
+        </div>
+
+        <!-- Reframed Output -->
+        <div class="reframed-section">
+          <div class="reframed-label">
+            <span>&#10024;</span>
+            <span>AI-Generated Connection</span>
+          </div>
+          <div class="reframed-text" id="reframedText">
+            Loading...
+          </div>
+        </div>
+      </div>
+
+      <!-- Discussion Starters -->
+      <div class="discussion-section">
+        <div class="discussion-header">
+          <div class="icon">&#128172;</div>
+          <h3>Discussion Starters for Your Class</h3>
+        </div>
+        <div class="discussion-list" id="discussionList">
+          <div class="discussion-item">
+            <span class="number">1</span>
+            <span>Loading...</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-sources">
+      <span class="footer-source"><span class="dot" style="background: #1976D2;"></span> PowerSchool (attendance)</span>
+      <span class="footer-source"><span class="dot" style="background: #7B1FA2;"></span> Schoology (lessons)</span>
+      <span class="footer-source"><span class="dot" style="background: #00897B;"></span> Schoolinks (careers)</span>
+    </div>
+    <div class="footer-credit">
+      Purpose Engine &mdash; <a href="https://www.uplifteducation.org" target="_blank">Uplift Education</a> | Presidential AI Challenge 2026
+    </div>
+  </footer>
+
+  <script>
+    // ============================================
+    // REAL AI INTEGRATION
+    // Proxied through Cloudflare Worker
+    // ============================================
+    
+    // Cloudflare Worker URL (replace with your deployed worker)
+    const WORKER_URL = 'https://purpose-engine-api.kesmit3.workers.dev';
+    
+    function setCareer(career) {
+      document.getElementById('careerInput').value = career;
+      document.querySelectorAll('.career-pill').forEach(p => p.classList.remove('active'));
+      if (event && event.target) {
+        event.target.classList.add('active');
+      }
+    }
+    
+    function showLoading(show) {
+      document.getElementById('loadingOverlay').classList.toggle('visible', show);
+      document.getElementById('computeBtn').disabled = show;
+      if (show) {
+        document.getElementById('computeBtn').classList.add('loading');
+        document.getElementById('computeBtn').innerHTML = '<span>&#8987;</span><span>AI Thinking...</span>';
+      } else {
+        document.getElementById('computeBtn').classList.remove('loading');
+        document.getElementById('computeBtn').innerHTML = '<span>&#9889;</span><span>Connect the Dots</span>';
+      }
+    }
+    
+    function showError(message) {
+      const errorEl = document.getElementById('errorMessage');
+      errorEl.textContent = message;
+      errorEl.classList.add('visible');
+      setTimeout(() => errorEl.classList.remove('visible'), 5000);
+    }
+    
+    async function runAI() {
+      const career = document.getElementById('careerInput').value.trim();
+      const lesson = document.getElementById('lessonSelect').value;
+      
+      if (!career) {
+        showError('Please enter a dream career first!');
+        return;
+      }
+      
+      showLoading(true);
+      document.getElementById('errorMessage').classList.remove('visible');
+      
+      try {
+        const response = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 1024,
+            messages: [{
+              role: 'user',
+              content: `You are helping a teacher show a student why today's lesson matters to their future career.
+
+CAREER: ${career}
+TODAY'S LESSON: ${lesson}
+
+Respond in this exact JSON format (no markdown, just raw JSON):
+{
+  "relevanceScore": <number 1-100>,
+  "careerIcon": "<single emoji for this career>",
+  "bridgingSkills": ["<skill 1>", "<skill 2>", "<skill 3>"],
+  "connection": "<2-3 sentence explanation of how this lesson directly helps someone pursuing this career. Be specific and practical. Address the student directly using 'you'.>",
+  "discussionQuestions": [
+    "<question 1 for class discussion>",
+    "<question 2 for class discussion>",
+    "<question 3 for class discussion>"
+  ]
+}
+
+Be creative and find genuine connections. Even unusual careers have real links to academic subjects. Make it feel personal and motivating, not generic.`
+            }]
+          })
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error?.message || 'API request failed');
+        }
+        
+        const data = await response.json();
+        const text = data.content[0].text;
+        
+        // Parse JSON response
+        let result;
+        try {
+          // Handle potential markdown code blocks
+          const jsonMatch = text.match(/\{[\s\S]*\}/);
+          result = JSON.parse(jsonMatch ? jsonMatch[0] : text);
+        } catch (e) {
+          console.error('Parse error:', e, 'Raw text:', text);
+          throw new Error('Failed to parse AI response');
+        }
+        
+        // Update UI with results
+        document.getElementById('alignmentScore').textContent = result.relevanceScore + '%';
+        document.getElementById('careerIcon').textContent = result.careerIcon || '🎯';
+        document.getElementById('careerNode').textContent = career;
+        document.getElementById('lessonNode').textContent = lesson;
+        document.getElementById('reframedText').innerHTML = result.connection;
+        
+        // Update skills
+        const skillsHtml = result.bridgingSkills
+          .map(skill => `<span class="skill-tag">${skill}</span>`)
+          .join('');
+        document.getElementById('matchedSkills').innerHTML = skillsHtml;
+        
+        // Update discussion questions
+        const discussionHtml = result.discussionQuestions
+          .map((q, i) => `
+            <div class="discussion-item">
+              <span class="number">${i + 1}</span>
+              <span>${q}</span>
+            </div>
+          `).join('');
+        document.getElementById('discussionList').innerHTML = discussionHtml;
+        
+        // Show results
+        document.getElementById('results').classList.add('visible');
+        document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+      } catch (error) {
+        console.error('AI Error:', error);
+        showError('AI Error: ' + error.message);
+      } finally {
+        showLoading(false);
+      }
+    }
+    
+    // Allow Enter key to trigger
+    document.getElementById('careerInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') runAI();
+    });
+    
+    // Also trigger on lesson change if results are visible
+    document.getElementById('lessonSelect').addEventListener('change', function() {
+      if (document.getElementById('results').classList.contains('visible')) {
+        runAI();
+      }
+    });
+  </script>
+</body>
+</html>

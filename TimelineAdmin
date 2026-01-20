@@ -1,0 +1,159 @@
+import React, { useState } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Select } from '@/components/ui/select';
+import { fetchTimelineFile, updateTimelineFile, insertEventIntoTimeline } from './github-api';
+
+const TimelineAdmin = () => {
+  const [eventData, setEventData] = useState({
+    month: '',
+    eventName: '',
+    eventType: 'rtcc', // Default to RTCC Events
+    audience: '',
+    host: '',
+    position: 'left'
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const months = [
+    'June', 'July', 'August', 'September', 'October',
+    'November', 'December', 'January', 'February',
+    'March', 'April', 'May'
+  ];
+
+  const eventTypes = [
+    { id: 'rtcc', name: 'RTCC Events' },
+    { id: 'signature', name: 'Signature Events' },
+    { id: 'testing', name: 'Testing Period' },
+    { id: 'campus', name: 'Campus Events' },
+    { id: 'family', name: 'Family Engagement' },
+    { id: 'cis', name: 'CIS' }
+  ];
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+
+  try {
+    // Fetch current timeline content
+    const { content, sha } = await fetchTimelineFile();
+
+    // Insert new event
+    const updatedContent = insertEventIntoTimeline(content, eventData);
+
+    // Commit changes to GitHub
+    await updateTimelineFile(
+      updatedContent, 
+      sha,
+      `Add ${eventData.eventName} to ${eventData.month}`
+    );
+
+    // Show success message
+    alert("Event added successfully!");
+
+    // Reset form
+    setEventData({
+      month: '',
+      eventName: '',
+      eventType: 'rtcc',
+      audience: '',
+      host: '',
+      position: 'left'
+    });
+
+  } catch (error) {
+    console.error('Error adding event:', error);
+    alert("Error adding event: " + error.message);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
+  return (
+    <Card className="w-full max-w-2xl mx-auto">
+      <CardHeader>
+        <CardTitle>Add New Timeline Event</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Month</label>
+              <select 
+                className="w-full p-2 border rounded"
+                value={eventData.month}
+                onChange={(e) => setEventData({...eventData, month: e.target.value})}
+              >
+                <option value="">Select Month</option>
+                {months.map(month => (
+                  <option key={month} value={month}>{month}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Event Type</label>
+              <select 
+                className="w-full p-2 border rounded"
+                value={eventData.eventType}
+                onChange={(e) => setEventData({...eventData, eventType: e.target.value})}
+              >
+                {eventTypes.map(type => (
+                  <option key={type.id} value={type.id}>{type.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Event Name</label>
+            <Input
+              value={eventData.eventName}
+              onChange={(e) => setEventData({...eventData, eventName: e.target.value})}
+              placeholder="Enter event name"
+              className="w-full"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Target Audience</label>
+            <Input
+              value={eventData.audience}
+              onChange={(e) => setEventData({...eventData, audience: e.target.value})}
+              placeholder="Who is this event for?"
+              className="w-full"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Host Department</label>
+            <Input
+              value={eventData.host}
+              onChange={(e) => setEventData({...eventData, host: e.target.value})}
+              placeholder="Who is organizing this event?"
+              className="w-full"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Position</label>
+            <select 
+              className="w-full p-2 border rounded"
+              value={eventData.position}
+              onChange={(e) => setEventData({...eventData, position: e.target.value})}
+            >
+              <option value="left">Left</option>
+              <option value="right">Right</option>
+            </select>
+          </div>
+
+          <Button type="submit" className="w-full">
+            Add Event
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default TimelineAdmin;

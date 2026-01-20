@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity Hub | Purpose Engine</title>
+  
+  <!-- Favicon and Social Sharing -->
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png?v=2">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png">
+  <meta property="og:title" content="Activity Hub | Purpose Engine">
+  <meta property="og:description" content="The data exists. The time to find it doesn't. See how an AI intelligence layer helps educators launch clubs and programs in seconds.">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="assets/variables.css">
+  
+  <style>
+    /* === Page-specific styles === */
+    body {
+      background: var(--navy);
+      color: white;
+    }
+
+    /* Main Container */
+    .demo-container {
+      padding: 100px 32px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .demo-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .demo-header h1 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .demo-header h1 .highlight {
+      color: var(--yellow);
+    }
+
+    .demo-header .subhead {
+      font-size: 22px;
+      color: var(--gray-400);
+      max-width: 800px;
+      margin: 0 auto 16px;
+      line-height: 1.6;
+    }
+
+    .demo-header .subhead strong {
+      color: white;
+    }
+
+    .demo-header .insight {
+      font-size: 16px;
+      color: var(--primary-light);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+      padding: 16px 24px;
+      background: rgba(0, 103, 177, 0.1);
+      border-radius: 12px;
+      border-left: 3px solid var(--primary);
+    }
+
+    /* The Two Problems */
+    .problems-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .problem-card {
+      background: rgba(239, 68, 68, 0.06);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    .problem-card .number {
+      width: 32px;
+      height: 32px;
+      background: rgba(239, 68, 68, 0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #FCA5A5;
+      margin-bottom: 16px;
+    }
+
+    .problem-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #FCA5A5;
+      margin-bottom: 8px;
+    }
+
+    .problem-card p {
+      font-size: 14px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    .problem-card .example {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--gray-400);
+      font-style: italic;
+    }
+
+    /* What If Section */
+    .whatif-section {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.02) 100%);
+      border: 2px solid rgba(16, 185, 129, 0.25);
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    .whatif-section .label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--success);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+    }
+
+    .whatif-section h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #6EE7B7;
+    }
+
+    .whatif-section .desc {
+      font-size: 16px;
+      color: var(--gray-400);
+      max-width: 700px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+
+    .whatif-section .desc strong {
+      color: white;
+    }
+
+    /* Question Examples */
+    .question-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      text-align: left;
+    }
+
+    .question-item {
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .question-item .icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .question-item .content {
+      flex: 1;
+    }
+
+    .question-item .query {
+      font-size: 15px;
+      color: white;
+      font-style: italic;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .question-item .context {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .question-item .time-saved {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-top: 8px;
+    }
+
+    /* Live Demo Section */
+    .live-demo-section {
+      margin-bottom: 48px;
+    }
+
+    .live-demo-section h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .demo-conversation {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .demo-message {
+      margin-bottom: 16px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .demo-message.user {
+      flex-direction: row-reverse;
+    }
+
+    .demo-message .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .demo-message.user .avatar {
+      background: var(--primary);
+    }
+
+    .demo-message.ai .avatar {
+      background: linear-gradient(135deg, var(--purple) 0%, #A78BFA 100%);
+    }
+
+    .demo-message .bubble {
+      max-width: 85%;
+      padding: 16px 20px;
+      border-radius: 16px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .demo-message.user .bubble {
+      background: var(--primary);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .demo-message.ai .bubble {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.9);
+      border-bottom-left-radius: 4px;
+    }
+
+    .demo-message.ai .bubble strong {
+      color: white;
+    }
+
+    .demo-message.ai .bubble .highlight-stat {
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .demo-message.ai .bubble ul {
+      margin: 12px 0;
+      padding-left: 20px;
+    }
+
+    .demo-message.ai .bubble li {
+      margin-bottom: 6px;
+      color: var(--gray-400);
+    }
+
+    .demo-message.ai .bubble li strong {
+      color: white;
+    }
+
+    .demo-cta {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .demo-cta button {
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .demo-cta .export-btn {
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: #A78BFA;
+    }
+
+    .demo-cta .export-btn:hover {
+      background: rgba(139, 92, 246, 0.25);
+    }
+
+    /* Possibilities Section */
+    .possibilities-section {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 48px;
+    }
+
+    .possibilities-section h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .possibilities-section .subtitle {
+      font-size: 15px;
+      color: var(--gray-400);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .possibilities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .possibility-card {
+      background: rgba(0,0,0,0.2);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .possibility-card .emoji {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    .possibility-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: white;
+    }
+
+    .possibility-card p {
+      font-size: 13px;
+      color: var(--gray-400);
+      line-height: 1.5;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      text-align: center;
+      padding-top: 16px;
+    }
+
+    .cta-section h3 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .cta-section h3 .highlight {
+      color: var(--yellow);
+    }
+
+    .cta-section p {
+      font-size: 16px;
+      color: var(--gray-400);
+      margin-bottom: 28px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      padding: 16px 28px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      border: none;
+    }
+
+    .cta-btn.primary {
+      background: var(--yellow);
+      color: var(--navy);
+    }
+
+    .cta-btn.secondary {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .problems-section,
+      .question-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .possibilities-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .demo-container {
+        padding: 80px 20px 40px;
+      }
+      
+      .demo-header h1 {
+        font-size: 28px;
+      }
+      
+      .demo-header .subhead {
+        font-size: 18px;
+      }
+      
+      .whatif-section {
+        padding: 28px;
+      }
+      
+      .whatif-section h2 {
+        font-size: 22px;
+      }
+      
+      .demo-message .bubble {
+        max-width: 90%;
+        padding: 14px 16px;
+        font-size: 14px;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+      
+      .cta-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav nav--dark">
+    <div class="nav__left">
+      <a href="index.html" class="nav__logo">
+        <img src="https://kesmit3.github.io/paic/upliftlogo.png" class="nav__logo-img" alt="Uplift Education">
+        <div class="nav__divider"></div>
+        <span class="nav__product">Purpose Engine</span>
+      </a>
+      <div class="nav__links">
+        <a href="aichallenge.html" class="nav__link">&#127942; <span class="nav__link-text">Challenge</span></a>
+      </div>
+    </div>
+    
+    <div class="nav__right">
+      <div class="nav__links">
+        <div class="nav__dropdown">
+          <button class="nav__dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>Demo</span>
+            <span class="nav__dropdown-arrow">&#9660;</span>
+          </button>
+          
+          <div class="nav__mega-menu">
+            <div class="mega-menu__grid">
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">Scholar Journeys</div>
+                <a href="ivan-day.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--yellow">&#128295;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Ivan</div>
+                    <div class="mega-menu__desc">Electrician pathway</div>
+                  </div>
+                </a>
+                <a href="cyber-pathway.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#128737;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Marcus</div>
+                    <div class="mega-menu__desc">Cybersecurity pathway</div>
+                  </div>
+                </a>
+                <a href="career-bridge.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--green">&#127793;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Maya</div>
+                    <div class="mega-menu__desc">Sustainable design pathway</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">For Educators</div>
+                <a href="educator-dashboard.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Dashboard</div>
+                    <div class="mega-menu__desc">Alerts, praise, insights</div>
+                  </div>
+                </a>
+                <a href="activity-hub.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--orange">&#128640;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Activity Hub</div>
+                    <div class="mega-menu__desc">Clubs, funding, eligibility</div>
+                  </div>
+                </a>
+                
+                <div class="mega-menu__header" style="margin-top: 16px;">For Counselors</div>
+                <a href="rtcc.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#127891;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Road to College &amp; Career</div>
+                    <div class="mega-menu__desc">FAFSA, IBCs, applications</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section mega-menu__section--full">
+                <div class="mega-menu__header">For Students</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                  <a href="student-dashboard.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Dashboard</div>
+                      <div class="mega-menu__desc">Your overview</div>
+                    </div>
+                  </a>
+                  <a href="career-bridge.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--green">&#127919;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Career Bridge</div>
+                      <div class="mega-menu__desc">Connect classwork</div>
+                    </div>
+                  </a>
+                  <a href="future-self.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--yellow">&#128302;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Future Self</div>
+                      <div class="mega-menu__desc">Chat with 32-year-old you</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <button class="nav__toggle" onclick="toggleNav()" aria-label="Toggle menu">&#9776;</button>
+    <div id="navLinks">
+      <a href="aichallenge.html" class="nav__link">&#127942; Challenge</a>
+      <div class="mobile-menu__header">Scholar Journeys</div>
+      <a href="ivan-day.html" class="nav__link">&#128295; Ivan (Electrician)</a>
+      <a href="cyber-pathway.html" class="nav__link">&#128737; Marcus (Cybersecurity)</a>
+      <a href="career-bridge.html" class="nav__link">&#127793; Maya (Sustainable Design)</a>
+      <div class="mobile-menu__header">For Educators</div>
+      <a href="educator-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="activity-hub.html" class="nav__link">&#128640; Activity Hub</a>
+      <div class="mobile-menu__header">For Counselors</div>
+      <a href="rtcc.html" class="nav__link">&#127891; Road to College &amp; Career</a>
+      <div class="mobile-menu__header">For Students</div>
+      <a href="student-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="career-bridge.html" class="nav__link">&#127919; Career Bridge</a>
+      <a href="future-self.html" class="nav__link">&#128302; Future Self</a>
+    </div>
+  </nav>
+
+  <div class="demo-container">
+    <!-- Header -->
+    <div class="demo-header">
+      <h1>Programs Die in <span class="highlight">Spreadsheets</span></h1>
+      <p class="subhead">
+        The data exists. <strong>The time to find it doesn't.</strong>
+      </p>
+      <p class="insight">
+        Your systems aren't broken—they just lack an intelligence layer that can understand what you're asking and pull the right context together instantly.
+      </p>
+    </div>
+
+    <!-- The Two Problems -->
+    <div class="problems-section">
+      <div class="problem-card">
+        <div class="number">1</div>
+        <h3>You don't know what you don't know</h3>
+        <p>
+          State funding rules change. TEA just reviewed 2,000+ industry certifications and approved 523. 
+          Which of your students' certs actually count this year? Which programs of study align with the new list?
+        </p>
+        <div class="example">
+          "Wait—Microsoft retired the MTA certification? How many students does that affect?"
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="number">2</div>
+        <h3>Even when you know, the hunt is painful</h3>
+        <p>
+          The information lives in PowerSchool, Schoolinks, CCMR reports, and your own spreadsheets. 
+          Answering a simple question means logging into multiple systems and cross-referencing manually.
+        </p>
+        <div class="example">
+          "I just need to know which robotics club students qualify for state funding. That shouldn't take 2 hours."
+        </div>
+      </div>
+    </div>
+
+    <!-- What If Section -->
+    <div class="whatif-section">
+      <div class="label">✨ Imagine This Instead</div>
+      <h2>What if you could just ask?</h2>
+      <p class="desc">
+        An intelligence layer that <strong>understands context</strong>—not just data. 
+        It knows what "qualifying pathway" means, what changed in the latest TEA update, 
+        and which students are affected. You ask in plain English. You get an answer in seconds.
+      </p>
+      
+      <div class="question-grid">
+        <div class="question-item">
+          <div class="icon">🤖</div>
+          <div class="content">
+            <div class="query">"Which Robotics Club students are on pathways that qualify for state funding?"</div>
+            <div class="context">Checks pathway enrollment, cross-references funding criteria</div>
+            <div class="time-saved">⏱ 2 hours → 10 seconds</div>
+          </div>
+        </div>
+        <div class="question-item">
+          <div class="icon">📜</div>
+          <div class="content">
+            <div class="query">"Which of our IBCs got removed from the 2025-30 TEA list?"</div>
+            <div class="context">Compares your offerings against new accountability list</div>
+            <div class="time-saved">⏱ 3 hours → instant</div>
+          </div>
+        </div>
+        <div class="question-item">
+          <div class="icon">🎓</div>
+          <div class="content">
+            <div class="query">"Show seniors who haven't completed FAFSA and are first-gen college students"</div>
+            <div class="context">Combines demographics, FAFSA status, and family history</div>
+            <div class="time-saved">⏱ 3+ hours → instant</div>
+          </div>
+        </div>
+        <div class="question-item">
+          <div class="icon">🏥</div>
+          <div class="content">
+            <div class="query">"Students interested in healthcare who haven't applied to the hospital internship"</div>
+            <div class="context">Matches interest surveys with application status</div>
+            <div class="time-saved">⏱ 1 hour → instant</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Demo Section -->
+    <div class="live-demo-section">
+      <h3>See It In Action</h3>
+      
+      <div class="demo-conversation">
+        <div class="demo-message user">
+          <div class="avatar">👩‍🏫</div>
+          <div class="bubble">
+            I'm starting a Robotics Club—20 students signed up. Which ones are on CTE pathways that qualify for state funding?
+          </div>
+        </div>
+        
+        <div class="demo-message ai">
+          <div class="avatar">🤖</div>
+          <div class="bubble">
+            <strong class="highlight-stat">12 of 20 students</strong> are on qualifying CTE pathways:
+            <ul>
+              <li><strong>8 students</strong> — Engineering & Technology</li>
+              <li><strong>3 students</strong> — Advanced Manufacturing</li>
+              <li><strong>1 student</strong> — Information Technology</li>
+            </ul>
+            <strong>Funding eligibility: 60%</strong> — that's $2,520 you can justify immediately.
+            <br><br>
+            The other 8 students aren't currently on qualifying pathways, but 3 of them are taking Principles of Engineering next semester—they may qualify then.
+          </div>
+        </div>
+        
+        <div class="demo-cta">
+          <button class="export-btn">
+            <span>📄</span>
+            <span>Export Funding Report</span>
+          </button>
+          <button class="export-btn">
+            <span>📧</span>
+            <span>Email to Principal</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Possibilities Section -->
+    <div class="possibilities-section">
+      <h3>What Becomes Possible</h3>
+      <p class="subtitle">When the friction disappears, good things happen.</p>
+      
+      <div class="possibilities-grid">
+        <div class="possibility-card">
+          <div class="emoji">🚀</div>
+          <h4>Programs Actually Launch</h4>
+          <p>Teachers start clubs and programs because proving funding eligibility takes 10 seconds, not 2 hours.</p>
+        </div>
+        <div class="possibility-card">
+          <div class="emoji">🎯</div>
+          <h4>Students Get Found</h4>
+          <p>The first-gen senior who needs FAFSA help isn't a needle in a haystack anymore—they're one question away.</p>
+        </div>
+        <div class="possibility-card">
+          <div class="emoji">💡</div>
+          <h4>Insights Surface Proactively</h4>
+          <p>"Hey, 12 students are about to age out of their industry cert. Want to schedule retests?"</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <h3>AI Isn't About Replacing <span class="highlight">People</span></h3>
+      <p>It's about removing the barriers that prevent good things from happening. Teachers teach. Students thrive. The data finally works for you.</p>
+      <div class="cta-buttons">
+        <a href="explore.html" class="cta-btn primary">
+          <span>👩‍🏫</span>
+          <span>See Full Demo</span>
+        </a>
+        <a href="educator-dashboard.html" class="cta-btn secondary">
+          <span>📊</span>
+          <span>Educator Dashboard</span>
+        </a>
+        <a href="index.html" class="cta-btn secondary">
+          <span>🏠</span>
+          <span>Back to Home</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleNav() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+purpose-engine/
+├── index.html                 ← Landing page ✅
+├── educator-dashboard.html    ← Teacher view ✅
+├── student-dashboard.html     ← TO BUILD
+├── future-self.html           ← TO BUILD
+├── career-bridge.html         ← TO BUILD (assignment transformer)
+├── assets/
+│   ├── uplift-logo.png       ✅
+│   └── variables.css          ← Could externalize shared styles
+└── docs/
+    ├── uplift-official-colors.md
+    ├── purpose-engine-corrections.md
+    ├── purpose-engine-flowchart.mermaid
+    └── notes.txt

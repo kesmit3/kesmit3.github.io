@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!-- 
+==============================================
+EVENT SUBMISSION FORM VERSION NOTES
+==============================================
+Version: 1.0
+Last Updated: January 13, 2025
+Created By: Kimberly Wright
+
+FEATURES:
+- Campus selection from dropdown
+- Required field validation
+- Mobile responsive design
+==============================================
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Campus Event</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        .form-container {
+            max-width: 800px;
+            margin: 20px auto 40px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #2196f3;
+        }
+
+        .required {
+            color: #f44336;
+            margin-left: 3px;
+        }
+
+        .submit-btn {
+            background-color: #2196f3;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #1976d2;
+        }
+
+        .cancel-btn {
+            background-color: #f5f5f5;
+            color: #333;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cancel-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .button-group {
+            margin-top: 30px;
+            text-align: right;
+        }
+
+        .help-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                margin: 10px;
+                padding: 20px;
+            }
+
+            .button-group {
+                text-align: center;
+            }
+
+            .button-group button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Submit Campus Event</h1>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="arch.html">Timeline</a></li>
+            <li><a href="aboutarch.html">About the Timeline</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Section -->
+    <main>
+        <div class="form-container">
+            <form id="eventSubmissionForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="campus">Campus<span class="required">*</span></label>
+                    <select id="campus" name="campus" required>
+                        <option value="">Select a campus</option>
+                        <option value="wisdom">Uplift Wisdom Preparatory</option>
+                        <option value="northhills">Uplift North Hills Preparatory</option>
+                        <option value="summit">Uplift Summit International Preparatory</option>
+                        <option value="infinity">Uplift Infinity Preparatory</option>
+                        <option value="hampton">Uplift Hampton Preparatory</option>
+                        <option value="luna">Uplift Luna Preparatory</option>
+                        <option value="grand">Uplift Grand Preparatory</option>
+                        <option value="atlas">Uplift Atlas Preparatory</option>
+                        <option value="elevate">Uplift Elevate Preparatory</option>
+                        <option value="heights">Uplift Heights Preparatory - Healthcare</option>
+                        <option value="williams">Uplift Williams Preparatory</option>
+                        <option value="mighty">Uplift Mighty Preparatory</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventName">Event Name<span class="required">*</span></label>
+                    <input type="text" id="eventName" name="eventName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="audience">Target Audience<span class="required">*</span></label>
+                    <input type="text" id="audience" name="audience" required>
+                    <p class="help-text">e.g., "All Students", "Seniors Only", "Parents and Students"</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="host">Host/Organizing Department<span class="required">*</span></label>
+                    <input type="text" id="host" name="host" required>
+                    <p class="help-text">Department or team organizing the event</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="purpose">Event Purpose<span class="required">*</span></label>
+                    <textarea id="purpose" name="purpose" rows="4" required></textarea>
+                    <p class="help-text">Brief description of the event's goals and expected outcomes</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Event Date<span class="required">*</span></label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="cancel-btn" onclick="window.location.href='timeline.html'">Cancel</button>
+                    <button type="submit" class="submit-btn">Submit Event</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Kimberly Wright. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Gather form data
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+            
+            // You would typically send this data to a server
+            console.log('Event Submission:', data);
+            
+            // For now, just show an alert
+            alert('Event submitted successfully!');
+            
+            // Redirect back to timeline
+            window.location.href = 'timeline.html';
+        }
+    </script>
+</body>
+</html>
