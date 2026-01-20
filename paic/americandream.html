@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>American Dream | Purpose Engine</title>
+  <title>Why This Matters | Purpose Engine</title>
 
   <!-- Favicon and Social Sharing -->
-  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/upliftlogo.png">
-  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/upliftlogo.png">
-  <meta property="og:title" content="American Dream | Purpose Engine">
-  <meta property="og:description" content="A vision for AI that reconnects people and helps us build a future together.">
-  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeinginesquare.png">
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png?v=2">
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png">
+  <meta property="og:title" content="Why This Matters | Purpose Engine">
+  <meta property="og:description" content="The American Dream is breaking. Not because students lack ability&mdash;but because they can't see the path. AI can change that.">
+  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -20,23 +20,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Shared Styles -->
-  <link rel="stylesheet" href="assets/variables.css">
+  <link rel="stylesheet" href="variables.css">
 
   <style>
-    body {
-      background: var(--navy);
-      color: white;
+    body { 
+      background: var(--navy); 
+      color: white; 
     }
 
-    /* Hero */
+    .dream-page {
+      padding-top: var(--nav-height);
+    }
+
+    /* Hero Section */
     .hero {
-      min-height: 100vh;
+      min-height: 90vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 120px 40px 80px;
+      padding: 60px 40px 80px;
       position: relative;
       overflow: hidden;
     }
@@ -46,69 +50,66 @@
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background:
-        radial-gradient(ellipse at 30% 20%, rgba(0, 103, 177, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.10) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 30%, rgba(255, 196, 37, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(239, 68, 68, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(0, 103, 177, 0.1) 0%, transparent 60%);
       pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       background: rgba(255, 196, 37, 0.15);
       border: 1px solid rgba(255, 196, 37, 0.3);
-      padding: 8px 16px;
-      border-radius: 20px;
-      margin-bottom: 24px;
-      position: relative;
+      padding: 10px 20px;
+      border-radius: 24px;
+      margin-bottom: 28px;
     }
 
     .hero-badge span {
       color: var(--yellow);
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 14px;
+      font-weight: 700;
     }
 
     .hero h1 {
       font-size: 52px;
       font-weight: 800;
       line-height: 1.1;
-      margin-bottom: 24px;
-      max-width: 900px;
-      position: relative;
+      margin-bottom: 28px;
     }
 
     .hero h1 .highlight {
-      color: var(--yellow);
+      background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    .hero p {
-      font-size: 18px;
-      color: var(--gray-400);
-      max-width: 800px;
+    .hero h1 .danger {
+      color: var(--danger);
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 750px;
       line-height: 1.7;
-      margin-bottom: 24px;
-      position: relative;
-    }
-
-    .hero p strong {
-      color: rgba(255, 255, 255, 0.92);
-      font-weight: 650;
-    }
-
-    .hero p em {
-      color: var(--yellow);
-      font-style: normal;
-      font-weight: 600;
+      margin: 0 auto 36px;
     }
 
     .hero-ctas {
       display: flex;
       gap: 16px;
-      position: relative;
-      flex-wrap: wrap;
       justify-content: center;
-      margin-top: 16px;
+      flex-wrap: wrap;
     }
 
     .btn-primary {
@@ -153,17 +154,15 @@
       border-color: rgba(255, 255, 255, 0.5);
     }
 
-    /* Sections */
-    .section {
+    /* Crisis Section */
+    .crisis-section {
       padding: 100px 40px;
+      background: linear-gradient(180deg, var(--navy) 0%, #0a0f18 100%);
     }
 
-    .section--light {
-      background: var(--navy-light);
-    }
-
-    .section--dark {
-      background: var(--navy);
+    .crisis-container {
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     .section-header {
@@ -171,10 +170,27 @@
       margin-bottom: 60px;
     }
 
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--danger);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
     .section-header h2 {
-      font-size: 36px;
+      font-size: 40px;
       font-weight: 800;
       margin-bottom: 16px;
+      line-height: 1.15;
     }
 
     .section-header p {
@@ -182,149 +198,412 @@
       color: var(--gray-400);
       max-width: 700px;
       margin: 0 auto;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
-    /* Cards Grid */
-    .cards-grid {
+    /* Big Quote */
+    .big-quote {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 4px solid var(--danger);
+      border-radius: 16px;
+      padding: 40px 48px;
+      margin-bottom: 48px;
+    }
+
+    .big-quote blockquote {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: white;
+      margin: 0 0 16px;
+    }
+
+    .big-quote blockquote em {
+      color: var(--yellow);
+      font-style: normal;
+    }
+
+    .big-quote .attribution {
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    /* Stats Grid */
+    .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .stat-card .number {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--danger);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .stat-card .label {
+      font-size: 15px;
+      color: var(--gray-400);
+      line-height: 1.5;
+    }
+
+    /* Story Card */
+    .story-card {
+      background: linear-gradient(135deg, rgba(0, 103, 177, 0.1) 0%, rgba(139, 92, 246, 0.08) 100%);
+      border: 1px solid rgba(0, 103, 177, 0.2);
+      border-radius: 24px;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .story-content h3 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .story-content h3 span {
+      color: var(--yellow);
+    }
+
+    .story-content p {
+      font-size: 16px;
+      color: var(--gray-400);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .story-content p strong {
+      color: white;
+    }
+
+    .story-outcome {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .outcome-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--danger);
+      margin-bottom: 12px;
+    }
+
+    .outcome-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: white;
+      line-height: 1.5;
+    }
+
+    /* Promise Section */
+    .promise-section {
+      padding: 100px 40px;
+      background: var(--navy-light);
+    }
+
+    .promise-container {
       max-width: 1100px;
       margin: 0 auto;
     }
 
-    .card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      border-radius: 20px;
-      padding: 32px;
-      text-align: left;
-      transition: all 0.3s ease;
-    }
-
-    .card:hover {
-      border-color: rgba(255, 255, 255, 0.20);
-      transform: translateY(-4px);
-    }
-
-    .card .kicker {
+    .promise-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      background: rgba(255, 196, 37, 0.15);
+      border: 1px solid rgba(255, 196, 37, 0.3);
+      color: var(--yellow);
+      padding: 8px 16px;
+      border-radius: 20px;
       font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.78);
-      margin-bottom: 12px;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
     }
 
-    .card h3 {
+    .promise-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .promise-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .promise-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--yellow) 0%, var(--orange) 100%);
+    }
+
+    .promise-card .icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .promise-card h3 {
       font-size: 20px;
-      font-weight: 750;
-      margin-bottom: 10px;
+      font-weight: 700;
+      margin-bottom: 12px;
       color: white;
     }
 
-    .card p {
+    .promise-card p {
       font-size: 15px;
       color: var(--gray-400);
-      line-height: 1.65;
+      line-height: 1.6;
       margin: 0;
     }
 
-    /* Proposal Section */
-    .proposal-wrap {
-      max-width: 1100px;
+    /* Executive Order Section */
+    .eo-section {
+      padding: 100px 40px;
+      background: linear-gradient(180deg, var(--navy-light) 0%, var(--navy) 100%);
+    }
+
+    .eo-container {
+      max-width: 1000px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 28px;
-      align-items: start;
     }
 
-    .proposal-main, .proposal-side {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.10);
+    .eo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--success);
+      padding: 8px 16px;
       border-radius: 20px;
-      padding: 34px;
-    }
-
-    .proposal-main h3 {
-      font-size: 26px;
-      font-weight: 800;
-      margin: 0 0 14px;
-    }
-
-    .proposal-main p {
-      color: var(--gray-400);
-      font-size: 16px;
-      line-height: 1.8;
-      margin: 0 0 14px;
-    }
-
-    .bullets {
-      margin: 18px 0 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 12px;
-    }
-
-    .bullets li {
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: rgba(0, 0, 0, 0.28);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: rgba(255, 255, 255, 0.80);
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    .bullets li strong {
-      color: white;
-      font-weight: 750;
-    }
-
-    .proposal-side .mini-title {
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.05em;
+      font-size: 12px;
+      font-weight: 700;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.70);
-      margin-bottom: 14px;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
     }
 
-    .side-block {
-      background: rgba(0, 103, 177, 0.12);
-      border: 1px solid rgba(0, 103, 177, 0.25);
-      border-radius: 16px;
-      padding: 16px;
+    .eo-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .eo-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 2px solid rgba(16, 185, 129, 0.25);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+    }
+
+    .eo-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--success) 0%, var(--primary) 100%);
+      border-radius: 20px 20px 0 0;
+    }
+
+    .eo-card .eo-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--success);
       margin-bottom: 12px;
     }
 
-    .side-block .label {
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--yellow);
-      margin-bottom: 6px;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
+    .eo-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: white;
     }
 
-    .side-block .text {
+    .eo-card .eo-quote {
       font-size: 14px;
-      color: rgba(255, 255, 255, 0.82);
-      line-height: 1.55;
+      color: var(--gray-400);
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 16px;
+      padding-left: 16px;
+      border-left: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .eo-card .eo-response {
+      background: rgba(0, 103, 177, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .eo-response-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary-light);
+      margin-bottom: 8px;
+    }
+
+    .eo-response p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Validation Section */
+    .validation-section {
+      padding: 100px 40px;
+      background: var(--navy);
+    }
+
+    .validation-container {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .validation-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: #A78BFA;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .validation-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin: 48px 0;
+      flex-wrap: wrap;
+    }
+
+    .validation-stat {
+      text-align: center;
+    }
+
+    .validation-stat .big-number {
+      font-size: 64px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .validation-stat .stat-label {
+      font-size: 16px;
+      color: var(--gray-400);
+    }
+
+    .validation-quote {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 32px 40px;
+      margin-top: 32px;
+    }
+
+    .validation-quote p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .validation-quote p em {
+      color: var(--yellow);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 100px 40px;
+      background: linear-gradient(180deg, var(--navy) 0%, #0a0f18 100%);
+      text-align: center;
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta-statement {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 24px;
+    }
+
+    .cta-statement .gold {
+      color: var(--yellow);
+    }
+
+    .cta-sub {
+      font-size: 18px;
+      color: var(--gray-400);
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .cta-sub strong {
+      color: white;
     }
 
     /* Footer */
     footer {
       padding: 40px;
-      background: var(--navy-light);
+      background: #0a0f18;
       text-align: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     footer p {
@@ -338,66 +617,87 @@
       text-decoration: none;
     }
 
+    footer a:hover {
+      text-decoration: underline;
+    }
+
     /* Responsive */
     @media (max-width: 1024px) {
-      .cards-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .stats-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto 48px;
       }
-      
-      .proposal-wrap {
+
+      .story-card {
+        grid-template-columns: 1fr;
+      }
+
+      .promise-grid,
+      .eo-cards {
         grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 768px) {
       .hero {
-        padding: 100px 24px 60px;
+        padding: 40px 24px 60px;
         min-height: auto;
       }
-      
+
       .hero h1 {
         font-size: 32px;
       }
-      
-      .hero p {
-        font-size: 15px;
+
+      .hero-subtitle {
+        font-size: 16px;
       }
-      
+
       .hero-ctas {
         flex-direction: column;
         width: 100%;
         max-width: 320px;
       }
-      
+
       .btn-primary, .btn-secondary {
         width: 100%;
         justify-content: center;
-        padding: 14px 24px;
       }
-      
-      .section {
+
+      .crisis-section,
+      .promise-section,
+      .eo-section,
+      .validation-section,
+      .cta-section {
         padding: 60px 24px;
       }
-      
+
       .section-header h2 {
         font-size: 28px;
       }
-      
-      .section-header p {
-        font-size: 15px;
-      }
-      
-      .cards-grid {
-        grid-template-columns: 1fr;
-        max-width: 420px;
-      }
-      
-      .proposal-main, .proposal-side {
+
+      .big-quote {
         padding: 24px;
       }
-      
-      .proposal-main h3 {
-        font-size: 20px;
+
+      .big-quote blockquote {
+        font-size: 18px;
+      }
+
+      .story-card {
+        padding: 32px 24px;
+      }
+
+      .validation-stats {
+        gap: 32px;
+      }
+
+      .validation-stat .big-number {
+        font-size: 48px;
+      }
+
+      .cta-statement {
+        font-size: 24px;
       }
     }
   </style>
@@ -405,7 +705,7 @@
 
 <body>
   <!-- Navigation -->
-  <nav class="nav nav--light">
+  <nav class="nav nav--dark">
     <div class="nav__left">
       <a href="index.html" class="nav__logo">
         <img src="https://kesmit3.github.io/paic/upliftlogo.png" class="nav__logo-img" alt="Uplift Education">
@@ -413,215 +713,394 @@
         <span class="nav__product">Purpose Engine</span>
       </a>
       <div class="nav__links">
-        <a href="index.html" class="nav__link">&#127968; <span class="nav__link-text">Home</span></a>
-        <a href="aichallenge.html" class="nav__link">&#129302; <span class="nav__link-text">How We Use AI</span></a>
-        <a href="americandream.html" class="nav__link nav__link--active">&#129517; <span class="nav__link-text">Why This Matters</span></a>
+        <a href="aichallenge.html" class="nav__link">&#127942; <span class="nav__link-text">Challenge</span></a>
       </div>
     </div>
     
     <div class="nav__right">
       <div class="nav__links">
-        <a href="student-dashboard.html" class="nav__link">&#128202; <span class="nav__link-text">Student</span></a>
-        <a href="career-bridge.html" class="nav__link">&#127919; <span class="nav__link-text">Career Bridge</span></a>
-        <a href="future-self.html" class="nav__link">&#128302; <span class="nav__link-text">Future Self</span></a>
-        <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; <span class="nav__link-text">Educator</span></a>
-        <a href="demo.html" class="nav__link">&#9658; <span class="nav__link-text">Demo</span></a>
-        <a href="rtcc-demo.html" class="nav__link">&#128176; <span class="nav__link-text">RTCC</span></a>
+        <div class="nav__dropdown">
+          <button class="nav__dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>Demo</span>
+            <span class="nav__dropdown-arrow">&#9660;</span>
+          </button>
+          
+          <div class="nav__mega-menu">
+            <div class="mega-menu__grid">
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">Scholar Journeys</div>
+                <a href="ivan-day.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--yellow">&#128295;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Ivan</div>
+                    <div class="mega-menu__desc">Electrician pathway</div>
+                  </div>
+                </a>
+                <a href="cyber-pathway.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#128737;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Marcus</div>
+                    <div class="mega-menu__desc">Cybersecurity pathway</div>
+                  </div>
+                </a>
+                <a href="career-bridge.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--green">&#127793;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Maya</div>
+                    <div class="mega-menu__desc">Sustainable design pathway</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section">
+                <div class="mega-menu__header">For Educators</div>
+                <a href="educator-dashboard.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Dashboard</div>
+                    <div class="mega-menu__desc">Alerts, praise, insights</div>
+                  </div>
+                </a>
+                <a href="activity-hub.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--orange">&#128640;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Activity Hub</div>
+                    <div class="mega-menu__desc">Clubs, funding, eligibility</div>
+                  </div>
+                </a>
+                
+                <div class="mega-menu__header" style="margin-top: 16px;">For Counselors</div>
+                <a href="rtcc.html" class="mega-menu__link">
+                  <div class="mega-menu__icon mega-menu__icon--blue">&#127891;</div>
+                  <div class="mega-menu__content">
+                    <div class="mega-menu__title">Road to College &amp; Career</div>
+                    <div class="mega-menu__desc">FAFSA, IBCs, applications</div>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="mega-menu__section mega-menu__section--full">
+                <div class="mega-menu__header">For Students</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                  <a href="student-dashboard.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--purple">&#128202;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Dashboard</div>
+                      <div class="mega-menu__desc">Your overview</div>
+                    </div>
+                  </a>
+                  <a href="career-bridge.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--green">&#127919;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Career Bridge</div>
+                      <div class="mega-menu__desc">Connect classwork</div>
+                    </div>
+                  </a>
+                  <a href="future-self.html" class="mega-menu__link">
+                    <div class="mega-menu__icon mega-menu__icon--yellow">&#128302;</div>
+                    <div class="mega-menu__content">
+                      <div class="mega-menu__title">Future Self</div>
+                      <div class="mega-menu__desc">Chat with 32-year-old you</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     
-    <button class="nav__toggle" onclick="toggleNav()">&#9776;</button>
-    <div class="nav__links" id="navLinks">
-      <a href="index.html" class="nav__link">&#127968; <span class="nav__link-text">Home</span></a>
-      <a href="aichallenge.html" class="nav__link">&#129302; <span class="nav__link-text">How We Use AI</span></a>
-      <a href="americandream.html" class="nav__link nav__link--active">&#129517; <span class="nav__link-text">Why This Matters</span></a>
-      <a href="student-dashboard.html" class="nav__link">&#128202; <span class="nav__link-text">Student</span></a>
-      <a href="career-bridge.html" class="nav__link">&#127919; <span class="nav__link-text">Career Bridge</span></a>
-      <a href="future-self.html" class="nav__link">&#128302; <span class="nav__link-text">Future Self</span></a>
-      <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; <span class="nav__link-text">Educator</span></a>
-      <a href="demo.html" class="nav__link">&#9658; <span class="nav__link-text">Demo</span></a>
-      <a href="rtcc-demo.html" class="nav__link">&#128176; <span class="nav__link-text">RTCC</span></a>
+    <button class="nav__toggle" onclick="toggleNav()" aria-label="Toggle menu">&#9776;</button>
+    <div id="navLinks">
+      <a href="aichallenge.html" class="nav__link">&#127942; Challenge</a>
+      <div class="mobile-menu__header">Scholar Journeys</div>
+      <a href="ivan-day.html" class="nav__link">&#128295; Ivan (Electrician)</a>
+      <a href="cyber-pathway.html" class="nav__link">&#128737; Marcus (Cybersecurity)</a>
+      <a href="career-bridge.html" class="nav__link">&#127793; Maya (Sustainable Design)</a>
+      <div class="mobile-menu__header">For Educators</div>
+      <a href="educator-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="activity-hub.html" class="nav__link">&#128640; Activity Hub</a>
+      <div class="mobile-menu__header">For Counselors</div>
+      <a href="rtcc.html" class="nav__link">&#127891; Road to College &amp; Career</a>
+      <div class="mobile-menu__header">For Students</div>
+      <a href="student-dashboard.html" class="nav__link">&#128202; Dashboard</a>
+      <a href="career-bridge.html" class="nav__link">&#127919; Career Bridge</a>
+      <a href="future-self.html" class="nav__link">&#128302; Future Self</a>
     </div>
   </nav>
 
-  <!-- HERO: Vision statement -->
-  <section class="hero" id="top">
-    <div class="hero-badge">
-      <span>Purpose of AI</span>
-    </div>
+  <div class="dream-page">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>&#127468;&#127480;</span>
+          <span>Why This Matters</span>
+        </div>
 
-    <h1>
-      AI should <span class="highlight">reconnect</span> human intelligence,
-      not replace it.
-    </h1>
+        <h1>
+          The American Dream is <span class="danger">breaking.</span><br>
+          Not because students lack ability&mdash;<br>
+          but because they <span class="highlight">can&rsquo;t see the path.</span>
+        </h1>
 
-    <p>
-      We already hold more information than any generation before us.
-      The challenge now is not access to knowledge, but the wisdom to <em>integrate</em> it.
-      Used well, AI helps us see patterns across experience, understand one another more clearly,
-      and build a future shaped by shared understanding.
-    </p>
-
-    <p>
-      <strong>The future is not something AI creates for us.</strong>
-      It is something we learn to create with one another.
-    </p>
-
-    <div class="hero-ctas">
-      <a class="btn-primary" href="#proposal">View the Proposal â†’</a>
-      <a class="btn-secondary" href="index.html">Back to Purpose Engine</a>
-    </div>
-  </section>
-
-  <!-- Bridge: why this matters -->
-  <section class="section section--light">
-    <div class="section-header">
-      <h2>Why This Page Exists</h2>
-      <p>
-        The American Dream has always been a promise of possibility.
-        In this era, possibility depends on belonging, clarity, skill, and real guidance.
-        AI can amplify those things, but only if we design for people first.
-      </p>
-    </div>
-
-    <div class="cards-grid">
-      <div class="card">
-        <div class="kicker">Principle</div>
-        <h3>Human Connection First</h3>
-        <p>AI should strengthen relationships: student and teacher, family and school, learner and future self.</p>
-      </div>
-      <div class="card">
-        <div class="kicker">Principle</div>
-        <h3>Integration Over Information</h3>
-        <p>We move from scattered data to coherent insight: what matters next, and why it matters to this student.</p>
-      </div>
-      <div class="card">
-        <div class="kicker">Principle</div>
-        <h3>Agency, Not Automation</h3>
-        <p>The goal is not to do work for learners, but to help them see purpose, practice skills, and make choices.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Proposal -->
-  <section class="section section--dark" id="proposal">
-    <div class="section-header">
-      <h2>App Proposal</h2>
-      <p>
-        A coherent, student-centered AI system that connects existing tools,
-        strengthens human guidance, and turns schoolwork into a pathway.
-      </p>
-    </div>
-
-    <div class="proposal-wrap">
-      <!-- Main proposal -->
-      <div class="proposal-main">
-        <h3>Purpose Engine: A People-First AI Layer</h3>
-        <p>
-          This proposal introduces an AI layer that sits above existing systems (LMS, SIS, advising tools),
-          translating data into actionable, human-friendly insight. It supports teachers and counselors with
-          clarity, and supports students with purpose and direction.
+        <p class="hero-subtitle">
+          For generations, America promised that hard work leads somewhere. Today, half our students 
+          are disengaged&mdash;not because they don&rsquo;t care, but because nobody connected their 
+          effort to a future they can believe in. AI can finally change that.
         </p>
 
-        <p>
-          The system is designed to be safe, transparent, and educational. It does not replace instruction.
-          It helps connect effort to meaning, and meaning to a future the student can name.
+        <div class="hero-ctas">
+          <a class="btn-primary" href="#crisis">See the Crisis &#8595;</a>
+          <a class="btn-secondary" href="aichallenge.html">View Challenge Entry</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Crisis -->
+    <section class="crisis-section" id="crisis">
+      <div class="crisis-container">
+        <div class="section-header">
+          <div class="section-badge">
+            <span>&#9888;</span>
+            <span>The Motivation Crisis</span>
+          </div>
+          <h2>We&rsquo;re Losing a Generation&mdash;<br>Not to Ability, but to Invisibility</h2>
+          <p>
+            Students aren&rsquo;t checking out because school is too hard. 
+            They&rsquo;re checking out because nobody showed them why it matters.
+          </p>
+        </div>
+
+        <div class="big-quote">
+          <blockquote>
+            &ldquo;A first-generation student doesn&rsquo;t fail chemistry because he can&rsquo;t do the math. 
+            He fails because <em>nobody ever connected the math to anything that matters to him.</em>&rdquo;
+          </blockquote>
+          <div class="attribution">&mdash; Purpose Engine development insight</div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="number">&lt;2 in 10</div>
+            <div class="label">students strongly agree school is important, interesting, or aligned with their talents</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">~50%</div>
+            <div class="label">of students are disengaged from their education</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">500:1</div>
+            <div class="label">student-to-counselor ratio makes personalized guidance nearly impossible</div>
+          </div>
+        </div>
+
+        <div class="story-card">
+          <div class="story-content">
+            <h3>The Robotics Club That <span>Never Happened</span></h3>
+            <p>
+              A teacher wants to start a robotics club. Twenty students sign up. 
+              To get CTE funding, she needs to identify which students are on qualifying career pathways.
+            </p>
+            <p>
+              <strong>The current process:</strong> Log into the Student Information System. Search each student. 
+              Navigate to course schedules. Cross-reference with CCMR codes in a separate system. 
+              Document everything in a spreadsheet. Repeat twenty times.
+            </p>
+            <p>
+              <strong>Time required:</strong> Two hours&mdash;if nothing goes wrong.
+            </p>
+          </div>
+          <div class="story-outcome">
+            <div class="outcome-label">What Actually Happens</div>
+            <div class="outcome-text">
+              The club doesn&rsquo;t happen. Not because the teacher doesn&rsquo;t care. 
+              Not because students aren&rsquo;t interested. Because the system made it too hard.
+              <br><br>
+              <strong>Twenty kids lose an opportunity</strong>&mdash;not to budget cuts, 
+              but to bureaucratic friction.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Promise -->
+    <section class="promise-section" id="promise">
+      <div class="promise-container">
+        <div class="section-header">
+          <div class="promise-badge">
+            <span>&#10024;</span>
+            <span>A Different Vision</span>
+          </div>
+          <h2>AI That Reconnects&mdash;<br>Not Replaces</h2>
+          <p>
+            The future isn&rsquo;t something AI creates for us. 
+            It&rsquo;s something we learn to create with one another&mdash;with AI as the bridge.
+          </p>
+        </div>
+
+        <div class="promise-grid">
+          <div class="promise-card">
+            <div class="icon">&#129309;</div>
+            <h3>Human Connection First</h3>
+            <p>
+              AI should strengthen relationships: student and teacher, family and school, 
+              learner and future self. Technology serves the relationship&mdash;not the other way around.
+            </p>
+          </div>
+          <div class="promise-card">
+            <div class="icon">&#128269;</div>
+            <h3>Visibility, Not Surveillance</h3>
+            <p>
+              Students, educators, and counselors see the same meaningful context. 
+              AI synthesizes data into insight&mdash;surfacing what matters so humans can act.
+            </p>
+          </div>
+          <div class="promise-card">
+            <div class="icon">&#127919;</div>
+            <h3>Agency, Not Automation</h3>
+            <p>
+              The goal isn&rsquo;t to do work for students. It&rsquo;s to help them see purpose, 
+              practice skills, and make choices. AI illuminates paths; students walk them.
+            </p>
+          </div>
+          <div class="promise-card">
+            <div class="icon">&#128736;</div>
+            <h3>Skilled Trades as Aspiration</h3>
+            <p>
+              Not every student needs a four-year degree. Many need a clear path to 
+              electrician licensure, cybersecurity certification, or welding credentials. 
+              AI makes those paths visible.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Executive Orders -->
+    <section class="eo-section" id="alignment">
+      <div class="eo-container">
+        <div class="section-header">
+          <div class="eo-badge">
+            <span>&#10003;</span>
+            <span>Administration Alignment</span>
+          </div>
+          <h2>This Is What the White House Asked For</h2>
+          <p>
+            Purpose Engine directly responds to two Executive Orders signed in 2025&mdash;turning 
+            policy language into working solutions.
+          </p>
+        </div>
+
+        <div class="eo-cards">
+          <div class="eo-card">
+            <div class="eo-label">Executive Order 14277</div>
+            <h3>Advancing AI Education for American Youth</h3>
+            <div class="eo-quote">
+              &ldquo;America&rsquo;s youth need opportunities to cultivate the skills and understanding 
+              necessary to use and create the next generation of AI technology.&rdquo;
+            </div>
+            <div class="eo-response">
+              <div class="eo-response-label">How Purpose Engine Delivers</div>
+              <p>
+                Career-Bridge Challenges integrate AI across all subjects. 
+                The CTE Funding Identifier reduces 2-hour administrative tasks to 10 seconds. 
+                1,100 students engaged with AI at Tech Expo with 90%+ approval.
+              </p>
+            </div>
+          </div>
+
+          <div class="eo-card">
+            <div class="eo-label">Executive Order 14278</div>
+            <h3>Preparing Americans for High-Paying Skilled Trade Jobs</h3>
+            <div class="eo-quote">
+              &ldquo;Strategies to recognize alternative credentials and assessments beyond 
+              traditional four-year degrees that align with employer-specific skill requirements.&rdquo;
+            </div>
+            <div class="eo-response">
+              <div class="eo-response-label">How Purpose Engine Delivers</div>
+              <p>
+                Ivan&rsquo;s Electrician Pathway connects students to TDLR licensing requirements, 
+                employer contacts, and step-by-step credentialing&mdash;not college applications. 
+                Skilled trades as a first-choice career, not a fallback.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Validation -->
+    <section class="validation-section" id="validation">
+      <div class="validation-container">
+        <div class="section-header">
+          <div class="validation-badge">
+            <span>&#128202;</span>
+            <span>Real-World Validation</span>
+          </div>
+          <h2>This Isn&rsquo;t Theoretical</h2>
+          <p>
+            We tested Purpose Engine components with real students at Uplift Education&rsquo;s Tech Expo.
+            The response validated everything.
+          </p>
+        </div>
+
+        <div class="validation-stats">
+          <div class="validation-stat">
+            <div class="big-number">1,100</div>
+            <div class="stat-label">students engaged</div>
+          </div>
+          <div class="validation-stat">
+            <div class="big-number">90%+</div>
+            <div class="stat-label">approval rating</div>
+          </div>
+          <div class="validation-stat">
+            <div class="big-number">4</div>
+            <div class="stat-label">new tech clubs launched</div>
+          </div>
+        </div>
+
+        <div class="validation-quote">
+          <p>
+            When students talked to their Future Self AI, they didn&rsquo;t just answer one question 
+            and leave. They asked <em>3&ndash;5 unprompted follow-up questions</em>&mdash;exploring 
+            their futures with genuine curiosity. That&rsquo;s not engagement we manufactured. 
+            That&rsquo;s relevance students recognized.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="cta-container">
+        <p class="cta-statement">
+          The American Dream isn&rsquo;t dead.<br>
+          It&rsquo;s just <span class="gold">waiting to be made visible.</span>
         </p>
-
-        <ul class="bullets">
-          <li><strong>Student View:</strong> Personalized purpose prompts that connect assignments to real pathways and interests.</li>
-          <li><strong>Educator View:</strong> Low-friction tools to contextualize work and spot motivation risk early.</li>
-          <li><strong>Counselor View:</strong> Advising summaries that improve follow-up, reduce guesswork, and strengthen planning.</li>
-          <li><strong>Family View (optional):</strong> Simple updates that help families support goals without needing insider knowledge.</li>
-        </ul>
+        <p class="cta-sub">
+          Every student deserves to see the connection between today&rsquo;s assignment and 
+          tomorrow&rsquo;s opportunity. Every teacher deserves tools that don&rsquo;t waste their time. 
+          Every counselor deserves to know their students as whole people with futures worth preparing for.
+          <br><br>
+          <strong>Purpose Engine makes that possible&mdash;not by replacing humans, but by reconnecting them.</strong>
+        </p>
+        <div class="hero-ctas">
+          <a class="btn-primary" href="ivan-day.html">&#128295; See Ivan&rsquo;s Story</a>
+          <a class="btn-secondary" href="aichallenge.html">&#127942; View Challenge Entry</a>
+        </div>
       </div>
-
-      <!-- Side: Implementation snapshot -->
-      <aside class="proposal-side">
-        <div class="mini-title">Implementation Snapshot</div>
-
-        <div class="side-block">
-          <div class="label">Core Idea</div>
-          <div class="text">Use AI to connect the dots between learning, identity, and opportunity while preserving human leadership.</div>
-        </div>
-
-        <div class="side-block">
-          <div class="label">Data Inputs</div>
-          <div class="text">SIS + LMS + advising platform + interest/aptitude signals + educator notes (as permitted).</div>
-        </div>
-
-        <div class="side-block">
-          <div class="label">Outputs</div>
-          <div class="text">Purpose framing, career-context prompts, early warning signals, and coaching-ready summaries.</div>
-        </div>
-
-        <div class="side-block">
-          <div class="label">Guardrails</div>
-          <div class="text">Transparent prompts, role-based access, logging, bias checks, and clear "AI is a tool" messaging.</div>
-        </div>
-
-        <div class="side-block">
-          <div class="label">Pilot Path</div>
-          <div class="text">Start with a limited cohort and a small set of use-cases, then scale by validated outcomes.</div>
-        </div>
-
-        <div class="hero-ctas" style="margin-top:16px;">
-          <a class="btn-primary" href="educator-dashboard.html">See Educator View â†’</a>
-          <a class="btn-secondary" href="#top">Back to Top</a>
-        </div>
-      </aside>
-    </div>
-  </section>
-
-  <!-- Next: modules -->
-  <section class="section section--light">
-    <div class="section-header">
-      <h2>What We're Building</h2>
-      <p>
-        A small number of high-impact modules that work together. Each module is useful on its own,
-        but stronger as a system.
-      </p>
-    </div>
-
-    <div class="cards-grid">
-      <div class="card">
-        <div class="kicker">Module 01</div>
-        <h3>Purpose Prompts</h3>
-        <p>Reframes assignments into personally meaningful contexts without changing learning objectives.</p>
-      </div>
-      <div class="card">
-        <div class="kicker">Module 02</div>
-        <h3>Future Self Coaching</h3>
-        <p>Motivation and mentorship simulations that strengthen agency, reflection, and persistence.</p>
-      </div>
-      <div class="card">
-        <div class="kicker">Module 03</div>
-        <h3>Early Warning Signals</h3>
-        <p>Pattern detection for disengagement risk, surfaced as educator-friendly "next best actions."</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="section section--dark">
-    <div class="section-header">
-      <h2>Build the Future Together</h2>
-      <p>
-        If we design AI for connection, clarity, and human leadership, we can expand opportunity at scale
-        without losing the heart of learning.
-      </p>
-    </div>
-
-    <div class="hero-ctas">
-      <a class="btn-primary" href="student-dashboard.html">View Student Experience â†’</a>
-      <a class="btn-secondary" href="index.html">Return Home</a>
-    </div>
-  </section>
+    </section>
+  </div>
 
   <!-- Footer -->
   <footer>
     <p>
-      Purpose Engine &#8212; An <a href="https://www.uplifteducation.org" target="_blank">Uplift Education</a> Initiative
+      Purpose Engine &mdash; An <a href="https://www.uplifteducation.org" target="_blank">Uplift Education</a> Initiative
     </p>
   </footer>
 
@@ -633,7 +1112,7 @@
     document.addEventListener('click', function(e) {
       const nav = document.getElementById('navLinks');
       const toggle = document.querySelector('.nav__toggle');
-      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+      if (nav && toggle && !nav.contains(e.target) && !toggle.contains(e.target)) {
         nav.classList.remove('open');
       }
     });
