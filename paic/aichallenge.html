@@ -31,9 +31,6 @@
     .challenge-page {
       padding-top: var(--nav-height);
     }
-    .track-label {
-      background: transparent;
-    }
 
     /* Hero Section */
     .hero {
@@ -625,6 +622,22 @@
       .other-priorities-list {
         flex-direction: column;
       }
+    }
+        /* Ensure page uses the intended font */
+    html, body {
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    
+    /* Kill the inner yellow block no matter who sets it */
+    .challenge-badge .track-label,
+    .track-label {
+      background: transparent !important;
+    }
+    
+    /* (Optional but usually right) Let the outer badge own the yellow */
+    .challenge-badge {
+      background: #FFC425;
+      color: #1a1a1a; /* ensures contrast */
     }
   </style>
 </head>
