@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parent View | Purpose Engine</title>
+
+  <!-- Favicon and Social Sharing (match your site conventions) -->
+  <link rel="icon" type="image/png" href="https://kesmit3.github.io/paic/favicon32.png?v=2" />
+  <link rel="apple-touch-icon" href="https://kesmit3.github.io/paic/purposeengineappletouchicon.png" />
+  <meta property="og:title" content="Parent View | Purpose Engine" />
+  <meta property="og:description" content="A calm, parent-friendly view of today’s schedule, deadlines, and how to support at home." />
+  <meta property="og:image" content="https://kesmit3.github.io/paic/purposeengineogsquare.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Shared Styles (uses your existing tokens) -->
+  <link rel="stylesheet" href="assets/variables.css" />
+
+  <style>
+    :root{
+      --primary-glow: rgba(0, 103, 177, 0.30);
+      --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --nav-height: 72px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body{
+      font-family: var(--font-family);
+      background: var(--navy);
+      color: white;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Navigation (reuse your existing nav pattern) */
+    .nav{
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px;
+      z-index: 1000;
+      background: rgba(13, 20, 33, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .nav__logo{
+      display: flex; align-items: center; gap: 16px;
+      text-decoration: none;
+      color: white;
+    }
+    .nav__logo-img{ height: 44px; width: auto; }
+    .nav__divider{ width: 1px; height: 28px; background: rgba(255,255,255,0.2); }
+    .nav__product{ font-size: 15px; font-weight: 600; color: white; }
+    .nav__links{ display: flex; gap: 4px; align-items: center; }
+    .nav__link{
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      color: rgba(255,255,255,0.7);
+      display: flex; align-items: center; gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .nav__link:hover{ background: rgba(255,255,255,0.1); color: white; }
+    .nav__link--active{ background: var(--primary); color: white; font-weight: 600; }
+    .nav__pill{
+      margin-left: 12px;
+      background: rgba(255, 196, 37, 0.16);
+      border: 1px solid rgba(255, 196, 37, 0.25);
+      color: var(--yellow);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .nav__toggle{
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      font-size: 24px;
+      color: white;
+    }
+
+    /* Page Shell */
+    .page{
+      min-height: 100vh;
+      padding-top: var(--nav-height);
+    }
+
+    /* Hero */
+    .hero{
+      padding: 120px 40px 70px;
+      background: linear-gradient(180deg, var(--navy) 0%, #0a1018 100%);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .hero::before{
+      content:'';
+      position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse at 20% 55%, rgba(0, 103, 177, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(255, 196, 37, 0.10) 0%, transparent 40%);
+      pointer-events:none;
+    }
+    .hero-content{
+      max-width: 980px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 196, 37, 0.15);
+      border: 1px solid rgba(255, 196, 37, 0.3);
+      color: var(--yellow);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 650;
+      margin-bottom: 18px;
+    }
+    .hero h1{
+      font-size: 46px;
+      font-weight: 850;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .hero h1 span{
+      background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-subtitle{
+      font-size: 18px;
+      color: var(--gray-400);
+      line-height: 1.7;
+      max-width: 760px;
+      margin: 0 auto 24px;
+    }
+
+    /* Parent Snapshot Card */
+    .snapshot{
+      max-width: 980px;
+      margin: -38px auto 0;
+      padding: 0 40px;
+      position: relative;
+      z-index: 2;
+    }
+    .snapshot-card{
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 20px;
+      padding: 22px 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.22);
+    }
+    .snap-top{
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .snap-avatar{
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      box-shadow: 0 0 20px var(--primary-glow);
+      display: flex; align-items:center; justify-content:center;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+    .snap-ident{
+      flex: 1;
+      min-width: 260px;
+    }
+    .snap-name{
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+    .snap-meta{
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+    .snap-status{
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 14px 16px;
+      color: rgba(255,255,255,0.82);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .snap-pill-row{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 2px;
+    }
+    .pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 650;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.75);
+    }
+    .pill.good{
+      border-color: rgba(16,185,129,0.25);
+      background: rgba(16,185,129,0.08);
+      color: #6EE7B7;
+    }
+    .pill.warn{
+      border-color: rgba(245,158,11,0.28);
+      background: rgba(245,158,11,0.10);
+      color: #FCD34D;
+    }
+    .pill.note{
+      border-color: rgba(139,92,246,0.25);
+      background: rgba(139,92,246,0.10);
+      color: #C4B5FD;
+    }
+
+    /* Sections */
+    .section{
+      padding: 70px 40px;
+      background: var(--navy);
+    }
+    .section.alt{
+      background: linear-gradient(180deg, #0a1018 0%, var(--navy) 100%);
+    }
+    .container{
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .section-header{
+      text-align: center;
+      margin-bottom: 42px;
+    }
+    .section-badge{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 103, 177, 0.15);
+      border: 1px solid rgba(0, 103, 177, 0.3);
+      color: var(--primary-light);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 650;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .section-title{
+      font-size: 30px;
+      font-weight: 850;
+      margin-bottom: 10px;
+    }
+    .section-subtitle{
+      color: var(--gray-400);
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* Timeline (Ivan-inspired) */
+    .timeline{
+      position: relative;
+      margin-top: 10px;
+    }
+    .timeline::before{
+      content:'';
+      position:absolute;
+      left: 140px;
+      top: 26px;
+      bottom: 26px;
+      width: 3px;
+      background: linear-gradient(180deg, var(--primary) 0%, var(--yellow) 55%, var(--success) 100%);
+      opacity: 0.35;
+      border-radius: 4px;
+    }
+    .time-block{
+      display: grid;
+      grid-template-columns: 120px 40px 1fr;
+      gap: 20px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .time-label{
+      text-align: right;
+      padding-top: 14px;
+    }
+    .time-value{
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--primary-light);
+    }
+    .time-period{
+      font-size: 11px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-top: 2px;
+    }
+    .time-dot{
+      display:flex;
+      justify-content: center;
+      padding-top: 16px;
+      position: relative;
+      z-index: 2;
+    }
+    .time-dot::before{
+      content:'';
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 18px var(--primary-glow);
+    }
+    .time-block.highlight .time-dot::before{
+      background: var(--yellow);
+      box-shadow: 0 0 18px rgba(255,196,37,0.35);
+    }
+    .time-block.success .time-dot::before{
+      background: var(--success);
+      box-shadow: 0 0 18px rgba(16,185,129,0.30);
+    }
+    .time-content{
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 20px 22px;
+      transition: all 0.2s ease;
+    }
+    .time-content:hover{
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(0,103,177,0.30);
+      transform: translateX(4px);
+    }
+    .time-header{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .time-title{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .time-icon{ font-size: 20px; }
+    .class-badge{
+      background: rgba(255,255,255,0.08);
+      padding: 4px 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 650;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .time-desc{
+      font-size: 14px;
+      color: rgba(255,255,255,0.80);
+      line-height: 1.65;
+    }
+    .why-line{
+      margin-top: 12px;
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: var(--gray-300);
+      line-height: 1.55;
+    }
+    .why-line strong{
+      color: var(--yellow);
+      font-weight: 700;
+    }
+
+    /* Two-column blocks */
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 24px;
+    }
+    .card{
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 22px;
+    }
+    .card-title{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .muted{ color: var(--gray-400); }
+
+    /* Deadlines list */
+    .list{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .item{
+      display:flex;
+      align-items:flex-start;
+      gap: 12px;
+      padding: 12px 12px;
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+    }
+    .item-icon{
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(0,103,177,0.18);
+      flex-shrink:0;
+      font-size: 16px;
+    }
+    .item-main{ flex: 1; }
+    .item-title{ font-size: 14px; font-weight: 750; margin-bottom: 2px; }
+    .item-meta{ font-size: 12px; color: var(--gray-400); line-height: 1.45; }
+    .item-tag{
+      margin-left: auto;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.78);
+      white-space: nowrap;
+    }
+    .tag-warn{
+      border-color: rgba(245,158,11,0.28);
+      background: rgba(245,158,11,0.10);
+      color: #FCD34D;
+    }
+    .tag-good{
+      border-color: rgba(16,185,129,0.25);
+      background: rgba(16,185,129,0.08);
+      color: #6EE7B7;
+    }
+    .tag-note{
+      border-color: rgba(139,92,246,0.25);
+      background: rgba(139,92,246,0.10);
+      color: #C4B5FD;
+    }
+
+    /* Coaching prompts */
+    .coach-box{
+      background: linear-gradient(135deg, rgba(139,92,246,0.10) 0%, rgba(0,103,177,0.10) 100%);
+      border: 1px solid rgba(139,92,246,0.22);
+      border-radius: 18px;
+      padding: 20px 22px;
+    }
+    .coach-kicker{
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #C4B5FD;
+      margin-bottom: 10px;
+    }
+    .coach-line{
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-top: 10px;
+      color: rgba(255,255,255,0.84);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .coach-line strong{ color: var(--yellow); font-weight: 750; }
+
+    /* Weekly schedule */
+    .week-grid{
+      display:grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .day{
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 12px;
+      min-height: 120px;
+    }
+    .day-name{
+      font-size: 12px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 8px;
+      letter-spacing: 0.03em;
+    }
+    .day-item{
+      font-size: 12px;
+      color: var(--gray-400);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    /* Footer CTA */
+    .cta{
+      text-align: center;
+      padding: 70px 40px 90px;
+      background: #0a1018;
+    }
+    .cta-title{
+      font-size: 28px;
+      font-weight: 850;
+      margin-bottom: 10px;
+    }
+    .cta-subtitle{
+      color: var(--gray-400);
+      font-size: 16px;
+      max-width: 650px;
+      margin: 0 auto 24px;
+      line-height: 1.7;
+    }
+    .cta-row{
+      display:flex;
+      justify-content:center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn{
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 750;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      transition: transform 0.2s ease;
+      font-family: inherit;
+    }
+    .btn:hover{ transform: translateY(-2px); }
+    .btn.primary{
+      background: linear-gradient(135deg, var(--yellow) 0%, #FFB300 100%);
+      color: var(--navy);
+    }
+    .btn.ghost{
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .nav{ padding: 0 20px; }
+      .hero{ padding: 110px 20px 60px; }
+      .snapshot{ padding: 0 20px; }
+      .section{ padding: 55px 20px; }
+      .timeline::before{ left: 20px; }
+      .time-block{ grid-template-columns: 1fr; gap: 12px; }
+      .time-label{ text-align: left; padding-top: 0; display:flex; gap: 10px; align-items: baseline; }
+      .time-dot{ display:none; }
+      .grid-2{ grid-template-columns: 1fr; }
+      .week-grid{ grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px){
+      .nav__divider, .nav__product{ display:none; }
+      .nav__links.desktop{ display:none; }
+      .nav__toggle{ display:block; }
+      .nav__links.mobile{
+        position:absolute;
+        top: var(--nav-height);
+        left: 0; right: 0;
+        display:none;
+        flex-direction: column;
+        background: var(--navy);
+        padding: 14px 16px;
+        gap: 8px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      .nav__links.mobile.open{ display:flex; }
+      .hero h1{ font-size: 32px; }
+      .section-title{ font-size: 24px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      <img src="https://kesmit3.github.io/paic/upliftlogo.png" class="nav__logo-img" alt="Uplift Education" />
+      <div class="nav__divider"></div>
+      <span class="nav__product">Purpose Engine</span>
+    </a>
+
+    <div class="nav__links desktop">
+      <a href="index.html" class="nav__link">&#127968; <span class="nav__link-text">Home</span></a>
+      <a href="student-dashboard.html" class="nav__link">&#128202; <span class="nav__link-text">Student</span></a>
+      <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; <span class="nav__link-text">Educator</span></a>
+      <a href="parent-dashboard.html" class="nav__link nav__link--active">&#128106; <span class="nav__link-text">Parent</span></a>
+      <span class="nav__pill">Demo Mode</span>
+    </div>
+
+    <button class="nav__toggle" onclick="toggleNav()">&#9776;</button>
+
+    <!-- Mobile -->
+    <div class="nav__links mobile" id="navLinks">
+      <a href="index.html" class="nav__link">&#127968; Home</a>
+      <a href="student-dashboard.html" class="nav__link">&#128202; Student</a>
+      <a href="educator-dashboard.html" class="nav__link">&#128105;&#8205;&#127979; Educator</a>
+      <a href="parent-dashboard.html" class="nav__link nav__link--active">&#128106; Parent</a>
+    </div>
+  </nav>
+
+  <div class="page">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>&#128106;</span>
+          <span>Parent View</span>
+        </div>
+
+        <h1>A Day in <span>Jordan’s</span> School Life</h1>
+        <p class="hero-subtitle">
+          A calm view of today’s schedule, what’s coming up, and how you can support without hovering.
+        </p>
+      </div>
+    </section>
+
+    <!-- SNAPSHOT -->
+    <section class="snapshot">
+      <div class="snapshot-card">
+        <div class="snap-top">
+          <div class="snap-avatar">JW</div>
+          <div class="snap-ident">
+            <div class="snap-name">Jordan Williams</div>
+            <div class="snap-meta">11th Grade &bull; Uplift Example Prep &bull; Today: Tuesday</div>
+          </div>
+        </div>
+
+        <div class="snap-status">
+          <strong>Today’s snapshot:</strong> Jordan looks steady this week. One English draft is due Friday,
+          and there’s a college/career event next week that might be worth planning around.
+        </div>
+
+        <div class="snap-pill-row">
+          <span class="pill good">&#9989; Attendance steady</span>
+          <span class="pill warn">&#9888; 1 deadline needs attention</span>
+          <span class="pill note">&#9733; Strong engagement in STEM</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TODAY TIMELINE -->
+    <section class="section alt">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">
+            <span>&#9200;</span>
+            <span>Today</span>
+          </div>
+          <h2 class="section-title">Today’s Schedule, Through a Parent Lens</h2>
+          <p class="section-subtitle">
+            Not just “what class,” but “why it matters,” so home conversations can be more supportive and less transactional.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <div class="time-block highlight">
+            <div class="time-label">
+              <div class="time-value">7:25 AM</div>
+              <div class="time-period">Morning</div>
+            </div>
+            <div class="time-dot"></div>
+            <div class="time-content">
+              <div class="time-header">
+                <div class="time-title"><span class="time-icon">&#128187;</span> Morning Check-in</div>
+                <span class="class-badge">Daily</span>
+              </div>
+              <div class="time-desc">
+                Jordan sees today’s plan and the one thing that matters most.
+              </div>
+              <div class="why-line">
+                Parent tip: If mornings feel tight, try a <strong>single question</strong>:
+                “What’s the one thing you want to feel good about by tonight?”
+              </div>
+            </div>
+          </div>
+
+          <div class="time-block">
+            <div class="time-label">
+              <div class="time-value">9:10 AM</div>
+              <div class="time-period">Period 2</div>
+            </div>
+            <div class="time-dot"></div>
+            <div class="time-content">
+              <div class="time-header">
+                <div class="time-title"><span class="time-icon">&#128210;</span> English III</div>
+                <span class="class-badge">Writing</span>
+              </div>
+              <div class="time-desc">
+                Persuasive writing workshop: outline + evidence selection.
+              </div>
+              <div class="why-line">
+                Why this matters: <strong>Clear writing = clear thinking</strong>. This skill shows up in applications, interviews, and leadership.
+              </div>
+            </div>
+          </div>
+
+          <div class="time-block">
+            <div class="time-label">
+              <div class="time-value">10:45 AM</div>
+              <div class="time-period">Period 3</div>
+            </div>
+            <div class="time-dot"></div>
+            <div class="time-content">
+              <div class="time-header">
+                <div class="time-title"><span class="time-icon">&#129518;</span> Algebra II</div>
+                <span class="class-badge">Math</span>
+              </div>
+              <div class="time-desc">
+                Systems of equations practice and quick checks.
+              </div>
+              <div class="why-line">
+                Why this matters: strong algebra supports “pattern thinking” used in engineering, coding, and data jobs.
+              </div>
+            </div>
+          </div>
+
+          <div class="time-block success">
+            <div class="time-label">
+              <div class="time-value">1:15 PM</div>
+              <div class="time-period">Period 5</div>
+            </div>
+            <div class="time-dot"></div>
+            <div class="time-content">
+              <div class="time-header">
+                <div class="time-title"><span class="time-icon">&#128187;</span> Computer Science</div>
+                <span class="class-badge">STEM</span>
+              </div>
+              <div class="time-desc">
+                Lab day: debugging and pair programming.
+              </div>
+              <div class="why-line">
+                Bright spot: Jordan tends to stay engaged here. If you want to praise something,
+                try: <strong>“I noticed you stuck with it.”</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="time-block">
+            <div class="time-label">
+              <div class="time-value">3:05 PM</div>
+              <div class="time-period">After School</div>
+            </div>
+            <div class="time-dot"></div>
+            <div class="time-content">
+              <div class="time-header">
+                <div class="time-title"><span class="time-icon">&#127919;</span> Club / Activity</div>
+                <span class="class-badge">Optional</span>
+              </div>
+              <div class="time-desc">
+                Robotics club (or study hall) placeholder.
+              </div>
+              <div class="why-line">
+                Consistency beats intensity. If energy is low, the win might be: <strong>show up</strong>, not “do it perfectly.”
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRESS + DEADLINES -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">
+            <span>&#128221;</span>
+            <span>This Week</span>
+          </div>
+          <h2 class="section-title">What to Watch, Without Worrying</h2>
+          <p class="section-subtitle">
+            A short list of signals and deadlines to reduce surprise stress at home.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">&#9888; Needs attention</div>
+            <div class="muted">This is the one item most likely to create friction if it sneaks up.</div>
+
+            <div class="list">
+              <div class="item">
+                <div class="item-icon">&#128210;</div>
+                <div class="item-main">
+                  <div class="item-title">Persuasive Essay Draft</div>
+                  <div class="item-meta">English III &bull; Due Friday &bull; Status: Not started</div>
+                </div>
+                <span class="item-tag tag-warn">Due Fri</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">&#128197; Upcoming events</div>
+            <div class="muted">School schedule + RTCC moments that benefit from planning.</div>
+
+            <div class="list">
+              <div class="item">
+                <div class="item-icon">&#127891;</div>
+                <div class="item-main">
+                  <div class="item-title">College & Career Night</div>
+                  <div class="item-meta">Auditorium &bull; Next Tuesday, 6:00 PM</div>
+                </div>
+                <span class="item-tag tag-note">Plan</span>
+              </div>
+
+              <div class="item">
+                <div class="item-icon">&#9997;</div>
+                <div class="item-main">
+                  <div class="item-title">SAT Registration Window</div>
+                  <div class="item-meta">Closes in 12 days (placeholder)</div>
+                </div>
+                <span class="item-tag tag-warn">Soon</span>
+              </div>
+
+              <div class="item">
+                <div class="item-icon">&#9989;</div>
+                <div class="item-main">
+                  <div class="item-title">CTE Module Completed</div>
+                  <div class="item-meta">Computer Science &bull; Logged this week</div>
+                </div>
+                <span class="item-tag tag-good">Win</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parent Coaching -->
+        <div style="margin-top:18px;">
+          <div class="coach-box">
+            <div class="coach-kicker">How to support this week</div>
+            <div class="muted">These are designed to help you stay connected without turning home into another classroom.</div>
+
+            <div class="coach-line">
+              <strong>Conversation prompt:</strong> “What felt most interesting today?” (Not “What homework do you have?”)
+            </div>
+            <div class="coach-line">
+              <strong>If Friday’s draft is tense:</strong> Ask “Want help starting, or want quiet while you start?”
+            </div>
+            <div class="coach-line">
+              <strong>Notice effort:</strong> Praise the process (“You stayed with it”) more than the outcome (“You got an A”).
+            </div>
+
+            <div class="coach-line" style="border-color: rgba(255,196,37,0.22); background: rgba(255,196,37,0.08);">
+              Optional: If you’d like, we can add a “message to counselor” button here in the future
+              (wireframe only).
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WEEKLY RHYTHM + SCHOOL SCHEDULE -->
+    <section class="section alt">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">
+            <span>&#128467;</span>
+            <span>Routine</span>
+          </div>
+          <h2 class="section-title">Weekly Rhythm & School Schedule</h2>
+          <p class="section-subtitle">
+            A simple view of the week, so families can plan around reality.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">&#128338; Bell schedule (wireframe)</div>
+            <div class="muted">Replace with campus-specific schedule data.</div>
+
+            <div class="list">
+              <div class="item">
+                <div class="item-icon">&#9200;</div>
+                <div class="item-main">
+                  <div class="item-title">School starts</div>
+                  <div class="item-meta">7:45 AM</div>
+                </div>
+                <span class="item-tag tag-note">Daily</span>
+              </div>
+              <div class="item">
+                <div class="item-icon">&#127860;</div>
+                <div class="item-main">
+                  <div class="item-title">Lunch</div>
+                  <div class="item-meta">11:55 AM</div>
+                </div>
+                <span class="item-tag tag-note">Daily</span>
+              </div>
+              <div class="item">
+                <div class="item-icon">&#127968;</div>
+                <div class="item-main">
+                  <div class="item-title">Dismissal</div>
+                  <div class="item-meta">3:20 PM</div>
+                </div>
+                <span class="item-tag tag-note">Daily</span>
+              </div>
+              <div class="item">
+                <div class="item-icon">&#128197;</div>
+                <div class="item-main">
+                  <div class="item-title">Early release</div>
+                  <div class="item-meta">Wednesday (example)</div>
+                </div>
+                <span class="item-tag tag-warn">Heads up</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">&#128221; Family planning view</div>
+            <div class="muted">Add/adjust blocks based on what the student shares.</div>
+
+            <div class="week-grid">
+              <div class="day">
+                <div class="day-name">Mon</div>
+                <div class="day-item">After-school: Robotics</div>
+                <div class="day-item">Home: 30–45 min writing</div>
+              </div>
+              <div class="day">
+                <div class="day-name">Tue</div>
+                <div class="day-item">Event: College night (6pm)</div>
+                <div class="day-item">Home: light study</div>
+              </div>
+              <div class="day">
+                <div class="day-name">Wed</div>
+                <div class="day-item">Early release</div>
+                <div class="day-item">Home: catch-up window</div>
+              </div>
+              <div class="day">
+                <div class="day-name">Thu</div>
+                <div class="day-item">Home: essay draft start</div>
+                <div class="day-item">Bedtime buffer</div>
+              </div>
+              <div class="day">
+                <div class="day-name">Fri</div>
+                <div class="day-item">Due: English draft</div>
+                <div class="day-item">Weekend: reset</div>
+              </div>
+            </div>
+
+            <div class="why-line" style="margin-top:14px;">
+              Tiny strategy: pick <strong>one predictable routine</strong> (same time, same place) and keep it even when it’s not perfect.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta-title">Keep the window open, not the pressure on</div>
+        <div class="cta-subtitle">
+          Parent View is designed to support connection, reduce surprises, and make school feel navigable.
+          It’s not meant to replace student agency.
+        </div>
+
+        <div class="cta-row">
+          <a class="btn primary" href="student-dashboard.html">&#128202; View Student Dashboard</a>
+          <a class="btn ghost" href="future-self.html">&#128302; Try Future Self</a>
+          <a class="btn ghost" href="educator-dashboard.html">&#128105;&#8205;&#127979; Educator View</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function toggleNav(){
+      const el = document.getElementById('navLinks');
+      if(!el) return;
+      el.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
